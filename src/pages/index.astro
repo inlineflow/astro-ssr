@@ -1,0 +1,14 @@
+---
+export const prerender = false;
+import "../components/astro/tagline.astro";
+import Tagline from "../components/astro/tagline.astro";
+
+console.log(Astro.request.method);
+// Astro.response.headers.set("Content-Type", "application/json");
+---
+
+<html>
+  <Tagline timeout={1000} server:defer>
+    <p slot="fallback">Aight</p>
+  </Tagline>
+</html>

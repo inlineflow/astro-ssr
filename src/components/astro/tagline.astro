@@ -1,0 +1,18 @@
+---
+interface Props {
+  timeout: number;
+}
+const { timeout } = Astro.props;
+const getTagline = async () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("hello world");
+    }, timeout);
+  });
+};
+console.log(Astro.request.headers.get("referer"));
+
+const tagline = (await getTagline()) as string;
+---
+
+<p>{tagline}{timeout}</p>
