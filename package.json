@@ -29,5 +29,10 @@
     "msw": "^2.10.3",
     "tw-animate-css": "^1.3.5",
     "vitest": "^3.2.4"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
