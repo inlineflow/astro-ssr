@@ -1,15 +1,19 @@
 import { http, HttpResponse } from "msw";
 import type { Product } from "../types";
+import { baseUrl } from "src/env";
 
 export const handlers = [
-  http.get("https://example.com/users", () => {
+  http.get(`${baseUrl}/tagline`, () => {
+    return HttpResponse.json({ tagline: "Hello world from MSW" });
+  }),
+  http.get(`${baseUrl}/users`, () => {
     return HttpResponse.json([
       { id: 1, name: "Alice" },
       { id: 2, name: "Bob" },
     ]);
   }),
   http.post<never, Product, undefined>(
-    "https://api.example.com/products",
+    `${baseUrl}/api/products`,
     async ({ request }) => {
       const newProduct = await request.json();
       return HttpResponse.json(
