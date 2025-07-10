@@ -30,7 +30,7 @@ const services: Service[] = [
 
 const bookedDates = Array.from({ length: 7 }, (_, i) =>
   addDays(today, -i)
-).sort();
+).sort((a, b) => a.getTime() - b.getTime());
 
 export const handlers = [
   http.get<{ id: string }, undefined, Service | ActionError>(
@@ -52,7 +52,7 @@ export const handlers = [
   ),
   http.get(`${baseUrl}/appointments/booked`, async () => {
     await delay(1000);
-    return HttpResponse.json(bookedDates);
+    return HttpResponse.json(bookedDates.map((d) => d.getTime()));
   }),
   http.get(`${baseUrl}/tagline`, () => {
     return HttpResponse.json({ tagline: "Hello world from MSW" });

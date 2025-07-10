@@ -1,4 +1,4 @@
-import type { ActionError as AE } from "astro:actions";
+import type { ActionError } from "astro:actions";
 
 export type Product = {
   id: number;
@@ -13,4 +13,4 @@ export type NetworkError = {
   error: string;
 };
 
-export type ActionError = AE;
+export type AstroResponse<T> = T | ActionError;

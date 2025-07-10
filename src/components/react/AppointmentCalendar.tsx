@@ -1,6 +1,6 @@
 import { Calendar } from "@/ui/calendar";
 import { Card } from "@/ui/card";
-import { addDays } from "date-fns";
+// import { addDays } from "date-fns";
 import { useState } from "react";
 
 type AppointmentCalendarProps = {
@@ -15,6 +15,7 @@ export const AppointmentCalendar = ({
   intervalInMinutes,
 }: AppointmentCalendarProps) => {
   const [date, setDate] = useState(new Date());
+  // console.log(disabled);
 
   const onSelect = (selectedDate: Date) => {
     console.log(`Date: ${selectedDate}`);
@@ -38,7 +39,7 @@ export const AppointmentCalendar = ({
         onSelect={onSelect}
         captionLayout="dropdown"
         required
-        disabled={bookedDates}
+        disabled={disabled}
       />
     </Card>
   );

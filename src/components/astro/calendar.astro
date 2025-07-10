@@ -3,25 +3,38 @@ import { AppointmentCalendar } from "../react/AppointmentCalendar";
 
 import { actions } from "astro:actions";
 
-const { data: booked, error } = await Astro.callAction(
+const { data: bookedTimestamps, error: bookedError } = await Astro.callAction(
   actions.getBookedAppointemnts,
   {}
 );
-//  = await actions.getBookedAppointemnts();
-if (error) {
+if (bookedError) {
+  return Astro.redirect(404);
+}
+console.log("booked: ", bookedTimestamps);
+console.log("typeof booked at 0: ", typeof bookedTimestamps[0]);
+console.log("booked at 0", bookedTimestamps[0]);
+// console.log(
+//   "booked timestamps: ",
+//   booked.map((i) => i.getTime())
+// );
+
+const { data: service, error: serviceError } = await Astro.callAction(
+  actions.getService,
+  { id: 1 }
+);
+
+console.log("service: ", service);
+
+if (serviceError) {
   return Astro.redirect(404);
 }
 
-// const fetchAvailable = async () => {
-//   const resp = await fetch(`${baseUrl}/appointments/booked`);
-//   const result = (await resp.json()) as Date[];
-//   return result;
-// };
-
-// const fetchService = async () => {
-//   const resp = await fetch(`${baseUrl}/service/1`);
-//   const result = (await resp.json()) as Date[];
-// };
+const booked = bookedTimestamps.map((t) => new Date(t));
 ---
 
-<AppointmentCalendar client:load disabled={booked} />
+<AppointmentCalendar
+  client:load
+  disabled={booked}
+  intervalInMinutes={30}
+  openingTime={service.openingTime}
+/>
