@@ -14,7 +14,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 export const handlers = [
   http.get(`${baseUrl}/appointments/available`, async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    return HttpResponse.json([new Date()]);
+    return HttpResponse.json({ before: new Date() });
   }),
   http.get(`${baseUrl}/tagline`, () => {
     return HttpResponse.json({ tagline: "Hello world from MSW" });

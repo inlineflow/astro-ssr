@@ -11,4 +11,4 @@ const fetchAvailable = async () => {
 const available = await fetchAvailable();
 ---
 
-<AppointmentCalendar server:defer client:load disabled={available} />
+<AppointmentCalendar client:load disabled={available} />

@@ -20,7 +20,7 @@ console.log(Astro.request.method);
 
 <BaseLayout>
   <div class="flex justify-center items-center min-w-screen">
-    <Calendar>
+    <Calendar server:defer>
       <p slot="fallback">Loading calendar...</p>
     </Calendar>
   </div>
