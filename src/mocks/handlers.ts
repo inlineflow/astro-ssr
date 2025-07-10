@@ -52,7 +52,7 @@ export const handlers = [
   ),
   http.get(`${baseUrl}/appointments/booked`, async () => {
     await delay(1000);
-    return HttpResponse.json(bookedDates.map((d) => d.getTime()));
+    return HttpResponse.json(bookedDates);
   }),
   http.get(`${baseUrl}/tagline`, () => {
     return HttpResponse.json({ tagline: "Hello world from MSW" });
