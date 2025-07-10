@@ -1,11 +1,26 @@
-import { http, HttpResponse } from "msw";
+import {
+  http,
+  HttpHandler,
+  HttpResponse,
+  type HttpResponseResolver,
+} from "msw";
 import type { Product } from "../types";
 // import { baseUrl } from "src/env";
 
 // for some reason when I import it from 'src/env' it doesn't work
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
+// const delay = async (url: string, resolver: HttpResponseResolver): HttpResponse => {
+//   return await new Promise(resolve => setTimeout(resolve, 1000));
+//   return resolver
+//   }
+// };
+
 export const handlers = [
+  http.get(`${baseUrl}/appointments/available`, async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return HttpResponse.json([new Date()]);
+  }),
   http.get(`${baseUrl}/tagline`, () => {
     return HttpResponse.json({ tagline: "Hello world from MSW" });
   }),
