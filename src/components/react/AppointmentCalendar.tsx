@@ -3,7 +3,10 @@ import { Card } from "@/ui/card";
 import { addDays } from "date-fns";
 import { useState } from "react";
 
-type AppointmentCalendarProps = React.ComponentProps<typeof Calendar>;
+type AppointmentCalendarProps = {
+  openingTime: number;
+  intervalInMinutes: number;
+} & React.ComponentProps<typeof Calendar>;
 
 export const AppointmentCalendar = ({
   className,

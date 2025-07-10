@@ -1,6 +1,15 @@
 import { http, HttpResponse } from "msw";
-import type { NetworkError, Product, Service } from "../types";
+import type { Product, Service } from "../types";
 import { addDays, setHours } from "date-fns";
+// import { ActionError } from "astro:actions";
+class ActionError extends Error {
+  code: string;
+  constructor({ message, code }: { message: string; code: string }) {
+    super(message);
+    this.code = code;
+  }
+}
+// import { ActionError } from "astro:actions";
 // import { baseUrl } from "src/env";
 
 // for some reason when I import it from 'src/env' it doesn't work
@@ -24,16 +33,17 @@ const bookedDates = Array.from({ length: 7 }, (_, i) =>
 ).sort();
 
 export const handlers = [
-  http.get<{ id: string }, undefined, Service | NetworkError>(
+  http.get<{ id: string }, undefined, Service | ActionError>(
     `${baseUrl}/service/:id`,
     async ({ params }) => {
       const { id: paramId } = params;
       const id = parseInt(paramId as string) - 1;
       if (id < 0) {
-        return HttpResponse.json(
-          { error: "Id can't be less than 1" },
-          { status: 400 }
-        );
+        const error = new ActionError({
+          message: "Id can't be less than 1",
+          code: "BAD_REQUEST",
+        });
+        return HttpResponse.json(error);
       }
 
       await delay(1000);

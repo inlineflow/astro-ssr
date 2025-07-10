@@ -1,19 +1,27 @@
 ---
-import { baseUrl } from "src/env";
 import { AppointmentCalendar } from "../react/AppointmentCalendar";
 
-const fetchAvailable = async () => {
-  const resp = await fetch(`${baseUrl}/appointments/booked`);
-  const result = (await resp.json()) as Date[];
-  return result;
-};
+import { actions } from "astro:actions";
 
-const fetchService = async () => {
-  const resp = await fetch(`${baseUrl}/service/1`);
-  const result = (await resp.json()) as Date[];
-};
+const { data: booked, error } = await Astro.callAction(
+  actions.getBookedAppointemnts,
+  {}
+);
+//  = await actions.getBookedAppointemnts();
+if (error) {
+  return Astro.redirect(404);
+}
 
-const available = await fetchAvailable();
+// const fetchAvailable = async () => {
+//   const resp = await fetch(`${baseUrl}/appointments/booked`);
+//   const result = (await resp.json()) as Date[];
+//   return result;
+// };
+
+// const fetchService = async () => {
+//   const resp = await fetch(`${baseUrl}/service/1`);
+//   const result = (await resp.json()) as Date[];
+// };
 ---
 
-<AppointmentCalendar client:load disabled={available} />
+<AppointmentCalendar client:load disabled={booked} />
