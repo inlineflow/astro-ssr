@@ -1,6 +1,9 @@
 import { http, HttpResponse } from "msw";
 import type { Product } from "../types";
-import { baseUrl } from "src/env";
+// import { baseUrl } from "src/env";
+
+// for some reason when I import it from 'src/env' it doesn't work
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 export const handlers = [
   http.get(`${baseUrl}/tagline`, () => {
