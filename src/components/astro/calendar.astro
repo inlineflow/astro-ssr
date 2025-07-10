@@ -3,9 +3,14 @@ import { baseUrl } from "src/env";
 import { AppointmentCalendar } from "../react/AppointmentCalendar";
 
 const fetchAvailable = async () => {
-  const resp = await fetch(`${baseUrl}/appointments/available`);
+  const resp = await fetch(`${baseUrl}/appointments/booked`);
   const result = (await resp.json()) as Date[];
   return result;
+};
+
+const fetchService = async () => {
+  const resp = await fetch(`${baseUrl}/service/1`);
+  const result = (await resp.json()) as Date[];
 };
 
 const available = await fetchAvailable();
