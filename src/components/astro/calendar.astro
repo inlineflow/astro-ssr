@@ -1,0 +1,14 @@
+---
+import { baseUrl } from "src/env";
+import { AppointmentCalendar } from "../react/AppointmentCalendar";
+
+const fetchAvailable = async () => {
+  const resp = await fetch(`${baseUrl}/appointments/available`);
+  const result = (await resp.json()) as Date[];
+  return result;
+};
+
+const available = await fetchAvailable();
+---
+
+<AppointmentCalendar server:defer client:load disabled={available} />

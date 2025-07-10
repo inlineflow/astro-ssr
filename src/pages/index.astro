@@ -2,16 +2,17 @@
 export const prerender = false;
 import BaseLayout from "src/layouts/BaseLayout.astro";
 import "../components/astro/tagline.astro";
-import { AppointmentCalendar } from "src/components/react/AppointmentCalendar";
-import { baseUrl } from "src/env";
+// import { AppointmentCalendar } from "src/components/react/AppointmentCalendar";
+// import { baseUrl } from "src/env";
+import Calendar from "src/components/astro/calendar.astro";
 // import Tagline from "../components/astro/tagline.astro";
-const fetchAvailable = async () => {
-  const resp = await fetch(`${baseUrl}/appointments/available`);
-  const result = (await resp.json()) as Date[];
-  return result;
-};
+// const fetchAvailable = async () => {
+//   const resp = await fetch(`${baseUrl}/appointments/available`);
+//   const result = (await resp.json()) as Date[];
+//   return result;
+// };
 
-const available = await fetchAvailable();
+// const available = await fetchAvailable();
 
 console.log(Astro.request.method);
 // Astro.response.headers.set("Content-Type", "application/json");
@@ -19,8 +20,8 @@ console.log(Astro.request.method);
 
 <BaseLayout>
   <div class="flex justify-center items-center min-w-screen">
-    <AppointmentCalendar server:defer client:load disabled={available}>
+    <Calendar>
       <p slot="fallback">Loading calendar...</p>
-    </AppointmentCalendar>
+    </Calendar>
   </div>
 </BaseLayout>

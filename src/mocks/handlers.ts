@@ -1,9 +1,4 @@
-import {
-  http,
-  HttpHandler,
-  HttpResponse,
-  type HttpResponseResolver,
-} from "msw";
+import { http, HttpResponse } from "msw";
 import type { Product } from "../types";
 // import { baseUrl } from "src/env";
 
