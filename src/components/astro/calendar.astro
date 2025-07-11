@@ -2,25 +2,18 @@
 import { AppointmentCalendar } from "../react/AppointmentCalendar";
 
 import { actions } from "astro:actions";
-import Timeblocks from "./timeblocks.astro";
 
 const { data: bookedTimestamps, error: bookedError } = await Astro.callAction(
   actions.getBookedAppointemnts,
   {}
 );
 
-const { data: service, error: serviceError } = await Astro.callAction(
-  actions.getService,
-  { id: 1 }
-);
-
 const booked = bookedTimestamps?.map((t) => t.toJSDate());
-const hasErrors = bookedError || serviceError;
+const hasErrors = bookedError;
 // console.log(hasErrors);
 ---
 
 <div class="flex flex-col">
-  {service && <AppointmentCalendar client:load disabled={booked} />}
-  {service && <Timeblocks service={service} client:load />}
+  <AppointmentCalendar client:load disabled={booked} />
 </div>
 {hasErrors && <div>Oopsie error happened</div>}

@@ -33,7 +33,7 @@ export const TimeBlocks = ({
     <div className={cn("flex", className)}>
       {blocks.map((b) => (
         <Card key={b.toISO()}>
-          <Button>{b.toFormat("T")}</Button>
+          <Button onClick={() => console.log(b)}>{b.toFormat("T")}</Button>
         </Card>
       ))}
     </div>

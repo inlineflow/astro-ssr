@@ -8,6 +8,7 @@ const { service } = Astro.props;
 ---
 
 <TimeBlocks
+  client:load
   openingTime={service.openingTime}
   closingTime={service.closingTime}
   intervalInMinutes={service.intervalInMinutes}
