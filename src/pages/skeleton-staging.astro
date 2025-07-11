@@ -1,11 +1,14 @@
 ---
 import CalendarSkeleton from "src/components/astro/calendar-skeleton.astro";
-// import Calendar from "src/components/astro/calendar.astro";
-import { AppointmentCalendar } from "src/components/react/AppointmentCalendar";
+import Calendar from "src/components/astro/calendar.astro";
+import Timeblocks from "src/components/astro/timeblocks.astro";
+// import { AppointmentCalendar } from "src/components/react/AppointmentCalendar";
 import SkeletonStagingLayout from "src/layouts/SkeletonStagingLayout.astro";
+const service: Service = {};
 ---
 
 <SkeletonStagingLayout>
-  <CalendarSkeleton slot="skeleton" />
-  <AppointmentCalendar slot="component" />
+  <!-- <CalendarSkeleton slot="skeleton" />
+  <Calendar slot="component" /> -->
+  <Timeblocks />
 </SkeletonStagingLayout>
