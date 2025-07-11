@@ -9,11 +9,8 @@ const { data: bookedTimestamps, error: bookedError } = await Astro.callAction(
 );
 
 const booked = bookedTimestamps?.map((t) => t.toJSDate());
-const hasErrors = bookedError;
 // console.log(hasErrors);
 ---
 
-<div class="flex flex-col">
-  <AppointmentCalendar client:load disabled={booked} />
-</div>
-{hasErrors && <div>Oopsie error happened</div>}
+<AppointmentCalendar client:load disabled={booked} />
+{bookedError && <div>Oopsie error happened</div>}

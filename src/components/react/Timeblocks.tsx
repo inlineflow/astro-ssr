@@ -30,12 +30,21 @@ export const TimeBlocks = ({
   console.log("Blocks: ", blocks);
 
   return (
-    <div className={cn("flex", className)}>
+    <Card
+      className={cn(
+        "flex-row flex-wrap max-w-full w-70 items-center justify-center md:w-86",
+        className
+      )}
+    >
       {blocks.map((b) => (
-        <Card key={b.toISO()}>
-          <Button onClick={() => console.log(b)}>{b.toFormat("T")}</Button>
-        </Card>
+        <Button
+          onClick={() => console.log(b)}
+          key={b.toISO()}
+          className="w-24 h-10"
+        >
+          {b.toFormat("T")}
+        </Button>
       ))}
-    </div>
+    </Card>
   );
 };
