@@ -3,7 +3,7 @@ import { Card } from "@/ui/card";
 import { Skeleton } from "@/ui/skeleton";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 const numberOfRows = 5;
-const numberOfCols = 5;
+const numberOfCols = 6;
 const calendarPlaceholder = Array.from({ length: numberOfRows }, (_, row) =>
   Array.from({ length: numberOfCols }, (_, col) => ({
     row,
@@ -24,7 +24,7 @@ console.log(calendarPlaceholder);
 ---
 
 <div class="calendar-skeleton">
-  <Card className="p-10">
+  <Card className="p-5">
     <div class="header flex items-center justify-center mb-10">
       <div class="flex justify-between w-full items-center">
         <ChevronLeftIcon className="size-4" />
@@ -35,11 +35,11 @@ console.log(calendarPlaceholder);
         <ChevronRightIcon className="size-4" />
       </div>
     </div>
-    <div class="flex flex-col space-y-2.5 md:space-y-3.5">
+    <div class="flex flex-col space-y-2.5 md:space-y-3">
       {
         calendarPlaceholder.map((row, i) => (
           <div
-            class={`flex space-x-2.5 md:space-x-3.5 ${i < 2 ? "justify-end" : ""}`}
+            class={`flex space-x-2.5 md:space-x-3 ${i < 2 ? "justify-end" : ""}`}
           >
             {row.map((cell) => {
               if (draw(cell)) {
