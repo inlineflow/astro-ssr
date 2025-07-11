@@ -24,7 +24,7 @@ export const AppointmentCalendar = ({
   };
 
   return (
-    <Card>
+    <Card className="size-fit">
       <Calendar
         mode="single"
         // className={className ?? ""}
