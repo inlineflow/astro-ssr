@@ -1,14 +1,22 @@
 ---
-import CalendarSkeleton from "src/components/astro/calendar-skeleton.astro";
-import Calendar from "src/components/astro/calendar.astro";
+import { DateTime } from "luxon";
+import TimeblocksSkeleton from "src/components/astro/timeblocks-skeleton.astro";
+// import CalendarSkeleton from "src/components/astro/calendar-skeleton.astro";
+// import Calendar from "src/components/astro/calendar.astro";
 import Timeblocks from "src/components/astro/timeblocks.astro";
 // import { AppointmentCalendar } from "src/components/react/AppointmentCalendar";
 import SkeletonStagingLayout from "src/layouts/SkeletonStagingLayout.astro";
-const service: Service = {};
+import type { Service } from "src/types";
+const service: Service = {
+  openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
+  closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
+  intervalInMinutes: 60,
+};
 ---
 
 <SkeletonStagingLayout>
   <!-- <CalendarSkeleton slot="skeleton" />
   <Calendar slot="component" /> -->
-  <Timeblocks />
+  <Timeblocks service={service} slot="component" />
+  <TimeblocksSkeleton service={service} slot="skeleton" />
 </SkeletonStagingLayout>

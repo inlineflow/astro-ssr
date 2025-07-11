@@ -18,8 +18,6 @@ const makeBlocks = (
   const blocks = [];
   let date = DateTime.fromISO(openingTime);
   const closed = DateTime.fromISO(closingTime);
-  console.log("Open : ", date);
-  console.log("Closed : ", closed);
 
   while (date.plus({ minutes: intervalInMinutes }) <= closed) {
     blocks.push(date);

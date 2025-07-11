@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Calendar } from "@/ui/calendar";
 import { Card } from "@/ui/card";
 import { useState } from "react";
@@ -19,7 +20,7 @@ export const AppointmentCalendar = ({
 
   return (
     <div>
-      <Card className="size-fit">
+      <Card className={cn("size-fit", className)}>
         <Calendar
           mode="single"
           // className={className ?? ""}

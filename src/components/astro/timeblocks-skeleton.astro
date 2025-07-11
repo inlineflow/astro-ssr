@@ -1,0 +1,61 @@
+---
+interface Props {
+  service: Service;
+}
+import { cn } from "@/lib/utils";
+import { Card } from "@/ui/card";
+import { Skeleton } from "@/ui/skeleton";
+import { DateTime } from "luxon";
+import type { Service } from "src/types";
+
+const { service } = Astro.props;
+
+const makeBlocks = (
+  openingTime: string,
+  closingTime: string,
+  intervalInMinutes: number
+) => {
+  const blocks = [];
+  let date = DateTime.fromISO(openingTime);
+  const closed = DateTime.fromISO(closingTime);
+  console.log("Open : ", date);
+  console.log("Closed : ", closed);
+
+  while (date.plus({ minutes: intervalInMinutes }) <= closed) {
+    blocks.push(date);
+    date = date.set({ minute: date.minute + intervalInMinutes });
+  }
+
+  const midpoint = Math.ceil(blocks.length / 2);
+  const firstHalf = blocks.slice(0, midpoint);
+  const secondHalf = blocks.slice(midpoint);
+  const result = [firstHalf, secondHalf];
+
+  return result;
+};
+
+const blockRows = makeBlocks(
+  service.openingTime,
+  service.closingTime,
+  service.intervalInMinutes
+);
+
+console.log("blockRows: ", blockRows);
+---
+
+<Card
+  className={cn(
+    "flex-row flex-wrap max-w-full w-70 items-center justify-center md:w-86 px-4"
+  )}
+>
+  {
+    blockRows.map((bRow) => (
+      <div class="flex flex-col space-y-5">
+        {bRow.map((_) => (
+          <Skeleton className="w-24 h-10" />
+        ))}
+      </div>
+    ))
+  }
+</Card>
+);
