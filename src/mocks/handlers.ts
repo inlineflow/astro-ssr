@@ -1,6 +1,5 @@
 import { http, HttpResponse } from "msw";
 import type { APIError, Product, Service } from "../types";
-import { setHours } from "date-fns";
 import { DateTime } from "luxon";
 // import { ActionError } from "astro:actions";
 // class ActionError extends Error {
@@ -28,7 +27,11 @@ const delay = async (timeout: number) =>
 const today = new Date();
 const weekAgo = DateTime.fromJSDate(today).minus({ week: 1 });
 const services: Service[] = [
-  { openingTime: setHours(new Date(), 10).setMinutes(0) },
+  {
+    openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
+    closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
+    intervalInMinutes: 30,
+  },
 ];
 
 const bookedDates = Array.from({ length: 7 }, (_, i) =>

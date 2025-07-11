@@ -6,7 +6,9 @@ export type Product = {
 };
 
 export type Service = {
-  openingTime: number;
+  openingTime: string; //ISO
+  closingTime: string; //ISO
+  intervalInMinutes: number;
 };
 
 export type NetworkError = {

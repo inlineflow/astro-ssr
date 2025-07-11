@@ -1,0 +1,14 @@
+---
+interface Props {
+  service: Service;
+}
+import type { Service } from "src/types";
+import { TimeBlocks } from "../react/Timeblocks";
+const { service } = Astro.props;
+---
+
+<TimeBlocks
+  openingTime={service.openingTime}
+  closingTime={service.closingTime}
+  intervalInMinutes={service.intervalInMinutes}
+/>
