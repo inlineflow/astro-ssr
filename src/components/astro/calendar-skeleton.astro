@@ -1,25 +1,57 @@
 ---
+import { Card } from "@/ui/card";
 import { Skeleton } from "@/ui/skeleton";
-const numberOfColumns = 5;
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 const numberOfRows = 5;
-const calendarPlaceholder = Array.from({ length: numberOfColumns }, (_, col) =>
-  Array.from({ length: numberOfRows }, (_, row) => ({
-    col,
+const numberOfCols = 7;
+const calendarPlaceholder = Array.from({ length: numberOfRows }, (_, row) =>
+  Array.from({ length: numberOfCols }, (_, col) => ({
     row,
+    col,
   }))
 );
+
+const ignoredDates = [
+  { row: 0, col: 0 },
+  { row: 0, col: 1 },
+  { row: numberOfRows - 1, col: numberOfCols - 1 },
+];
 
 console.log(calendarPlaceholder);
 ---
 
-<div class="flex space-x-5">
-  {
-    calendarPlaceholder.map((col) => (
-      <div class="flex flex-col space-y-5">
-        {col.map((row) => (
-          <Skeleton className="w-10 h-10" />
-        ))}
+<div class="calendar-skeleton">
+  <Card className="p-10">
+    <div class="header flex items-center justify-center">
+      <div class="flex justify-between w-full items-center">
+        <ChevronLeftIcon className="size-4" />
+        <div class="month-nav flex gap-5">
+          <Skeleton className="w-16 h-8" />
+          <Skeleton className="w-16 h-8" />
+        </div>
+        <ChevronRightIcon className="size-4" />
       </div>
-    ))
-  }
+    </div>
+    <div class="flex flex-col space-y-5">
+      {
+        calendarPlaceholder.map((row, i) => (
+          <div class={`flex space-x-5 ${i < 2 ? "justify-end" : ""}`}>
+            {row.map((cell) => {
+              if (
+                !ignoredDates.find(
+                  (i) => i.row === cell.row && i.col === cell.col
+                )
+              ) {
+                return (
+                  <div col={cell.row} row={cell.col} class="size-10">
+                    <Skeleton className="size-10" />
+                  </div>
+                );
+              }
+            })}
+          </div>
+        ))
+      }
+    </div>
+  </Card>
 </div>

@@ -55,7 +55,7 @@ export const handlers = [
         return HttpResponse.json(error);
       }
 
-      await delay(1000);
+      // await delay(1000);
       return HttpResponse.json(services[id]);
     }
   ),

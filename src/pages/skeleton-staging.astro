@@ -1,0 +1,10 @@
+---
+import CalendarSkeleton from "src/components/astro/calendar-skeleton.astro";
+import Calendar from "src/components/astro/calendar.astro";
+import SkeletonStagingLayout from "src/layouts/SkeletonStagingLayout.astro";
+---
+
+<SkeletonStagingLayout>
+  <CalendarSkeleton slot="skeleton" />
+  <Calendar slot="component" />
+</SkeletonStagingLayout>
