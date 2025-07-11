@@ -1,8 +1,8 @@
-import { defineAction } from "astro:actions";
+import { ActionError, defineAction } from "astro:actions";
 import { DateTime } from "luxon";
 import { z } from "astro:schema";
 import { baseUrl } from "src/env";
-import type { Service } from "src/types";
+import type { APIError, Service } from "src/types";
 
 export const server = {
   getBookedAppointemnts: defineAction({
@@ -19,7 +19,13 @@ export const server = {
     }),
     handler: async (input) => {
       const resp = await fetch(`${baseUrl}/service/${input.id}`);
-      const result = (await resp.json()) as Service;
+      const result = (await resp.json()) as Service | APIError;
+      if ("error" in result) {
+        throw new ActionError({
+          code: ActionError.statusToCode(result.error.status),
+          message: result.error.message,
+        });
+      }
       return result;
     },
   }),

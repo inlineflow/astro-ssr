@@ -1,14 +1,16 @@
 import { http, HttpResponse } from "msw";
-import type { Product, Service } from "../types";
-import { addDays, setHours } from "date-fns";
+import type { APIError, Product, Service } from "../types";
+import { setHours } from "date-fns";
+import { DateTime } from "luxon";
 // import { ActionError } from "astro:actions";
-class ActionError extends Error {
-  code: string;
-  constructor({ message, code }: { message: string; code: string }) {
-    super(message);
-    this.code = code;
-  }
-}
+// class ActionError extends Error {
+//   code: string;
+//   constructor({ message, code }: { message: string; code: string }) {
+//     super(message);
+//     this.code = code;
+//   }
+// }
+
 // import { ActionError } from "astro:actions";
 // import { baseUrl } from "src/env";
 
@@ -24,25 +26,32 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 const delay = async (timeout: number) =>
   new Promise((resolve) => setTimeout(resolve, timeout));
 const today = new Date();
+const weekAgo = DateTime.fromJSDate(today).minus({ week: 1 });
 const services: Service[] = [
   { openingTime: setHours(new Date(), 10).setMinutes(0) },
 ];
 
 const bookedDates = Array.from({ length: 7 }, (_, i) =>
-  addDays(today, -i)
-).sort((a, b) => a.getTime() - b.getTime());
+  weekAgo.plus({ day: i })
+).sort((a, b) => a.toUnixInteger() - b.toUnixInteger());
 
 export const handlers = [
-  http.get<{ id: string }, undefined, Service | ActionError>(
+  http.get<{ id: string }, undefined, Service | APIError>(
     `${baseUrl}/service/:id`,
     async ({ params }) => {
       const { id: paramId } = params;
       const id = parseInt(paramId as string) - 1;
       if (id < 0) {
-        const error = new ActionError({
-          message: "Id can't be less than 1",
-          code: "BAD_REQUEST",
-        });
+        const error: APIError = {
+          error: {
+            message: "Service ID cannot be negative",
+            status: 404,
+          },
+        };
+        // const error = new ActionError({
+        //   message: "Id can't be less than 1",
+        //   code: "BAD_REQUEST",
+        // });
         return HttpResponse.json(error);
       }
 

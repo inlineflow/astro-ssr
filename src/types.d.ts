@@ -13,4 +13,8 @@ export type NetworkError = {
   error: string;
 };
 
-export type AstroResponse<T> = T | ActionError;
+type APIError = {
+  error: { status: number; message: string };
+};
+
+export type AstroResponse<T> = T | APIError;

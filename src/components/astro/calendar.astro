@@ -7,34 +7,26 @@ const { data: bookedTimestamps, error: bookedError } = await Astro.callAction(
   actions.getBookedAppointemnts,
   {}
 );
-if (bookedError) {
-  return Astro.redirect(404);
-}
-console.log("booked: ", bookedTimestamps);
-console.log("typeof booked at 0: ", typeof bookedTimestamps[0]);
-console.log("booked at 0", bookedTimestamps[0]);
-// console.log(
-//   "booked timestamps: ",
-//   booked.map((i) => i.getTime())
-// );
 
 const { data: service, error: serviceError } = await Astro.callAction(
   actions.getService,
   { id: 1 }
 );
 
-console.log("service: ", service);
-
-if (serviceError) {
-  return Astro.redirect(404);
-}
-
-const booked = bookedTimestamps.map((t) => new Date(t));
+const booked = bookedTimestamps?.map((t) => t.toJSDate());
+const hasErrors = bookedError || serviceError;
+console.log(hasErrors);
 ---
 
-<AppointmentCalendar
-  client:load
-  disabled={booked}
-  intervalInMinutes={30}
-  openingTime={service.openingTime}
-/>
+{
+  service && (
+    <AppointmentCalendar
+      client:load
+      disabled={booked}
+      intervalInMinutes={30}
+      openingTime={service.openingTime}
+    />
+  )
+}
+
+{hasErrors && <div>Oopsie error happened</div>}

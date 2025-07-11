@@ -1,0 +1,25 @@
+---
+import { Skeleton } from "@/ui/skeleton";
+const numberOfColumns = 5;
+const numberOfRows = 5;
+const calendarPlaceholder = Array.from({ length: numberOfColumns }, (_, col) =>
+  Array.from({ length: numberOfRows }, (_, row) => ({
+    col,
+    row,
+  }))
+);
+
+console.log(calendarPlaceholder);
+---
+
+<div class="flex space-x-5">
+  {
+    calendarPlaceholder.map((col) => (
+      <div class="flex flex-col space-y-5">
+        {col.map((row) => (
+          <Skeleton className="w-10 h-10" />
+        ))}
+      </div>
+    ))
+  }
+</div>
