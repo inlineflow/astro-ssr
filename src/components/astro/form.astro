@@ -1,5 +1,15 @@
 ---
+import { actions } from "astro:actions";
 import { AppointmentForm } from "../react/AppointmentForm";
+const { data: service, error: serviceError } = await Astro.callAction(
+  actions.getService,
+  { id: 1 }
+);
+
+const sleep = (duration: number) =>
+  new Promise((resolve) => setTimeout(resolve, duration));
+
+await sleep(1000);
 ---
 
-<AppointmentForm client:load />
+{service && <AppointmentForm service={service} client:load />}

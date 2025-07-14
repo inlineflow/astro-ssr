@@ -1,6 +1,6 @@
 ---
 interface Props {
-  service: Service;
+  serviceProp?: Service;
 }
 import { cn } from "@/lib/utils";
 import { Card } from "@/ui/card";
@@ -8,7 +8,7 @@ import { Skeleton } from "@/ui/skeleton";
 import { DateTime } from "luxon";
 import type { Service } from "src/types";
 
-const { service } = Astro.props;
+const { serviceProp } = Astro.props;
 
 const makeBlocks = (
   openingTime: string,
@@ -33,6 +33,14 @@ const makeBlocks = (
 
   return result;
 };
+
+const defaultService: Service = {
+  openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
+  closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
+  intervalInMinutes: 60,
+};
+
+const service = serviceProp ?? defaultService;
 
 const blockRows = makeBlocks(
   service.openingTime,

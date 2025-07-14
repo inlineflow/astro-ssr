@@ -1,22 +1,28 @@
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/ui/calendar";
 import { Card } from "@/ui/card";
-import { useState } from "react";
+import type { DayPickerProps, OnSelectHandler } from "react-day-picker";
 
-type AppointmentCalendarProps = React.ComponentProps<typeof Calendar>;
+type AppointmentCalendarProps = {
+  className?: string;
+  disabled?: DayPickerProps["disabled"];
+  selected: Date;
+  onSelect: OnSelectHandler<Date>;
+};
 
 export const AppointmentCalendar = ({
   className,
   disabled,
+  selected,
+  onSelect,
 }: AppointmentCalendarProps) => {
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   // console.log(disabled);
 
-  const onSelect = (selectedDate: Date) => {
-    console.log(`Date: ${selectedDate}`);
-    console.log(`Unix timestamp: ${Math.floor(selectedDate.getTime() / 1000)}`);
-    setDate(selectedDate);
-  };
+  // const handleSelect = (selectedDate: Date) => {
+  //   console.log(`Date: ${selectedDate}`);
+  //   console.log(`Unix timestamp: ${Math.floor(selectedDate.getTime() / 1000)}`);
+  // };
 
   return (
     <div>
@@ -25,8 +31,8 @@ export const AppointmentCalendar = ({
           mode="single"
           // className={className ?? ""}
           className="bg-transparent p-0 [--cell-size:--spacing(10)] md:[--cell-size:--spacing(12)]"
-          selected={date}
-          defaultMonth={date}
+          selected={selected}
+          defaultMonth={selected}
           showOutsideDays={false}
           modifiers={{ booked: disabled }}
           modifiersClassNames={{

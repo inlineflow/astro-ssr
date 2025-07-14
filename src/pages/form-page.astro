@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+import FormSkeleton from "src/components/astro/form-skeleton.astro";
 import Form from "src/components/astro/form.astro";
 import BaseLayout from "src/layouts/BaseLayout.astro";
 ---
@@ -6,7 +8,9 @@ import BaseLayout from "src/layouts/BaseLayout.astro";
 <BaseLayout>
   <div class="flex justify-center items-center min-w-screen">
     <div class="flex flex-col items-center gap-5">
-      <Form />
+      <Form server:defer>
+        <FormSkeleton slot="fallback" />
+      </Form>
     </div>
   </div>
 </BaseLayout>
