@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/ui/button";
 import { Card } from "@/ui/card";
+import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 import { DateTime } from "luxon";
 import { useState } from "react";
 
@@ -50,13 +51,19 @@ export const TimeBlocks = ({
         className
       )}
     >
-      {blockRows.map((bRow, i) => (
-        <div className="flex flex-col space-y-5" key={i}>
-          {bRow.map((b) => (
-            <Timeblock dt={b} key={b.toISO()} onSelect={onSelect} />
-          ))}
-        </div>
-      ))}
+      <ToggleGroup
+        type="single"
+        onValueChange={(val) => console.log(val)}
+        className="space-x-5"
+      >
+        {blockRows.map((bRow, i) => (
+          <div className="flex flex-col space-y-5" key={i}>
+            {bRow.map((b) => (
+              <Timeblock dt={b} key={b.toISO()} onSelect={onSelect} />
+            ))}
+          </div>
+        ))}
+      </ToggleGroup>
     </Card>
   );
 };
@@ -68,27 +75,14 @@ const Timeblock = ({
   dt: DateTime;
   onSelect?: TimeblocksProps["onSelect"];
 }) => {
-  const defaultClassName = ["w-24 h-10"];
-  // className = "border-red-500";
-  const borderClassName = "border-8 border-red-500";
-  const [className, setClassName] = useState(defaultClassName);
-
-  const handleClick = () => {
-    if (className.includes(borderClassName)) return;
-
-    setClassName([...className, borderClassName]);
-    if (onSelect) onSelect(dt);
-  };
-
   return (
-    <div>
-      <Button
-        type="button"
-        onClick={() => handleClick()}
-        className={className.join(" ")}
-      >
+    <ToggleGroupItem
+      value={dt.toISO()!}
+      className="bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 rounded-md data-[state=on]:bg-primary border-8 border-primary data-[state=on]:border-accent data-[state=on]:text-primary"
+    >
+      <div className="w-24 h-10 flex items-center justify-center">
         {dt.toFormat("T")}
-      </Button>
-    </div>
+      </div>
+    </ToggleGroupItem>
   );
 };
