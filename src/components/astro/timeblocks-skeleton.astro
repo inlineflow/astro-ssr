@@ -37,7 +37,7 @@ const makeBlocks = (
 const defaultService: Service = {
   openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
   closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
-  intervalInMinutes: 60,
+  intervalInMinutes: 30,
 };
 
 const service = serviceProp ?? defaultService;

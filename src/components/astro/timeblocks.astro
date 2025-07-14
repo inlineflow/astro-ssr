@@ -1,8 +1,8 @@
 ---
 interface Props {
-  service: Service;
+  service: ServiceValidated;
 }
-import type { Service } from "src/types";
+import type { ServiceValidated } from "src/types";
 import { TimeBlocks } from "../react/Timeblocks";
 const { service } = Astro.props;
 ---

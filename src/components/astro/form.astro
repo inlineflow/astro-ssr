@@ -1,15 +1,38 @@
 ---
 import { actions } from "astro:actions";
 import { AppointmentForm } from "../react/AppointmentForm";
+import { validateService } from "root/src/validations/service";
 const { data: service, error: serviceError } = await Astro.callAction(
   actions.getService,
   { id: 1 }
 );
 
+let validService;
+let invalidServiceError;
+if (!serviceError) {
+  const { data, error } = validateService(service);
+
+  validService = data;
+  invalidServiceError = error;
+}
+
+// type y = typeof x;
+
+// const {data, error} = validateService(service);
+
+const errors = [serviceError, invalidServiceError];
+
 const sleep = (duration: number) =>
   new Promise((resolve) => setTimeout(resolve, duration));
 
 await sleep(1000);
+
+console.log(errors);
 ---
 
-{service && <AppointmentForm service={service} client:load />}
+{validService && <AppointmentForm service={validService} client:load />}
+{
+  errors.filter((e) => e !== undefined).length > 0 && (
+    <div>{errors[0]?.message}</div>
+  )
+}

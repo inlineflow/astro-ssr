@@ -1,4 +1,5 @@
 import type { ActionError } from "astro:actions";
+import type { DateTime } from "root";
 
 export type Product = {
   id: number;
@@ -9,6 +10,16 @@ export type Service = {
   openingTime: string; //ISO
   closingTime: string; //ISO
   intervalInMinutes: number;
+};
+
+export type ServiceValidated = {
+  openingTime: DateTime<true>;
+  closingTime: DateTime<true>;
+  intervalInMinutes: number;
+};
+
+export type text = {
+  [K in keyof ServiceValidated]: ServiceValidated[K];
 };
 
 export type NetworkError = {

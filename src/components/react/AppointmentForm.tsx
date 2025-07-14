@@ -13,7 +13,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateTime } from "luxon";
 import { TimeBlocks } from "./Timeblocks";
-import type { Service } from "src/types";
+import type { ServiceValidated } from "src/types";
 
 const FormSchema = z.object({
   calendarDate: z.date({
@@ -24,7 +24,7 @@ const FormSchema = z.object({
   }),
 });
 
-export const AppointmentForm = ({ service }: { service: Service }) => {
+export const AppointmentForm = ({ service }: { service: ServiceValidated }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: { calendarDate: new Date() },

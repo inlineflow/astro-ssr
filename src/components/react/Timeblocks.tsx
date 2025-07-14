@@ -1,26 +1,78 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@/ui/button";
 import { Card } from "@/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 import { DateTime } from "luxon";
-import { useState } from "react";
+import type { ServiceValidated } from "root/src/types";
 
 type TimeblocksProps = {
+  [K in keyof ServiceValidated]: ServiceValidated[K];
+} & {
   className?: string;
-  openingTime: string;
-  closingTime: string;
-  intervalInMinutes: number;
   onSelect?: (dt: DateTime) => void;
 };
 
+export const TimeBlocks = ({
+  className,
+  openingTime,
+  closingTime,
+  intervalInMinutes,
+  onSelect,
+}: TimeblocksProps) => {
+  const blockRows = makeBlocks(openingTime, closingTime, intervalInMinutes);
+  // console.log("blockRows: ", blockRows);
+  console.log("first row: ", blockRows[0]);
+
+  const defaultSelection = blockRows[0]![0];
+
+  return (
+    <Card
+      className={cn(
+        "flex-row flex-wrap max-w-full w-70 items-center justify-center md:w-86 px-4",
+        className
+      )}
+    >
+      <ToggleGroup
+        defaultValue={defaultSelection?.toISO()!}
+        // value={}
+        type="single"
+        onValueChange={(val) => {
+          if (val && onSelect) onSelect(DateTime.fromISO(val));
+        }}
+        className="space-x-5"
+      >
+        {blockRows.map((bRow, i) => (
+          <div className="flex flex-col space-y-5" key={i}>
+            {bRow.map((b) => (
+              <Timeblock dt={b} key={b.toISO()} />
+            ))}
+          </div>
+        ))}
+      </ToggleGroup>
+    </Card>
+  );
+};
+
+const Timeblock = ({ dt }: { dt: DateTime }) => {
+  return (
+    <ToggleGroupItem
+      value={dt.toISO()!}
+      className="bg-accent text-accent-foreground shadow-xs hover:bg-primary/90 rounded-md data-[state=on]:bg-primary border-2 border-primary data-[state=on]:border-primary data-[state=on]:text-primary-foreground"
+    >
+      <div className="w-24 h-10 flex items-center justify-center">
+        {dt.toFormat("T")}
+      </div>
+    </ToggleGroupItem>
+  );
+};
+
 const makeBlocks = (
-  openingTime: string,
-  closingTime: string,
+  openingTime: DateTime,
+  closingTime: DateTime,
   intervalInMinutes: number
 ) => {
   const blocks = [];
-  let date = DateTime.fromISO(openingTime);
-  const closed = DateTime.fromISO(closingTime);
+  let date = openingTime;
+  const closed = closingTime;
 
   while (date.plus({ minutes: intervalInMinutes }) <= closed) {
     blocks.push(date);
@@ -33,56 +85,4 @@ const makeBlocks = (
   const result = [firstHalf, secondHalf];
 
   return result;
-};
-
-export const TimeBlocks = ({
-  className,
-  openingTime,
-  closingTime,
-  intervalInMinutes,
-  onSelect,
-}: TimeblocksProps) => {
-  const blockRows = makeBlocks(openingTime, closingTime, intervalInMinutes);
-
-  return (
-    <Card
-      className={cn(
-        "flex-row flex-wrap max-w-full w-70 items-center justify-center md:w-86 px-4",
-        className
-      )}
-    >
-      <ToggleGroup
-        type="single"
-        onValueChange={(val) => console.log(val)}
-        className="space-x-5"
-      >
-        {blockRows.map((bRow, i) => (
-          <div className="flex flex-col space-y-5" key={i}>
-            {bRow.map((b) => (
-              <Timeblock dt={b} key={b.toISO()} onSelect={onSelect} />
-            ))}
-          </div>
-        ))}
-      </ToggleGroup>
-    </Card>
-  );
-};
-
-const Timeblock = ({
-  dt,
-  onSelect,
-}: {
-  dt: DateTime;
-  onSelect?: TimeblocksProps["onSelect"];
-}) => {
-  return (
-    <ToggleGroupItem
-      value={dt.toISO()!}
-      className="bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 rounded-md data-[state=on]:bg-primary border-8 border-primary data-[state=on]:border-accent data-[state=on]:text-primary"
-    >
-      <div className="w-24 h-10 flex items-center justify-center">
-        {dt.toFormat("T")}
-      </div>
-    </ToggleGroupItem>
-  );
 };
