@@ -23,7 +23,7 @@ const { data: service, error: serviceError } = await Astro.callAction(
             <Calendar server:defer>
               <CalendarSkeleton slot="fallback" />
             </Calendar>
-            <Timeblocks service={service} />
+            <Timeblocks service={{ ...service, validated: true }} />
           </Fragment>
         )
       }

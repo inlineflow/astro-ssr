@@ -2,13 +2,15 @@ import { cn } from "@/lib/utils";
 import { Card } from "@/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 import { DateTime } from "luxon";
-import type { ServiceValidated } from "root/src/types";
 
 type TimeblocksProps = {
-  [K in keyof ServiceValidated]: ServiceValidated[K];
+  openingTime: string;
+  closingTime: string;
+  intervalInMinutes: number;
 } & {
   className?: string;
-  onSelect?: (dt: DateTime) => void;
+  onSelect?: (dt: string) => void;
+  selected?: string;
 };
 
 export const TimeBlocks = ({
@@ -17,10 +19,9 @@ export const TimeBlocks = ({
   closingTime,
   intervalInMinutes,
   onSelect,
+  selected,
 }: TimeblocksProps) => {
   const blockRows = makeBlocks(openingTime, closingTime, intervalInMinutes);
-  // console.log("blockRows: ", blockRows);
-  console.log("first row: ", blockRows[0]);
 
   const defaultSelection = blockRows[0]![0];
 
@@ -33,10 +34,10 @@ export const TimeBlocks = ({
     >
       <ToggleGroup
         defaultValue={defaultSelection?.toISO()!}
-        // value={}
+        value={selected ?? ""}
         type="single"
         onValueChange={(val) => {
-          if (val && onSelect) onSelect(DateTime.fromISO(val));
+          if (val && onSelect) onSelect(val);
         }}
         className="space-x-5"
       >
@@ -66,13 +67,14 @@ const Timeblock = ({ dt }: { dt: DateTime }) => {
 };
 
 const makeBlocks = (
-  openingTime: DateTime,
-  closingTime: DateTime,
+  openingTime: string,
+  closingTime: string,
   intervalInMinutes: number
 ) => {
   const blocks = [];
-  let date = openingTime;
-  const closed = closingTime;
+
+  let date = DateTime.fromISO(openingTime);
+  const closed = DateTime.fromISO(closingTime);
 
   while (date.plus({ minutes: intervalInMinutes }) <= closed) {
     blocks.push(date);

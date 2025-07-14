@@ -1,7 +1,6 @@
-type ErrorType<E extends Error> = NonNullable<E>;
-
+// type ErrorType<E extends Error> = NonNullable<E>;
 // type Result<T, ErrorType> = Ok<T> | Err<ErrorType>;
-type ResultType<T> = NonNullable<T>;
+// type ResultType<T> = NonNullable<T>;
 export type Result<ResultType, ErrorType> =
   | {
       data: ResultType;

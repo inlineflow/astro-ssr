@@ -5,8 +5,10 @@ import { err, ok, type Result } from "../result";
 
 type ValidationResult<T, E> = Result<T, E>;
 export const validateService = (
-  service: Service
+  service: Service | undefined
 ): ValidationResult<ServiceValidated, Error> => {
+  if (!service) return err(new Error("Failed to fetch service."));
+
   const open = DateTime.fromISO(service.openingTime);
   const closed = DateTime.fromISO(service.closingTime);
 
@@ -17,9 +19,10 @@ export const validateService = (
       new Error("The time between opening and closing can't fit an appointment")
     );
 
+  console.log("open in validation: ", open);
+
   return ok({
-    openingTime: open,
-    closingTime: closed,
-    intervalInMinutes: service.intervalInMinutes,
+    ...service,
+    validated: true,
   });
 };

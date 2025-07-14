@@ -13,9 +13,9 @@ export type Service = {
 };
 
 export type ServiceValidated = {
-  openingTime: DateTime<true>;
-  closingTime: DateTime<true>;
-  intervalInMinutes: number;
+  [K in keyof Service]: Service[K];
+} & {
+  validated: true;
 };
 
 export type text = {

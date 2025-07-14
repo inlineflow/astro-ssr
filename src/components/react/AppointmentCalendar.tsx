@@ -8,6 +8,7 @@ type AppointmentCalendarProps = {
   disabled?: DayPickerProps["disabled"];
   selected: Date;
   onSelect: OnSelectHandler<Date>;
+  id?: string;
 };
 
 export const AppointmentCalendar = ({
