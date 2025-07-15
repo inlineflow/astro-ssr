@@ -9,16 +9,18 @@ interface Props {
 const { service } = Astro.props;
 ---
 
-<div class="flex flex-col overflow-hidden gap-5">
-  <Card className="items-center justify-center p-2.5 w-full h-32 bg-purple-200">
+<div class="flex flex-col overflow-hidden gap-5 md:grid grid-cols-5">
+  <Card
+    className="items-center justify-center p-2.5 w-full h-32 bg-purple-200 md:col-span-1 row-start-2 md:w-full md:h-full"
+  >
     <Flower2 size={64} />
   </Card>
-  <Card className="items-center p-2.5">
+  <Card className="items-center p-2.5 md:col-span-full md:row-start-1">
     <p>
       {service.name}
     </p>
   </Card>
-  <Card className="py-2.5 px-4">
+  <Card className="py-2.5 px-4 md:col-span-4 md:col-start-2 md:row-start-2">
     <p class="break-words">
       {service.description}
     </p>
