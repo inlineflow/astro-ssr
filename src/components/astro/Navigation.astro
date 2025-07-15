@@ -1,0 +1,22 @@
+---
+type Link = {
+  text: string;
+  path: string;
+};
+const links: Link[] = [
+  { text: "Home", path: "/" },
+  { text: "Booking", path: "/booking" },
+];
+---
+
+<nav>
+  <ul class="flex space-x-10 py-5 items-center justify-center">
+    {
+      links.map((l) => (
+        <li>
+          <a href={l.path}>{l.text}</a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

@@ -1,0 +1,19 @@
+---
+import type { ErrorType } from "root/src/types";
+import { isValidationError } from "root/src/utils";
+
+interface Props {
+  errors: ErrorType[];
+}
+const { errors } = Astro.props;
+const err = errors[0];
+---
+
+{
+  errors.length > 0 && (
+    <div>
+      <p>{err?.message}</p>
+      {isValidationError(err) && err?.details?.map((d) => <p>{d}</p>)}
+    </div>
+  )
+}

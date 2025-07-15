@@ -1,26 +1,9 @@
 import { http, HttpResponse } from "msw";
 import type { APIError, Product, Service } from "../types";
 import { DateTime } from "luxon";
-// import { ActionError } from "astro:actions";
-// class ActionError extends Error {
-//   code: string;
-//   constructor({ message, code }: { message: string; code: string }) {
-//     super(message);
-//     this.code = code;
-//   }
-// }
-
-// import { ActionError } from "astro:actions";
-// import { baseUrl } from "src/env";
 
 // for some reason when I import it from 'src/env' it doesn't work
 const baseUrl = import.meta.env.VITE_BASE_URL;
-
-// const delay = async (url: string, resolver: HttpResponseResolver): HttpResponse => {
-//   return await new Promise(resolve => setTimeout(resolve, 1000));
-//   return resolver
-//   }
-// };
 
 const delay = async (timeout: number) =>
   new Promise((resolve) => setTimeout(resolve, timeout));
@@ -30,6 +13,18 @@ const services: Service[] = [
   {
     openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
     closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
+    intervalInMinutes: 30,
+  },
+  {
+    openingTime: DateTime.now().set({ hour: 15, minute: 0, second: 0 }).toISO(),
+    closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
+    intervalInMinutes: 30,
+  },
+  {
+    openingTime: DateTime.now()
+      .set({ hour: 10, minute: 31, second: 0 })
+      .toISO(),
+    closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
     intervalInMinutes: 30,
   },
 ];

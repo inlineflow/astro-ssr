@@ -52,8 +52,8 @@ export const AppointmentForm = ({ service }: { service: ServiceValidated }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-col space-y-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5">
+        <div className="flex flex-col space-y-5">
           <FormField
             control={form.control}
             name="calendarDate"
@@ -69,6 +69,8 @@ export const AppointmentForm = ({ service }: { service: ServiceValidated }) => {
                     disabled={(date) =>
                       date < DateTime.now().minus({ day: 1 }).toJSDate()
                     }
+                    {...field}
+                    className="w-full items-center justify-center"
                   />
                 </FormControl>
                 {/* <FormDescription>Your booking date.</FormDescription> */}
@@ -97,7 +99,9 @@ export const AppointmentForm = ({ service }: { service: ServiceValidated }) => {
             )}
           ></FormField>
         </div>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full mt-5 mb-100">
+          Submit
+        </Button>
       </form>
     </Form>
   );

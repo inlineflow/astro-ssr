@@ -11,6 +11,8 @@ type TimeblocksProps = {
   className?: string;
   onSelect?: (dt: string) => void;
   selected?: string;
+  id?: string;
+  ariaDescribedBy?: string;
 };
 
 export const TimeBlocks = ({
@@ -20,36 +22,48 @@ export const TimeBlocks = ({
   intervalInMinutes,
   onSelect,
   selected,
+  id,
+  ariaDescribedBy,
 }: TimeblocksProps) => {
   const blockRows = makeBlocks(openingTime, closingTime, intervalInMinutes);
 
   const defaultSelection = blockRows[0]![0];
 
   return (
-    <Card
-      className={cn(
-        "flex-row flex-wrap max-w-full w-70 items-center justify-center md:w-86 px-4",
-        className
-      )}
-    >
-      <ToggleGroup
-        defaultValue={defaultSelection?.toISO()!}
-        value={selected ?? ""}
-        type="single"
-        onValueChange={(val) => {
-          if (val && onSelect) onSelect(val);
-        }}
-        className="space-x-5"
+    <div>
+      <input
+        type="date"
+        name={id}
+        id={id}
+        value={selected}
+        aria-describedby={ariaDescribedBy}
+        hidden
+      />
+      <Card
+        className={cn(
+          "flex-row flex-wrap max-w-full w-70 items-center justify-center md:w-86 px-4",
+          className
+        )}
       >
-        {blockRows.map((bRow, i) => (
-          <div className="flex flex-col space-y-5" key={i}>
-            {bRow.map((b) => (
-              <Timeblock dt={b} key={b.toISO()} />
-            ))}
-          </div>
-        ))}
-      </ToggleGroup>
-    </Card>
+        <ToggleGroup
+          defaultValue={defaultSelection?.toISO()!}
+          value={selected ?? ""}
+          type="single"
+          onValueChange={(val) => {
+            if (val && onSelect) onSelect(val);
+          }}
+          className="space-x-5"
+        >
+          {blockRows.map((bRow, i) => (
+            <div className="flex flex-col space-y-5" key={i}>
+              {bRow.map((b) => (
+                <Timeblock dt={b} key={b.toISO()} />
+              ))}
+            </div>
+          ))}
+        </ToggleGroup>
+      </Card>
+    </div>
   );
 };
 

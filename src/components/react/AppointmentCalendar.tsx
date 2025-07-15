@@ -1,21 +1,25 @@
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/ui/calendar";
 import { Card } from "@/ui/card";
+import { DateTime } from "luxon";
 import type { DayPickerProps, OnSelectHandler } from "react-day-picker";
 
 type AppointmentCalendarProps = {
   className?: string;
   disabled?: DayPickerProps["disabled"];
-  selected: Date;
-  onSelect: OnSelectHandler<Date>;
+  selected?: Date;
+  onSelect?: OnSelectHandler<Date>;
   id?: string;
+  aridDescribedBy?: string;
 };
 
 export const AppointmentCalendar = ({
   className,
   disabled,
-  selected,
-  onSelect,
+  selected = new Date(),
+  onSelect = () => {},
+  id,
+  aridDescribedBy,
 }: AppointmentCalendarProps) => {
   // const [date, setDate] = useState(new Date());
   // console.log(disabled);
@@ -27,6 +31,14 @@ export const AppointmentCalendar = ({
 
   return (
     <div>
+      <input
+        type="date"
+        name={id}
+        id={id}
+        value={DateTime.fromJSDate(selected).toISO()!}
+        aria-describedby={aridDescribedBy}
+        hidden
+      />
       <Card className={cn("size-fit", className)}>
         <Calendar
           mode="single"

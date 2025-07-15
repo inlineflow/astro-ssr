@@ -1,0 +1,28 @@
+---
+import { actions } from "astro:actions";
+import { validateService } from "root/src/validations/service";
+import ErrorMessage from "root/src/components/astro/error-message.astro";
+
+export const prerender = false;
+const { id: idParam } = Astro.params;
+
+if (!idParam) {
+  return Astro.redirect(400);
+}
+
+const id = parseInt(idParam);
+
+const { data: service, error: serviceError } = await Astro.callAction(
+  actions.getService,
+  { id: id }
+);
+
+const { error: invalidServiceError } = validateService(service);
+const errors = [serviceError, invalidServiceError].filter(
+  (e) => e !== undefined
+);
+---
+
+<h1>Service with id: {id}</h1>
+<p>{service?.openingTime}</p>
+{errors && <ErrorMessage errors={errors} />}

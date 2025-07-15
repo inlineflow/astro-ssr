@@ -1,5 +1,6 @@
 import type { ActionError } from "astro:actions";
 import type { DateTime } from "root";
+import type { ValidationError } from "./validations/errors";
 
 export type Product = {
   id: number;
@@ -31,3 +32,5 @@ type APIError = {
 };
 
 export type AstroResponse<T> = T | APIError;
+
+export type ErrorType = ActionError | ValidationError | Error;

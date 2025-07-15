@@ -1,14 +1,18 @@
-// type ErrorType<E extends Error> = NonNullable<E>;
 // type Result<T, ErrorType> = Ok<T> | Err<ErrorType>;
-// type ResultType<T> = NonNullable<T>;
-export type Result<ResultType, ErrorType> =
+type ConstrainedError<E extends Error> = E;
+export type ErrorType<E extends ConstrainedError<any>> = NonNullable<E>;
+type ResultType<T> = NonNullable<T>;
+export type Result<
+  R extends ResultType<any>,
+  E extends ErrorType<ConstrainedError<any>>
+> =
   | {
-      data: ResultType;
+      data: R;
       error: undefined;
     }
   | {
       data: undefined;
-      error: ErrorType;
+      error: E;
     };
 
 export function ok<ResultType>(value: ResultType): Result<ResultType, never> {
