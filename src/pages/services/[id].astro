@@ -2,6 +2,10 @@
 import { actions } from "astro:actions";
 import { validateService } from "root/src/validations/service";
 import ErrorMessage from "root/src/components/astro/error-message.astro";
+import ServiceDescription from "root/src/components/astro/service-description.astro";
+import BaseLayout from "root/src/layouts/BaseLayout.astro";
+import Form from "root/src/components/astro/form.astro";
+import FormSkeleton from "root/src/components/astro/form-skeleton.astro";
 
 export const prerender = false;
 const { id: idParam } = Astro.params;
@@ -17,12 +21,27 @@ const { data: service, error: serviceError } = await Astro.callAction(
   { id: id }
 );
 
-const { error: invalidServiceError } = validateService(service);
+const { data: validatedService, error: invalidServiceError } =
+  validateService(service);
 const errors = [serviceError, invalidServiceError].filter(
   (e) => e !== undefined
 );
+
+console.log(validatedService);
 ---
 
-<h1>Service with id: {id}</h1>
-<p>{service?.openingTime}</p>
-{errors && <ErrorMessage errors={errors} />}
+<BaseLayout>
+  {
+    validatedService && (
+      <div class="flex justify-center items-center min-w-screen">
+        <div class="flex flex-col items-center gap-5">
+          <ServiceDescription service={validatedService} />
+          <Form server:defer>
+            <FormSkeleton slot="fallback" />
+          </Form>
+        </div>
+      </div>
+    )
+  }
+  {errors && <ErrorMessage errors={errors} />}
+</BaseLayout>

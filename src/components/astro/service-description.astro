@@ -1,0 +1,15 @@
+---
+import type { ServiceValidated } from "root/src/types";
+
+interface Props {
+  service: ServiceValidated;
+}
+const { service } = Astro.props;
+---
+
+<p>
+  {service.name}
+</p>
+<p>
+  {service.description}
+</p>

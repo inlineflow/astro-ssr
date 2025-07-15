@@ -11,14 +11,20 @@ const today = new Date();
 const weekAgo = DateTime.fromJSDate(today).minus({ week: 1 });
 const services: Service[] = [
   {
+    name: "СПА у Зои",
     openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
     closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
     intervalInMinutes: 30,
+    address: "Советская 91, 1",
+    description: "Лучшее СПА в мире",
   },
   {
     openingTime: DateTime.now().set({ hour: 15, minute: 0, second: 0 }).toISO(),
     closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
     intervalInMinutes: 30,
+    description: "Лучший сервис в городе",
+    address: "Ленина 15, дом 2",
+    name: 'Салон "Ноготочки"',
   },
   {
     openingTime: DateTime.now()
@@ -26,6 +32,9 @@ const services: Service[] = [
       .toISO(),
     closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
     intervalInMinutes: 30,
+    description: "Баня, сауна, бильярд",
+    address: "Дзержинская 15, 31б",
+    name: 'Баня "Совушка"',
   },
 ];
 

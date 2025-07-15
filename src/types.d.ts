@@ -11,6 +11,9 @@ export type Service = {
   openingTime: string; //ISO
   closingTime: string; //ISO
   intervalInMinutes: number;
+  description: string;
+  address: string;
+  name: string;
 };
 
 export type ServiceValidated = {
