@@ -6,6 +6,7 @@ import ServiceDescription from "root/src/components/astro/service-description.as
 import BaseLayout from "root/src/layouts/BaseLayout.astro";
 import Form from "root/src/components/astro/form.astro";
 import FormSkeleton from "root/src/components/astro/form-skeleton.astro";
+import ServiceDescriptionSkeleton from "root/src/components/astro/service-description-skeleton.astro";
 
 export const prerender = false;
 const { id: idParam } = Astro.params;
@@ -31,17 +32,21 @@ console.log(validatedService);
 ---
 
 <BaseLayout>
-  {
-    validatedService && (
-      <div class="flex justify-center items-center min-w-screen">
-        <div class="flex flex-col items-center gap-5">
-          <ServiceDescription service={validatedService} />
-          <Form server:defer>
-            <FormSkeleton slot="fallback" />
-          </Form>
+  <div class="">
+    {
+      validatedService && (
+        <div class="flex justify-center items-center min-w-screen">
+          <div class="flex flex-col items-center gap-5 p-10">
+            <ServiceDescription service={validatedService} server:defer>
+              <ServiceDescriptionSkeleton slot="fallback" />
+            </ServiceDescription>
+            <Form validService={validatedService} server:defer>
+              <FormSkeleton slot="fallback" />
+            </Form>
+          </div>
         </div>
-      </div>
-    )
-  }
-  {errors && <ErrorMessage errors={errors} />}
+      )
+    }
+    {errors && <ErrorMessage errors={errors} />}
+  </div>
 </BaseLayout>

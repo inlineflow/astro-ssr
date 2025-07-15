@@ -4,18 +4,18 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico?" />
   </head>
-  <body>
+  <body class="max-w-full overflow-x-hidden">
     <Navigation />
     <div class="flex flex-col justify-between min-h-screen">
       <div class="page-body flex flex-col grow">
-        <main class="flex grow w-fit">
+        <main class="flex">
           <slot />
         </main>
       </div>

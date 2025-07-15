@@ -38,6 +38,7 @@ export const AppointmentCalendar = ({
         value={DateTime.fromJSDate(selected).toISO()!}
         aria-describedby={aridDescribedBy}
         hidden
+        readOnly
       />
       <Card className={cn("size-fit", className)}>
         <Calendar

@@ -36,8 +36,10 @@ export const TimeBlocks = ({
         name={id}
         id={id}
         value={selected}
+        defaultValue={defaultSelection?.toISO()!}
         aria-describedby={ariaDescribedBy}
         hidden
+        readOnly
       />
       <Card
         className={cn(
