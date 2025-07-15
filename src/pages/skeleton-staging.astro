@@ -1,22 +1,26 @@
 ---
 import { DateTime } from "luxon";
-import TimeblocksSkeleton from "src/components/astro/timeblocks-skeleton.astro";
-// import CalendarSkeleton from "src/components/astro/calendar-skeleton.astro";
-// import Calendar from "src/components/astro/calendar.astro";
-import Timeblocks from "src/components/astro/timeblocks.astro";
-// import { AppointmentCalendar } from "src/components/react/AppointmentCalendar";
 import SkeletonStagingLayout from "src/layouts/SkeletonStagingLayout.astro";
-import type { Service } from "src/types";
-const service: Service = {
+import type { ServiceValidated } from "src/types";
+import ServiceDescription from "../components/astro/service-description.astro";
+import ServiceDescriptionSkeleton from "../components/astro/service-description-skeleton.astro";
+const service: ServiceValidated = {
+  name: "СПА у Зои",
   openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
   closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
-  intervalInMinutes: 60,
+  intervalInMinutes: 30,
+  address: "Советская 91, 1",
+  description:
+    "Откройте для себя оазис спокойствия и возрождения в нашем SPA. Позвольте себе погрузиться в мир гармонии и блаженства, где каждый ритуал направлен на восстановление вашего тела и души. Наши опытные мастера и широкий спектр процедур – от расслабляющих массажей до омолаживающих уходов за кожей – подарят вам незабываемые ощущения и полное обновление. Забудьте о повседневной суете и насладитесь моментом истинного релакса в атмосфере роскоши и уюта.  ",
+  validated: true,
 };
 ---
 
 <SkeletonStagingLayout>
+  <ServiceDescription service={service} slot="component" />
+  <ServiceDescriptionSkeleton slot="skeleton" />
   <!-- <CalendarSkeleton slot="skeleton" />
   <Calendar slot="component" /> -->
-  <Timeblocks service={service} slot="component" />
-  <TimeblocksSkeleton serviceProp={service} slot="skeleton" />
+  <!-- <Timeblocks service={service} slot="component" />
+  <TimeblocksSkeleton serviceProp={service} slot="skeleton" /> -->
 </SkeletonStagingLayout>

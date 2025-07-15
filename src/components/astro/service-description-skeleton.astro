@@ -2,4 +2,14 @@
 import { Skeleton } from "@/ui/skeleton";
 ---
 
-<Skeleton className="w-24 p-8" />
+<div
+  class="flex flex-col overflow-hidden gap-5 md:grid md:grid-cols-5 md:w-256"
+>
+  <Skeleton
+    className="items-center justify-center p-2.5 w-full h-32 bg-purple-200 md:col-span-1 row-start-2 md:w-full md:h-full"
+  />
+  <Skeleton className="items-center p-2.5 md:col-span-full md:row-start-1" />
+  <Skeleton
+    className="py-2.5 px-4 md:col-span-4 md:col-start-2 md:row-start-2 h-32"
+  />
+</div>
