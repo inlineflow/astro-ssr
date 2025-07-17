@@ -1,13 +1,13 @@
 import { DateTime } from "luxon";
-import type { Establishment } from "root/src/lib/types";
-import type { EstablishmentValidated } from "root/src/lib/types";
+import type { Location } from "src/lib/schema";
+import type { LocationValidated } from "src/lib/schema";
 import { err, ok, type Result } from "../lib/result";
 import { ValidationError } from "./errors";
 
 type ValidationResult<T, E> = Result<T, E>;
 export const validateService = (
-  service: Establishment | undefined
-): ValidationResult<EstablishmentValidated, ValidationError> => {
+  service: Location | undefined
+): ValidationResult<LocationValidated, ValidationError> => {
   if (!service) return err(new ValidationError("Failed to fetch service."));
 
   const open = DateTime.fromISO(service.openingTime);
@@ -17,7 +17,7 @@ export const validateService = (
     return err(new ValidationError("Opening time is invalid."));
   if (!closed.isValid)
     return err(new ValidationError("Closing time is invalid."));
-  if (open.plus({ minutes: service.intervalInMinutes }) > closed)
+  if (open.plus({ minutes: service. }) > closed)
     return err(
       new ValidationError(
         `The time between opening and closing can't fit an appointment`,

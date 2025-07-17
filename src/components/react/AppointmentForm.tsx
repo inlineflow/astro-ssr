@@ -12,7 +12,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateTime } from "luxon";
 import { TimeBlocks } from "./Timeblocks";
-import type { EstablishmentValidated } from "root/src/lib/types";
+import type { Location } from "src/lib/schema";
 import { Button } from "@/ui/button";
 import { toast } from "sonner";
 import { actions } from "astro:actions";
@@ -30,11 +30,7 @@ const FormSchema = z.object({
     .nonempty(),
 });
 
-export const AppointmentForm = ({
-  service,
-}: {
-  service: EstablishmentValidated;
-}) => {
+export const AppointmentForm = ({ location }: { location: Location }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: { calendarDate: DateTime.now().toISO() },
@@ -102,9 +98,9 @@ export const AppointmentForm = ({
               <FormItem>
                 <FormControl>
                   <TimeBlocks
-                    openingTime={service.openingTime}
-                    closingTime={service.closingTime}
-                    intervalInMinutes={service.intervalInMinutes}
+                    openingTime={location.openingTime}
+                    closingTime={location.closingTime}
+                    durationInMinutes={location.services[0]?.durationInMinutes!}
                     onSelect={(dt) => field.onChange(dt)}
                     selected={field.value}
                   />

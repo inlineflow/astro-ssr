@@ -1,15 +1,16 @@
 ---
 interface Props {
-  service: EstablishmentValidated;
+  openingTime: string;
+  closingTime: string;
+  durationInMinutes: number;
 }
-import type { EstablishmentValidated } from "root/src/lib/types";
 import { TimeBlocks } from "../react/Timeblocks";
-const { service } = Astro.props;
+const { openingTime, closingTime, durationInMinutes } = Astro.props;
 ---
 
 <TimeBlocks
   client:load
-  openingTime={service.openingTime}
-  closingTime={service.closingTime}
-  intervalInMinutes={service.intervalInMinutes}
+  openingTime={openingTime}
+  closingTime={closingTime}
+  durationInMinutes={durationInMinutes}
 />

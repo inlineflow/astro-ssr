@@ -6,7 +6,7 @@ import { DateTime } from "luxon";
 type TimeblocksProps = {
   openingTime: string;
   closingTime: string;
-  intervalInMinutes: number;
+  durationInMinutes: number;
 } & {
   className?: string;
   onSelect?: (dt: string) => void;
@@ -19,13 +19,13 @@ export const TimeBlocks = ({
   className,
   openingTime,
   closingTime,
-  intervalInMinutes,
+  durationInMinutes,
   onSelect,
   selected,
   id,
   ariaDescribedBy,
 }: TimeblocksProps) => {
-  const blockRows = makeBlocks(openingTime, closingTime, intervalInMinutes);
+  const blockRows = makeBlocks(openingTime, closingTime, durationInMinutes);
 
   const defaultSelection = blockRows[0]![0];
 

@@ -1,3 +1,4 @@
+import type { ServerConfig } from "astro";
 import { z } from "astro:schema";
 
 export const employeeSchema = z.object({
@@ -31,6 +32,11 @@ export const locationSchema = z.object({
   photo: z.string().url().optional(),
 });
 export type Location = z.infer<typeof locationSchema>;
+export type LocationValidated = {
+  [K in keyof Location]: Location[K];
+} & {
+  validated: true;
+};
 
 const lightLocationSchema = locationSchema.omit({
   services: true,
@@ -45,12 +51,6 @@ export const establishmentSchema = z.object({
   name: z.string(),
 });
 export type Establishment = z.infer<typeof establishmentSchema>;
-
-export type EstablishmentValidated = {
-  [K in keyof Establishment]: Establishment[K];
-} & {
-  validated: true;
-};
 
 export const AppointmentSchema = z.object({
   establishmentId: z.string().uuid(),

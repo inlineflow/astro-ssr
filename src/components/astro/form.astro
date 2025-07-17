@@ -1,16 +1,12 @@
 ---
 import { AppointmentForm } from "../react/AppointmentForm";
-import type { EstablishmentValidated } from "root/src/lib/types";
+import type { Location } from "src/lib/schema";
 
 interface Props {
-  validEstablishment: EstablishmentValidated;
+  validLocation: Location;
 }
 
-const { validEstablishment } = Astro.props;
+const { validLocation } = Astro.props;
 ---
 
-{
-  validEstablishment && (
-    <AppointmentForm service={validEstablishment} client:load />
-  )
-}
+{validLocation && <AppointmentForm location={validLocation} client:load />}

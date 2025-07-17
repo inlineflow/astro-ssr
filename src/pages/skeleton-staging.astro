@@ -1,10 +1,10 @@
 ---
 import { DateTime } from "luxon";
 import SkeletonStagingLayout from "src/layouts/SkeletonStagingLayout.astro";
-import type { EstablishmentValidated } from "root/src/lib/schema";
+import type { LocationValidated } from "src/lib/schema";
 import EstablishmentDescription from "components/astro/establishment-description.astro";
 import EstablishmentDescriptionSkeleton from "../components/astro/establishment-description-skeleton.astro";
-const service: EstablishmentValidated = {
+const service: LocationValidated = {
   name: "СПА у Зои",
   openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
   closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
@@ -17,7 +17,7 @@ const service: EstablishmentValidated = {
 ---
 
 <SkeletonStagingLayout>
-  <EstablishmentDescription validEstablishment={service} slot="component" />
+  <EstablishmentDescription validService={service} slot="component" />
   <EstablishmentDescriptionSkeleton slot="skeleton" />
   <!-- <CalendarSkeleton slot="skeleton" />
   <Calendar slot="component" /> -->

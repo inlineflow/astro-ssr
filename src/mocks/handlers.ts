@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 import type { APIError, Product } from "../lib/types";
-import type { Establishment, Location, Service } from "../lib/schema";
+import type { Service, Location, Establishment } from "../lib/schema";
 import { DateTime } from "luxon";
 import type { AppointmentPostRequest } from "../lib/schema";
 
@@ -31,7 +31,7 @@ const employees = [
 ];
 const location: Location = {
   locationId: locationId,
-  name: "СПА у Зои на Московской",
+  name: "СПА у Зои На Московской",
   openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
   closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
   services: services,
@@ -48,23 +48,25 @@ const establishments: Establishment[] = [
       "Откройте для себя оазис спокойствия и возрождения в нашем SPA. Позвольте себе погрузиться в мир гармонии и блаженства, где каждый ритуал направлен на восстановление вашего тела и души. Наши опытные мастера и широкий спектр процедур – от расслабляющих массажей до омолаживающих уходов за кожей – подарят вам незабываемые ощущения и полное обновление. Забудьте о повседневной суете и насладитесь моментом истинного релакса в атмосфере роскоши и уюта.  ",
   },
   {
-    openingTime: DateTime.now().set({ hour: 15, minute: 0, second: 0 }).toISO(),
-    closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
-    intervalInMinutes: 30,
+    // openingTime: DateTime.now().set({ hour: 15, minute: 0, second: 0 }).toISO(),
+    // closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
+    // intervalInMinutes: 30,
+    id: crypto.randomUUID(),
+    locations: [location],
     description: "Лучший сервис в городе",
-    address: "Ленина 15, дом 2",
+    // address: "Ленина 15, дом 2",
     name: 'Салон "Ноготочки"',
   },
-  {
-    openingTime: DateTime.now()
-      .set({ hour: 10, minute: 31, second: 0 })
-      .toISO(),
-    closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
-    intervalInMinutes: 30,
-    description: "Баня, сауна, бильярд",
-    address: "Дзержинская 15, 31б",
-    name: 'Баня "Совушка"',
-  },
+  // {
+  //   openingTime: DateTime.now()
+  //     .set({ hour: 10, minute: 31, second: 0 })
+  //     .toISO(),
+  //   closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
+  //   intervalInMinutes: 30,
+  //   description: "Баня, сауна, бильярд",
+  //   address: "Дзержинская 15, 31б",
+  //   name: 'Баня "Совушка"',
+  // },
 ];
 
 const bookedDates = Array.from({ length: 7 }, (_, i) =>
