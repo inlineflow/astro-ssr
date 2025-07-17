@@ -18,6 +18,11 @@ export const serviceSchema = z.object({
   durationInMinutes: z.number(),
 });
 export type Service = z.infer<typeof serviceSchema>;
+export type ServiceValidated = {
+  [K in keyof Service]: Service[K];
+} & {
+  validated: true;
+};
 
 export const locationSchema = z.object({
   locationId: z.string().uuid(),
@@ -32,11 +37,6 @@ export const locationSchema = z.object({
   photo: z.string().url().optional(),
 });
 export type Location = z.infer<typeof locationSchema>;
-export type LocationValidated = {
-  [K in keyof Location]: Location[K];
-} & {
-  validated: true;
-};
 
 const lightLocationSchema = locationSchema.omit({
   services: true,
