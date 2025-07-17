@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/components/react/shadcn/*"],
-      "root/*": ["./*"]
+      "root/*": ["./*"],
+      "components/*": ["./src/components/*"]
     },
     "jsx": "react-jsx"
   }

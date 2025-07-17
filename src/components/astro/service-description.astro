@@ -13,18 +13,25 @@ const { service } = Astro.props;
   class="flex flex-col overflow-hidden gap-5 md:grid md:grid-cols-5 md:max-w-256"
 >
   <Card
-    className="items-center justify-center p-2.5 w-full h-32 bg-purple-200 md:col-span-1 row-start-2 md:w-full md:h-full"
+    className="items-center justify-center p-2.5 w-full h-32 bg-purple-200 md:col-span-2 row-start-2 md:w-full md:h-full"
   >
     <Flower2 size={64} />
   </Card>
   <Card className="items-center p-2.5 md:col-span-full md:row-start-1">
-    <p>
+    <p class="text-xl py-2">
       {service.name}
     </p>
   </Card>
-  <Card className="py-2.5 px-4 md:col-span-4 md:col-start-2 md:row-start-2">
-    <p class="break-words">
+  <Card
+    className="py-2.5 px-4 md:col-span-3 md:col-start-3 md:row-start-2 md:row-end-3 md:min-h-64 md:items-center md:justify-center"
+  >
+    <p class="break-words text-center">
       {service.description}
+    </p>
+  </Card>
+  <Card className="w-full md:col-span-full py-4">
+    <p class="text-center">
+      {`Время сеанса: ${service.intervalInMinutes} минут`}
     </p>
   </Card>
 </div>

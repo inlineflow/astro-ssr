@@ -52,8 +52,11 @@ export const AppointmentForm = ({ service }: { service: ServiceValidated }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5">
-        <div className="flex flex-col space-y-5 md:flex-row md:space-x-5">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mt-5 w-full items-center justify-center space-y-5"
+      >
+        <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 justify-center">
           <FormField
             control={form.control}
             name="calendarDate"
