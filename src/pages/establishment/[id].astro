@@ -1,0 +1,57 @@
+---
+import { actions } from "astro:actions";
+import { validateService } from "root/src/validations/establishment";
+import ErrorMessage from "root/src/components/astro/error-message.astro";
+import BaseLayout from "root/src/layouts/BaseLayout.astro";
+import Form from "components/astro/form.astro";
+import FormSkeleton from "root/src/components/astro/form-skeleton.astro";
+import { Toaster } from "components/react/shadcn/ui/sonner";
+import EstablishmentDescriptionSkeleton from "root/src/components/astro/establishment-description-skeleton.astro";
+import EstablishmentDescription from "root/src/components/astro/establishment-description.astro";
+
+export const prerender = false;
+const { id: idParam } = Astro.params;
+
+if (!idParam) {
+  return Astro.redirect(400);
+}
+
+const id = parseInt(idParam);
+
+const { data: establishment, error: serviceError } = await Astro.callAction(
+  actions.establishment.getEstablishment,
+  { id: id }
+);
+
+const { data: validatedEstablishment, error: invalidEstablishmentError } =
+  validateService(establishment);
+const errors = [serviceError, invalidEstablishmentError].filter(
+  (e) => e !== undefined
+);
+
+console.log(validatedEstablishment);
+---
+
+<BaseLayout>
+  <div class="">
+    {
+      validatedEstablishment && (
+        <div class="flex justify-center items-center min-w-screen">
+          <div class="flex flex-col items-center gap-5 p-10">
+            <EstablishmentDescription
+              validEstablishment={validatedEstablishment}
+              server:defer
+            >
+              <EstablishmentDescriptionSkeleton slot="fallback" />
+            </EstablishmentDescription>
+            <Form validEstablishment={validatedEstablishment} server:defer>
+              <FormSkeleton slot="fallback" />
+            </Form>
+          </div>
+        </div>
+      )
+    }
+    {errors && <ErrorMessage errors={errors} />}
+  </div>
+  <Toaster client:load />
+</BaseLayout>

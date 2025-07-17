@@ -1,12 +1,12 @@
 ---
 import { Card } from "@/ui/card";
-import type { ServiceValidated } from "root/src/types";
+import type { EstablishmentValidated } from "src/lib/schema";
 import { Flower2 } from "lucide-react";
 
 interface Props {
-  service: ServiceValidated;
+  validEstablishment: EstablishmentValidated;
 }
-const { service } = Astro.props;
+const { validEstablishment } = Astro.props;
 ---
 
 <div
@@ -19,19 +19,19 @@ const { service } = Astro.props;
   </Card>
   <Card className="items-center p-2.5 md:col-span-full md:row-start-1">
     <p class="text-xl py-2">
-      {service.name}
+      {validEstablishment.name}
     </p>
   </Card>
   <Card
     className="py-2.5 px-4 md:col-span-3 md:col-start-3 md:row-start-2 md:row-end-3 md:min-h-64 md:items-center md:justify-center"
   >
     <p class="break-words text-center">
-      {service.description}
+      {validEstablishment.description}
     </p>
   </Card>
   <Card className="w-full md:col-span-full py-4">
     <p class="text-center">
-      {`Время сеанса: ${service.intervalInMinutes} минут`}
+      {`Время сеанса: ${validEstablishment.intervalInMinutes} минут`}
     </p>
   </Card>
 </div>

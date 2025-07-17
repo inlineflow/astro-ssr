@@ -1,13 +1,13 @@
 import { DateTime } from "luxon";
-import type { Service } from "root/src/types";
-import type { ServiceValidated } from "root/src/types";
-import { err, ok, type Result } from "../result";
+import type { Establishment } from "root/src/lib/types";
+import type { EstablishmentValidated } from "root/src/lib/types";
+import { err, ok, type Result } from "../lib/result";
 import { ValidationError } from "./errors";
 
 type ValidationResult<T, E> = Result<T, E>;
 export const validateService = (
-  service: Service | undefined
-): ValidationResult<ServiceValidated, ValidationError> => {
+  service: Establishment | undefined
+): ValidationResult<EstablishmentValidated, ValidationError> => {
   if (!service) return err(new ValidationError("Failed to fetch service."));
 
   const open = DateTime.fromISO(service.openingTime);

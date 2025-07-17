@@ -1,10 +1,10 @@
 ---
 import { DateTime } from "luxon";
 import SkeletonStagingLayout from "src/layouts/SkeletonStagingLayout.astro";
-import type { ServiceValidated } from "src/types";
-import ServiceDescription from "../components/astro/service-description.astro";
-import ServiceDescriptionSkeleton from "../components/astro/service-description-skeleton.astro";
-const service: ServiceValidated = {
+import type { EstablishmentValidated } from "root/src/lib/schema";
+import EstablishmentDescription from "components/astro/establishment-description.astro";
+import EstablishmentDescriptionSkeleton from "../components/astro/establishment-description-skeleton.astro";
+const service: EstablishmentValidated = {
   name: "СПА у Зои",
   openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
   closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
@@ -17,8 +17,8 @@ const service: ServiceValidated = {
 ---
 
 <SkeletonStagingLayout>
-  <ServiceDescription service={service} slot="component" />
-  <ServiceDescriptionSkeleton slot="skeleton" />
+  <EstablishmentDescription validEstablishment={service} slot="component" />
+  <EstablishmentDescriptionSkeleton slot="skeleton" />
   <!-- <CalendarSkeleton slot="skeleton" />
   <Calendar slot="component" /> -->
   <!-- <Timeblocks service={service} slot="component" />

@@ -1,6 +1,8 @@
 import { http, HttpResponse } from "msw";
-import type { APIError, Product, Service } from "../types";
+import type { APIError, Product } from "../lib/types";
+import type { Establishment, Location, Service } from "../lib/schema";
 import { DateTime } from "luxon";
+import type { AppointmentPostRequest } from "../lib/schema";
 
 // for some reason when I import it from 'src/env' it doesn't work
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -11,11 +13,37 @@ const today = new Date();
 const weekAgo = DateTime.fromJSDate(today).minus({ week: 1 });
 const services: Service[] = [
   {
+    durationInMinutes: 30,
+    name: "Стрижка",
+    serviceId: crypto.randomUUID(),
+  },
+];
+const locationId = crypto.randomUUID();
+const establishmentId = crypto.randomUUID();
+const employees = [
+  {
+    name: "Виктор",
+    employeeId: crypto.randomUUID(),
+    location: locationId,
+    nonWorkingDays: [],
+    providesServices: services.map((s) => s.serviceId),
+  },
+];
+const location: Location = {
+  locationId: locationId,
+  name: "СПА у Зои на Московской",
+  openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
+  closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
+  services: services,
+  employees: employees,
+  address: "Советская 91, 1",
+  establishmentId: establishmentId,
+};
+const establishments: Establishment[] = [
+  {
     name: "СПА у Зои",
-    openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
-    closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
-    intervalInMinutes: 30,
-    address: "Советская 91, 1",
+    id: crypto.randomUUID(),
+    locations: [location],
     description:
       "Откройте для себя оазис спокойствия и возрождения в нашем SPA. Позвольте себе погрузиться в мир гармонии и блаженства, где каждый ритуал направлен на восстановление вашего тела и души. Наши опытные мастера и широкий спектр процедур – от расслабляющих массажей до омолаживающих уходов за кожей – подарят вам незабываемые ощущения и полное обновление. Забудьте о повседневной суете и насладитесь моментом истинного релакса в атмосфере роскоши и уюта.  ",
   },
@@ -44,8 +72,18 @@ const bookedDates = Array.from({ length: 7 }, (_, i) =>
 ).sort((a, b) => a.toUnixInteger() - b.toUnixInteger());
 
 export const handlers = [
-  http.get<{ id: string }, undefined, Service | APIError>(
-    `${baseUrl}/service/:id`,
+  http.post<never, AppointmentPostRequest>(
+    `${baseUrl}/appointment`,
+    ({ request }) => {
+      console.log(request.body);
+      return HttpResponse.json(
+        { appointmentId: crypto.randomUUID() },
+        { status: 201 }
+      );
+    }
+  ),
+  http.get<{ id: string }, undefined, Establishment | APIError>(
+    `${baseUrl}/establishment/:id`,
     async ({ params }) => {
       const { id: paramId } = params;
       const id = parseInt(paramId as string) - 1;
@@ -64,7 +102,7 @@ export const handlers = [
       }
 
       // await delay(1000);
-      return HttpResponse.json(services[id]);
+      return HttpResponse.json(establishments[id]);
     }
   ),
   http.get(`${baseUrl}/appointments/booked`, async () => {

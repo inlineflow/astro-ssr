@@ -12,8 +12,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateTime } from "luxon";
 import { TimeBlocks } from "./Timeblocks";
-import type { ServiceValidated } from "src/types";
+import type { EstablishmentValidated } from "root/src/lib/types";
 import { Button } from "@/ui/button";
+import { toast } from "sonner";
+import { actions } from "astro:actions";
 
 const FormSchema = z.object({
   calendarDate: z
@@ -28,15 +30,17 @@ const FormSchema = z.object({
     .nonempty(),
 });
 
-export const AppointmentForm = ({ service }: { service: ServiceValidated }) => {
-  console.log("service in form: ", service);
-
+export const AppointmentForm = ({
+  service,
+}: {
+  service: EstablishmentValidated;
+}) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: { calendarDate: DateTime.now().toISO() },
   });
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     const timeOfDay = DateTime.fromISO(data.timeOfDay);
     // console.log(DateTime.fromISO(data.calendarDate).toFormat("yyyy MM dd"));
     // console.log(DateTime.fromISO(data.timeOfDay).toFormat("T"));
@@ -47,7 +51,17 @@ export const AppointmentForm = ({ service }: { service: ServiceValidated }) => {
       second: 0,
     });
 
-    console.log("Your appointment is at: ", appointment.toISO());
+    toast(`Your appointment is at: ${appointment.toISO()}`);
+    const { data: postResponse, error } =
+      await actions.appointment.postAppointment({
+        datetime: appointment.toISO()!,
+        serviceId: crypto.randomUUID(),
+        userId: crypto.randomUUID(),
+        employeeId: crypto.randomUUID(),
+        establishmentId: crypto.randomUUID(),
+      });
+
+    console.log("postResponse: ", postResponse);
   };
 
   return (
