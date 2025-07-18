@@ -1,0 +1,32 @@
+---
+import { Card } from "@/ui/card";
+import { actions } from "astro:actions";
+import ErrorMessage from "components/astro/error-message.astro";
+import BaseLayout from "src/layouts/BaseLayout.astro";
+
+const { data: establishments, error } = await Astro.callAction(
+  actions.establishment.getAllEstablishments,
+  {}
+);
+
+console.log("establishments: ", JSON.stringify(establishments, null, 2));
+---
+
+<BaseLayout>
+  <div>
+    {
+      establishments && (
+        <ul>
+          {establishments.map((est) => (
+            <a href={`/establishment/${est.id}`}>
+              <Card>
+                <p>{est.name}</p>
+              </Card>
+            </a>
+          ))}
+        </ul>
+      )
+    }
+    {error && <ErrorMessage errors={[error]} />}
+  </div>
+</BaseLayout>

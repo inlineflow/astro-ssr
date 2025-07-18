@@ -19,7 +19,7 @@ const services: Service[] = [
   },
 ];
 const locationId = crypto.randomUUID();
-const establishmentId = crypto.randomUUID();
+export const establishmentId = crypto.randomUUID();
 const employees = [
   {
     name: "Виктор",
@@ -39,11 +39,12 @@ const location: Location = {
   address: "Советская 91, 1",
   establishmentId: establishmentId,
 };
+const locations = [location];
 const establishments: Establishment[] = [
   {
     name: "СПА у Зои",
-    id: crypto.randomUUID(),
-    locations: [location],
+    id: establishmentId,
+    locations: locations,
     description:
       "Откройте для себя оазис спокойствия и возрождения в нашем SPA. Позвольте себе погрузиться в мир гармонии и блаженства, где каждый ритуал направлен на восстановление вашего тела и души. Наши опытные мастера и широкий спектр процедур – от расслабляющих массажей до омолаживающих уходов за кожей – подарят вам незабываемые ощущения и полное обновление. Забудьте о повседневной суете и насладитесь моментом истинного релакса в атмосфере роскоши и уюта.  ",
   },
@@ -52,7 +53,7 @@ const establishments: Establishment[] = [
     // closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
     // intervalInMinutes: 30,
     id: crypto.randomUUID(),
-    locations: [location],
+    locations: locations,
     description: "Лучший сервис в городе",
     // address: "Ленина 15, дом 2",
     name: 'Салон "Ноготочки"',
@@ -67,13 +68,38 @@ const establishments: Establishment[] = [
   //   address: "Дзержинская 15, 31б",
   //   name: 'Баня "Совушка"',
   // },
-];
+].map((est) => {
+  return {
+    ...est,
+    locations: est.locations.map((loc) => {
+      const { services, employees, ...locLight } = loc;
+      return locLight;
+    }),
+  };
+});
 
 const bookedDates = Array.from({ length: 7 }, (_, i) =>
   weekAgo.plus({ day: i })
 ).sort((a, b) => a.toUnixInteger() - b.toUnixInteger());
 
 export const handlers = [
+  http.get<{ id: string }, undefined, Location | APIError>(
+    `${baseUrl}/location/:id`,
+    async ({ params }) => {
+      const { id } = params;
+      const location = locations.find((loc) => loc.locationId === id);
+      if (!location) {
+        const error: APIError = {
+          error: {
+            message: "Not found",
+            status: 404,
+          },
+        };
+        return HttpResponse.json(error);
+      }
+      return HttpResponse.json(location);
+    }
+  ),
   http.post<never, AppointmentPostRequest>(
     `${baseUrl}/appointment`,
     ({ request }) => {
@@ -84,27 +110,24 @@ export const handlers = [
       );
     }
   ),
+  http.get(`${baseUrl}/establishment`, () => {
+    return HttpResponse.json(establishments);
+  }),
   http.get<{ id: string }, undefined, Establishment | APIError>(
     `${baseUrl}/establishment/:id`,
     async ({ params }) => {
-      const { id: paramId } = params;
-      const id = parseInt(paramId as string) - 1;
-      if (id < 0) {
+      const { id } = params;
+      const establishment = establishments.find((e) => e.id === id);
+      if (!establishment) {
         const error: APIError = {
           error: {
-            message: "Service ID cannot be negative",
+            message: "Not found",
             status: 404,
           },
         };
-        // const error = new ActionError({
-        //   message: "Id can't be less than 1",
-        //   code: "BAD_REQUEST",
-        // });
         return HttpResponse.json(error);
       }
-
-      // await delay(1000);
-      return HttpResponse.json(establishments[id]);
+      return HttpResponse.json(establishment);
     }
   ),
   http.get(`${baseUrl}/appointments/booked`, async () => {

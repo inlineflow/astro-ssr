@@ -1,12 +1,12 @@
 ---
 import { Card } from "@/ui/card";
-import type { Establishment } from "src/lib/schema";
+import type { LocationLight } from "src/lib/schema";
 import { Flower2 } from "lucide-react";
 
 interface Props {
-  validEstablishment: Establishment;
+  validLocationLight: LocationLight & { description?: string | undefined };
 }
-const { validEstablishment } = Astro.props;
+const { validLocationLight: validLocationLight } = Astro.props;
 ---
 
 <div
@@ -19,14 +19,14 @@ const { validEstablishment } = Astro.props;
   </Card>
   <Card className="items-center p-2.5 md:col-span-full md:row-start-1">
     <p class="text-xl py-2">
-      {validEstablishment.name}
+      {validLocationLight.name}
     </p>
   </Card>
   <Card
     className="py-2.5 px-4 md:col-span-3 md:col-start-3 md:row-start-2 md:row-end-3 md:min-h-64 md:items-center md:justify-center"
   >
     <p class="break-words text-center">
-      {validEstablishment.description}
+      {validLocationLight.description}
     </p>
   </Card>
 </div>

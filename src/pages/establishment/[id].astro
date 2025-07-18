@@ -1,0 +1,37 @@
+---
+import { Card } from "@/ui/card";
+import { actions } from "astro:actions";
+import BaseLayout from "src/layouts/BaseLayout.astro";
+
+export const prerender = false;
+const { id } = Astro.params;
+
+if (!id) {
+  return Astro.redirect(400);
+}
+
+const { data: establishment, error } = await Astro.callAction(
+  actions.establishment.getEstablishment,
+  { id: id }
+);
+---
+
+<BaseLayout>
+  <div>
+    <p>
+      {establishment?.name}
+    </p>
+    <p>
+      {establishment?.description}
+    </p>
+    <p>
+      {
+        establishment?.locations.map((loc) => (
+          <a href={`/location/${loc.locationId}`}>
+            <Card>{loc.name}</Card>
+          </a>
+        ))
+      }
+    </p>
+  </div>
+</BaseLayout>

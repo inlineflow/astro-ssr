@@ -1,50 +1,58 @@
 ---
 import { actions } from "astro:actions";
-import { validateService } from "src/validations/establishment";
+// import { validateService } from "src/validations/service";
 import ErrorMessage from "src/components/astro/error-message.astro";
 import BaseLayout from "src/layouts/BaseLayout.astro";
 import Form from "components/astro/form.astro";
 import FormSkeleton from "src/components/astro/form-skeleton.astro";
 import { Toaster } from "components/react/shadcn/ui/sonner";
-import EstablishmentDescriptionSkeleton from "src/components/astro/establishment-description-skeleton.astro";
-import EstablishmentDescription from "src/components/astro/establishment-description.astro";
+import LocationDescription from "components/astro/location-description.astro";
+import LocationDescriptionSkeleton from "components/astro/location-description-skeleton.astro";
+import type { LocationLight } from "src/lib/schema";
 
 export const prerender = false;
-const { id: idParam } = Astro.params;
+const { id } = Astro.params;
 
-if (!idParam) {
+if (!id) {
   return Astro.redirect(400);
 }
 
-const id = parseInt(idParam);
-
-const { data: establishment, error: serviceError } = await Astro.callAction(
-  actions.establishment.getEstablishment,
+// let location: Location = {} as Location;
+const { data: location, error: fetchError } = await Astro.callAction(
+  actions.location.getLocation,
   { id: id }
 );
 
-const { data: validatedEstablishment, error: invalidEstablishmentError } =
-  validateService(establishment);
-const errors = [serviceError, invalidEstablishmentError].filter(
-  (e) => e !== undefined
-);
+// const { data: validatedEstablishment, error: invalidEstablishmentError } =
+//   validateService(establishment);
+const errors = [fetchError].filter((e) => e !== undefined);
 
-console.log(validatedEstablishment);
+let locLight = {} as LocationLight;
+if (!fetchError) {
+  locLight = {
+    name: location.name,
+    address: location.address,
+    closingTime: location.closingTime,
+    establishmentId: location.establishmentId,
+    locationId: location.locationId,
+    openingTime: location.openingTime,
+    photo: location.photo,
+  };
+} // let location: Location = {} as Location;
+// const { services, employees, ...locLight } = location!;
+// console.log(validatedEstablishment);
 ---
 
 <BaseLayout>
   <div class="">
     {
-      validatedEstablishment && (
+      location && (
         <div class="flex justify-center items-center min-w-screen">
           <div class="flex flex-col items-center gap-5 p-10">
-            <EstablishmentDescription
-              validService={validatedEstablishment}
-              server:defer
-            >
-              <EstablishmentDescriptionSkeleton slot="fallback" />
-            </EstablishmentDescription>
-            <Form validLocation={validatedEstablishment} server:defer>
+            <LocationDescription validLocationLight={locLight} server:defer>
+              <LocationDescriptionSkeleton slot="fallback" />
+            </LocationDescription>
+            <Form validLocation={location} server:defer>
               <FormSkeleton slot="fallback" />
             </Form>
           </div>

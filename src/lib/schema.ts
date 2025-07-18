@@ -43,6 +43,7 @@ const lightLocationSchema = locationSchema.omit({
   employees: true,
   description: true,
 });
+export type LocationLight = z.infer<typeof lightLocationSchema>;
 
 export const establishmentSchema = z.object({
   id: z.string().uuid(),
@@ -51,6 +52,15 @@ export const establishmentSchema = z.object({
   name: z.string(),
 });
 export type Establishment = z.infer<typeof establishmentSchema>;
+
+export const establishmentLightSchema = establishmentSchema
+  .omit({
+    locations: true,
+  })
+  .extend({
+    locations: lightLocationSchema,
+  });
+export type EstablishmentLight = z.infer<typeof establishmentLightSchema>;
 
 export const AppointmentSchema = z.object({
   establishmentId: z.string().uuid(),

@@ -1,0 +1,13 @@
+---
+interface Props {
+  id: string;
+}
+import { actions } from "astro:actions";
+
+const { id } = Astro.props;
+
+const { data: establishment, error: serviceError } = await Astro.callAction(
+  actions.establishment.getEstablishment,
+  { id: id }
+);
+---
