@@ -1,0 +1,26 @@
+---
+interface Props {
+  establishment: Establishment;
+}
+import { Card } from "@/ui/card";
+import type { Establishment } from "src/lib/schema";
+import { conjugate } from "src/utils";
+const { establishment } = Astro.props;
+---
+
+<a href={`/establishment/${establishment.id}`}>
+  <Card className="justify-center items-center px-6 gap-3">
+    <p>{establishment.name}</p>
+    {establishment.logo && <img src={establishment.logo} />}
+    {!establishment.logo && <div class="bg-pink-300 w-full h-24 rounded-md" />}
+    {establishment.description && <p>{establishment.description}</p>}
+    <p>
+      {
+        `${establishment.locations.length} ${conjugate(
+          establishment.locations.length,
+          ["филиал", "филиала", "филиалов"]
+        )}`
+      }
+    </p>
+  </Card>
+</a>

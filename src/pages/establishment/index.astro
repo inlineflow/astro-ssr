@@ -2,7 +2,8 @@
 import { Card } from "@/ui/card";
 import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
-import BaseLayout from "src/layouts/BaseLayout.astro";
+import EstablishmentCard from "components/astro/establishment-card.astro";
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
 
 const { data: establishments, error } = await Astro.callAction(
   actions.establishment.getAllEstablishments,
@@ -12,21 +13,22 @@ const { data: establishments, error } = await Astro.callAction(
 console.log("establishments: ", JSON.stringify(establishments, null, 2));
 ---
 
-<BaseLayout>
-  <div>
+<CenteredLayout>
+  <div class="w-64">
+    <Card
+      className="w-full bg-pink-200 h-24 text-center justify-center text-xl mb-12"
+    >
+      <p>Establishments</p>
+    </Card>
     {
       establishments && (
-        <ul>
+        <ul class="flex flex-col gap-6">
           {establishments.map((est) => (
-            <a href={`/establishment/${est.id}`}>
-              <Card>
-                <p>{est.name}</p>
-              </Card>
-            </a>
+            <EstablishmentCard establishment={est} />
           ))}
         </ul>
       )
     }
     {error && <ErrorMessage errors={[error]} />}
   </div>
-</BaseLayout>
+</CenteredLayout>
