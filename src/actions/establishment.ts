@@ -1,7 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import type { APIError } from "../lib/types";
-import type { Establishment, EstablishmentLight } from "src/lib/schema";
+import type { Establishment } from "src/lib/schema";
 import { baseUrl } from "../env";
 
 export const establishment = {
@@ -24,7 +24,7 @@ export const establishment = {
   getAllEstablishments: defineAction({
     handler: async () => {
       const resp = await fetch(`${baseUrl}/establishment`);
-      const result = (await resp.json()) as EstablishmentLight[] | APIError;
+      const result = (await resp.json()) as Establishment[] | APIError;
       if ("error" in result) {
         throw new ActionError({
           code: ActionError.statusToCode(result.error.status),
