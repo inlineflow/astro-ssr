@@ -1,0 +1,50 @@
+---
+interface Props {
+  location: LocationLight;
+}
+import { Card, CardFooter, CardHeader } from "@/ui/card";
+import { MapPin } from "lucide-react";
+import { Separator } from "@/ui/separator";
+import { DateTime } from "luxon";
+import type { LocationLight } from "src/lib/schema";
+const { location } = Astro.props;
+const open = DateTime.fromISO(location.openingTime);
+const close = DateTime.fromISO(location.closingTime);
+
+console.log("Services: ", location.services);
+---
+
+<Card className="text-center px-4 py-4">
+  <a href={`/location/${location.locationId}`} class="flex flex-col gap-4">
+    <CardHeader className="text-lg">{location.name}</CardHeader>
+    <Separator orientation="horizontal" />
+    {
+      location.photo ? (
+        <img src={location.photo} />
+      ) : (
+        <div class="bg-pink-200 w-full h-24 rounded-xl" />
+      )
+    }
+
+    {
+      location.services && (
+        <div>
+          {location.services.map((s) => (
+            <div class="bg-amber-100 size-12 rounded-full" />
+          ))}
+        </div>
+      )
+    }
+    <Separator orientation="horizontal" decorative />
+    <CardFooter className="items-center gap-4 px-0 min-h-fit h-4">
+      <div class="flex space-x-1">
+        <MapPin />
+        <p class="text-center">{location.address}</p>
+      </div>
+      <Separator orientation="vertical" className="" decorative />
+      <div class="flex">
+        <p>{`${open.toFormat("T")} — ${close.toFormat("T")}`}</p>
+      </div>
+    </CardFooter>
+  </a>
+</Card>

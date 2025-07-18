@@ -1,7 +1,7 @@
 ---
-import { Card } from "@/ui/card";
 import { actions } from "astro:actions";
-import BaseLayout from "src/layouts/BaseLayout.astro";
+import LocationCard from "components/astro/location-card.astro";
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
 
 export const prerender = false;
 const { id } = Astro.params;
@@ -16,22 +16,16 @@ const { data: establishment, error } = await Astro.callAction(
 );
 ---
 
-<BaseLayout>
-  <div>
-    <p>
+<CenteredLayout>
+  <div class="flex flex-col space-y-2.5">
+    <p class="text-center text-2xl">
       {establishment?.name}
     </p>
     <p>
       {establishment?.description}
     </p>
     <p>
-      {
-        establishment?.locations.map((loc) => (
-          <a href={`/location/${loc.locationId}`}>
-            <Card>{loc.name}</Card>
-          </a>
-        ))
-      }
+      {establishment?.locations.map((loc) => <LocationCard location={loc} />)}
     </p>
   </div>
-</BaseLayout>
+</CenteredLayout>

@@ -73,7 +73,7 @@ const establishments: Establishment[] = [
   return {
     ...est,
     locations: est.locations.map((loc) => {
-      const { services, employees, ...locLight } = loc;
+      const { employees, ...locLight } = loc;
       return locLight;
     }),
   };

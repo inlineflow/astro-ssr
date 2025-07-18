@@ -39,7 +39,6 @@ export const locationSchema = z.object({
 export type Location = z.infer<typeof locationSchema>;
 
 const lightLocationSchema = locationSchema.omit({
-  services: true,
   employees: true,
   description: true,
 });
