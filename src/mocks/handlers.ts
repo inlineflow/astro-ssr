@@ -38,7 +38,7 @@ const employees = [
 ];
 const location: Location = {
   locationId: locationId,
-  name: "СПА у Зои На Московской",
+  name: "СПА у Зои На Советской",
   openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
   closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
   services: services,
@@ -48,7 +48,27 @@ const location: Location = {
   description:
     "Откройте для себя оазис спокойствия и возрождения в нашем SPA. Позвольте себе погрузиться в мир гармонии и блаженства, где каждый ритуал направлен на восстановление вашего тела и души. Наши опытные мастера и широкий спектр процедур – от расслабляющих массажей до омолаживающих уходов за кожей – подарят вам незабываемые ощущения и полное обновление. Забудьте о повседневной суете и насладитесь моментом истинного релакса в атмосфере роскоши и уюта.  ",
 };
-const locations = [location];
+const locations: Location[] = [
+  location,
+  {
+    name: "СПА у Зои На Московской",
+    address: "Московская 15",
+    services: [
+      ...services,
+      {
+        durationInMinutes: 90,
+        name: "Педикюр",
+        serviceId: crypto.randomUUID(),
+        tag: "pedicure",
+      },
+    ],
+    employees: employees,
+    establishmentId: establishmentId,
+    locationId: crypto.randomUUID(),
+    openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
+    closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
+  },
+];
 const establishments: Establishment[] = [
   {
     name: "СПА у Зои",

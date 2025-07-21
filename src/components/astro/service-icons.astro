@@ -2,33 +2,10 @@
 interface Props {
   services: Service[];
 }
-import BarbershopLogo from "src/icons/barbershop.svg";
-import NailPolishLogo from "src/icons/nail-polish.svg";
+import { commonContainerClasses, iconMap } from "src/lib/icons";
 import type { Service } from "src/lib/schema";
 
 const { services } = Astro.props;
-
-const commonContainerClasses = [
-  "rounded-full",
-  "p-2",
-  "flex",
-  "items-center",
-  "justify-center",
-  "size-12",
-];
-
-const iconMap = [
-  {
-    tag: "hairdressing",
-    Icon: BarbershopLogo,
-    classList: ["bg-yellow-100"],
-  },
-  {
-    tag: "nail-polish",
-    Icon: NailPolishLogo,
-    classList: ["bg-pink-100"],
-  },
-];
 
 const availableServicesIcons = iconMap.filter((i) =>
   services.map((s) => s.tag).includes(i.tag)
