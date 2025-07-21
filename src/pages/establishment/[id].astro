@@ -31,9 +31,7 @@ const allServices = new Set(establishment.locations.flatMap((l) => l.services));
     <p>
       {establishment?.description}
     </p>
-    <div>
-      {(<ServiceIconsDescription services={[...allServices]} />)}
-    </div>
+    {(<ServiceIconsDescription services={[...allServices]} />)}
     <p>
       {establishment?.locations.map((loc) => <LocationCard location={loc} />)}
     </p>

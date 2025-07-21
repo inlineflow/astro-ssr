@@ -31,20 +31,28 @@ const iconMap = [
   },
 ];
 
-const availableServicesIcons = iconMap.filter((i) =>
-  services.map((s) => s.tag).includes(i.tag)
-);
+// const availableServicesIcons = iconMap.filter((i) =>
+//   services.map((s) => s.tag).includes(i.tag)
+// );
+
+const iconServiceData = iconMap
+  .map((i) => {
+    const x = services.find((s) => s.tag === i.tag);
+    if (!x) return;
+    return { ...i, name: x.name };
+  })
+  .filter((d) => d !== undefined);
 ---
 
-<div class="flex space-x-2 flex-wrap">
+<div class="flex space-x-2 flex-wrap gap-2 justify-center max-w-76">
   {
-    availableServicesIcons.map((i) => (
-      <Card className={[...commonContainerClasses, ...i.classList].join(" ")}>
-        <i.Icon />
+    iconServiceData.map((i) => (
+      <Card className="flex flex-row py-1 px-2 max-w-full items-center justify-center gap-2 mr-0">
+        <p>{i.name}</p>
+        <div class={[...commonContainerClasses, ...i.classList].join(" ")}>
+          <i.Icon width={32} height={32} />
+        </div>
       </Card>
-      //   <div class={[...commonContainerClasses, ...i.classList].join(" ")}>
-      //     <i.Icon />
-      //   </div>
     ))
   }
 </div>
