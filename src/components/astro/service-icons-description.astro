@@ -8,10 +8,6 @@ import type { Service } from "src/lib/schema";
 
 const { services } = Astro.props;
 
-// const availableServicesIcons = iconMap.filter((i) =>
-//   services.map((s) => s.tag).includes(i.tag)
-// );
-
 const iconServiceData = iconMap
   .map((i) => {
     const x = services.find((s) => s.tag === i.tag);

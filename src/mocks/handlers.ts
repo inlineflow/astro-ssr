@@ -130,8 +130,9 @@ export const handlers = [
   ),
   http.post<never, AppointmentPostRequest>(
     `${baseUrl}/appointment`,
-    ({ request }) => {
+    async ({ request }) => {
       console.log(request.body);
+      await delay(1000);
       return HttpResponse.json(
         { appointmentId: crypto.randomUUID() },
         { status: 201 }

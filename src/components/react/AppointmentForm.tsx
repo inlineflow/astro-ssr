@@ -38,8 +38,6 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     const timeOfDay = DateTime.fromISO(data.timeOfDay);
-    // console.log(DateTime.fromISO(data.calendarDate).toFormat("yyyy MM dd"));
-    // console.log(DateTime.fromISO(data.timeOfDay).toFormat("T"));
     const appointment = DateTime.fromISO(data.calendarDate).set({
       hour: timeOfDay.hour,
       minute: timeOfDay.minute,
@@ -47,17 +45,32 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       second: 0,
     });
 
-    toast(`Your appointment is at: ${appointment.toISO()}`);
-    const { data: postResponse, error } =
-      await actions.appointment.postAppointment({
-        datetime: appointment.toISO()!,
-        serviceId: crypto.randomUUID(),
-        userId: crypto.randomUUID(),
-        employeeId: crypto.randomUUID(),
-        establishmentId: crypto.randomUUID(),
-      });
+    // toast(`Your appointment is at: ${appointment.toISO()}`);
+    const x = actions.appointment.postAppointment({
+      datetime: appointment.toISO()!,
+      serviceId: crypto.randomUUID(),
+      userId: crypto.randomUUID(),
+      employeeId: crypto.randomUUID(),
+      establishmentId: crypto.randomUUID(),
+    });
+    toast.promise(x, {
+      loading: "Loading...",
+      success: (data) => {
+        console.log(data.data);
+        return `${data.data.appointmentId} toast has been added`;
+      },
+      error: "Error",
+    });
+    // const { data: postResponse, error } =
+    //   await actions.appointment.postAppointment({
+    //     datetime: appointment.toISO()!,
+    //     serviceId: crypto.randomUUID(),
+    //     userId: crypto.randomUUID(),
+    //     employeeId: crypto.randomUUID(),
+    //     establishmentId: crypto.randomUUID(),
+    //   });
 
-    console.log("postResponse: ", postResponse);
+    // console.log("postResponse: ", postResponse);
   };
 
   return (
@@ -86,7 +99,6 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                     className="w-full items-center justify-center"
                   />
                 </FormControl>
-                {/* <FormDescription>Your booking date.</FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}

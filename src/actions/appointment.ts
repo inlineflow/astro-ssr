@@ -1,7 +1,7 @@
 import { defineAction } from "astro:actions";
 import { baseUrl } from "../env";
 import { DateTime } from "luxon";
-import { AppointmentPostRequestSchema } from "../lib/schema";
+import { AppointmentSchema } from "../lib/schema";
 
 export const appointment = {
   getBookedAppointemnts: defineAction({
@@ -13,7 +13,7 @@ export const appointment = {
     },
   }),
   postAppointment: defineAction({
-    input: AppointmentPostRequestSchema,
+    input: AppointmentSchema,
     handler: async (input) => {
       try {
         console.log("input: ", input);
