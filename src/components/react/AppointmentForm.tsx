@@ -62,9 +62,11 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
     toast.promise(promise, {
       loading: "Loading...",
       success: (data) => {
-        return `Your appointment at ${appointment.toFormat(
-          "T"
-        )} has been successfully booked.`;
+        return {
+          message: "Your appointment has been successfully booked.",
+          description: `Time: ${appointment.toFormat("T, dd.MM.yy")}`,
+          descriptionClassName: "!text-black",
+        };
       },
       error: "Error",
     });
@@ -76,38 +78,40 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-5 w-full items-center justify-center space-y-5"
       >
-        <FormField
-          control={form.control}
-          name="employeeId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel hidden>Employee</FormLabel>
-              <FormControl>
-                <EmployeePicker
-                  employees={location.employees}
-                  selectedId={field.value}
-                  onSelect={(employeeId) => field.onChange(employeeId)}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        ></FormField>
-        <FormField
-          control={form.control}
-          name="serviceId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel hidden>Service</FormLabel>
-              <FormControl>
-                <ServicePicker
-                  services={location.services}
-                  selectedId={field.value}
-                  onSelect={(serviceId) => field.onChange(serviceId)}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        ></FormField>
+        <div className="flex flex-col gap-3 md:flex-row md:justify-between">
+          <FormField
+            control={form.control}
+            name="employeeId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel hidden>Employee</FormLabel>
+                <FormControl>
+                  <EmployeePicker
+                    employees={location.employees}
+                    selectedId={field.value}
+                    onSelect={(employeeId) => field.onChange(employeeId)}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          ></FormField>
+          <FormField
+            control={form.control}
+            name="serviceId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel hidden>Service</FormLabel>
+                <FormControl>
+                  <ServicePicker
+                    services={location.services}
+                    selectedId={field.value}
+                    onSelect={(serviceId) => field.onChange(serviceId)}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          ></FormField>
+        </div>
         <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 justify-center">
           <FormField
             control={form.control}
