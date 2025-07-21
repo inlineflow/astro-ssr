@@ -17,6 +17,7 @@ import { Button } from "@/ui/button";
 import { toast } from "sonner";
 import { actions } from "astro:actions";
 import { EmployeePicker } from "./EmployeePicker";
+import { ServicePicker } from "./ServicePicker";
 
 const FormSchema = z.object({
   calendarDate: z
@@ -30,6 +31,7 @@ const FormSchema = z.object({
     })
     .nonempty(),
   employeeId: z.uuid({ error: "Employee is required." }),
+  serviceId: z.uuid({ error: "Service is required." }),
 });
 
 export const AppointmentForm = ({ location }: { location: Location }) => {
@@ -48,31 +50,24 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
     });
 
     // toast(`Your appointment is at: ${appointment.toISO()}`);
-    const x = actions.appointment.postAppointment({
+    const requestBody = {
       datetime: appointment.toISO()!,
-      serviceId: crypto.randomUUID(),
+      serviceId: data.serviceId,
       userId: crypto.randomUUID(),
-      employeeId: crypto.randomUUID(),
-      establishmentId: crypto.randomUUID(),
-    });
-    toast.promise(x, {
+      employeeId: data.employeeId,
+      establishmentId: location.establishmentId,
+    };
+    const promise = actions.appointment.postAppointment(requestBody);
+
+    toast.promise(promise, {
       loading: "Loading...",
       success: (data) => {
-        console.log(data.data);
-        return `${data.data.appointmentId} toast has been added`;
+        return `Your appointment at ${appointment.toFormat(
+          "T"
+        )} has been successfully booked.`;
       },
       error: "Error",
     });
-    // const { data: postResponse, error } =
-    //   await actions.appointment.postAppointment({
-    //     datetime: appointment.toISO()!,
-    //     serviceId: crypto.randomUUID(),
-    //     userId: crypto.randomUUID(),
-    //     employeeId: crypto.randomUUID(),
-    //     establishmentId: crypto.randomUUID(),
-    //   });
-
-    // console.log("postResponse: ", postResponse);
   };
 
   return (
@@ -92,6 +87,22 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                   employees={location.employees}
                   selectedId={field.value}
                   onSelect={(employeeId) => field.onChange(employeeId)}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        ></FormField>
+        <FormField
+          control={form.control}
+          name="serviceId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel hidden>Service</FormLabel>
+              <FormControl>
+                <ServicePicker
+                  services={location.services}
+                  selectedId={field.value}
+                  onSelect={(serviceId) => field.onChange(serviceId)}
                 />
               </FormControl>
             </FormItem>

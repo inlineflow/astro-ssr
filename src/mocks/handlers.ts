@@ -35,6 +35,13 @@ const employees = [
     nonWorkingDays: [],
     providesServices: services.map((s) => s.serviceId),
   },
+  {
+    name: "Александр",
+    employeeId: crypto.randomUUID(),
+    location: locationId,
+    nonWorkingDays: [],
+    providesServices: services.map((s) => s.serviceId),
+  },
 ];
 const location: Location = {
   locationId: locationId,

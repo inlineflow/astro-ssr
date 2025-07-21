@@ -11,15 +11,15 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import type { Employee } from "src/lib/schema";
+import type { Service } from "src/lib/schema";
 
 type Props = {
-  employees: Employee[];
+  services: Service[];
   selectedId: string;
   onSelect: (newEmployeeId: string) => void;
 };
 
-export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
+export const ServicePicker = ({ selectedId, onSelect, services }: Props) => {
   const [open, setOpen] = useState(false);
   //   const [id, setId] = useState();
 
@@ -33,7 +33,7 @@ export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
           className="w-[200px] justify-between"
         >
           {selectedId
-            ? employees.find((e) => e.employeeId === selectedId)?.name
+            ? services.find((s) => s.serviceId === selectedId)?.name
             : "Select employee..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -44,20 +44,20 @@ export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
           <CommandList>
             <CommandEmpty>Процедура не найдена.</CommandEmpty>
             <CommandGroup>
-              {employees.map((employee) => (
+              {services.map((service) => (
                 <CommandItem
-                  key={employee.employeeId}
-                  value={employee.employeeId}
+                  key={service.serviceId}
+                  value={service.serviceId}
                   onSelect={(currentId) => {
                     onSelect(currentId === selectedId ? "" : currentId);
                     setOpen(false);
                   }}
                 >
-                  {employee.name}
+                  {service.name}
                   <Check
                     className={cn(
                       "ml-auto",
-                      selectedId === employee.employeeId
+                      selectedId === service.serviceId
                         ? "opacity-100"
                         : "opacity-0"
                     )}

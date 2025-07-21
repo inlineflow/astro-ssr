@@ -21,14 +21,6 @@ export const AppointmentCalendar = ({
   id,
   aridDescribedBy,
 }: AppointmentCalendarProps) => {
-  // const [date, setDate] = useState(new Date());
-  // console.log(disabled);
-
-  // const handleSelect = (selectedDate: Date) => {
-  //   console.log(`Date: ${selectedDate}`);
-  //   console.log(`Unix timestamp: ${Math.floor(selectedDate.getTime() / 1000)}`);
-  // };
-
   return (
     <div>
       <input
