@@ -1,6 +1,7 @@
 ---
 import { actions } from "astro:actions";
 import LocationCard from "components/astro/location-card.astro";
+import ServiceIconsDescription from "components/astro/service-icons-description.astro";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 
 export const prerender = false;
@@ -10,10 +11,16 @@ if (!id) {
   return Astro.redirect(400);
 }
 
-const { data: establishment, error } = await Astro.callAction(
+const { data: establishment, error: _error } = await Astro.callAction(
   actions.establishment.getEstablishment,
   { id: id }
 );
+
+if (_error) {
+  return;
+}
+
+const allServices = new Set(establishment.locations.flatMap((l) => l.services));
 ---
 
 <CenteredLayout>
@@ -24,6 +31,9 @@ const { data: establishment, error } = await Astro.callAction(
     <p>
       {establishment?.description}
     </p>
+    <div>
+      {(<ServiceIconsDescription services={[...allServices]} />)}
+    </div>
     <p>
       {establishment?.locations.map((loc) => <LocationCard location={loc} />)}
     </p>

@@ -1,4 +1,3 @@
-import type { ServerConfig } from "astro";
 import { z } from "astro:schema";
 
 export const employeeSchema = z.object({
@@ -16,6 +15,7 @@ export const serviceSchema = z.object({
   name: z.string(),
   serviceId: z.string().uuid(),
   durationInMinutes: z.number(),
+  tag: z.string(),
 });
 export type Service = z.infer<typeof serviceSchema>;
 export type ServiceValidated = {

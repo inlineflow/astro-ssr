@@ -1,33 +1,12 @@
 ---
 export const prerender = false;
-import BaseLayout from "src/layouts/BaseLayout.astro";
-import Calendar from "src/components/astro/calendar.astro";
-import CalendarSkeleton from "src/components/astro/calendar-skeleton.astro";
-import Timeblocks from "src/components/astro/timeblocks.astro";
-import { actions } from "astro:actions";
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
 
 // we're fetching the service here because we'll need it for other stuff on this page later
-const { data: service, error: serviceError } = await Astro.callAction(
-  actions.getService,
-  { id: 1 }
-);
+
 // console.log(Astro.request.method);
 ---
 
-<BaseLayout>
-  <div class="flex justify-center items-center min-w-screen">
-    <div class="flex flex-col items-center gap-5">
-      {
-        service && (
-          <Fragment>
-            <Calendar server:defer>
-              <CalendarSkeleton slot="fallback" />
-            </Calendar>
-            <Timeblocks service={{ ...service, validated: true }} />
-          </Fragment>
-        )
-      }
-      {serviceError && <p>An error happened. Please try again later.</p>}
-    </div>
-  </div>
-</BaseLayout>
+<CenteredLayout>
+  <p>Hello world</p>
+</CenteredLayout>

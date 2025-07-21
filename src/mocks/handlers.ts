@@ -16,6 +16,13 @@ const services: Service[] = [
     durationInMinutes: 30,
     name: "Стрижка",
     serviceId: crypto.randomUUID(),
+    tag: "hairdressing",
+  },
+  {
+    durationInMinutes: 60,
+    name: "Маникюр",
+    serviceId: crypto.randomUUID(),
+    tag: "nail-polish",
   },
 ];
 const locationId = crypto.randomUUID();
