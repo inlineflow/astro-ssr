@@ -16,6 +16,7 @@ import type { Location } from "src/lib/schema";
 import { Button } from "@/ui/button";
 import { toast } from "sonner";
 import { actions } from "astro:actions";
+import { EmployeePicker } from "./EmployeePicker";
 
 const FormSchema = z.object({
   calendarDate: z
@@ -28,6 +29,7 @@ const FormSchema = z.object({
       error: "Appointment time is required.",
     })
     .nonempty(),
+  employeeId: z.uuid({ error: "Employee is required." }),
 });
 
 export const AppointmentForm = ({ location }: { location: Location }) => {
@@ -79,6 +81,22 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-5 w-full items-center justify-center space-y-5"
       >
+        <FormField
+          control={form.control}
+          name="employeeId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel hidden>Employee</FormLabel>
+              <FormControl>
+                <EmployeePicker
+                  employees={location.employees}
+                  selectedId={field.value}
+                  onSelect={(employeeId) => field.onChange(employeeId)}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        ></FormField>
         <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 justify-center">
           <FormField
             control={form.control}
