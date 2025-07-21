@@ -18,6 +18,9 @@ import { toast } from "sonner";
 import { actions } from "astro:actions";
 import { EmployeePicker } from "./EmployeePicker";
 import { ServicePicker } from "./ServicePicker";
+import { Card } from "@/ui/card";
+import { CalendarDays, Clock } from "lucide-react";
+import { Separator } from "@/ui/separator";
 
 const FormSchema = z.object({
   calendarDate: z
@@ -61,13 +64,32 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
 
     toast.promise(promise, {
       loading: "Loading...",
-      success: (data) => {
-        return {
-          message: "Your appointment has been successfully booked.",
-          description: `Time: ${appointment.toFormat("T, dd.MM.yy")}`,
-          descriptionClassName: "!text-black",
-        };
-      },
+      success: () => (
+        <div>
+          <p className="text-lg">Your appointment is at: </p>
+          <div className="flex flex-row gap-3 min-h-2 h-4 items-center">
+            <div className="flex space-x-1 flex-row items-center justify-center">
+              <Clock size={16} />
+              <p>{appointment.toFormat("T")}</p>
+            </div>
+            <Separator orientation="vertical" className="w-8 h-2 border-1" />
+            <div className="flex space-x-1 flex-row items-center justify-center">
+              <CalendarDays size={16} />
+              <p>{appointment.toFormat("dd.MM.yy")}</p>
+            </div>
+            {/* <Card className="flex-row gap-0 items-center px-2 py-0 max-w-fit bg-black text-white text">
+              {appointment.toFormat("dd.MM.yy")}
+            </Card> */}
+          </div>
+        </div>
+      ),
+      // success: () => {
+      //   return {
+      //     message: "Your appointment has been successfully booked.",
+      //     description: `Time: ${appointment.toFormat("T, dd.MM.yy")}`,
+      //     descriptionClassName: "!text-black",
+      //   };
+      // },
       error: "Error",
     });
   };
@@ -92,6 +114,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                     onSelect={(employeeId) => field.onChange(employeeId)}
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           ></FormField>
@@ -108,6 +131,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                     onSelect={(serviceId) => field.onChange(serviceId)}
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           ></FormField>
