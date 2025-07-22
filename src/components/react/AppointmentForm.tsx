@@ -131,12 +131,10 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                 <AppointmentServiceControls
                   employees={location.employees}
                   services={location.services}
-                  onSelectEmployee={(name) =>
+                  onSelectEmployee={(employeeId) =>
                     field.onChange({
                       ...field.value,
-                      employeeId: location.employees.find(
-                        (x) => x.name === name
-                      )?.employeeId,
+                      employeeId,
                     })
                   }
                   onSelectService={(name) =>

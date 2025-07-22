@@ -29,7 +29,7 @@ export const AppointmentServiceControls = ({
         <EmployeePicker
           employees={employees}
           onSelect={onSelectEmployee}
-          selectedName={selectedEmployeeId}
+          selectedEmployeeId={selectedEmployeeId}
         />
         <EmployeeErrorMessage />
       </div>

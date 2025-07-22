@@ -15,16 +15,19 @@ import type { Employee } from "src/lib/schema";
 
 type Props = {
   employees: Employee[];
-  selectedName: string;
-  onSelect: (newEmployeeId: string) => void;
+  selectedEmployeeId: string;
+  onSelect: (currentEmpName: string) => void;
 };
 
 export const EmployeePicker = ({
-  selectedName,
+  selectedEmployeeId,
   onSelect,
   employees,
 }: Props) => {
   const [open, setOpen] = useState(false);
+  const currentEmployee = employees.find(
+    (e) => e.employeeId === selectedEmployeeId
+  );
   //   const [id, setId] = useState();
 
   return (
@@ -36,9 +39,7 @@ export const EmployeePicker = ({
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {selectedName
-            ? employees.find((e) => e.employeeId === selectedName)?.name
-            : "Выберите мастера..."}
+          {selectedEmployeeId ? currentEmployee?.name : "Выберите мастера..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -54,7 +55,10 @@ export const EmployeePicker = ({
                   value={employee.name}
                   onSelect={(currentEmpName) => {
                     onSelect(
-                      currentEmpName === selectedName ? "" : currentEmpName
+                      currentEmpName === currentEmployee?.name
+                        ? ""
+                        : employees.find((x) => x.name === currentEmpName)
+                            ?.employeeId!
                     );
                     setOpen(false);
                   }}
@@ -65,7 +69,7 @@ export const EmployeePicker = ({
                   <Check
                     className={cn(
                       "ml-auto",
-                      selectedName === employee.employeeId
+                      selectedEmployeeId === employee.employeeId
                         ? "opacity-100"
                         : "opacity-0"
                     )}
