@@ -15,11 +15,11 @@ import type { Service } from "src/lib/schema";
 
 type Props = {
   services: Service[];
-  selectedId: string;
+  selectedName: string;
   onSelect: (newEmployeeId: string) => void;
 };
 
-export const ServicePicker = ({ selectedId, onSelect, services }: Props) => {
+export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
   const [open, setOpen] = useState(false);
   //   const [id, setId] = useState();
 
@@ -32,9 +32,9 @@ export const ServicePicker = ({ selectedId, onSelect, services }: Props) => {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {selectedId
-            ? services.find((s) => s.serviceId === selectedId)?.name
-            : "Select employee..."}
+          {selectedName
+            ? services.find((s) => s.serviceId === selectedName)?.name
+            : "Select service..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -47,9 +47,9 @@ export const ServicePicker = ({ selectedId, onSelect, services }: Props) => {
               {services.map((service) => (
                 <CommandItem
                   key={service.serviceId}
-                  value={service.serviceId}
-                  onSelect={(currentId) => {
-                    onSelect(currentId === selectedId ? "" : currentId);
+                  value={service.name}
+                  onSelect={(currentName) => {
+                    onSelect(currentName === selectedName ? "" : currentName);
                     setOpen(false);
                   }}
                 >
@@ -57,7 +57,7 @@ export const ServicePicker = ({ selectedId, onSelect, services }: Props) => {
                   <Check
                     className={cn(
                       "ml-auto",
-                      selectedId === service.serviceId
+                      selectedName === service.serviceId
                         ? "opacity-100"
                         : "opacity-0"
                     )}

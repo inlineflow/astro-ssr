@@ -131,11 +131,20 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                 <AppointmentServiceControls
                   employees={location.employees}
                   services={location.services}
-                  onSelectEmployee={(employeeId) =>
-                    field.onChange({ ...field.value, employeeId })
+                  onSelectEmployee={(name) =>
+                    field.onChange({
+                      ...field.value,
+                      employeeId: location.employees.find(
+                        (x) => x.name === name
+                      )?.employeeId,
+                    })
                   }
-                  onSelectService={(serviceId) =>
-                    field.onChange({ ...field.value, serviceId })
+                  onSelectService={(name) =>
+                    field.onChange({
+                      ...field.value,
+                      serviceId: location.services.find((x) => x.name === name)
+                        ?.serviceId,
+                    })
                   }
                   selectedEmployeeId={field.value.employeeId}
                   selectedServiceId={field.value.serviceId}

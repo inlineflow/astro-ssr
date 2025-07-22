@@ -29,14 +29,14 @@ export const AppointmentServiceControls = ({
         <EmployeePicker
           employees={employees}
           onSelect={onSelectEmployee}
-          selectedId={selectedEmployeeId}
+          selectedName={selectedEmployeeId}
         />
         <EmployeeErrorMessage />
       </div>
       <div>
         <ServicePicker
           services={services}
-          selectedId={selectedServiceId}
+          selectedName={selectedServiceId}
           onSelect={onSelectService}
         />
         <ServiceErrorMessage />

@@ -15,11 +15,15 @@ import type { Employee } from "src/lib/schema";
 
 type Props = {
   employees: Employee[];
-  selectedId: string;
+  selectedName: string;
   onSelect: (newEmployeeId: string) => void;
 };
 
-export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
+export const EmployeePicker = ({
+  selectedName,
+  onSelect,
+  employees,
+}: Props) => {
   const [open, setOpen] = useState(false);
   //   const [id, setId] = useState();
 
@@ -32,8 +36,8 @@ export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {selectedId
-            ? employees.find((e) => e.employeeId === selectedId)?.name
+          {selectedName
+            ? employees.find((e) => e.employeeId === selectedName)?.name
             : "Выберите мастера..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
@@ -42,23 +46,26 @@ export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
         <Command>
           <CommandInput placeholder="Выберите мастера" className="h-9" />
           <CommandList>
-            <CommandEmpty>Процедура не найдена.</CommandEmpty>
+            <CommandEmpty>Мастер не найден.</CommandEmpty>
             <CommandGroup>
               {employees.map((employee) => (
                 <CommandItem
                   key={employee.employeeId}
-                  value={employee.employeeId}
-                  onSelect={(currentId) => {
-                    onSelect(currentId === selectedId ? "" : currentId);
+                  value={employee.name}
+                  onSelect={(currentEmpName) => {
+                    onSelect(
+                      currentEmpName === selectedName ? "" : currentEmpName
+                    );
                     setOpen(false);
                   }}
                 >
-                  <div className="inline rounded-full bg-pink-200 size-12"></div>
+                  <div className="inline rounded-full bg-pink-200 size-8"></div>
                   <div>{employee.name}</div>
+
                   <Check
                     className={cn(
                       "ml-auto",
-                      selectedId === employee.employeeId
+                      selectedName === employee.employeeId
                         ? "opacity-100"
                         : "opacity-0"
                     )}
