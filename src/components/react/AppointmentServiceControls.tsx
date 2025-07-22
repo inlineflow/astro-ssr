@@ -47,11 +47,7 @@ export const ServiceErrorMessage = () => {
     return null;
   }
 
-  console.log("error in service error: ", error);
-
   const optsErrors = error as AppointmentFormErrors["serviceOpts"];
-  console.log("optsErrors in service error: ", optsErrors);
-  console.log("employeeId message: ", optsErrors?.employeeId);
 
   return (
     <div className="flex justify-between">
