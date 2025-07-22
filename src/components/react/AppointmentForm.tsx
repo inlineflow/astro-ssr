@@ -18,9 +18,12 @@ import { toast } from "sonner";
 import { actions } from "astro:actions";
 import { EmployeePicker } from "./EmployeePicker";
 import { ServicePicker } from "./ServicePicker";
-import { Card } from "@/ui/card";
 import { CalendarDays, Clock } from "lucide-react";
 import { Separator } from "@/ui/separator";
+import {
+  AppointmentServiceControls,
+  ServiceErrorMessage,
+} from "./AppointmentServiceControls";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
@@ -35,14 +38,24 @@ const FormSchema = z.object({
       error: "Appointment time is required.",
     })
     .nonempty(),
-  employeeId: z.uuid({ error: "Employee is required." }),
-  serviceId: z.uuid({ error: "Service is required." }),
+  serviceOpts: z.object(
+    {
+      employeeId: z.uuid({ error: "Employee is required." }),
+      serviceId: z.uuid({ error: "Service is required." }),
+    },
+    { error: "Service opts are required" }
+  ),
 });
 
+export type AppointmentFormValues = z.infer<typeof FormSchema>;
+
 export const AppointmentForm = ({ location }: { location: Location }) => {
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm<AppointmentFormValues>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { calendarDate: DateTime.now().toISO() },
+    defaultValues: {
+      calendarDate: DateTime.now().toISO(),
+      serviceOpts: { employeeId: "", serviceId: "" },
+    },
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
@@ -54,12 +67,13 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       second: 0,
     });
 
-    // toast(`Your appointment is at: ${appointment.toISO()}`);
+    console.log("Submitting: ", data);
+
     const requestBody = {
       datetime: appointment.toISO()!,
-      serviceId: data.serviceId,
+      serviceId: data.serviceOpts.serviceId,
       userId: crypto.randomUUID(),
-      employeeId: data.employeeId,
+      employeeId: data.serviceOpts.employeeId,
       establishmentId: location.establishmentId,
     };
     const promise = actions.appointment.postAppointment(requestBody);
@@ -115,42 +129,31 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-5 w-full items-center justify-center space-y-5"
       >
-        <div className="flex flex-col gap-3 md:flex-row md:justify-between">
-          <FormField
-            control={form.control}
-            name="employeeId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel hidden>Employee</FormLabel>
-                <FormControl>
-                  <EmployeePicker
-                    employees={location.employees}
-                    selectedId={field.value}
-                    onSelect={(employeeId) => field.onChange(employeeId)}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-          <FormField
-            control={form.control}
-            name="serviceId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel hidden>Service</FormLabel>
-                <FormControl>
-                  <ServicePicker
-                    services={location.services}
-                    selectedId={field.value}
-                    onSelect={(serviceId) => field.onChange(serviceId)}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-        </div>
+        <FormField
+          control={form.control}
+          name="serviceOpts"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel hidden>Service</FormLabel>
+              <FormControl>
+                <AppointmentServiceControls
+                  employees={location.employees}
+                  services={location.services}
+                  onSelectEmployee={(employeeId) =>
+                    field.onChange({ ...field.value, employeeId })
+                  }
+                  onSelectService={(serviceId) =>
+                    field.onChange({ ...field.value, serviceId })
+                  }
+                  selectedEmployeeId={field.value.employeeId}
+                  selectedServiceId={field.value.serviceId}
+                />
+              </FormControl>
+              {/* <FormMessage /> */}
+              <ServiceErrorMessage />
+            </FormItem>
+          )}
+        ></FormField>
         <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 justify-center">
           <FormField
             control={form.control}
