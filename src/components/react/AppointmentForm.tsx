@@ -22,6 +22,8 @@ import { Card } from "@/ui/card";
 import { CalendarDays, Clock } from "lucide-react";
 import { Separator } from "@/ui/separator";
 
+const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
+
 const FormSchema = z.object({
   calendarDate: z
     .string({
@@ -75,7 +77,20 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
             <Separator orientation="vertical" className="w-8 h-2 border-1" />
             <div className="flex space-x-1 flex-row items-center justify-center">
               <CalendarDays size={16} />
-              <p>{appointment.toFormat("dd.MM.yy")}</p>
+              {/* <p>{appointment.toFormat("dd.MM.yy")}</p> */}
+              <p>
+                {capitalize(
+                  appointment.toLocaleString(
+                    {
+                      weekday: "long",
+                      day: "2-digit",
+                      month: "short",
+                      year: "2-digit",
+                    },
+                    { locale: "ru-RU" }
+                  )
+                )}
+              </p>
             </div>
             {/* <Card className="flex-row gap-0 items-center px-2 py-0 max-w-fit bg-black text-white text">
               {appointment.toFormat("dd.MM.yy")}
