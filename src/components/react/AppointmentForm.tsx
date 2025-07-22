@@ -150,7 +150,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                 />
               </FormControl>
               {/* <FormMessage /> */}
-              <ServiceErrorMessage />
+              {/* <ServiceErrorMessage /> */}
             </FormItem>
           )}
         ></FormField>

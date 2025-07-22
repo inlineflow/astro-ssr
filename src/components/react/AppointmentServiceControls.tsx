@@ -25,16 +25,22 @@ export const AppointmentServiceControls = ({
 }: Props) => {
   return (
     <div className="flex flex-col gap-3 md:flex-row md:justify-between">
-      <ServicePicker
-        services={services}
-        selectedId={selectedServiceId}
-        onSelect={onSelectService}
-      />
-      <EmployeePicker
-        employees={employees}
-        onSelect={onSelectEmployee}
-        selectedId={selectedEmployeeId}
-      />
+      <div>
+        <EmployeePicker
+          employees={employees}
+          onSelect={onSelectEmployee}
+          selectedId={selectedEmployeeId}
+        />
+        <EmployeeErrorMessage />
+      </div>
+      <div>
+        <ServicePicker
+          services={services}
+          selectedId={selectedServiceId}
+          onSelect={onSelectService}
+        />
+        <ServiceErrorMessage />
+      </div>
     </div>
   );
 };
@@ -47,24 +53,38 @@ export const ServiceErrorMessage = () => {
     return null;
   }
 
-  const optsErrors = error as AppointmentFormErrors["serviceOpts"];
+  const err = (error as AppointmentFormErrors["serviceOpts"])!["serviceId"];
+
+  const body = String(err?.message ?? "");
 
   return (
-    <div className="flex justify-between">
-      <p
-        data-slot="form-message"
-        id={formMessageId}
-        className={cn("text-destructive text-sm", "")}
-      >
-        {optsErrors?.employeeId?.message ?? ""}
-      </p>
-      <p
-        data-slot="form-message"
-        id={formMessageId}
-        className={cn("text-destructive text-sm", "")}
-      >
-        {optsErrors?.serviceId?.message ?? ""}
-      </p>
-    </div>
+    <p
+      data-slot="form-message"
+      id={formMessageId}
+      className={cn("text-destructive text-sm", "")}
+    >
+      {body}
+    </p>
+  );
+};
+
+export const EmployeeErrorMessage = () => {
+  const { error, formMessageId } = useFormField();
+  if (!error) {
+    return null;
+  }
+
+  const err = (error as AppointmentFormErrors["serviceOpts"])!["employeeId"];
+
+  const body = String(err?.message ?? "");
+
+  return (
+    <p
+      data-slot="form-message"
+      id={formMessageId}
+      className={cn("text-destructive text-sm", "")}
+    >
+      {body}
+    </p>
   );
 };
