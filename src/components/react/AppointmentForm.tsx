@@ -16,14 +16,9 @@ import type { Location } from "src/lib/schema";
 import { Button } from "@/ui/button";
 import { toast } from "sonner";
 import { actions } from "astro:actions";
-import { EmployeePicker } from "./EmployeePicker";
-import { ServicePicker } from "./ServicePicker";
 import { CalendarDays, Clock } from "lucide-react";
 import { Separator } from "@/ui/separator";
-import {
-  AppointmentServiceControls,
-  ServiceErrorMessage,
-} from "./AppointmentServiceControls";
+import { AppointmentServiceControls } from "./AppointmentServiceControls";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
@@ -106,9 +101,6 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                 )}
               </p>
             </div>
-            {/* <Card className="flex-row gap-0 items-center px-2 py-0 max-w-fit bg-black text-white text">
-              {appointment.toFormat("dd.MM.yy")}
-            </Card> */}
           </div>
         </div>
       ),
@@ -149,8 +141,6 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                   selectedServiceId={field.value.serviceId}
                 />
               </FormControl>
-              {/* <FormMessage /> */}
-              {/* <ServiceErrorMessage /> */}
             </FormItem>
           )}
         ></FormField>
@@ -193,7 +183,6 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                   />
                 </FormControl>
                 <FormLabel hidden>Time of day of the appointment.</FormLabel>
-                {/* <FormDescription>Time slot</FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}

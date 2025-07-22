@@ -34,13 +34,13 @@ export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
         >
           {selectedId
             ? employees.find((e) => e.employeeId === selectedId)?.name
-            : "Select employee..."}
+            : "Выберите мастера..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search service..." className="h-9" />
+          <CommandInput placeholder="Выберите мастера" className="h-9" />
           <CommandList>
             <CommandEmpty>Процедура не найдена.</CommandEmpty>
             <CommandGroup>
@@ -53,7 +53,8 @@ export const EmployeePicker = ({ selectedId, onSelect, employees }: Props) => {
                     setOpen(false);
                   }}
                 >
-                  {employee.name}
+                  <div className="inline rounded-full bg-pink-200 size-12"></div>
+                  <div>{employee.name}</div>
                   <Check
                     className={cn(
                       "ml-auto",
