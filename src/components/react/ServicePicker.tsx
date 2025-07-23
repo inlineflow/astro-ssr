@@ -11,7 +11,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import type { Employee, Service } from "src/lib/schema";
+import type { Service } from "src/lib/schema";
 import {
   useSelectedEmployee,
   useSelectedService,
@@ -37,12 +37,10 @@ export const ServicePicker = ({
   );
   const availableServices = services.map((s) => ({
     ...s,
-    availableForSelectedEmployee: Object.hasOwn(
-      selectedEmployee,
-      "providesServices"
-    )
-      ? selectedEmployee.providesServices?.includes(s.serviceId)
-      : true,
+    availableForSelectedEmployee:
+      "providesServices" in selectedEmployee
+        ? selectedEmployee.providesServices?.includes(s.serviceId)
+        : true,
   }));
   console.log("selected employee: ", selectedEmployee);
   console.log("available services: ", availableServices);

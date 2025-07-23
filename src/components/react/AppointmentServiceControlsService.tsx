@@ -1,11 +1,11 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { Employee, Service } from "src/lib/schema";
+import type { EmployeeView, ServiceView } from "src/lib/views";
 
 const SelectedEmployeeContext = createContext<{
-  selectedEmployee: Employee;
-  setSelectedEmployee: (emp: Employee) => void;
+  selectedEmployee: EmployeeView;
+  setSelectedEmployee: (emp: EmployeeView) => void;
 }>({
-  selectedEmployee: {} as Employee,
+  selectedEmployee: {},
   setSelectedEmployee: (_) => {},
 });
 
@@ -14,7 +14,7 @@ export const SelectedEmployeeProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [selectedEmployee, setSelectedEmployee] = useState({} as Employee);
+  const [selectedEmployee, setSelectedEmployee] = useState<EmployeeView>({});
   const value = { selectedEmployee, setSelectedEmployee };
 
   return (
@@ -27,10 +27,10 @@ export const SelectedEmployeeProvider = ({
 export const useSelectedEmployee = () => useContext(SelectedEmployeeContext);
 
 const SelectedServiceContext = createContext<{
-  selectedService: Service;
-  setSelectedService: (serv: Service) => void;
+  selectedService: ServiceView;
+  setSelectedService: (serv: ServiceView) => void;
 }>({
-  selectedService: {} as Service,
+  selectedService: {},
   setSelectedService: (_) => {},
 });
 
@@ -39,7 +39,7 @@ export const SelectedServiceProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [selectedService, setSelectedService] = useState({} as Service);
+  const [selectedService, setSelectedService] = useState<ServiceView>({});
   const value = { selectedService, setSelectedService };
 
   return (

@@ -34,9 +34,6 @@ export const EmployeePicker = ({
   const currentEmployee = employees.find(
     (e) => e.employeeId === selectedEmployeeId
   );
-  // const availableEmployees = new Set(
-  //   employees.map((emp) => emp.providesServices)
-  // ).intersection(new Set(selectedService.serviceId));
   const availableEmployees = employees.map((emp) => ({
     ...emp,
     availableForSelectedService: Object.hasOwn(selectedService, "serviceId")
@@ -72,7 +69,7 @@ export const EmployeePicker = ({
                   onSelect={(currentEmpName) => {
                     setSelectedEmployee(
                       currentEmpName === currentEmployee?.name
-                        ? ({} as Employee)
+                        ? {}
                         : employees.find((x) => x.name === currentEmpName)!
                     );
                     onSelect(
