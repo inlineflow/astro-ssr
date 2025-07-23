@@ -12,3 +12,7 @@ Only available services for the selected employee and vice verca should be selec
 ### Rework pickers
 
 Make your own component for selecting services/employees
+
+### Fix service picker to allow unselecting the selected service
+
+### Allow selection of any service if employee is not selected

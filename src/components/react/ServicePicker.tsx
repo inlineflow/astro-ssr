@@ -12,6 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
 import type { Service } from "src/lib/schema";
+import { useSelectedEmployee } from "./AppointmentServiceControlsService";
 
 type Props = {
   services: Service[];
@@ -21,7 +22,14 @@ type Props = {
 
 export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
   const [open, setOpen] = useState(false);
-  //   const [id, setId] = useState();
+
+  const { selectedEmployee, setSelectedEmployee } = useSelectedEmployee();
+  const availableServices = services.map((s) => ({
+    ...s,
+    availableForSelectedEmployee: selectedEmployee?.providesServices?.includes(
+      s.serviceId
+    ),
+  }));
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -44,7 +52,7 @@ export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
           <CommandList>
             <CommandEmpty>Процедура не найдена.</CommandEmpty>
             <CommandGroup>
-              {services.map((service) => (
+              {availableServices.map((service) => (
                 <CommandItem
                   key={service.serviceId}
                   value={service.name}
@@ -52,6 +60,12 @@ export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
                     onSelect(currentName === selectedName ? "" : currentName);
                     setOpen(false);
                   }}
+                  className={cn(
+                    service.availableForSelectedEmployee
+                      ? "opacity-100"
+                      : "opacity-50"
+                  )}
+                  disabled={!service.availableForSelectedEmployee}
                 >
                   {service.name}
                   <Check

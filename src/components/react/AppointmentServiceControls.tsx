@@ -5,6 +5,12 @@ import { useFormField } from "@/ui/form";
 import { cn } from "@/lib/utils";
 import { type FieldErrors } from "react-hook-form";
 import type { AppointmentFormValues } from "./AppointmentForm";
+import {
+  SelectedEmployeeProvider,
+  SelectedServiceProvider,
+  useSelectedEmployee,
+  useSelectedService,
+} from "./AppointmentServiceControlsService";
 
 type Props = {
   employees: Employee[];
@@ -25,22 +31,26 @@ export const AppointmentServiceControls = ({
 }: Props) => {
   return (
     <div className="flex flex-col gap-3 md:flex-row md:justify-between">
-      <div>
-        <EmployeePicker
-          employees={employees}
-          onSelect={onSelectEmployee}
-          selectedEmployeeId={selectedEmployeeId}
-        />
-        <EmployeeErrorMessage />
-      </div>
-      <div>
-        <ServicePicker
-          services={services}
-          selectedName={selectedServiceId}
-          onSelect={onSelectService}
-        />
-        <ServiceErrorMessage />
-      </div>
+      <SelectedEmployeeProvider>
+        <SelectedServiceProvider>
+          <div>
+            <EmployeePicker
+              employees={employees}
+              onSelect={onSelectEmployee}
+              selectedEmployeeId={selectedEmployeeId}
+            />
+            <EmployeeErrorMessage />
+          </div>
+          <div>
+            <ServicePicker
+              services={services}
+              selectedName={selectedServiceId}
+              onSelect={onSelectService}
+            />
+            <ServiceErrorMessage />
+          </div>
+        </SelectedServiceProvider>
+      </SelectedEmployeeProvider>
     </div>
   );
 };

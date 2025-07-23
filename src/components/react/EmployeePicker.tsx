@@ -12,6 +12,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
 import type { Employee } from "src/lib/schema";
+import { useSelectedEmployee } from "./AppointmentServiceControlsService";
 
 type Props = {
   employees: Employee[];
@@ -25,6 +26,7 @@ export const EmployeePicker = ({
   employees,
 }: Props) => {
   const [open, setOpen] = useState(false);
+  const { setSelectedEmployee } = useSelectedEmployee();
   const currentEmployee = employees.find(
     (e) => e.employeeId === selectedEmployeeId
   );
@@ -54,6 +56,11 @@ export const EmployeePicker = ({
                   key={employee.employeeId}
                   value={employee.name}
                   onSelect={(currentEmpName) => {
+                    setSelectedEmployee(
+                      currentEmpName === currentEmployee?.name
+                        ? ({} as Employee)
+                        : employees.find((x) => x.name === currentEmpName)!
+                    );
                     onSelect(
                       currentEmpName === currentEmployee?.name
                         ? ""

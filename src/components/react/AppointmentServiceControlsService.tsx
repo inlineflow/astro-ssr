@@ -1,12 +1,52 @@
-import { createContext } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { Employee, Service } from "src/lib/schema";
 
-const EmployeesContext = createContext<{ employees: Employee[] }>({
-  employees: [],
+const SelectedEmployeeContext = createContext<{
+  selectedEmployee: Employee;
+  setSelectedEmployee: (emp: Employee) => void;
+}>({
+  selectedEmployee: {} as Employee,
+  setSelectedEmployee: (_) => {},
 });
 
-const ServicesContext = createContext<{ services: Service[] }>({
-  services: [],
+export const SelectedEmployeeProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [selectedEmployee, setSelectedEmployee] = useState({} as Employee);
+  const value = { selectedEmployee, setSelectedEmployee };
+
+  return (
+    <SelectedEmployeeContext.Provider value={value}>
+      {children}
+    </SelectedEmployeeContext.Provider>
+  );
+};
+
+export const useSelectedEmployee = () => useContext(SelectedEmployeeContext);
+
+const SelectedServiceContext = createContext<{
+  selectedService: Service;
+  setSelectedService: (serv: Service) => void;
+}>({
+  selectedService: {} as Service,
+  setSelectedService: (_) => {},
 });
 
-// const UseEmployeesContext =
+export const SelectedServiceProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [selectedService, setSelectedService] = useState({} as Service);
+  const value = { selectedService, setSelectedService };
+
+  return (
+    <SelectedServiceContext.Provider value={value}>
+      {children}
+    </SelectedServiceContext.Provider>
+  );
+};
+
+export const useSelectedService = () => useContext(SelectedServiceContext);
