@@ -13,4 +13,8 @@ Only available services for the selected employee and vice verca should be selec
 
 Make your own component for selecting services/employees
 
-### Allow selection of any service if employee is not selected
+### Add service icons with fallback to employee picker
+
+### Color background of services in service picker with their icon color
+
+### Add availableServices as keywords to employee picker and vice versa

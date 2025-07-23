@@ -50,15 +50,15 @@ export const EmployeePicker = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-64 justify-between"
         >
           {selectedEmployeeId ? currentEmployee?.name : "Выберите мастера..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-fit max-w-72 p-0">
         <Command>
-          <CommandInput placeholder="Выберите мастера" className="h-9" />
+          <CommandInput placeholder="Выберите мастера" className="h-9 w-fit" />
           <CommandList>
             <CommandEmpty>Мастер не найден.</CommandEmpty>
             <CommandGroup>
@@ -80,14 +80,14 @@ export const EmployeePicker = ({
                     );
                     setOpen(false);
                   }}
-                  className={
+                  className={`${
                     employee.availableForSelectedService
                       ? "opacity-100"
                       : "opacity-50"
-                  }
+                  } w-full h-fit max-w-full`}
                   disabled={!employee.availableForSelectedService}
                 >
-                  <div className="inline rounded-full bg-pink-200 size-8"></div>
+                  <div className="inline rounded-full bg-pink-200 size-12"></div>
                   <div>{employee.name}</div>
 
                   <Check
@@ -98,6 +98,13 @@ export const EmployeePicker = ({
                         : "opacity-0"
                     )}
                   />
+                  <div className="flex flex-wrap w-16 gap-1">
+                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
+                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
+                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
+                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
+                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
+                  </div>
                 </CommandItem>
               ))}
             </CommandGroup>
