@@ -137,11 +137,10 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                       employeeId,
                     })
                   }
-                  onSelectService={(name) =>
+                  onSelectService={(serviceId) =>
                     field.onChange({
                       ...field.value,
-                      serviceId: location.services.find((x) => x.name === name)
-                        ?.serviceId,
+                      serviceId,
                     })
                   }
                   selectedEmployeeId={field.value.employeeId}

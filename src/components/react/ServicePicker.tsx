@@ -11,25 +11,37 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import type { Service } from "src/lib/schema";
+import type { Employee, Service } from "src/lib/schema";
 import { useSelectedEmployee } from "./AppointmentServiceControlsService";
 
 type Props = {
   services: Service[];
-  selectedName: string;
+  selectedServiceId: string;
   onSelect: (newEmployeeId: string) => void;
 };
 
-export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
+export const ServicePicker = ({
+  selectedServiceId,
+  onSelect,
+  services,
+}: Props) => {
   const [open, setOpen] = useState(false);
 
   const { selectedEmployee, setSelectedEmployee } = useSelectedEmployee();
+  const currentService = services.find(
+    (x) => x.serviceId === selectedServiceId
+  );
   const availableServices = services.map((s) => ({
     ...s,
-    availableForSelectedEmployee: selectedEmployee?.providesServices?.includes(
-      s.serviceId
-    ),
+    availableForSelectedEmployee: Object.hasOwn(
+      selectedEmployee,
+      "providesServices"
+    )
+      ? selectedEmployee.providesServices?.includes(s.serviceId)
+      : true,
   }));
+  console.log("selected employee: ", selectedEmployee);
+  console.log("available services: ", availableServices);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -40,15 +52,13 @@ export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {selectedName
-            ? services.find((s) => s.serviceId === selectedName)?.name
-            : "Select service..."}
+          {selectedServiceId ? currentService?.name : "Выберите процедуру..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search service..." className="h-9" />
+          <CommandInput placeholder="Выберите процедуру..." className="h-9" />
           <CommandList>
             <CommandEmpty>Процедура не найдена.</CommandEmpty>
             <CommandGroup>
@@ -57,7 +67,13 @@ export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
                   key={service.serviceId}
                   value={service.name}
                   onSelect={(currentName) => {
-                    onSelect(currentName === selectedName ? "" : currentName);
+                    onSelect(
+                      currentName === currentService?.name
+                        ? ""
+                        : services.find((x) => x.name === currentName)
+                            ?.serviceId!
+                      // currentName === selectedServiceId ? "" : currentName
+                    );
                     setOpen(false);
                   }}
                   className={cn(
@@ -71,7 +87,7 @@ export const ServicePicker = ({ selectedName, onSelect, services }: Props) => {
                   <Check
                     className={cn(
                       "ml-auto",
-                      selectedName === service.serviceId
+                      selectedServiceId === service.serviceId
                         ? "opacity-100"
                         : "opacity-0"
                     )}

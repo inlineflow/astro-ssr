@@ -44,7 +44,7 @@ export const AppointmentServiceControls = ({
           <div>
             <ServicePicker
               services={services}
-              selectedName={selectedServiceId}
+              selectedServiceId={selectedServiceId}
               onSelect={onSelectService}
             />
             <ServiceErrorMessage />
