@@ -1,3 +1,5 @@
+import { Icon, Scissors } from "lucide-react";
+import { scissorsHairComb } from "@lucide/lab";
 import BarbershopLogo from "src/icons/barbershop.svg?react";
 import NailPolishLogo from "src/icons/nail-polish.svg?react";
 
@@ -13,7 +15,7 @@ export const commonContainerClasses = [
 export const iconMap = [
   {
     tag: "hairdressing",
-    Icon: BarbershopLogo,
+    Icon: (props: any) => <Icon iconNode={scissorsHairComb} {...props} />,
     classList: ["bg-yellow-100"],
   },
   {
