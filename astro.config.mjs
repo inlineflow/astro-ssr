@@ -1,6 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import node from "@astrojs/node";
+import svgr from 'vite-plugin-svgr';
 import { defineConfig } from "astro/config";
 
 
@@ -9,7 +10,7 @@ export default defineConfig({
     mode: 'standalone',
   }),
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), svgr()],
   },
   integrations: [react()],
 });

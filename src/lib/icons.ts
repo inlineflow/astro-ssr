@@ -1,5 +1,5 @@
-import BarbershopLogo from "src/icons/barbershop.svg";
-import NailPolishLogo from "src/icons/nail-polish.svg";
+import BarbershopLogo from "src/icons/barbershop.svg?react";
+import NailPolishLogo from "src/icons/nail-polish.svg?react";
 
 export const commonContainerClasses = [
   "rounded-full",

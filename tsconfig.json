@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strictest",
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [".astro/types.d.ts", "**/*", "src/env.d.ts"],
   "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": ".",
@@ -8,6 +8,7 @@
       "@/*": ["./src/components/react/shadcn/*"],
       "components/*": ["./src/components/*"]
     },
+    "types": ["vite-plugin-svgr/client"],
     "jsx": "react-jsx"
   }
 }

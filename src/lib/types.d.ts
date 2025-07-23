@@ -14,3 +14,7 @@ type APIError = {
 export type AstroResponse<T> = T | APIError;
 
 export type ErrorType = ActionError | ValidationError | Error;
+
+export type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};

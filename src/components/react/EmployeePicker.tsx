@@ -11,14 +11,15 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import type { Employee } from "src/lib/schema";
 import {
   useSelectedEmployee,
   useSelectedService,
 } from "./AppointmentServiceControlsService";
+import type { EmployeeView } from "src/lib/views";
+import { commonContainerClasses, iconMap } from "src/lib/icons";
 
 type Props = {
-  employees: Employee[];
+  employees: EmployeeView[];
   selectedEmployeeId: string;
   onSelect: (currentEmpName: string) => void;
 };
@@ -34,12 +35,23 @@ export const EmployeePicker = ({
   const currentEmployee = employees.find(
     (e) => e.employeeId === selectedEmployeeId
   );
-  const availableEmployees = employees.map((emp) => ({
-    ...emp,
-    availableForSelectedService: Object.hasOwn(selectedService, "serviceId")
-      ? emp.providesServices.includes(selectedService.serviceId)
-      : true,
+
+  const availableEmployees = employees!.map((emp) => ({
+    ...emp!,
+    availableForSelectedService:
+      "serviceId" in selectedService
+        ? emp.services.map((s) => s.serviceId === selectedService.serviceId)
+        : // .map((s) => s.serviceId)
+          // .includes(selectedService.serviceId)
+          true,
   }));
+
+  // const availableEmployees = employees.map((emp) => ({
+  //   ...emp,
+  //   availableForSelectedService: Object.hasOwn(selectedService, "serviceId")
+  //     ? emp.providesServices.includes(selectedService.serviceId)
+  //     : true,
+  // }));
   console.log("selected service: ", selectedService);
   console.log("available employees: ", availableEmployees);
 
@@ -69,7 +81,7 @@ export const EmployeePicker = ({
                   onSelect={(currentEmpName) => {
                     setSelectedEmployee(
                       currentEmpName === currentEmployee?.name
-                        ? {}
+                        ? ({} as EmployeeView)
                         : employees.find((x) => x.name === currentEmpName)!
                     );
                     onSelect(
@@ -99,11 +111,32 @@ export const EmployeePicker = ({
                     )}
                   />
                   <div className="flex flex-wrap w-16 gap-1">
+                    {
+                      iconMap
+                        .filter((i) =>
+                          employee.services.map((s) => s.tag).includes(i.tag)
+                        )
+                        .map((ic) => (
+                          <div
+                            className={[
+                              ...commonContainerClasses,
+                              ...ic.classList,
+                            ].join(" ")}
+                          >
+                            <ic.Icon className="size-6" />
+                          </div>
+                        ))
+                      // availableServicesIcons.map((i) => (
+                      //   <div class={[...commonContainerClasses, ...i.classList].join(" ")}>
+                      //     <i.Icon />
+                      //   </div>
+                      // ))
+                    }
+                    {/* <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
                     <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
                     <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
                     <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
-                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
-                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
+                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div> */}
                   </div>
                 </CommandItem>
               ))}

@@ -8,8 +8,6 @@ import type { AppointmentFormValues } from "./AppointmentForm";
 import {
   SelectedEmployeeProvider,
   SelectedServiceProvider,
-  useSelectedEmployee,
-  useSelectedService,
 } from "./AppointmentServiceControlsService";
 
 type Props = {
@@ -29,13 +27,20 @@ export const AppointmentServiceControls = ({
   onSelectService,
   onSelectEmployee,
 }: Props) => {
+  const empViews = employees.map((emp) => ({
+    ...emp,
+    services: services.filter((s) =>
+      emp.providesServices.includes(s.serviceId)
+    ),
+  }));
+
   return (
     <div className="flex flex-col gap-3 md:flex-row md:justify-between">
       <SelectedEmployeeProvider>
         <SelectedServiceProvider>
           <div>
             <EmployeePicker
-              employees={employees}
+              employees={empViews}
               onSelect={onSelectEmployee}
               selectedEmployeeId={selectedEmployeeId}
             />
