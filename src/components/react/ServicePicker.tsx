@@ -12,7 +12,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
 import type { Employee, Service } from "src/lib/schema";
-import { useSelectedEmployee } from "./AppointmentServiceControlsService";
+import {
+  useSelectedEmployee,
+  useSelectedService,
+} from "./AppointmentServiceControlsService";
 
 type Props = {
   services: Service[];
@@ -27,7 +30,8 @@ export const ServicePicker = ({
 }: Props) => {
   const [open, setOpen] = useState(false);
 
-  const { selectedEmployee, setSelectedEmployee } = useSelectedEmployee();
+  const { selectedEmployee } = useSelectedEmployee();
+  const { setSelectedService } = useSelectedService();
   const currentService = services.find(
     (x) => x.serviceId === selectedServiceId
   );
@@ -67,6 +71,11 @@ export const ServicePicker = ({
                   key={service.serviceId}
                   value={service.name}
                   onSelect={(currentName) => {
+                    setSelectedService(
+                      currentName === currentService?.name
+                        ? ({} as Service)
+                        : services.find((x) => x.name === currentName)!
+                    );
                     onSelect(
                       currentName === currentService?.name
                         ? ""

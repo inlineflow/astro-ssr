@@ -12,7 +12,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
 import type { Employee } from "src/lib/schema";
-import { useSelectedEmployee } from "./AppointmentServiceControlsService";
+import {
+  useSelectedEmployee,
+  useSelectedService,
+} from "./AppointmentServiceControlsService";
 
 type Props = {
   employees: Employee[];
@@ -27,10 +30,21 @@ export const EmployeePicker = ({
 }: Props) => {
   const [open, setOpen] = useState(false);
   const { setSelectedEmployee } = useSelectedEmployee();
+  const { selectedService } = useSelectedService();
   const currentEmployee = employees.find(
     (e) => e.employeeId === selectedEmployeeId
   );
-  //   const [id, setId] = useState();
+  // const availableEmployees = new Set(
+  //   employees.map((emp) => emp.providesServices)
+  // ).intersection(new Set(selectedService.serviceId));
+  const availableEmployees = employees.map((emp) => ({
+    ...emp,
+    availableForSelectedService: Object.hasOwn(selectedService, "serviceId")
+      ? emp.providesServices.includes(selectedService.serviceId)
+      : true,
+  }));
+  console.log("selected service: ", selectedService);
+  console.log("available employees: ", availableEmployees);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -51,7 +65,7 @@ export const EmployeePicker = ({
           <CommandList>
             <CommandEmpty>Мастер не найден.</CommandEmpty>
             <CommandGroup>
-              {employees.map((employee) => (
+              {availableEmployees.map((employee) => (
                 <CommandItem
                   key={employee.employeeId}
                   value={employee.name}
@@ -69,6 +83,12 @@ export const EmployeePicker = ({
                     );
                     setOpen(false);
                   }}
+                  className={
+                    employee.availableForSelectedService
+                      ? "opacity-100"
+                      : "opacity-50"
+                  }
+                  disabled={!employee.availableForSelectedService}
                 >
                   <div className="inline rounded-full bg-pink-200 size-8"></div>
                   <div>{employee.name}</div>
