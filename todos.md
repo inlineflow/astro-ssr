@@ -24,3 +24,5 @@ Add fallback
 ### Restyle pickers so they look good
 
 ### Use <Avatar> component for the Employee Avatar in employee picker. Use suspense, and TanStack Query if you need to.
+
+# Rework timeblocks to accept the current service and re-render to show available blocks

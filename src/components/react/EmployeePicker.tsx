@@ -22,13 +22,15 @@ type Props = {
   employees: EmployeeView[];
   selectedEmployeeId: string;
   onSelect: (currentEmpName: string) => void;
+  // className: string;
 };
 
 export const EmployeePicker = ({
   selectedEmployeeId,
   onSelect,
   employees,
-}: Props) => {
+}: // className,
+Props) => {
   const [open, setOpen] = useState(false);
   const { setSelectedEmployee } = useSelectedEmployee();
   const { selectedService } = useSelectedService();
@@ -41,17 +43,9 @@ export const EmployeePicker = ({
     availableForSelectedService:
       "serviceId" in selectedService
         ? emp.services.map((s) => s.serviceId === selectedService.serviceId)
-        : // .map((s) => s.serviceId)
-          // .includes(selectedService.serviceId)
-          true,
+        : true,
   }));
 
-  // const availableEmployees = employees.map((emp) => ({
-  //   ...emp,
-  //   availableForSelectedService: Object.hasOwn(selectedService, "serviceId")
-  //     ? emp.providesServices.includes(selectedService.serviceId)
-  //     : true,
-  // }));
   console.log("selected service: ", selectedService);
   console.log("available employees: ", availableEmployees);
 
@@ -62,7 +56,7 @@ export const EmployeePicker = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className={cn("w-full justify-between", "")}
         >
           {selectedEmployeeId ? currentEmployee?.name : "Выберите мастера..."}
           <ChevronsUpDown className="opacity-50" />
@@ -112,33 +106,21 @@ export const EmployeePicker = ({
                     )}
                   />
                   <div className="flex flex-wrap w-16 gap-1">
-                    {
-                      serviceStyles
-                        .filter((i) =>
-                          employee.services.map((s) => s.tag).includes(i.tag)
-                        )
-                        .map((ic) => (
-                          <div
-                            className={[
-                              ...commonContainerClasses,
-                              ...ic.classList,
-                              ic.bgColor,
-                            ].join(" ")}
-                          >
-                            <ic.Icon className="size-6" color="black" />
-                          </div>
-                        ))
-                      // availableServicesIcons.map((i) => (
-                      //   <div class={[...commonContainerClasses, ...i.classList].join(" ")}>
-                      //     <i.Icon />
-                      //   </div>
-                      // ))
-                    }
-                    {/* <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
-                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
-                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
-                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div>
-                    <div className="ml-auto size-6 rounded-full bg-cyan-200"></div> */}
+                    {serviceStyles
+                      .filter((i) =>
+                        employee.services.map((s) => s.tag).includes(i.tag)
+                      )
+                      .map((ic) => (
+                        <div
+                          className={[
+                            ...commonContainerClasses,
+                            ...ic.classList,
+                            ic.bgColor,
+                          ].join(" ")}
+                        >
+                          <ic.Icon className="size-6" color="black" />
+                        </div>
+                      ))}
                   </div>
                 </CommandItem>
               ))}
