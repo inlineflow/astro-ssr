@@ -2,6 +2,7 @@ import { Icon, Scissors } from "lucide-react";
 import { scissorsHairComb } from "@lucide/lab";
 import BarbershopLogo from "src/icons/barbershop.svg?react";
 import NailPolishLogo from "src/icons/nail-polish.svg?react";
+import { cn } from "@/lib/utils";
 
 export const commonContainerClasses = [
   "rounded-full",
@@ -15,7 +16,13 @@ export const commonContainerClasses = [
 export const serviceStyles = [
   {
     tag: "hairdressing",
-    Icon: (props: any) => <Icon iconNode={scissorsHairComb} {...props} />,
+    Icon: ({ className, ...props }: any) => (
+      <Icon
+        iconNode={scissorsHairComb}
+        {...props}
+        className={cn("stroke-black/65", className)}
+      />
+    ),
     bgColor: "bg-yellow-100",
     bgHighlight: "data-[selected=true]:bg-yellow-200",
     classList: [],

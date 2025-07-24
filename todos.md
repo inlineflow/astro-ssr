@@ -16,3 +16,11 @@ Make your own component for selecting services/employees
 ### Add service icons with fallback to employee picker
 
 Add fallback
+
+### Add i18n
+
+### Add form errors above submit button so mobile users can see they haven't filled it out properly
+
+### Add admin page
+
+### Restyle the appointment booking page, so that there's a container with min-w-screen and padding, and all of the items are inside of it
