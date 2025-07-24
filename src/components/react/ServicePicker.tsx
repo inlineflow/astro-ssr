@@ -11,22 +11,25 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import type { Service } from "src/lib/schema";
+import type { Employee, Service } from "src/lib/schema";
 import {
   useSelectedEmployee,
   useSelectedService,
 } from "./AppointmentServiceControlsService";
+import { serviceStyles } from "src/lib/icons";
 
 type Props = {
   services: Service[];
   selectedServiceId: string;
   onSelect: (newEmployeeId: string) => void;
+  employees?: Employee;
 };
 
 export const ServicePicker = ({
   selectedServiceId,
   onSelect,
   services,
+  employees,
 }: Props) => {
   const [open, setOpen] = useState(false);
 
@@ -38,9 +41,14 @@ export const ServicePicker = ({
   const availableServices = services.map((s) => ({
     ...s,
     availableForSelectedEmployee:
-      "providesServices" in selectedEmployee
-        ? selectedEmployee.providesServices?.includes(s.serviceId)
-        : true,
+      "services" in selectedEmployee
+        ? selectedEmployee.services
+            .map((x) => x.serviceId)
+            .includes(s.serviceId)
+        : // ? selectedEmployee.services?.map((x) => x.serviceId === s.serviceId)
+          true,
+    styles: serviceStyles.find((x) => x.tag === s.tag),
+    // bgColor: serviceStyles.filter((x) => x.tag === s.tag).map((y) => y.bgColor),
   }));
   console.log("selected employee: ", selectedEmployee);
   console.log("available services: ", availableServices);
@@ -86,10 +94,15 @@ export const ServicePicker = ({
                   className={cn(
                     service.availableForSelectedEmployee
                       ? "opacity-100"
-                      : "opacity-50"
+                      : "opacity-50",
+                    service.styles?.bgColor,
+                    // `${service.styles!.bgColor}/70`,
+                    // `data-[selected=true]:${service.styles?.bgColor}`,
+                    service.styles?.bgHighlight
                   )}
                   disabled={!service.availableForSelectedEmployee}
                 >
+                  {service.styles && <service.styles.Icon />}
                   {service.name}
                   <Check
                     className={cn(

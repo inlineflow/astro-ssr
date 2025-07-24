@@ -15,6 +15,6 @@ Make your own component for selecting services/employees
 
 ### Add service icons with fallback to employee picker
 
-### Color background of services in service picker with their icon color
+Add fallback
 
 ### Add availableServices as keywords to employee picker and vice versa

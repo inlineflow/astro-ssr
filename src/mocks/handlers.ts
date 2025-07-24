@@ -24,6 +24,12 @@ const services: Service[] = [
     serviceId: crypto.randomUUID(),
     tag: "nail-polish",
   },
+  {
+    durationInMinutes: 90,
+    name: "Педикюр",
+    serviceId: crypto.randomUUID(),
+    tag: "pedicure",
+  },
 ];
 const locationId = crypto.randomUUID();
 export const establishmentId = crypto.randomUUID();
@@ -33,7 +39,9 @@ const employees = [
     employeeId: crypto.randomUUID(),
     location: locationId,
     nonWorkingDays: [],
-    providesServices: services.map((s) => s.serviceId),
+    providesServices: services
+      .filter((x) => x.name !== "Педикюр")
+      .map((s) => s.serviceId),
   },
   {
     name: "Александр",
@@ -48,7 +56,7 @@ const location: Location = {
   name: "СПА у Зои На Советской",
   openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
   closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
-  services: services,
+  services: services.filter((s) => s.name !== "Педикюр"),
   employees: employees,
   address: "Советская 91, 1",
   establishmentId: establishmentId,
@@ -60,15 +68,7 @@ const locations: Location[] = [
   {
     name: "СПА у Зои На Московской",
     address: "Московская 15",
-    services: [
-      ...services,
-      {
-        durationInMinutes: 90,
-        name: "Педикюр",
-        serviceId: crypto.randomUUID(),
-        tag: "pedicure",
-      },
-    ],
+    services: [...services],
     employees: employees,
     establishmentId: establishmentId,
     locationId: crypto.randomUUID(),

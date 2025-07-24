@@ -2,12 +2,12 @@
 interface Props {
   services: Service[];
 }
-import { commonContainerClasses, iconMap } from "src/lib/icons";
+import { commonContainerClasses, serviceStyles } from "src/lib/icons";
 import type { Service } from "src/lib/schema";
 
 const { services } = Astro.props;
 
-const availableServicesIcons = iconMap.filter((i) =>
+const availableServicesIcons = serviceStyles.filter((i) =>
   services.map((s) => s.tag).includes(i.tag)
 );
 ---
@@ -15,7 +15,9 @@ const availableServicesIcons = iconMap.filter((i) =>
 <div class="flex space-x-2">
   {
     availableServicesIcons.map((i) => (
-      <div class={[...commonContainerClasses, ...i.classList].join(" ")}>
+      <div
+        class={[...commonContainerClasses, ...i.classList, i.bgColor].join(" ")}
+      >
         <i.Icon width={32} height={32} />
       </div>
     ))

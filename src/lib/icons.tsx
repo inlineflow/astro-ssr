@@ -12,20 +12,26 @@ export const commonContainerClasses = [
   "size-12",
 ];
 
-export const iconMap = [
+export const serviceStyles = [
   {
     tag: "hairdressing",
     Icon: (props: any) => <Icon iconNode={scissorsHairComb} {...props} />,
-    classList: ["bg-yellow-100"],
+    bgColor: "bg-yellow-100",
+    bgHighlight: "data-[selected=true]:bg-yellow-200",
+    classList: [],
   },
   {
     tag: "nail-polish",
     Icon: NailPolishLogo,
-    classList: ["bg-pink-100"],
+    bgColor: "bg-pink-100",
+    bgHighlight: "data-[selected=true]:bg-pink-200",
+    classList: [],
   },
   {
     tag: "pedicure",
     Icon: NailPolishLogo,
-    classList: ["bg-cyan-200"],
+    bgColor: "bg-cyan-100",
+    bgHighlight: "data-[selected=true]:bg-cyan-200",
+    classList: [],
   },
 ];

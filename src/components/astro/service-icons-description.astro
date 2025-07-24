@@ -3,12 +3,12 @@ interface Props {
   services: Service[];
 }
 import { Card } from "@/ui/card";
-import { commonContainerClasses, iconMap } from "src/lib/icons";
+import { commonContainerClasses, serviceStyles } from "src/lib/icons";
 import type { Service } from "src/lib/schema";
 
 const { services } = Astro.props;
 
-const iconServiceData = iconMap
+const iconServiceData = serviceStyles
   .map((i) => {
     const x = services.find((s) => s.tag === i.tag);
     if (!x) return;
@@ -22,7 +22,11 @@ const iconServiceData = iconMap
     iconServiceData.map((i) => (
       <Card className="flex flex-row py-1 px-2 max-w-full items-center justify-center gap-2 mr-0">
         <p>{i.name}</p>
-        <div class={[...commonContainerClasses, ...i.classList].join(" ")}>
+        <div
+          class={[...commonContainerClasses, ...i.classList, i.bgColor].join(
+            " "
+          )}
+        >
           <i.Icon width={32} height={32} />
         </div>
       </Card>

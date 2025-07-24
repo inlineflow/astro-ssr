@@ -17,7 +17,11 @@ const { data: establishment, error: _error } = await Astro.callAction(
 );
 
 if (_error) {
-  return;
+  console.log("Error while fetching establishment: ", _error);
+  if (_error) {
+    return Astro.redirect("/establishment");
+    // return new Response("", { status: _error.status });
+  }
 }
 
 const allServices = new Set(establishment.locations.flatMap((l) => l.services));

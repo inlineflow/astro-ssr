@@ -16,7 +16,7 @@ import {
   useSelectedService,
 } from "./AppointmentServiceControlsService";
 import type { EmployeeView } from "src/lib/views";
-import { commonContainerClasses, iconMap } from "src/lib/icons";
+import { commonContainerClasses, serviceStyles } from "src/lib/icons";
 
 type Props = {
   employees: EmployeeView[];
@@ -78,6 +78,7 @@ export const EmployeePicker = ({
                 <CommandItem
                   key={employee.employeeId}
                   value={employee.name}
+                  keywords={employee.services.map((s) => s.name)}
                   onSelect={(currentEmpName) => {
                     setSelectedEmployee(
                       currentEmpName === currentEmployee?.name
@@ -112,7 +113,7 @@ export const EmployeePicker = ({
                   />
                   <div className="flex flex-wrap w-16 gap-1">
                     {
-                      iconMap
+                      serviceStyles
                         .filter((i) =>
                           employee.services.map((s) => s.tag).includes(i.tag)
                         )
@@ -121,9 +122,10 @@ export const EmployeePicker = ({
                             className={[
                               ...commonContainerClasses,
                               ...ic.classList,
+                              ic.bgColor,
                             ].join(" ")}
                           >
-                            <ic.Icon className="size-6" />
+                            <ic.Icon className="size-6" color="black" />
                           </div>
                         ))
                       // availableServicesIcons.map((i) => (

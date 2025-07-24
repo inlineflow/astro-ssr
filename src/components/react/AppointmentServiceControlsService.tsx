@@ -2,7 +2,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import type { EmployeeView, ServiceView } from "src/lib/views";
 
 const SelectedEmployeeContext = createContext<{
-  selectedEmployee: EmployeeView;
+  selectedEmployee: EmployeeView | Record<PropertyKey, never>;
   setSelectedEmployee: (emp: EmployeeView) => void;
 }>({
   selectedEmployee: {},
@@ -14,7 +14,9 @@ export const SelectedEmployeeProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [selectedEmployee, setSelectedEmployee] = useState<EmployeeView>({});
+  const [selectedEmployee, setSelectedEmployee] = useState<
+    EmployeeView | Record<PropertyKey, never>
+  >({});
   const value = { selectedEmployee, setSelectedEmployee };
 
   return (
