@@ -8,7 +8,7 @@ import type { AppointmentFormValues } from "./AppointmentForm";
 import {
   SelectedEmployeeProvider,
   SelectedServiceProvider,
-} from "./AppointmentServiceControlsService";
+} from "./AppointmentServiceControlsContext";
 
 type Props = {
   employees: Employee[];
@@ -48,6 +48,7 @@ export const AppointmentServiceControls = ({
           </div>
           <div>
             <ServicePicker
+              employees={employees}
               services={services}
               selectedServiceId={selectedServiceId}
               onSelect={onSelectService}

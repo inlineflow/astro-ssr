@@ -15,14 +15,14 @@ import type { Employee, Service } from "src/lib/schema";
 import {
   useSelectedEmployee,
   useSelectedService,
-} from "./AppointmentServiceControlsService";
+} from "./AppointmentServiceControlsContext";
 import { serviceStyles } from "src/lib/icons";
 
 type Props = {
   services: Service[];
   selectedServiceId: string;
   onSelect: (newEmployeeId: string) => void;
-  employees?: Employee;
+  employees?: Employee[];
 };
 
 export const ServicePicker = ({
@@ -48,6 +48,9 @@ export const ServicePicker = ({
         : // ? selectedEmployee.services?.map((x) => x.serviceId === s.serviceId)
           true,
     styles: serviceStyles.find((x) => x.tag === s.tag),
+    employees: employees?.filter((e) =>
+      e.providesServices.includes(s.serviceId)
+    ),
     // bgColor: serviceStyles.filter((x) => x.tag === s.tag).map((y) => y.bgColor),
   }));
   console.log("selected employee: ", selectedEmployee);
@@ -74,6 +77,11 @@ export const ServicePicker = ({
             <CommandGroup>
               {availableServices.map((service) => (
                 <CommandItem
+                  keywords={
+                    service.employees
+                      ? service.employees?.map((e) => e.name)
+                      : []
+                  }
                   key={service.serviceId}
                   value={service.name}
                   onSelect={(currentName) => {

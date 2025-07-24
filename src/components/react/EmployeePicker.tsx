@@ -14,7 +14,7 @@ import { useState } from "react";
 import {
   useSelectedEmployee,
   useSelectedService,
-} from "./AppointmentServiceControlsService";
+} from "./AppointmentServiceControlsContext";
 import type { EmployeeView } from "src/lib/views";
 import { commonContainerClasses, serviceStyles } from "src/lib/icons";
 
