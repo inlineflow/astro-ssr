@@ -62,13 +62,13 @@ export const EmployeePicker = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-64 justify-between"
+          className="w-full justify-between"
         >
           {selectedEmployeeId ? currentEmployee?.name : "Выберите мастера..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-fit max-w-72 p-0">
+      <PopoverContent className="max-w-72 p-0 w-[var(--radix-popover-trigger-width)]">
         <Command>
           <CommandInput placeholder="Выберите мастера" className="h-9 w-fit" />
           <CommandList>
@@ -101,7 +101,7 @@ export const EmployeePicker = ({
                   disabled={!employee.availableForSelectedService}
                 >
                   <div className="inline rounded-full bg-pink-200 size-12"></div>
-                  <div>{employee.name}</div>
+                  <p className="text-xl">{employee.name}</p>
 
                   <Check
                     className={cn(

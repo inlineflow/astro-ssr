@@ -63,13 +63,13 @@ export const ServicePicker = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full justify-between"
         >
           {selectedServiceId ? currentService?.name : "Выберите процедуру..."}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
         <Command>
           <CommandInput placeholder="Выберите процедуру..." className="h-9" />
           <CommandList>
@@ -106,7 +106,8 @@ export const ServicePicker = ({
                     service.styles?.bgColor,
                     // `${service.styles!.bgColor}/70`,
                     // `data-[selected=true]:${service.styles?.bgColor}`,
-                    service.styles?.bgHighlight
+                    service.styles?.bgHighlight,
+                    "text-xl"
                   )}
                   disabled={!service.availableForSelectedEmployee}
                 >

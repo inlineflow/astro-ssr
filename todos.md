@@ -19,8 +19,8 @@ Add fallback
 
 ### Add i18n
 
-### Add form errors above submit button so mobile users can see they haven't filled it out properly
-
 ### Add admin page
 
-### Restyle the appointment booking page, so that there's a container with min-w-screen and padding, and all of the items are inside of it
+### Restyle pickers so they look good
+
+### Use <Avatar> component for the Employee Avatar in employee picker. Use suspense, and TanStack Query if you need to.

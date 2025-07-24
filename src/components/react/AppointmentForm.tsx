@@ -194,6 +194,11 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
             )}
           ></FormField>
         </div>
+        <div>
+          <p className="text-destructive">
+            {!form.formState.isValid ? "There are errors in the form." : ""}
+          </p>
+        </div>
         <Button type="submit" className="w-full mt-5 mb-100">
           Submit
         </Button>
