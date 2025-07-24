@@ -73,7 +73,7 @@ const Timeblock = ({ dt }: { dt: DateTime }) => {
   return (
     <ToggleGroupItem
       value={dt.toISO()!}
-      className="bg-accent text-accent-foreground shadow-xs hover:bg-primary/90 rounded-md data-[state=on]:bg-primary border-2 border-primary data-[state=on]:border-primary data-[state=on]:text-primary-foreground"
+      className="bg-accent text-accent-foreground shadow-xs hover:bg-primary/90 rounded-md data-[state=on]:bg-primary border-2 border-primary/40 data-[state=on]:border-primary data-[state=on]:text-primary-foreground"
     >
       <div className="w-24 h-10 flex items-center justify-center">
         {dt.toFormat("T")}

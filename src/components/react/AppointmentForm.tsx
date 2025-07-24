@@ -112,6 +112,9 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       //   };
       // },
       error: "Error",
+      // duration: 2500,
+      // dismissible: true,
+      closeButton: true,
     });
   };
 

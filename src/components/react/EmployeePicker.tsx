@@ -27,6 +27,8 @@ type Props = {
   // className: string;
 };
 
+const maxServices = 8;
+
 export const EmployeePicker = ({
   selectedEmployeeId,
   onSelect,
@@ -108,8 +110,8 @@ Props) => {
 };
 
 const EmployeePickerCard = ({ employee }: { employee: EmployeeView }) => (
-  <div className="grid grid-cols-7 grid-rows-4 max-h-32 rounded-l-lg rounded-bl-lg ">
-    <Avatar className="shrink-0 col-span-3 row-start-1 row-span-4 mx-auto rounded-none size-full rounded-l-lg rounded-bl-lg border-r-2 border-r-black/10">
+  <div className="grid grid-cols-7 grid-rows-3 rounded-l-lg rounded-bl-lg w-full h-fit">
+    <Avatar className="shrink-0 col-span-3 row-start-1 row-span-4 mx-auto rounded-none max-w-full max-h-full w-222 h-28 rounded-l-lg rounded-bl-lg border-r-2 border-r-black/10">
       <AvatarImage
         src="https://64.media.tumblr.com/3c948972b7be8a79f1436393a3a26281/tumblr_ogw26dCy7A1smd799o1_1280.jpg"
         className="rounded-l-lg rounded-bl-lg"
@@ -123,6 +125,7 @@ const EmployeePickerCard = ({ employee }: { employee: EmployeeView }) => (
     <div className="flex flex-wrap col-span-4 col-start-4 row-start-2 row-span-3 mt-1  gap-[2px] p-2 max-h-full">
       {serviceStyles
         .filter((i) => employee.services.map((s) => s.tag).includes(i.tag))
+        .slice(0, maxServices)
         .map((ic) => (
           <div
             className={cn(
