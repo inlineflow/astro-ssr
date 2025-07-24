@@ -94,34 +94,7 @@ Props) => {
                   } w-full h-fit max-w-full`}
                   disabled={!employee.availableForSelectedService}
                 >
-                  <div className="inline rounded-full bg-pink-200 size-12"></div>
-                  <p className="text-xl">{employee.name}</p>
-
-                  <Check
-                    className={cn(
-                      "ml-auto",
-                      selectedEmployeeId === employee.employeeId
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
-                  />
-                  <div className="flex flex-wrap w-16 gap-1">
-                    {serviceStyles
-                      .filter((i) =>
-                        employee.services.map((s) => s.tag).includes(i.tag)
-                      )
-                      .map((ic) => (
-                        <div
-                          className={[
-                            ...commonContainerClasses,
-                            ...ic.classList,
-                            ic.bgColor,
-                          ].join(" ")}
-                        >
-                          <ic.Icon className="size-6" color="black" />
-                        </div>
-                      ))}
-                  </div>
+                  <EmployeePickerCard employee={employee} />
                 </CommandItem>
               ))}
             </CommandGroup>
@@ -131,3 +104,25 @@ Props) => {
     </Popover>
   );
 };
+
+const EmployeePickerCard = ({ employee }: { employee: EmployeeView }) => (
+  <div className="grid grid-cols-3 items-center w-full h-full">
+    <div className="rounded-full bg-pink-200 size-16 shrink-0 col-span-1 row-start-1 row-span-2 mx-auto"></div>
+    <p className="text-xl mb-auto row-span-1 row-start-1">{employee.name}</p>
+    <div className="flex flex-wrap gap-1 col-span-2 col-start-2 row-start-2 row-span-2 mt-1">
+      {serviceStyles
+        .filter((i) => employee.services.map((s) => s.tag).includes(i.tag))
+        .map((ic) => (
+          <div
+            className={[
+              ...commonContainerClasses,
+              ...ic.classList,
+              ic.bgColor,
+            ].join(" ")}
+          >
+            <ic.Icon className="size-6" color="black" />
+          </div>
+        ))}
+    </div>
+  </div>
+);

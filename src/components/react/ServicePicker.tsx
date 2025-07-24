@@ -111,7 +111,13 @@ export const ServicePicker = ({
                   )}
                   disabled={!service.availableForSelectedEmployee}
                 >
-                  {service.styles && <service.styles.Icon />}
+                  {service.styles && (
+                    <service.styles.Icon
+                      width={16}
+                      height={16}
+                      className="size-6"
+                    />
+                  )}
                   {service.name}
                   <Check
                     className={cn(
