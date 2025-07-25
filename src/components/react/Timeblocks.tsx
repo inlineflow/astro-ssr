@@ -25,6 +25,14 @@ export const TimeBlocks = ({
   id,
   ariaDescribedBy,
 }: TimeblocksProps) => {
+  if (!durationInMinutes) {
+    return (
+      <Card className="items-center justify-center aspect-square">
+        <p>Choose a service.</p>
+      </Card>
+    );
+  }
+
   const blockRows = makeBlocks(openingTime, closingTime, durationInMinutes);
 
   const defaultSelection = blockRows[0]![0];

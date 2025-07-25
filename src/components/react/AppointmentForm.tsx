@@ -186,7 +186,14 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                   <TimeBlocks
                     openingTime={location.openingTime}
                     closingTime={location.closingTime}
-                    durationInMinutes={location.services[0]?.durationInMinutes!}
+                    durationInMinutes={
+                      location.services.find(
+                        (x) =>
+                          x.serviceId ===
+                          form.getValues("serviceOpts.serviceId")
+                      )?.durationInMinutes!
+                    }
+                    // durationInMinutes={location.services[0]?.durationInMinutes!}
                     onSelect={(dt) => field.onChange(dt)}
                     selected={field.value}
                   />
