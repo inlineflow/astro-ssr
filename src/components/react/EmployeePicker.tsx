@@ -60,8 +60,7 @@ Props) => {
         ? emp.services
             .map((s) => s.serviceId)
             .includes(selectedService.serviceId)
-        : // ? emp.services.map((s) => s.serviceId === selectedService.serviceId)
-          true,
+        : true,
   }));
 
   console.log("selected service: ", selectedService);
