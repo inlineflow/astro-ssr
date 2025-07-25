@@ -23,6 +23,8 @@ Add fallback
 
 ### Restyle pickers so they look good
 
-### Use <Avatar> component for the Employee Avatar in employee picker. Use suspense, and TanStack Query if you need to.
+### Use the Avatar component for the Employee Avatar in employee picker. Use suspense, and TanStack Query if you need to.
+
+### Consider using Js Date.toISOString instead of parsing to Luxon DateTime and then DateTime.toISOString
 
 # Rework timeblocks to accept the current service and re-render to show available blocks
