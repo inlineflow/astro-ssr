@@ -34,5 +34,3 @@ Add fallback
 # Rework timeblocks to accept the current service and re-render to show available blocks
 
 # Fix timeblocks to reset the selection to none on re-render
-
-# Fix timeblocks error message squishing the square placeholder
