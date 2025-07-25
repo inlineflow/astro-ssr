@@ -19,15 +19,26 @@ import type { EmployeeView } from "src/lib/views";
 import { commonContainerClasses, serviceStyles } from "src/lib/icons";
 import { Avatar, AvatarImage } from "@/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
+import type { Service } from "src/lib/schema";
 
 type Props = {
   employees: EmployeeView[];
   selectedEmployeeId: string;
   onSelect: (currentEmpName: string) => void;
-  // className: string;
 };
 
 const maxServices = 8;
+
+type AvailableEmployee = {
+  availableForSelectedService: boolean | boolean[];
+  employeeId: string;
+  name: string;
+  photo?: string | undefined;
+  title?: string | undefined;
+  location: string;
+  nonWorkingDays: string[];
+  services: Service[];
+};
 
 export const EmployeePicker = ({
   selectedEmployeeId,
@@ -46,8 +57,11 @@ Props) => {
     ...emp!,
     availableForSelectedService:
       "serviceId" in selectedService
-        ? emp.services.map((s) => s.serviceId === selectedService.serviceId)
-        : true,
+        ? emp.services
+            .map((s) => s.serviceId)
+            .includes(selectedService.serviceId)
+        : // ? emp.services.map((s) => s.serviceId === selectedService.serviceId)
+          true,
   }));
 
   console.log("selected service: ", selectedService);
@@ -109,8 +123,13 @@ Props) => {
   );
 };
 
-const EmployeePickerCard = ({ employee }: { employee: EmployeeView }) => (
-  <div className="grid grid-cols-7 grid-rows-3 rounded-l-lg rounded-bl-lg w-full h-fit">
+const EmployeePickerCard = ({ employee }: { employee: AvailableEmployee }) => (
+  <div
+    className={cn(
+      "grid grid-cols-7 grid-rows-3 rounded-l-lg rounded-bl-lg w-full h-fit",
+      employee.availableForSelectedService ? "opacity-100" : "opacity-50"
+    )}
+  >
     <Avatar className="shrink-0 col-span-3 row-start-1 row-span-4 mx-auto rounded-none max-w-full max-h-full w-222 h-28 rounded-l-lg rounded-bl-lg border-r-2 border-r-black/10">
       <AvatarImage
         src="https://64.media.tumblr.com/3c948972b7be8a79f1436393a3a26281/tumblr_ogw26dCy7A1smd799o1_1280.jpg"

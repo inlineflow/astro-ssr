@@ -27,4 +27,8 @@ Add fallback
 
 ### Consider using Js Date.toISOString instead of parsing to Luxon DateTime and then DateTime.toISOString
 
+### Consider moving the employee provider higher into the form
+
+### Check if timeblocks correctly generate the blocks (seems like it generates too few)
+
 # Rework timeblocks to accept the current service and re-render to show available blocks
