@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Card } from "@/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 import { DateTime } from "luxon";
+import { useSelectedService } from "./AppointmentServiceControlsContext";
 
 type TimeblocksProps = {
   openingTime: string;
@@ -25,15 +26,22 @@ export const TimeBlocks = ({
   id,
   ariaDescribedBy,
 }: TimeblocksProps) => {
-  if (!durationInMinutes) {
+  const { selectedService } = useSelectedService();
+
+  if (!selectedService.durationInMinutes) {
     return (
-      <Card className="items-center justify-center aspect-square">
+      // <Card className="items-center justify-center aspect-square">
+      <Card className="items-center justify-center md:min-w-86 mb-5">
         <p>Choose a service.</p>
       </Card>
     );
   }
 
-  const blockRows = makeBlocks(openingTime, closingTime, durationInMinutes);
+  const blockRows = makeBlocks(
+    openingTime,
+    closingTime,
+    selectedService.durationInMinutes
+  );
 
   const defaultSelection = blockRows[0]![0];
 

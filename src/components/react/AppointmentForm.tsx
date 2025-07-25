@@ -19,6 +19,11 @@ import { actions } from "astro:actions";
 import { CalendarDays, Clock } from "lucide-react";
 import { Separator } from "@/ui/separator";
 import { AppointmentServiceControls } from "./AppointmentServiceControls";
+import { useEffect } from "react";
+import {
+  SelectedEmployeeProvider,
+  SelectedServiceProvider,
+} from "./AppointmentServiceControlsContext";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
@@ -52,6 +57,8 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       serviceOpts: { employeeId: "", serviceId: "" },
     },
   });
+
+  const selectedServiceId = form.watch("serviceOpts.serviceId");
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     const timeOfDay = DateTime.fromISO(data.timeOfDay);
@@ -124,94 +131,96 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-5 w-full items-center justify-center space-y-5"
       >
-        <FormField
-          control={form.control}
-          name="serviceOpts"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel hidden>Service</FormLabel>
-              <FormControl>
-                <AppointmentServiceControls
-                  employees={location.employees}
-                  services={location.services}
-                  onSelectEmployee={(employeeId) =>
-                    field.onChange({
-                      ...field.value,
-                      employeeId,
-                    })
-                  }
-                  onSelectService={(serviceId) =>
-                    field.onChange({
-                      ...field.value,
-                      serviceId,
-                    })
-                  }
-                  selectedEmployeeId={field.value.employeeId}
-                  selectedServiceId={field.value.serviceId}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        ></FormField>
-        <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 justify-center">
+        <SelectedServiceProvider>
           <FormField
             control={form.control}
-            name="calendarDate"
+            name="serviceOpts"
             render={({ field }) => (
               <FormItem>
-                <FormLabel hidden>Calendar Date</FormLabel>
+                <FormLabel hidden>Service</FormLabel>
                 <FormControl>
-                  <AppointmentCalendar
-                    onSelect={(d) => {
-                      field.onChange(DateTime.fromJSDate(d).toISO());
-                    }}
-                    selected={DateTime.fromISO(field.value).toJSDate()}
-                    disabled={(date) =>
-                      date < DateTime.now().minus({ day: 1 }).toJSDate()
+                  <AppointmentServiceControls
+                    employees={location.employees}
+                    services={location.services}
+                    onSelectEmployee={(employeeId) =>
+                      field.onChange({
+                        ...field.value,
+                        employeeId,
+                      })
                     }
-                    {...field}
-                    className="w-full items-center justify-center"
+                    onSelectService={(serviceId) =>
+                      field.onChange({
+                        ...field.value,
+                        serviceId,
+                      })
+                    }
+                    selectedEmployeeId={field.value.employeeId}
+                    selectedServiceId={field.value.serviceId}
                   />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           ></FormField>
-          <FormField
-            control={form.control}
-            name="timeOfDay"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <TimeBlocks
-                    openingTime={location.openingTime}
-                    closingTime={location.closingTime}
-                    durationInMinutes={
-                      location.services.find(
-                        (x) =>
-                          x.serviceId ===
-                          form.getValues("serviceOpts.serviceId")
-                      )?.durationInMinutes!
-                    }
-                    // durationInMinutes={location.services[0]?.durationInMinutes!}
-                    onSelect={(dt) => field.onChange(dt)}
-                    selected={field.value}
-                  />
-                </FormControl>
-                <FormLabel hidden>Time of day of the appointment.</FormLabel>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-        </div>
-        <div>
-          <p className="text-destructive">
-            {!form.formState.isValid ? "Fill in the required fields." : ""}
-          </p>
-        </div>
-        <Button type="submit" className="w-full mt-5 mb-100">
-          Submit
-        </Button>
+          <div className="flex flex-col space-y-5 md:flex-row md:space-x-5 justify-center ">
+            <FormField
+              control={form.control}
+              name="calendarDate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel hidden>Calendar Date</FormLabel>
+                  <FormControl>
+                    <AppointmentCalendar
+                      onSelect={(d) => {
+                        field.onChange(DateTime.fromJSDate(d).toISO());
+                      }}
+                      selected={DateTime.fromISO(field.value).toJSDate()}
+                      disabled={(date) =>
+                        date < DateTime.now().minus({ day: 1 }).toJSDate()
+                      }
+                      {...field}
+                      className="w-full items-center justify-center"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            ></FormField>
+            <FormField
+              control={form.control}
+              name="timeOfDay"
+              render={({ field }) => (
+                <FormItem className="aspect-square md:justify-center">
+                  <FormControl>
+                    <TimeBlocks
+                      openingTime={location.openingTime}
+                      closingTime={location.closingTime}
+                      durationInMinutes={
+                        location.services.find(
+                          (x) =>
+                            x.serviceId ===
+                            form.getValues("serviceOpts.serviceId")
+                        )?.durationInMinutes!
+                      }
+                      // durationInMinutes={location.services[0]?.durationInMinutes!}
+                      onSelect={(dt) => field.onChange(dt)}
+                      selected={field.value}
+                    />
+                  </FormControl>
+                  <FormLabel hidden>Time of day of the appointment.</FormLabel>
+                  <FormMessage />
+                </FormItem>
+              )}
+            ></FormField>
+          </div>
+          <div>
+            <p className="text-destructive">
+              {!form.formState.isValid ? "Fill in the required fields." : ""}
+            </p>
+          </div>
+          <Button type="submit" className="w-full mt-5 mb-100">
+            Submit
+          </Button>
+        </SelectedServiceProvider>
       </form>
     </Form>
   );

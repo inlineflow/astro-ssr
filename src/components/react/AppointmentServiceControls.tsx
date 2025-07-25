@@ -37,25 +37,23 @@ export const AppointmentServiceControls = ({
   return (
     <div className="flex flex-col gap-3 md:flex-row md:justify-between md:grid md:grid-cols-5">
       <SelectedEmployeeProvider>
-        <SelectedServiceProvider>
-          <div className="md:col-span-2">
-            <EmployeePicker
-              employees={empViews}
-              onSelect={onSelectEmployee}
-              selectedEmployeeId={selectedEmployeeId}
-            />
-            <EmployeeErrorMessage />
-          </div>
-          <div className="md:col-span-3">
-            <ServicePicker
-              employees={employees}
-              services={services}
-              selectedServiceId={selectedServiceId}
-              onSelect={onSelectService}
-            />
-            <ServiceErrorMessage />
-          </div>
-        </SelectedServiceProvider>
+        <div className="md:col-span-2">
+          <EmployeePicker
+            employees={empViews}
+            onSelect={onSelectEmployee}
+            selectedEmployeeId={selectedEmployeeId}
+          />
+          <EmployeeErrorMessage />
+        </div>
+        <div className="md:col-span-3">
+          <ServicePicker
+            employees={employees}
+            services={services}
+            selectedServiceId={selectedServiceId}
+            onSelect={onSelectService}
+          />
+          <ServiceErrorMessage />
+        </div>
       </SelectedEmployeeProvider>
     </div>
   );
