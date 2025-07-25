@@ -19,11 +19,7 @@ import { actions } from "astro:actions";
 import { CalendarDays, Clock } from "lucide-react";
 import { Separator } from "@/ui/separator";
 import { AppointmentServiceControls } from "./AppointmentServiceControls";
-import { useEffect } from "react";
-import {
-  SelectedEmployeeProvider,
-  SelectedServiceProvider,
-} from "./AppointmentServiceControlsContext";
+import { SelectedServiceProvider } from "./AppointmentServiceControlsContext";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
@@ -57,8 +53,6 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       serviceOpts: { employeeId: "", serviceId: "" },
     },
   });
-
-  const selectedServiceId = form.watch("serviceOpts.serviceId");
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     const timeOfDay = DateTime.fromISO(data.timeOfDay);
