@@ -31,6 +31,8 @@ Add fallback
 
 ### Check if timeblocks correctly generate the blocks (seems like it generates too few)
 
+### Re-factor the form to load the skeleton instantly and load up employees and services after using TanStack Query and Suspense (research if TanStack Query is actually encessary)
+
 # Rework timeblocks to accept the current service and re-render to show available blocks
 
 # Fix timeblocks to reset the selection to none on re-render

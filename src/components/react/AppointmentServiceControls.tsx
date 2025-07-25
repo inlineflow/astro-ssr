@@ -35,7 +35,7 @@ export const AppointmentServiceControls = ({
   }));
 
   return (
-    <div className="flex flex-col gap-3 md:flex-row md:justify-between md:grid md:grid-cols-5">
+    <div className="flex flex-col gap-5 md:flex-row md:justify-between md:grid md:grid-cols-5">
       <SelectedEmployeeProvider>
         <div className="md:col-span-2">
           <EmployeePicker
