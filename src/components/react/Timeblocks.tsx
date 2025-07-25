@@ -31,7 +31,7 @@ export const TimeBlocks = ({
   if (!selectedService.durationInMinutes) {
     return (
       // <Card className="items-center justify-center aspect-square">
-      <Card className="items-center justify-center md:min-w-86 mb-5">
+      <Card className="items-center justify-center md:min-w-86 mb-5 aspect-square">
         <p>Choose a service.</p>
       </Card>
     );
