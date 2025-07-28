@@ -54,6 +54,8 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
     },
   });
 
+  // console.log("Fork state: ", Object.values(form.formState.errors));
+
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     const timeOfDay = DateTime.fromISO(data.timeOfDay);
     const appointment = DateTime.fromISO(data.calendarDate).set({
@@ -208,7 +210,9 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
           </div>
           <div>
             <p className="text-destructive">
-              {!form.formState.isValid ? "Fill in the required fields." : ""}
+              {Object.values(form.formState.errors).length > 0
+                ? "Fill in the required fields."
+                : ""}
             </p>
           </div>
           <Button type="submit" className="w-full mt-5 mb-100">
