@@ -23,7 +23,9 @@ Make your own component for selecting services/employees
 
 # Expand Service type to show how long the procedure takes and show the cost
 
-# Localize calendar
+# Localize calendar to KG
+
+# Add localization to KG
 
 # Make the establishments view on larger screens a grid of items
 
