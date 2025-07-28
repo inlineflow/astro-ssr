@@ -21,6 +21,7 @@ import { Separator } from "@/ui/separator";
 import { AppointmentServiceControls } from "./AppointmentServiceControls";
 import { SelectedServiceProvider } from "./AppointmentServiceControlsContext";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
@@ -55,6 +56,8 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       serviceOpts: { employeeId: "", serviceId: "" },
     },
   });
+
+  const { t } = useTranslation();
 
   // const watchedService = form.use("serviceOpts.serviceId");
   const watchedService = useWatch({
@@ -229,7 +232,8 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
             </p>
           </div>
           <Button type="submit" className="w-full mt-5 mb-100">
-            Submit
+            {/* Submit */}
+            {t("form_submit")}
           </Button>
         </SelectedServiceProvider>
       </form>

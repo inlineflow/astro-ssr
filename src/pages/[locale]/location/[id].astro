@@ -9,6 +9,7 @@ import { Toaster } from "components/react/shadcn/ui/sonner";
 import LocationDescription from "components/astro/location-description.astro";
 import LocationDescriptionSkeleton from "components/astro/location-description-skeleton.astro";
 import type { LocationLight } from "src/lib/schema";
+import ReactTranslatedCenteredLayout from "src/layouts/ReactTranslatedCenteredLayout.astro";
 
 export const prerender = false;
 const { id } = Astro.params;
@@ -44,7 +45,7 @@ if (!fetchError) {
 // console.log(validatedEstablishment);
 ---
 
-<BaseLayout>
+<ReactTranslatedCenteredLayout>
   <div class="">
     {
       location && (
@@ -63,4 +64,4 @@ if (!fetchError) {
     {errors && <ErrorMessage errors={errors} />}
   </div>
   <Toaster client:load />
-</BaseLayout>
+</ReactTranslatedCenteredLayout>
