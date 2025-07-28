@@ -53,8 +53,8 @@ export const ServicePicker = ({
     ),
     // bgColor: serviceStyles.filter((x) => x.tag === s.tag).map((y) => y.bgColor),
   }));
-  console.log("selected employee: ", selectedEmployee);
-  console.log("available services: ", availableServices);
+  // console.log("selected employee: ", selectedEmployee);
+  // console.log("available services: ", availableServices);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

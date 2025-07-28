@@ -63,8 +63,8 @@ Props) => {
         : true,
   }));
 
-  console.log("selected service: ", selectedService);
-  console.log("available employees: ", availableEmployees);
+  // console.log("selected service: ", selectedService);
+  // console.log("available employees: ", availableEmployees);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

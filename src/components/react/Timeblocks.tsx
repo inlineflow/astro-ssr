@@ -7,7 +7,7 @@ import { useSelectedService } from "./AppointmentServiceControlsContext";
 type TimeblocksProps = {
   openingTime: string;
   closingTime: string;
-  durationInMinutes: number;
+  // durationInMinutes: number;
 } & {
   className?: string;
   onSelect?: (dt: string) => void;
@@ -20,7 +20,7 @@ export const TimeBlocks = ({
   className,
   openingTime,
   closingTime,
-  durationInMinutes,
+  // durationInMinutes,
   onSelect,
   selected,
   id,

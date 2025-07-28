@@ -6,7 +6,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/ui/form";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { AppointmentCalendar } from "./AppointmentCalendar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +20,7 @@ import { CalendarDays, Clock } from "lucide-react";
 import { Separator } from "@/ui/separator";
 import { AppointmentServiceControls } from "./AppointmentServiceControls";
 import { SelectedServiceProvider } from "./AppointmentServiceControlsContext";
+import { useEffect } from "react";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
@@ -53,6 +54,17 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       serviceOpts: { employeeId: "", serviceId: "" },
     },
   });
+
+  // const watchedService = form.use("serviceOpts.serviceId");
+  const watchedService = useWatch({
+    control: form.control,
+    name: "serviceOpts.serviceId",
+  });
+  // console.log("watchedService: ", watchedService);
+
+  useEffect(() => {
+    form.setValue("timeOfDay", "", { shouldValidate: true, shouldDirty: true });
+  }, [watchedService, form.setValue]);
 
   // console.log("Fork state: ", Object.values(form.formState.errors));
 
@@ -190,13 +202,13 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                     <TimeBlocks
                       openingTime={location.openingTime}
                       closingTime={location.closingTime}
-                      durationInMinutes={
-                        location.services.find(
-                          (x) =>
-                            x.serviceId ===
-                            form.getValues("serviceOpts.serviceId")
-                        )?.durationInMinutes!
-                      }
+                      // durationInMinutes={
+                      //   location.services.find(
+                      //     (x) =>
+                      //       x.serviceId ===
+                      //       form.getValues("serviceOpts.serviceId")
+                      //   )?.durationInMinutes!
+                      // }
                       // durationInMinutes={location.services[0]?.durationInMinutes!}
                       onSelect={(dt) => field.onChange(dt)}
                       selected={field.value}
