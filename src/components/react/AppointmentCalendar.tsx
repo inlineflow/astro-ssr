@@ -3,6 +3,14 @@ import { Calendar } from "@/ui/calendar";
 import { Card } from "@/ui/card";
 import { DateTime } from "luxon";
 import type { DayPickerProps, OnSelectHandler } from "react-day-picker";
+import { enGB, ru } from "react-day-picker/locale";
+import { useTranslation } from "react-i18next";
+
+const locales = {
+  ru: ru,
+  en: enGB,
+  kg: ru,
+};
 
 type AppointmentCalendarProps = {
   className?: string;
@@ -20,7 +28,10 @@ export const AppointmentCalendar = ({
   onSelect = () => {},
   id,
   aridDescribedBy,
-}: AppointmentCalendarProps) => {
+}: // locale,
+AppointmentCalendarProps) => {
+  const locale = useTranslation().i18n.language as "ru" | "en" | "kg";
+
   return (
     <div>
       <input
@@ -48,6 +59,7 @@ export const AppointmentCalendar = ({
           captionLayout="dropdown"
           required
           disabled={disabled}
+          locale={locales[locale]}
         />
       </Card>
     </div>
