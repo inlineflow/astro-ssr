@@ -33,8 +33,9 @@ const FormSchema = z.object({
   timeOfDay: z
     .string({
       error: "Appointment time is required.",
+      // message: "123",
     })
-    .nonempty(),
+    .nonempty({ error: "Appointment time is required." }),
   serviceOpts: z.object(
     {
       employeeId: z.uuid({ error: "Employee is required." }),
