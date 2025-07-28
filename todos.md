@@ -34,3 +34,13 @@ Make your own component for selecting services/employees
 # Consider if using Suspense in the Form is a good idea
 
 # Make the language picker look good
+
+# Remove hidden inputs and adjust labels accordingly
+
+The standard way of integrating shadcn/ui DatePicker with react-hook-form via FormField and Controller is the correct and highly accessible approach. It leverages the built-in accessibility features of react-day-picker, shadcn/ui's components, and react-hook-form's robust form management, without needing redundant hidden inputs. Focus instead on ensuring you:
+
+Provide a clear FormLabel.
+
+Handle validation and display FormMessage appropriately.
+
+Ensure the button that triggers the date picker has an accessible label if its visual content isn't sufficient (e.g., using aria-label if it's just an icon).
