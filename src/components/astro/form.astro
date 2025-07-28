@@ -1,12 +1,21 @@
 ---
 import { AppointmentForm } from "../react/AppointmentForm";
 import type { Location } from "src/lib/schema";
+import { TranslationContext } from "src/components/react/TranslationWrapper";
+// import i18n from "src/lib/i18n";
 
 interface Props {
   validLocation: Location;
 }
 
 const { validLocation } = Astro.props;
+// await i18n.changeLanguage(Astro.currentLocale);
 ---
 
-{validLocation && <AppointmentForm location={validLocation} client:load />}
+{
+  validLocation && (
+    <TranslationContext lng={Astro.currentLocale!} client:load>
+      <AppointmentForm location={validLocation} client:load />
+    </TranslationContext>
+  )
+}

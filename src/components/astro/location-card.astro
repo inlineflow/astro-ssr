@@ -13,10 +13,14 @@ const open = DateTime.fromISO(location.openingTime);
 const close = DateTime.fromISO(location.closingTime);
 
 console.log("Services: ", location.services);
+console.log("Current locale: ", Astro.currentLocale);
 ---
 
 <Card className="text-center px-4 py-4">
-  <a href={`/location/${location.locationId}`} class="flex flex-col gap-4">
+  <a
+    href={`/${Astro.currentLocale}/location/${location.locationId}`}
+    class="flex flex-col gap-4"
+  >
     <CardHeader className="text-lg">{location.name}</CardHeader>
     <Separator orientation="horizontal" />
     {

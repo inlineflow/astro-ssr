@@ -1,13 +1,25 @@
 ---
+import { languages } from "src/lib/i18n";
+
 type Link = {
   text: string;
   path: string;
 };
+
+const currentLocale = Astro.currentLocale;
+const url = Astro.request.url;
+console.log("Url: ", url);
+const x = languages.map((l) => ({
+  lang: l,
+  nav: url.replace(Astro.currentLocale!, l),
+}));
+console.log("x: ", x);
+
 const links: Link[] = [
   { text: "Home", path: "/" },
   { text: "Booking", path: "/booking" },
   { text: "Establishments", path: "/establishment" },
-];
+].map((i) => ({ ...i, path: `/${currentLocale}${i.path}` }));
 ---
 
 <nav>
@@ -19,5 +31,14 @@ const links: Link[] = [
         </li>
       ))
     }
+    <ul>
+      {
+        x.map((y) => (
+          <li>
+            <a href={y.nav}>{y.lang}</a>
+          </li>
+        ))
+      }
+    </ul>
   </ul>
 </nav>

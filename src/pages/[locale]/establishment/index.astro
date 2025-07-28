@@ -5,6 +5,7 @@ import ErrorMessage from "components/astro/error-message.astro";
 import EstablishmentCard from "components/astro/establishment-card.astro";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 
+export const prerender = false;
 const { data: establishments, error } = await Astro.callAction(
   actions.establishment.getAllEstablishments,
   {}

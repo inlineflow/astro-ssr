@@ -22,21 +22,23 @@ import { AppointmentServiceControls } from "./AppointmentServiceControls";
 import { SelectedServiceProvider } from "./AppointmentServiceControlsContext";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { t as i18n } from "i18next";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
 const FormSchema = z.object({
   calendarDate: z
     .string({
-      error: "A date is required.",
+      error: "form_missing_date",
     })
     .nonempty(),
   timeOfDay: z
     .string({
-      error: "Appointment time is required.",
+      error: "form_missing_appointment_time",
+      // error: "Appointment time is required.",
       // message: "123",
     })
-    .nonempty({ error: "Appointment time is required." }),
+    .nonempty({ error: i18n("form_missing_appointment_time") }),
   serviceOpts: z.object(
     {
       employeeId: z.uuid({ error: "Employee is required." }),
@@ -58,6 +60,8 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
   });
 
   const { t } = useTranslation();
+
+  // console.log("Language on client: ", i18n.language);
 
   // const watchedService = form.use("serviceOpts.serviceId");
   const watchedService = useWatch({

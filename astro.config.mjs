@@ -13,6 +13,14 @@ export default defineConfig({
     plugins: [tailwindcss(), svgr()],
   },
   integrations: [react()],
+  i18n: {
+    locales: ['ru', 'kg', 'en'],
+    defaultLocale: "en",
+    routing: {
+      prefixDefaultLocale: true,
+    }
+  },
+  site: "https://example.com",
 });
 
 if (import.meta.env.DEV) {

@@ -1,3 +1,5 @@
 {
-    "form_submit": "Подтвердить."
+    "form_submit": "Подтвердить",
+    "form_missing_date": "Введите дату",
+    "form_missing_appointment_time": "Выберите время сеанса"
 }

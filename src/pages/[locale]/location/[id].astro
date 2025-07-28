@@ -1,15 +1,13 @@
 ---
 import { actions } from "astro:actions";
-// import { validateService } from "src/validations/service";
 import ErrorMessage from "src/components/astro/error-message.astro";
-import BaseLayout from "src/layouts/BaseLayout.astro";
 import Form from "components/astro/form.astro";
 import FormSkeleton from "src/components/astro/form-skeleton.astro";
 import { Toaster } from "components/react/shadcn/ui/sonner";
 import LocationDescription from "components/astro/location-description.astro";
 import LocationDescriptionSkeleton from "components/astro/location-description-skeleton.astro";
 import type { LocationLight } from "src/lib/schema";
-import ReactTranslatedCenteredLayout from "src/layouts/ReactTranslatedCenteredLayout.astro";
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
 
 export const prerender = false;
 const { id } = Astro.params;
@@ -45,7 +43,7 @@ if (!fetchError) {
 // console.log(validatedEstablishment);
 ---
 
-<ReactTranslatedCenteredLayout>
+<CenteredLayout>
   <div class="">
     {
       location && (
@@ -64,4 +62,4 @@ if (!fetchError) {
     {errors && <ErrorMessage errors={errors} />}
   </div>
   <Toaster client:load />
-</ReactTranslatedCenteredLayout>
+</CenteredLayout>

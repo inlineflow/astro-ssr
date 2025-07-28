@@ -1,3 +1,4 @@
 {
-    "form_submit": "Submit"
+    "form_submit": "Submit",
+    "form_missing_appointment_time": "Please select a timeslot"
 }

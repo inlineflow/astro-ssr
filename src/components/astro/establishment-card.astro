@@ -3,12 +3,13 @@ interface Props {
   establishment: Establishment;
 }
 import { Card } from "@/ui/card";
+// import { linkto } from "src/lib/routing.astro";
 import type { Establishment } from "src/lib/schema";
 import { conjugate } from "src/utils";
 const { establishment } = Astro.props;
 ---
 
-<a href={`/establishment/${establishment.id}`}>
+<a href={`establishment/${establishment.id}`}>
   <Card className="justify-center items-center px-6 gap-3">
     <p>{establishment.name}</p>
     {establishment.logo && <img src={establishment.logo} />}
