@@ -3,6 +3,7 @@ interface Props {
   services: Service[];
 }
 import { Card } from "@/ui/card";
+import i18n from "src/lib/i18n";
 import { commonContainerClasses, serviceStyles } from "src/lib/icons";
 import type { Service } from "src/lib/schema";
 
@@ -12,7 +13,7 @@ const iconServiceData = serviceStyles
   .map((i) => {
     const x = services.find((s) => s.tag === i.tag);
     if (!x) return;
-    return { ...i, name: x.name };
+    return { ...i, name: i18n.t(`services.${i.tag}`) };
   })
   .filter((d) => d !== undefined);
 ---

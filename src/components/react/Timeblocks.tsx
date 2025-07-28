@@ -3,6 +3,7 @@ import { Card } from "@/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 import { DateTime } from "luxon";
 import { useSelectedService } from "./AppointmentServiceControlsContext";
+import i18n from "src/lib/i18n";
 
 type TimeblocksProps = {
   openingTime: string;
@@ -32,7 +33,7 @@ export const TimeBlocks = ({
     return (
       // <Card className="items-center justify-center aspect-square">
       <Card className="items-center justify-center md:min-w-86 mb-5 aspect-square">
-        <p>Choose a service.</p>
+        <p>{i18n.t("form.pick_a_service")}</p>
       </Card>
     );
   }

@@ -1,5 +1,13 @@
 {
     "form_submit": "Подтвердить",
     "form_missing_date": "Введите дату",
-    "form_missing_appointment_time": "Выберите время сеанса"
+    "form_missing_appointment_time": "Выберите время сеанса",
+    "nav.home": "Главная",
+    "nav.booking": "Запись",
+    "nav.establishments": "Салоны",
+    "form.pick_an_employee": "Выберите мастера...",
+    "form.pick_a_service": "Выберите процедуру...",
+    "form.service_not_found": "Процедура не найдена",
+    "employee_not_found": "Мастер не найден",
+    "establishment.locations": ["филиал", "филиала", "филиалов"]
 }

@@ -34,3 +34,5 @@ Add fallback
 # Rework timeblocks to accept the current service and re-render to show available blocks
 
 # Expand Service type to show how long the procedure takes and show the cost
+
+# Localize calendar

@@ -4,6 +4,7 @@ import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
 import EstablishmentCard from "components/astro/establishment-card.astro";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
+import i18n from "src/lib/i18n";
 
 export const prerender = false;
 const { data: establishments, error } = await Astro.callAction(
@@ -19,7 +20,7 @@ console.log("establishments: ", JSON.stringify(establishments, null, 2));
     <Card
       className="w-full bg-pink-200 h-24 text-center justify-center text-xl mb-12"
     >
-      <p>Establishments</p>
+      <p>{i18n.t("establishments.title")}</p>
     </Card>
     {
       establishments && (

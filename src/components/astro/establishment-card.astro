@@ -3,6 +3,7 @@ interface Props {
   establishment: Establishment;
 }
 import { Card } from "@/ui/card";
+import i18n from "src/lib/i18n";
 // import { linkto } from "src/lib/routing.astro";
 import type { Establishment } from "src/lib/schema";
 import { conjugate } from "src/utils";
@@ -19,9 +20,16 @@ const { establishment } = Astro.props;
       {
         `${establishment.locations.length} ${conjugate(
           establishment.locations.length,
-          ["филиал", "филиала", "филиалов"]
+          i18n.t("establishment.locations", { returnObjects: true }) as string[]
+          // ["филиал", "филиала", "филиалов"]
         )}`
       }
+      <!-- {
+        `${establishment.locations.length} ${conjugate(
+          establishment.locations.length,
+          ["филиал", "филиала", "филиалов"]
+        )}`
+      } -->
     </p>
   </Card>
 </a>

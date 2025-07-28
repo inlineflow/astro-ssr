@@ -20,6 +20,7 @@ import { commonContainerClasses, serviceStyles } from "src/lib/icons";
 import { Avatar, AvatarImage } from "@/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import type { Service } from "src/lib/schema";
+import i18n from "src/lib/i18n";
 
 type Props = {
   employees: EmployeeView[];
@@ -75,15 +76,20 @@ Props) => {
           aria-expanded={open}
           className={cn("w-full justify-between", "")}
         >
-          {selectedEmployeeId ? currentEmployee?.name : "Выберите мастера..."}
+          {selectedEmployeeId
+            ? currentEmployee?.name
+            : i18n.t("form.pick_an_employee")}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="max-w-72 p-0 w-[var(--radix-popover-trigger-width)]">
         <Command>
-          <CommandInput placeholder="Выберите мастера" className="h-9 w-fit" />
+          <CommandInput
+            placeholder={i18n.t("form.pick_an_employee")}
+            className="h-9 w-fit"
+          />
           <CommandList>
-            <CommandEmpty>Мастер не найден.</CommandEmpty>
+            <CommandEmpty>{i18n.t("employee_not_found")}</CommandEmpty>
             <CommandGroup>
               {availableEmployees.map((employee) => (
                 <CommandItem

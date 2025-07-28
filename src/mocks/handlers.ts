@@ -88,7 +88,7 @@ const establishments: Establishment[] = [
     // closingTime: DateTime.now().set({ hour: 11, minute: 0, second: 0 }).toISO(),
     // intervalInMinutes: 30,
     id: crypto.randomUUID(),
-    locations: locations,
+    locations: [locations[1]] as Location[],
     description: "Лучший сервис в городе",
     // address: "Ленина 15, дом 2",
     name: 'Салон "Ноготочки"',

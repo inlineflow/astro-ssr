@@ -22,7 +22,8 @@ import { AppointmentServiceControls } from "./AppointmentServiceControls";
 import { SelectedServiceProvider } from "./AppointmentServiceControlsContext";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { t as i18n } from "i18next";
+import i18n from "src/lib/i18n";
+// import { t as t } from "i18next";
 
 const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
@@ -34,15 +35,13 @@ const FormSchema = z.object({
     .nonempty(),
   timeOfDay: z
     .string({
-      error: "form_missing_appointment_time",
-      // error: "Appointment time is required.",
-      // message: "123",
+      error: i18n.t("form_missing_appointment_time"),
     })
-    .nonempty({ error: i18n("form_missing_appointment_time") }),
+    .nonempty({ error: i18n.t("form_missing_appointment_time") }),
   serviceOpts: z.object(
     {
-      employeeId: z.uuid({ error: "Employee is required." }),
-      serviceId: z.uuid({ error: "Service is required." }),
+      employeeId: z.uuid({ error: i18n.t("form_missing_employee") }),
+      serviceId: z.uuid({ error: i18n.t("form_missing_service") }),
     },
     { error: "Service opts are required" }
   ),
@@ -97,10 +96,10 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
     const promise = actions.appointment.postAppointment(requestBody);
 
     toast.promise(promise, {
-      loading: "Loading...",
+      loading: i18n.t("loading.spinner"),
       success: () => (
         <div>
-          <p className="text-lg">Your appointment is at: </p>
+          <p className="text-lg">{i18n.t("appointment.successful.message")}</p>
           <div className="flex flex-row gap-3 min-h-2 h-4 items-center">
             <div className="flex space-x-1 flex-row items-center justify-center">
               <Clock size={16} />
@@ -153,7 +152,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
             name="serviceOpts"
             render={({ field }) => (
               <FormItem>
-                <FormLabel hidden>Service</FormLabel>
+                <FormLabel hidden>{i18n.t("service")}</FormLabel>
                 <FormControl>
                   <AppointmentServiceControls
                     employees={location.employees}
@@ -183,7 +182,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
               name="calendarDate"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel hidden>Calendar Date</FormLabel>
+                  <FormLabel hidden>{i18n.t("form.calendar_date")}</FormLabel>
                   <FormControl>
                     <AppointmentCalendar
                       onSelect={(d) => {
@@ -210,19 +209,11 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                     <TimeBlocks
                       openingTime={location.openingTime}
                       closingTime={location.closingTime}
-                      // durationInMinutes={
-                      //   location.services.find(
-                      //     (x) =>
-                      //       x.serviceId ===
-                      //       form.getValues("serviceOpts.serviceId")
-                      //   )?.durationInMinutes!
-                      // }
-                      // durationInMinutes={location.services[0]?.durationInMinutes!}
                       onSelect={(dt) => field.onChange(dt)}
                       selected={field.value}
                     />
                   </FormControl>
-                  <FormLabel hidden>Time of day of the appointment.</FormLabel>
+                  <FormLabel hidden>{i18n.t("form_timeOfDay_label")}</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}

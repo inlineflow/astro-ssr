@@ -1,8 +1,8 @@
 ---
-import { languages } from "src/lib/i18n";
+import i18n, { languages } from "src/lib/i18n";
 
 type Link = {
-  text: string;
+  label: string;
   path: string;
 };
 
@@ -16,10 +16,10 @@ const x = languages.map((l) => ({
 console.log("x: ", x);
 
 const links: Link[] = [
-  { text: "Home", path: "/" },
-  { text: "Booking", path: "/booking" },
-  { text: "Establishments", path: "/establishment" },
-].map((i) => ({ ...i, path: `/${currentLocale}${i.path}` }));
+  { tag: "nav.home", path: "/" },
+  { tag: "nav.booking", path: "/booking" },
+  { tag: "nav.establishments", path: "/establishment" },
+].map((i) => ({ label: i18n.t(i.tag), path: `/${currentLocale}${i.path}` }));
 ---
 
 <nav>
@@ -27,7 +27,7 @@ const links: Link[] = [
     {
       links.map((l) => (
         <li>
-          <a href={l.path}>{l.text}</a>
+          <a href={l.path}>{l.label}</a>
         </li>
       ))
     }

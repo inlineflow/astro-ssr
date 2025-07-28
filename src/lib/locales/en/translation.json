@@ -1,4 +1,23 @@
 {
     "form_submit": "Submit",
-    "form_missing_appointment_time": "Please select a timeslot"
+    "form_missing_appointment_time": "Please select a timeslot",
+    "form_missing_employee": "Employee is required",
+    "form_missing_service": "Service is required",
+    "loading.spinner": "Loading...",
+    "appointment.successful.message": "Your appointment is at: ",
+    "service": "Service",
+    "form.calendar_date": "Calendar Date",
+    "form_timeOfDay_label": "Time of day of the appointment",
+    "form.pick_a_service": "Choose a service",
+    "form.pick_an_employee": "Choose an employee",
+    "employee_not_found": "Employee not found",
+    "service_not_found": "Service not found",
+    "nav.home": "Home",
+    "nav.booking": "Booking",
+    "nav.establishments": "Establishments",
+    "establishment.locations": ["location", "locations"],
+    "establishments.title": "Establishments",
+    "services.hairdressing": "Hairdressing",
+    "services.nail-polish": "Nail Polish",
+    "services.pedicure": "Pedicure"
 }

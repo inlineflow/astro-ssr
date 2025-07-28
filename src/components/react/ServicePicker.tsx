@@ -17,6 +17,7 @@ import {
   useSelectedService,
 } from "./AppointmentServiceControlsContext";
 import { serviceStyles } from "src/lib/icons";
+import i18n from "src/lib/i18n";
 
 type Props = {
   services: Service[];
@@ -65,15 +66,20 @@ export const ServicePicker = ({
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {selectedServiceId ? currentService?.name : "Выберите процедуру..."}
+          {selectedServiceId
+            ? currentService?.name
+            : i18n.t("form.pick_a_service")}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0">
         <Command>
-          <CommandInput placeholder="Выберите процедуру..." className="h-9" />
+          <CommandInput
+            placeholder={i18n.t("form.pick_a_service")}
+            className="h-9"
+          />
           <CommandList>
-            <CommandEmpty>Процедура не найдена.</CommandEmpty>
+            <CommandEmpty>{i18n.t("service_not_found")}</CommandEmpty>
             <CommandGroup>
               {availableServices.map((service) => (
                 <CommandItem
