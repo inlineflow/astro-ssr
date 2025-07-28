@@ -13,12 +13,6 @@ Only available services for the selected employee and vice verca should be selec
 
 Make your own component for selecting services/employees
 
-### Add service icons with fallback to employee picker
-
-Add fallback
-
-### Add i18n
-
 ### Add admin page
 
 ### Restyle pickers so they look good
@@ -29,7 +23,7 @@ Add fallback
 
 ### Consider moving the employee provider higher into the form
 
-### Re-factor the form to load the skeleton instantly and load up employees and services after using TanStack Query and Suspense (research if TanStack Query is actually encessary)
+### Re-factor the form to load the skeleton instantly and load up employees and services after using TanStack Query and Suspense (research if TanStack Query is actually necessary)
 
 # Rework timeblocks to accept the current service and re-render to show available blocks
 
