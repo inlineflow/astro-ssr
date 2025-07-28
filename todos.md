@@ -32,3 +32,5 @@ Add fallback
 ### Re-factor the form to load the skeleton instantly and load up employees and services after using TanStack Query and Suspense (research if TanStack Query is actually encessary)
 
 # Rework timeblocks to accept the current service and re-render to show available blocks
+
+# Expand Service type to show how long the procedure takes and show the cost
