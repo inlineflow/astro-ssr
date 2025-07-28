@@ -30,3 +30,7 @@ Make your own component for selecting services/employees
 # Expand Service type to show how long the procedure takes and show the cost
 
 # Localize calendar
+
+# Make the establishments view on larger screens a grid of items
+
+# Add search to establishments view (should call the backend)
