@@ -1,6 +1,7 @@
 {
     "form_submit": "Submit",
     "form_missing_appointment_time": "Please select a timeslot",
+    "form_missing_date": "Pick a date",
     "form_missing_employee": "Employee is required",
     "form_missing_service": "Service is required",
     "loading.spinner": "Loading...",
@@ -11,8 +12,8 @@
     "form.pick_a_service": "Choose a service",
     "form.pick_an_employee": "Choose an employee",
     "form.has_errors": "Fill in the required fields",
-    "employee_not_found": "Employee not found",
-    "service_not_found": "Service not found",
+    "form.service_not_found": "Service not found",
+    "form.employee_not_found": "Employee not found",
     "nav.home": "Home",
     "nav.booking": "Booking",
     "nav.establishments": "Establishments",

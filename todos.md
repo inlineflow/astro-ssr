@@ -28,3 +28,7 @@ Make your own component for selecting services/employees
 # Make the establishments view on larger screens a grid of items
 
 # Add search to establishments view (should call the backend)
+
+# Consider if using Suspense in the Form is a good idea
+
+# Make the language picker look good

@@ -79,7 +79,7 @@ export const ServicePicker = ({
             className="h-9"
           />
           <CommandList>
-            <CommandEmpty>{i18n.t("service_not_found")}</CommandEmpty>
+            <CommandEmpty>{i18n.t("form.service_not_found")}</CommandEmpty>
             <CommandGroup>
               {availableServices.map((service) => (
                 <CommandItem

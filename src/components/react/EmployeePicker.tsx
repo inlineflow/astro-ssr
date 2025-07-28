@@ -89,7 +89,7 @@ Props) => {
             className="h-9 w-fit"
           />
           <CommandList>
-            <CommandEmpty>{i18n.t("employee_not_found")}</CommandEmpty>
+            <CommandEmpty>{i18n.t("form.employee_not_found")}</CommandEmpty>
             <CommandGroup>
               {availableEmployees.map((employee) => (
                 <CommandItem
