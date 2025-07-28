@@ -10,6 +10,7 @@
     "form_timeOfDay_label": "Time of day of the appointment",
     "form.pick_a_service": "Choose a service",
     "form.pick_an_employee": "Choose an employee",
+    "form.has_errors": "Fill in the required fields",
     "employee_not_found": "Employee not found",
     "service_not_found": "Service not found",
     "nav.home": "Home",

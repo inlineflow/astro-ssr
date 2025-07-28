@@ -222,7 +222,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
           <div>
             <p className="text-destructive">
               {Object.values(form.formState.errors).length > 0
-                ? "Fill in the required fields."
+                ? i18n.t("form.has_errors")
                 : ""}
             </p>
           </div>
