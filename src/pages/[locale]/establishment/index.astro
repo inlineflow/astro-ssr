@@ -1,5 +1,6 @@
 ---
 import { Card } from "@/ui/card";
+import { Input } from "@/ui/input";
 import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
 import EstablishmentCard from "components/astro/establishment-card.astro";
@@ -12,25 +13,34 @@ const { data: establishments, error } = await Astro.callAction(
   {}
 );
 
-console.log("establishments: ", JSON.stringify(establishments, null, 2));
+// console.log("establishments: ", JSON.stringify(establishments, null, 2));
 ---
 
 <CenteredLayout>
-  <div class="w-64">
-    <Card
-      className="w-full bg-pink-200 h-24 text-center justify-center text-xl mb-12"
-    >
-      <p>{i18n.t("establishments.title")}</p>
-    </Card>
-    {
-      establishments && (
-        <ul class="flex flex-col gap-6">
-          {establishments.map((est) => (
-            <EstablishmentCard establishment={est} />
-          ))}
-        </ul>
-      )
-    }
+  <div class="w-64 md:w-208 lg:w-278">
+    <div class="flex flex-col gap-5">
+      <Card
+        className="w-full bg-pink-200 h-24 text-center justify-center text-xl mb-12"
+      >
+        <p>{i18n.t("establishments.title")}</p>
+      </Card>
+      <Input />
+      <Card className="px-3 py-3 bg-pink-50">
+        {
+          establishments && (
+            <ul class="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-3 lg:grid-cols-5">
+              {Array.from({ length: 5 }, () => [...establishments])
+                .flat()
+                .map((est) => (
+                  <li>
+                    <EstablishmentCard establishment={est} />
+                  </li>
+                ))}
+            </ul>
+          )
+        }
+      </Card>
+    </div>
     {error && <ErrorMessage errors={[error]} />}
   </div>
 </CenteredLayout>
