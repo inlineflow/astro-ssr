@@ -44,3 +44,13 @@ Provide a clear FormLabel.
 Handle validation and display FormMessage appropriately.
 
 Ensure the button that triggers the date picker has an accessible label if its visual content isn't sufficient (e.g., using aria-label if it's just an icon).
+
+# Refactor MSW mocks, load testing data from JSON
+
+# Rework top-nav: replace Establishment with Locations (named like Search or Services) and put the establishment nav from each owned location
+
+Don't make establishment the first thing the user sees, it should be a bit more hidden.
+
+The user should be able to search by service in an area close to them, if they allow us to get geodata.
+
+Move search to location/index.astro

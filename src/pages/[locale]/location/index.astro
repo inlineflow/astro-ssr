@@ -1,0 +1,44 @@
+---
+import { Card } from "@/ui/card";
+import { Input } from "@/ui/input";
+import { actions } from "astro:actions";
+import ErrorMessage from "components/astro/error-message.astro";
+import LocationCard from "components/astro/location-card.astro";
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
+import i18n from "src/lib/i18n";
+
+export const prerender = false;
+const { data: locations, error } = await Astro.callAction(
+  actions.location.getAllLocations,
+  {}
+);
+
+// console.log("establishments: ", JSON.stringify(establishments, null, 2));
+---
+
+<CenteredLayout>
+  <div class="w-64 md:w-208 lg:w-278">
+    <div class="flex flex-col gap-5">
+      <Card
+        className="w-full bg-pink-200 h-24 text-center justify-center text-xl mb-12"
+      >
+        <p>{i18n.t("establishments.title")}</p>
+      </Card>
+      <Input />
+      <Card className="px-3 py-3 bg-pink-50">
+        {
+          locations && (
+            <ul class="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-3 lg:grid-cols-5">
+              {locations.map((loc) => (
+                <li>
+                  <LocationCard location={loc} />
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </Card>
+    </div>
+    {error && <ErrorMessage errors={[error]} />}
+  </div>
+</CenteredLayout>

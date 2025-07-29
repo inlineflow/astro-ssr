@@ -24,10 +24,12 @@ console.log("Current locale: ", Astro.currentLocale);
     <CardHeader className="text-lg">{location.name}</CardHeader>
     <Separator orientation="horizontal" />
     {
-      location.photo ? (
-        <img src={location.photo} />
-      ) : (
+      (
+        // location.photo ? (
+        //   <img src={location.photo} />
+        // ) : (
         <div class="bg-pink-200 w-full h-24 rounded-xl" />
+        // )
       )
     }
 

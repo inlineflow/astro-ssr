@@ -47,11 +47,20 @@ export type LocationLight = z.infer<typeof lightLocationSchema>;
 export const establishmentSchema = z.object({
   id: z.string().uuid(),
   description: z.string().optional(),
-  locations: z.array(lightLocationSchema).min(1),
+  locations: z.array(locationSchema).min(1),
   name: z.string(),
   logo: z.string().url().optional(),
 });
 export type Establishment = z.infer<typeof establishmentSchema>;
+
+// export const establishmentSchema = z.object({
+//   id: z.string().uuid(),
+//   description: z.string().optional(),
+//   locations: z.array(lightLocationSchema).min(1),
+//   name: z.string(),
+//   logo: z.string().url().optional(),
+// });
+// export type Establishment = z.infer<typeof establishmentSchema>;
 
 // export const establishmentLightSchema = establishmentSchema
 //   .omit({
