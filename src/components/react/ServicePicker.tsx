@@ -16,7 +16,7 @@ import {
   useSelectedEmployee,
   useSelectedService,
 } from "./AppointmentServiceControlsContext";
-import { serviceStyles } from "src/lib/icons";
+import { serviceStyles } from "src/lib/service";
 import i18n from "src/lib/i18n";
 
 type Props = {

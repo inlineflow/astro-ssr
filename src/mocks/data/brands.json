@@ -7,8 +7,8 @@
     "locations": [
       {
         "locationId": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
-        "openingTime": "2025-07-29T09:00:00Z",
-        "closingTime": "2025-07-29T19:00:00Z",
+        "openingTime": "2025-07-29T15:00:00+06:00",
+        "closingTime": "2025-07-29T23:00:00+06:00",
         "name": "Шарм Центр",
         "address": "ул. Ленина, 123, Аньково",
         "brandId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
@@ -34,7 +34,7 @@
               "2a3b4c5d-6e7f-8901-2345-67890abcdef1"
             ],
             "nonWorkingDays": [
-              "2025-08-01T00:00:00Z"
+              "2025-08-01T06:00:00+06:00"
             ]
           }
         ],
@@ -43,13 +43,13 @@
             "name": "Стрижка и укладка",
             "serviceId": "1a2b3c4d-5e6f-7890-1234-567890abcdef",
             "durationInMinutes": 60,
-            "tag": "Hair"
+            "tag": "hairdressing"
           },
           {
             "name": "Маникюр",
             "serviceId": "2a3b4c5d-6e7f-8901-2345-67890abcdef1",
             "durationInMinutes": 45,
-            "tag": "Nails"
+            "tag": "nail-polish"
           }
         ],
         "photo": "https://example.com/sharm_center.jpg"
@@ -64,8 +64,8 @@
     "locations": [
       {
         "locationId": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
-        "openingTime": "2025-07-29T10:00:00Z",
-        "closingTime": "2025-07-29T20:00:00Z",
+        "openingTime": "2025-07-29T16:00:00+06:00",
+        "closingTime": "2025-07-29T02:00:00+06:00",
         "name": "Ажур на Высоте",
         "address": "пр. Гагарина, 456, Аньково",
         "brandId": "b2c3d4e5-f6a7-8901-2345-67890abcdef1",
@@ -91,7 +91,7 @@
               "4c5d6e7f-8a9b-0123-4567-890abcdef123"
             ],
             "nonWorkingDays": [
-              "2025-08-05T00:00:00Z"
+              "2025-08-05T06:00:00+06:00"
             ]
           }
         ],
@@ -100,13 +100,13 @@
             "name": "Гель-маникюр",
             "serviceId": "3b4c5d6e-7f8a-9012-3456-7890abcdef12",
             "durationInMinutes": 60,
-            "tag": "Nails"
+            "tag": "nail-polish"
           },
           {
             "name": "Педикюр",
             "serviceId": "4c5d6e7f-8a9b-0123-4567-890abcdef123",
             "durationInMinutes": 75,
-            "tag": "Nails"
+            "tag": "nail-polish"
           }
         ],
         "photo": "https://example.com/azhur_vysota.jpg"
@@ -121,8 +121,8 @@
     "locations": [
       {
         "locationId": "d7c6b5a4-f3e2-1098-7654-3210fedcba98",
-        "openingTime": "2025-07-29T08:30:00Z",
-        "closingTime": "2025-07-29T18:30:00Z",
+        "openingTime": "2025-07-29T14:30:00+06:00",
+        "closingTime": "2025-07-29T00:30:00+06:00",
         "name": "Спа в Центре Города",
         "address": "ул. Мира, 789, Аньково",
         "brandId": "c3d4e5f6-a7b8-9012-3456-7890abcdef23",
@@ -145,13 +145,13 @@
             "name": "Глубокая чистка лица",
             "serviceId": "5d6e7f8a-9b0c-1234-5678-90abcdef1234",
             "durationInMinutes": 90,
-            "tag": "Skincare"
+            "tag": "skincare"
           },
           {
             "name": "Микродермабразия",
             "serviceId": "6e7f8a9b-0c1d-2345-6789-0abcdef12345",
             "durationInMinutes": 60,
-            "tag": "Skincare"
+            "tag": "skincare"
           }
         ],
         "photo": "https://example.com/spa_gorod.jpg"
@@ -166,8 +166,8 @@
     "locations": [
       {
         "locationId": "c6b5a4f3-e2d1-0987-6543-210fedcba987",
-        "openingTime": "2025-07-29T09:30:00Z",
-        "closingTime": "2025-07-29T19:30:00Z",
+        "openingTime": "2025-07-29T15:30:00+06:00",
+        "closingTime": "2025-07-29T01:30:00+06:00",
         "name": "Центр Ресниц и Бровей",
         "address": "ул. Пушкина, 101, Аньково",
         "brandId": "d4e5f6a7-b8c9-0123-4567-890abcdef345",
@@ -193,7 +193,7 @@
               "8a9b0c1d-2e3f-4567-8901-abcdef1234567"
             ],
             "nonWorkingDays": [
-              "2025-08-02T00:00:00Z"
+              "2025-08-02T06:00:00+06:00"
             ]
           }
         ],
@@ -202,13 +202,13 @@
             "name": "Наращивание ресниц",
             "serviceId": "7f8a9b0c-1d2e-3456-7890-abcdef123456",
             "durationInMinutes": 120,
-            "tag": "Eye Services"
+            "tag": "eyelash-extensions"
           },
           {
             "name": "Ламинирование бровей",
             "serviceId": "8a9b0c1d-2e3f-4567-8901-abcdef1234567",
             "durationInMinutes": 60,
-            "tag": "Eye Services"
+            "tag": "eyelash-extensions"
           }
         ],
         "photo": "https://example.com/lash_brow_center.jpg"
@@ -223,8 +223,8 @@
     "locations": [
       {
         "locationId": "b5a4f3e2-d1c0-9876-5432-10fedcba9876",
-        "openingTime": "2025-07-29T08:00:00Z",
-        "closingTime": "2025-07-29T18:00:00Z",
+        "openingTime": "2025-07-29T14:00:00+06:00",
+        "closingTime": "2025-07-29T00:00:00+06:00",
         "name": "Мужской Кабинет",
         "address": "ул. Горького, 222, Аньково",
         "brandId": "e5f6a7b8-c9d0-1234-5678-90abcdef4567",
@@ -247,13 +247,13 @@
             "name": "Мужская стрижка",
             "serviceId": "9b0c1d2e-3f4a-5678-9012-abcdef12345678",
             "durationInMinutes": 45,
-            "tag": "Hair"
+            "tag": "hairdressing"
           },
           {
             "name": "Бритье горячим полотенцем",
             "serviceId": "0c1d2e3f-4a5b-6789-0123-bcdef123456789",
             "durationInMinutes": 30,
-            "tag": "Shaving"
+            "tag": "beard-shave"
           }
         ],
         "photo": "https://example.com/muzhskoy_kabinet.jpg"
@@ -268,8 +268,8 @@
     "locations": [
       {
         "locationId": "a4f3e2d1-c0b9-8765-4321-0fedcba98765",
-        "openingTime": "2025-07-29T10:00:00Z",
-        "closingTime": "2025-07-29T21:00:00Z",
+        "openingTime": "2025-07-29T16:00:00+06:00",
+        "closingTime": "2025-07-30T03:00:00+06:00",
         "name": "Убежище Релакса",
         "address": "ул. Лермонтова, 333, Аньково",
         "brandId": "f6a7b8c9-d0e1-2345-6789-0abcdef56789",
@@ -285,7 +285,7 @@
               "2e3f4a5b-6c7d-8901-2345-def12345678901"
             ],
             "nonWorkingDays": [
-              "2025-08-03T00:00:00Z"
+              "2025-08-03T06:00:00+06:00"
             ]
           }
         ],
@@ -294,13 +294,13 @@
             "name": "Шведский массаж",
             "serviceId": "1d2e3f4a-5b6c-7890-1234-cdef1234567890",
             "durationInMinutes": 60,
-            "tag": "Massage"
+            "tag": "massage"
           },
           {
             "name": "Скраб для тела",
             "serviceId": "2e3f4a5b-6c7d-8901-2345-def12345678901",
             "durationInMinutes": 45,
-            "tag": "Body Treatments"
+            "tag": "spa-treatment"
           }
         ],
         "photo": "https://example.com/ubeshishche_relaksa.jpg"
@@ -315,8 +315,8 @@
     "locations": [
       {
         "locationId": "f3e2d1c0-b9a8-7654-3210-fedcba987654",
-        "openingTime": "2025-07-29T09:00:00Z",
-        "closingTime": "2025-07-29T19:00:00Z",
+        "openingTime": "2025-07-29T15:00:00+06:00",
+        "closingTime": "2025-07-29T01:00:00+06:00",
         "name": "Наследие Красоты Центр",
         "address": "ул. Чехова, 444, Аньково",
         "brandId": "a7b8c9d0-e1f2-3456-7890-1abcdef67890",
@@ -343,7 +343,7 @@
               "3f4a5b6c-7d8e-9012-3456-ef123456789012"
             ],
             "nonWorkingDays": [
-              "2025-08-04T00:00:00Z"
+              "2025-08-04T06:00:00+06:00"
             ]
           }
         ],
@@ -352,13 +352,13 @@
             "name": "Окрашивание и мелирование",
             "serviceId": "3f4a5b6c-7d8e-9012-3456-ef123456789012",
             "durationInMinutes": 180,
-            "tag": "Hair"
+            "tag": "hairdressing"
           },
           {
             "name": "Укладка феном",
             "serviceId": "4a5b6c7d-8e9f-0123-4567-f1234567890123",
             "durationInMinutes": 45,
-            "tag": "Hair"
+            "tag": "hairdressing"
           }
         ],
         "photo": "https://example.com/nasledie_krasoty_center.jpg"
@@ -373,8 +373,8 @@
     "locations": [
       {
         "locationId": "e2d1c0b9-a8f7-6543-2109-8765fedcba98",
-        "openingTime": "2025-07-29T10:00:00Z",
-        "closingTime": "2025-07-29T18:00:00Z",
+        "openingTime": "2025-07-29T16:00:00+06:00",
+        "closingTime": "2025-07-30T00:00:00+06:00",
         "name": "Центр Депиляции",
         "address": "ул. Толстого, 555, Аньково",
         "brandId": "b8c9d0e1-f2a3-4567-8901-2abcdef78901",
@@ -397,13 +397,13 @@
             "name": "Восковая депиляция ног",
             "serviceId": "5b6c7d8e-9f0a-1234-5678-1234567890123",
             "durationInMinutes": 60,
-            "tag": "Waxing"
+            "tag": "waxing"
           },
           {
             "name": "Восковая депиляция бровей",
             "serviceId": "6c7d8e9f-0a1b-2345-6789-2345678901234",
             "durationInMinutes": 15,
-            "tag": "Waxing"
+            "tag": "waxing"
           }
         ],
         "photo": "https://example.com/waxing_center.jpg"
@@ -418,8 +418,8 @@
     "locations": [
       {
         "locationId": "d1c0b9a8-f7e6-5432-1098-765fedcba987",
-        "openingTime": "2025-07-29T11:00:00Z",
-        "closingTime": "2025-07-29T20:00:00Z",
+        "openingTime": "2025-07-29T17:00:00+06:00",
+        "closingTime": "2025-07-30T02:00:00+06:00",
         "name": "Оздоровительный Отдых",
         "address": "ул. Достоевского, 666, Аньково",
         "brandId": "c9d0e1f2-a3b4-5678-9012-3abcdef89012",
@@ -442,13 +442,13 @@
             "name": "Глубокий массаж тканей",
             "serviceId": "7d8e9f0a-1b2c-3456-7890-3456789012345",
             "durationInMinutes": 75,
-            "tag": "Massage"
+            "tag": "nassage"
           },
           {
             "name": "Массаж горячими камнями",
             "serviceId": "8e9f0a1b-2c3d-4567-8901-4567890123456",
             "durationInMinutes": 90,
-            "tag": "Massage"
+            "tag": "nassage"
           }
         ],
         "photo": "https://example.com/ozdorovitelny_otdyh.jpg"
@@ -463,8 +463,8 @@
     "locations": [
       {
         "locationId": "c0b9a8f7-e6d5-4321-0987-654fedcba987",
-        "openingTime": "2025-07-29T09:00:00Z",
-        "closingTime": "2025-07-29T20:00:00Z",
+        "openingTime": "2025-07-29T15:00:00+06:00",
+        "closingTime": "2025-07-30T02:00:00+06:00",
         "name": "Бьюти Перекресток",
         "address": "ул. Гоголя, 777, Аньково",
         "brandId": "d0e1f2a3-b4c5-6789-0123-4abcdef90123",
@@ -491,7 +491,7 @@
               "0a1b2c3d-4e5f-6789-0123-6789012345678"
             ],
             "nonWorkingDays": [
-              "2025-08-06T00:00:00Z"
+              "2025-08-06T06:00:00+06:00"
             ]
           }
         ],
@@ -500,13 +500,13 @@
             "name": "Пакет «Уход за лицом и массаж»",
             "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
             "durationInMinutes": 120,
-            "tag": "Combination"
+            "tag": "bundle"
           },
           {
             "name": "Полное преображение",
             "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
             "durationInMinutes": 150,
-            "tag": "Makeup"
+            "tag": "makeup"
           }
         ],
         "photo": "https://example.com/beauty_perekrestok.jpg"
