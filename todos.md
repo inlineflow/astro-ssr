@@ -27,9 +27,9 @@ Make your own component for selecting services/employees
 
 # Add localization to KG
 
-# Make the establishments view on larger screens a grid of items
+# Make the brands view on larger screens a grid of items
 
-# Add search to establishments view (should call the backend)
+# Add search to brands view (should call the backend)
 
 # Consider if using Suspense in the Form is a good idea
 
@@ -47,9 +47,9 @@ Ensure the button that triggers the date picker has an accessible label if its v
 
 # Refactor MSW mocks, load testing data from JSON
 
-# Rework top-nav: replace Establishment with Locations (named like Search or Services) and put the establishment nav from each owned location
+# Rework top-nav: replace brand with Locations (named like Search or Services) and put the brand nav from each owned location
 
-Don't make establishment the first thing the user sees, it should be a bit more hidden.
+Don't make brand the first thing the user sees, it should be a bit more hidden.
 
 The user should be able to search by service in an area close to them, if they allow us to get geodata.
 

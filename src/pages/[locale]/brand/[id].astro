@@ -11,33 +11,33 @@ if (!id) {
   return Astro.redirect(400);
 }
 
-const { data: establishment, error: _error } = await Astro.callAction(
-  actions.establishment.getBrand,
+const { data: brand, error: _error } = await Astro.callAction(
+  actions.brand.getBrand,
   { id: id }
 );
 
 if (_error) {
-  console.log("Error while fetching establishment: ", _error);
+  console.log("Error while fetching brand: ", _error);
   if (_error) {
-    return Astro.redirect("/establishment");
+    return Astro.redirect("/brand");
     // return new Response("", { status: _error.status });
   }
 }
 
-const allServices = new Set(establishment.locations.flatMap((l) => l.services));
+const allServices = new Set(brand.locations.flatMap((l) => l.services));
 ---
 
 <CenteredLayout>
   <div class="flex flex-col space-y-2.5">
     <p class="text-center text-2xl">
-      {establishment?.name}
+      {brand?.name}
     </p>
     <p>
-      {establishment?.description}
+      {brand?.description}
     </p>
     {(<ServiceIconsDescription services={[...allServices]} />)}
     <p>
-      {establishment?.locations.map((loc) => <LocationCard location={loc} />)}
+      {brand?.locations.map((loc) => <LocationCard location={loc} />)}
     </p>
   </div>
 </CenteredLayout>

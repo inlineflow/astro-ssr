@@ -27,13 +27,13 @@ const { brand, className } = Astro.props;
       {
         `${brand.locations.length} ${conjugate(
           brand.locations.length,
-          i18n.t("establishment.locations", { returnObjects: true }) as string[]
+          i18n.t("brand.locations", { returnObjects: true }) as string[]
           // ["филиал", "филиала", "филиалов"]
         )}`
       }
       <!-- {
-        `${establishment.locations.length} ${conjugate(
-          establishment.locations.length,
+        `${brand.locations.length} ${conjugate(
+          brand.locations.length,
           ["филиал", "филиала", "филиалов"]
         )}`
       } -->

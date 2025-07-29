@@ -13,7 +13,7 @@ const { data: locations, error } = await Astro.callAction(
   {}
 );
 
-// console.log("establishments: ", JSON.stringify(establishments, null, 2));
+// console.log("brands: ", JSON.stringify(brands, null, 2));
 ---
 
 <CenteredLayout>
@@ -22,7 +22,7 @@ const { data: locations, error } = await Astro.callAction(
       <Card
         className="w-full bg-pink-200 h-24 text-center justify-center text-xl mb-12"
       >
-        <p>{i18n.t("establishments.title")}</p>
+        <p>{i18n.t("brands.title")}</p>
       </Card>
       <Input />
       <Card className="px-3 py-3 bg-pink-50">

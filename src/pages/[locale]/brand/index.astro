@@ -3,17 +3,17 @@ import { Card } from "@/ui/card";
 import { Input } from "@/ui/input";
 import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
-import EstablishmentCard from "components/astro/establishment-card.astro";
+import BrandCard from "components/astro/brand-card.astro";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import i18n from "src/lib/i18n";
 
 export const prerender = false;
-const { data: establishments, error } = await Astro.callAction(
-  actions.establishment.getAllBrands,
+const { data: brands, error } = await Astro.callAction(
+  actions.brand.getAllBrands,
   {}
 );
 
-// console.log("establishments: ", JSON.stringify(establishments, null, 2));
+// console.log("brands: ", JSON.stringify(brands, null, 2));
 ---
 
 <CenteredLayout>
@@ -22,18 +22,18 @@ const { data: establishments, error } = await Astro.callAction(
       <Card
         className="w-full bg-pink-200 h-24 text-center justify-center text-xl mb-12"
       >
-        <p>{i18n.t("establishments.title")}</p>
+        <p>{i18n.t("brands.title")}</p>
       </Card>
       <Input />
       <Card className="px-3 py-3 bg-pink-50">
         {
-          establishments && (
+          brands && (
             <ul class="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-3 lg:grid-cols-5">
-              {Array.from({ length: 5 }, () => [...establishments])
+              {Array.from({ length: 5 }, () => [...brands])
                 .flat()
                 .map((est) => (
                   <li>
-                    <EstablishmentCard establishment={est} />
+                    <BrandCard brand={est} />
                   </li>
                 ))}
             </ul>

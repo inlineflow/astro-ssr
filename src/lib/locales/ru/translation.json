@@ -17,8 +17,8 @@
     "nav.home": "Главная",
     "nav.booking": "Запись",
     "nav.locations": "Салоны",
-    "establishment.locations": ["филиал", "филиала", "филиалов"],
-    "establishments.title": "Салоны",
+    "brand.locations": ["филиал", "филиала", "филиалов"],
+    "brands.title": "Салоны",
     "services.hairdressing": "Стрижка",
     "services.nail-polish": "Маникюр",
     "services.pedicure": "Педикюр"

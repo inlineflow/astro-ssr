@@ -31,7 +31,7 @@ export const locationSchema = z.object({
   description: z.string().optional(),
   name: z.string(),
   address: z.string(),
-  establishmentId: z.string().uuid(),
+  brandId: z.string().uuid(),
   employees: z.array(employeeSchema),
   services: z.array(serviceSchema),
   photo: z.string().url().optional(),
@@ -53,26 +53,26 @@ export const brandSchema = z.object({
 });
 export type Brand = z.infer<typeof brandSchema>;
 
-// export const establishmentSchema = z.object({
+// export const brandSchema = z.object({
 //   id: z.string().uuid(),
 //   description: z.string().optional(),
 //   locations: z.array(lightLocationSchema).min(1),
 //   name: z.string(),
 //   logo: z.string().url().optional(),
 // });
-// export type Establishment = z.infer<typeof establishmentSchema>;
+// export type brand = z.infer<typeof brandSchema>;
 
-// export const establishmentLightSchema = establishmentSchema
+// export const brandLightSchema = brandSchema
 //   .omit({
 //     locations: true,
 //   })
 //   .extend({
 //     locations: lightLocationSchema,
 //   });
-// export type EstablishmentLight = z.infer<typeof establishmentLightSchema>;
+// export type brandLight = z.infer<typeof brandLightSchema>;
 
 export const AppointmentSchema = z.object({
-  establishmentId: z.string().uuid(),
+  brandId: z.string().uuid(),
   serviceId: z.string().uuid(),
   employeeId: z.string().uuid(),
   userId: z.string().uuid(),
@@ -82,7 +82,7 @@ export type Appointment = z.infer<typeof AppointmentSchema>;
 export type AppointmentPostRequest = Omit<Appointment, "">;
 
 // export const AppointmentPostRequestSchema = z.object({
-//   establishmentId: z.string().uuid(),
+//   brandId: z.string().uuid(),
 //   serviceId: z.string().uuid(),
 //   employeeId: z.string().uuid(),
 //   userId: z.string().uuid(),

@@ -90,7 +90,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
       serviceId: data.serviceOpts.serviceId,
       userId: crypto.randomUUID(),
       employeeId: data.serviceOpts.employeeId,
-      establishmentId: location.establishmentId,
+      brandId: location.brandId,
     };
     const promise = actions.appointment.postAppointment(requestBody);
 

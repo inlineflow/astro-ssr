@@ -33,7 +33,7 @@ const services: Service[] = [
   },
 ];
 const locationId = crypto.randomUUID();
-export const establishmentId = crypto.randomUUID();
+export const brandId = crypto.randomUUID();
 const employees = [
   {
     name: "Виктор",
@@ -60,7 +60,7 @@ const location: Location = {
   services: services.filter((s) => s.name !== "Педикюр"),
   employees: employees,
   address: "Советская 91, 1",
-  establishmentId: establishmentId,
+  brandId: brandId,
   description:
     "Откройте для себя оазис спокойствия и возрождения в нашем SPA. Позвольте себе погрузиться в мир гармонии и блаженства, где каждый ритуал направлен на восстановление вашего тела и души. Наши опытные мастера и широкий спектр процедур – от расслабляющих массажей до омолаживающих уходов за кожей – подарят вам незабываемые ощущения и полное обновление. Забудьте о повседневной суете и насладитесь моментом истинного релакса в атмосфере роскоши и уюта.  ",
 };
@@ -71,16 +71,16 @@ const location: Location = {
 //     address: "Московская 15",
 //     services: [...services],
 //     employees: employees,
-//     establishmentId: establishmentId,
+//     brandId: brandId,
 //     locationId: crypto.randomUUID(),
 //     openingTime: DateTime.now().set({ hour: 10, minute: 0, second: 0 }).toISO(),
 //     closingTime: DateTime.now().set({ hour: 18, minute: 0, second: 0 }).toISO(),
 //   },
 // ];
-// const establishmentsData: Establishment[] = [
+// const brandsData: brand[] = [
 //   {
 //     name: "СПА у Зои",
-//     id: establishmentId,
+//     id: brandId,
 //     locations: locations,
 //     description: "Знаменитое СПА, открытое с 2010 года.",
 //   },
@@ -92,8 +92,8 @@ const location: Location = {
 //   },
 // ];
 
-const establishments = await loadData<Brand[]>("establishments.json");
-const locations = establishments.map((e) => e.locations).flat();
+const brands = await loadData<Brand[]>("brands.json");
+const locations = brands.map((e) => e.locations).flat();
 
 const locationHandlers = [
   http.get<{ id: string }, undefined, Location | APIError>(
@@ -118,16 +118,16 @@ const locationHandlers = [
   }),
 ];
 
-const establishmentHandlers = [
-  http.get(`${baseUrl}/establishment`, () => {
-    return HttpResponse.json(establishments);
+const brandHandlers = [
+  http.get(`${baseUrl}/brand`, () => {
+    return HttpResponse.json(brands);
   }),
   http.get<{ id: string }, undefined, Brand | APIError>(
-    `${baseUrl}/establishment/:id`,
+    `${baseUrl}/brand/:id`,
     async ({ params }) => {
       const { id } = params;
-      const establishment = establishments.find((e) => e.id === id);
-      if (!establishment) {
+      const brand = brands.find((e) => e.id === id);
+      if (!brand) {
         const error: APIError = {
           error: {
             message: "Not found",
@@ -136,7 +136,7 @@ const establishmentHandlers = [
         };
         return HttpResponse.json(error);
       }
-      return HttpResponse.json(establishment);
+      return HttpResponse.json(brand);
     }
   ),
 ];
@@ -157,6 +157,6 @@ const appointmentHandlers = [
 
 export const handlers = [
   ...appointmentHandlers,
-  ...establishmentHandlers,
+  ...brandHandlers,
   ...locationHandlers,
 ];

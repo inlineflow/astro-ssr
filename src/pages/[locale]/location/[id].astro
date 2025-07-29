@@ -22,8 +22,8 @@ const { data: location, error: fetchError } = await Astro.callAction(
   { id: id }
 );
 
-// const { data: validatedEstablishment, error: invalidEstablishmentError } =
-//   validateService(establishment);
+// const { data: validatedbrand, error: invalidbrandError } =
+//   validateService(brand);
 const errors = [fetchError].filter((e) => e !== undefined);
 
 let locLight = {} as LocationLight;
@@ -32,7 +32,7 @@ if (!fetchError) {
     name: location.name,
     address: location.address,
     closingTime: location.closingTime,
-    establishmentId: location.establishmentId,
+    brandId: location.brandId,
     locationId: location.locationId,
     openingTime: location.openingTime,
     photo: location.photo,
@@ -40,7 +40,7 @@ if (!fetchError) {
   };
 } // let location: Location = {} as Location;
 // const { services, employees, ...locLight } = location!;
-// console.log(validatedEstablishment);
+// console.log(validatedbrand);
 ---
 
 <CenteredLayout>
