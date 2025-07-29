@@ -22,7 +22,7 @@ const { data } = Astro.props;
 >
   {data.find((d) => d.langTag === Astro.currentLocale!)?.langName}
   <ul
-    class="dropdown menu w-52 rounded-box bg-purple-100 shadow-sm text-primary"
+    class="dropdown menu w-52 rounded-box bg-purple-100 shadow-sm text-primary mt-2"
     popover
     id="lang-picker-popover"
     style="position-anchor: --lang-picker-anchor;"
