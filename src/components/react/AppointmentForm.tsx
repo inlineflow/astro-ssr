@@ -23,9 +23,8 @@ import { SelectedServiceProvider } from "./AppointmentServiceControlsContext";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "src/lib/i18n";
+import { capitalize } from "src/lib/utils";
 // import { t as t } from "i18next";
-
-const capitalize = (s: string) => s.slice(0, 1).toUpperCase() + s.slice(1);
 
 const FormSchema = z.object({
   calendarDate: z

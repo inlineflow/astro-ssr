@@ -1,4 +1,4 @@
-import { ValidationError } from "./validations/errors";
+import { ValidationError } from "src/validations/errors";
 
 export const isValidationError = (err: unknown): err is ValidationError =>
   err instanceof ValidationError;
@@ -15,3 +15,6 @@ export const conjugate = (value: number, words: string[]) => {
   if (num == 1) return words[0];
   return words[2];
 };
+
+export const capitalize = (s: string) =>
+  s.slice(0, 1).toUpperCase() + s.slice(1);

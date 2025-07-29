@@ -1,6 +1,7 @@
 ---
 import i18n, { languages } from "src/lib/i18n";
 import LanguagePicker from "./LanguagePicker.astro";
+import { capitalize } from "src/lib/utils";
 
 type Link = {
   label: string;
@@ -14,7 +15,7 @@ console.log("Url: ", url);
 const x = languages.map((l) => ({
   langTag: l,
   link: url.replace(Astro.currentLocale!, l),
-  langName: new Intl.DisplayNames([l], { type: "language" }).of(l),
+  langName: capitalize(new Intl.DisplayNames([l], { type: "language" }).of(l)!),
 }));
 console.log("x: ", x);
 
