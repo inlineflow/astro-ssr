@@ -61,9 +61,9 @@ console.log("Current locale: ", Astro.currentLocale);
         </span>
       </div>
       <!-- <div class="divider bg-border h-0.5!"></div> -->
-      <div class="flex space-x-1 shrink">
-        <MapPin />
-        <p class="text-center">{location.address}</p>
+      <div class="flex space-x-1 shrink justify-center items-center">
+        <MapPin className="size-6 shrink-0" />
+        <p class="">{location.address}</p>
       </div>
     </CardFooter>
   </a>
