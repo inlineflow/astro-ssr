@@ -5,7 +5,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import ruTranslation from "./locales/ru/translation.json";
 import enTranslation from "./locales/en/translation.json";
 
-export const languages = ["en", "ru", "kg"];
+export const languages = ["en", "ru", "ky"];
 export const defaultLang = "en";
 
 i18n

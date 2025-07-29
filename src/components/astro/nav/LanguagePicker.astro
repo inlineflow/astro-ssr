@@ -1,0 +1,38 @@
+---
+// import {
+//   Select,
+//   SelectContent,
+//   SelectGroup,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/ui/select";
+import type { LangLink } from "./Navigation.astro";
+// import { LanguagePickerReact } from "components/react/LanguagePicker";
+interface Props {
+  data: LangLink[];
+}
+const { data } = Astro.props;
+---
+
+<button
+  class="btn bg-purple-50 border-0 text-primary"
+  popovertarget="lang-picker-popover"
+  style="anchor-name: --lang-picker-anchor;"
+>
+  {data.find((d) => d.langTag === Astro.currentLocale!)?.langName}
+  <ul
+    class="dropdown menu w-52 rounded-box bg-purple-100 shadow-sm text-primary"
+    popover
+    id="lang-picker-popover"
+    style="position-anchor: --lang-picker-anchor;"
+  >
+    {
+      data.map((d) => (
+        <li>
+          <a href={d.link}>{d.langName}</a>
+        </li>
+      ))
+    }
+  </ul>
+</button>

@@ -1,5 +1,6 @@
 ---
 import i18n, { languages } from "src/lib/i18n";
+import LanguagePicker from "./LanguagePicker.astro";
 
 type Link = {
   label: string;
@@ -9,11 +10,15 @@ type Link = {
 const currentLocale = Astro.currentLocale;
 const url = Astro.request.url;
 console.log("Url: ", url);
+
 const x = languages.map((l) => ({
-  lang: l,
-  nav: url.replace(Astro.currentLocale!, l),
+  langTag: l,
+  link: url.replace(Astro.currentLocale!, l),
+  langName: new Intl.DisplayNames([l], { type: "language" }).of(l),
 }));
 console.log("x: ", x);
+
+export type LangLink = (typeof x)[number];
 
 const links: Link[] = [
   { tag: "nav.home", path: "/" },
@@ -31,14 +36,6 @@ const links: Link[] = [
         </li>
       ))
     }
-    <ul>
-      {
-        x.map((y) => (
-          <li>
-            <a href={y.nav}>{y.lang}</a>
-          </li>
-        ))
-      }
-    </ul>
+    <LanguagePicker data={x} />
   </ul>
 </nav>

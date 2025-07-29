@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "daisyui";
 
 /* @source inline("data-[selected=true]:bg-pink-100");
 @source inline("data-[selected=true]:bg-yellow-100");
