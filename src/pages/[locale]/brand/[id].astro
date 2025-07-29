@@ -12,7 +12,7 @@ if (!id) {
 }
 
 const { data: establishment, error: _error } = await Astro.callAction(
-  actions.establishment.getEstablishment,
+  actions.establishment.getBrand,
   { id: id }
 );
 

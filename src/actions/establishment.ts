@@ -1,17 +1,17 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import type { APIError } from "../lib/types";
-import type { Establishment } from "src/lib/schema";
+import type { Brand } from "src/lib/schema";
 import { baseUrl } from "../env";
 
-export const establishment = {
-  getEstablishment: defineAction({
+export const brand = {
+  getBrand: defineAction({
     input: z.object({
       id: z.string().uuid(),
     }),
     handler: async (input) => {
-      const resp = await fetch(`${baseUrl}/establishment/${input.id}`);
-      const result = (await resp.json()) as Establishment | APIError;
+      const resp = await fetch(`${baseUrl}/brand/${input.id}`);
+      const result = (await resp.json()) as Brand | APIError;
       if ("error" in result) {
         throw new ActionError({
           code: ActionError.statusToCode(result.error.status),
@@ -21,10 +21,10 @@ export const establishment = {
       return result;
     },
   }),
-  getAllEstablishments: defineAction({
+  getAllBrands: defineAction({
     handler: async () => {
-      const resp = await fetch(`${baseUrl}/establishment`);
-      const result = (await resp.json()) as Establishment[] | APIError;
+      const resp = await fetch(`${baseUrl}/brand`);
+      const result = (await resp.json()) as Brand[] | APIError;
       if ("error" in result) {
         throw new ActionError({
           code: ActionError.statusToCode(result.error.status),

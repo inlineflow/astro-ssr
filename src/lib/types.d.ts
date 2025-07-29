@@ -1,6 +1,6 @@
 import type { ActionError } from "astro:actions";
 import type { ValidationError } from "../validations/errors";
-import type { establishmentSchema } from "./schema";
+import type { brandSchema } from "./schema";
 
 export type Product = {
   id: number;

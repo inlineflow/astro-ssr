@@ -23,8 +23,7 @@ export type LangLink = (typeof x)[number];
 
 const links: Link[] = [
   { tag: "nav.home", path: "/" },
-  { tag: "nav.booking", path: "/booking" },
-  { tag: "nav.establishments", path: "/establishment" },
+  { tag: "nav.locations", path: "/location" },
 ].map((i) => ({ label: i18n.t(i.tag), path: `/${currentLocale}${i.path}` }));
 ---
 

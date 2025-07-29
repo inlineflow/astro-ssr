@@ -1,36 +1,32 @@
 ---
 interface Props {
-  establishment: Establishment;
+  brand: Brand;
   className?: string;
 }
 import { cn } from "@/lib/utils";
 import { Card } from "@/ui/card";
 import i18n from "src/lib/i18n";
 // import { linkto } from "src/lib/routing.astro";
-import type { Establishment } from "src/lib/schema";
+import type { Brand } from "src/lib/schema";
 import { conjugate } from "src/lib/utils";
-const { establishment, className } = Astro.props;
+const { brand, className } = Astro.props;
 ---
 
-<a href={`establishment/${establishment.id}`}>
+<a href={`brand/${brand.id}`}>
   <Card
     className={cn(
       "justify-center items-center px-6 gap-3 md:w-full md:h-full md:flex-none",
       className
     )}
   >
-    <p>{establishment.name}</p>
-    {establishment.logo && <img src={establishment.logo} />}
-    {
-      !establishment.logo && (
-        <div class="bg-pink-300 w-full md:w-48 h-24 rounded-md" />
-      )
-    }
-    {establishment.description && <p>{establishment.description}</p>}
+    <p>{brand.name}</p>
+    {brand.logo && <img src={brand.logo} />}
+    {!brand.logo && <div class="bg-pink-300 w-full md:w-48 h-24 rounded-md" />}
+    {brand.description && <p>{brand.description}</p>}
     <p>
       {
-        `${establishment.locations.length} ${conjugate(
-          establishment.locations.length,
+        `${brand.locations.length} ${conjugate(
+          brand.locations.length,
           i18n.t("establishment.locations", { returnObjects: true }) as string[]
           // ["филиал", "филиала", "филиалов"]
         )}`

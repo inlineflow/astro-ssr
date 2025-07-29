@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 import type { APIError, Product } from "../../lib/types";
-import type { Service, Location, Establishment } from "../../lib/schema";
+import type { Service, Location, Brand } from "../../lib/schema";
 import { DateTime } from "luxon";
 import type { AppointmentPostRequest } from "../../lib/schema";
 import { loadData } from "../utils";
@@ -92,7 +92,7 @@ const location: Location = {
 //   },
 // ];
 
-const establishments = await loadData<Establishment[]>("establishments.json");
+const establishments = await loadData<Brand[]>("establishments.json");
 const locations = establishments.map((e) => e.locations).flat();
 
 const locationHandlers = [
@@ -122,7 +122,7 @@ const establishmentHandlers = [
   http.get(`${baseUrl}/establishment`, () => {
     return HttpResponse.json(establishments);
   }),
-  http.get<{ id: string }, undefined, Establishment | APIError>(
+  http.get<{ id: string }, undefined, Brand | APIError>(
     `${baseUrl}/establishment/:id`,
     async ({ params }) => {
       const { id } = params;

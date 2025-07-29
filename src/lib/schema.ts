@@ -44,14 +44,14 @@ const lightLocationSchema = locationSchema.omit({
 });
 export type LocationLight = z.infer<typeof lightLocationSchema>;
 
-export const establishmentSchema = z.object({
+export const brandSchema = z.object({
   id: z.string().uuid(),
   description: z.string().optional(),
   locations: z.array(locationSchema).min(1),
   name: z.string(),
   logo: z.string().url().optional(),
 });
-export type Establishment = z.infer<typeof establishmentSchema>;
+export type Brand = z.infer<typeof brandSchema>;
 
 // export const establishmentSchema = z.object({
 //   id: z.string().uuid(),

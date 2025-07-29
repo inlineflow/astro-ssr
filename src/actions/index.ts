@@ -1,9 +1,9 @@
-import { establishment } from "./establishment";
+import { brand } from "./establishment";
 import { appointment } from "./appointment";
 import { location } from "./location";
 
 export const server = {
-  establishment,
+  establishment: brand,
   appointment,
   location,
 };

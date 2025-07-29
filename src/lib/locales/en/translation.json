@@ -16,7 +16,7 @@
     "form.employee_not_found": "Employee not found",
     "nav.home": "Home",
     "nav.booking": "Booking",
-    "nav.establishments": "Establishments",
+    "nav.locations": "Establishments",
     "establishment.locations": ["location", "locations"],
     "establishments.title": "Establishments",
     "services.hairdressing": "Hairdressing",

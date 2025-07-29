@@ -9,7 +9,7 @@ import i18n from "src/lib/i18n";
 
 export const prerender = false;
 const { data: establishments, error } = await Astro.callAction(
-  actions.establishment.getAllEstablishments,
+  actions.establishment.getAllBrands,
   {}
 );
 

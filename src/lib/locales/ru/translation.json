@@ -16,7 +16,7 @@
     "form.employee_not_found": "Мастер не найден",
     "nav.home": "Главная",
     "nav.booking": "Запись",
-    "nav.establishments": "Салоны",
+    "nav.locations": "Салоны",
     "establishment.locations": ["филиал", "филиала", "филиалов"],
     "establishments.title": "Салоны",
     "services.hairdressing": "Стрижка",
