@@ -35,7 +35,7 @@ export const LocationDialog = ({
   setOpen: (open: boolean) => void;
 }) => {
   return (
-    <Dialog defaultOpen={false} open={isOpen}>
+    <Dialog defaultOpen={false} open={isOpen} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{location.name}</DialogTitle>
@@ -72,7 +72,7 @@ const LocationDetails = ({ location }: { location: Location }) => {
       <Accordion type="single" collapsible>
         {/* className="flex flex-col max-w-fit self-center"> */}
         <AccordionItem value="services">
-          <AccordionTrigger className="w-full bg-accent">
+          <AccordionTrigger className="w-full px-4 border-none outline-0 focus-visible:ring-0">
             {/* // className="border-none flex outline-0 self-center"> */}
             {t("services")}
             {/* <ChevronDown /> */}
