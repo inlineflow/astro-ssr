@@ -1,4 +1,4 @@
-import { Icon, Scissors } from "lucide-react";
+import { Icon, Scissors, ServerCog } from "lucide-react";
 import { scissorsHairComb } from "@lucide/lab";
 import BarbershopLogo from "src/icons/barbershop.svg?react";
 import NailPolishLogo from "src/icons/nail-polish.svg?react";
@@ -42,3 +42,34 @@ export const serviceStyles = [
     classList: [],
   },
 ];
+
+export const ServiceIcons = ({
+  tags,
+  size,
+}: {
+  tags: string[];
+  size?: number;
+}) => {
+  const availableServicesIcons = serviceStyles.filter((s) =>
+    tags.includes(s.tag)
+  );
+
+  const __size = size ?? 32;
+
+  return (
+    <ul className="flex space-x-2">
+      {availableServicesIcons.map((i) => (
+        <li>
+          <div
+            className={cn(
+              [...commonContainerClasses, ...i.classList, i.bgColor].join(" "),
+              "size-8"
+            )}
+          >
+            <i.Icon width={__size} height={__size} />
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+};

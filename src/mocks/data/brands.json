@@ -19,9 +19,7 @@
             "photo": "https://example.com/elena_ivanova.jpg",
             "title": "Стилист по волосам",
             "location": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
-            "providesServices": [
-              "1a2b3c4d-5e6f-7890-1234-567890abcdef"
-            ],
+            "providesServices": ["1a2b3c4d-5e6f-7890-1234-567890abcdef"],
             "nonWorkingDays": []
           },
           {
@@ -30,12 +28,8 @@
             "photo": "https://example.com/anna_petrova.jpg",
             "title": "Мастер маникюра",
             "location": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
-            "providesServices": [
-              "2a3b4c5d-6e7f-8901-2345-67890abcdef1"
-            ],
-            "nonWorkingDays": [
-              "2025-08-01T06:00:00+06:00"
-            ]
+            "providesServices": ["2a3b4c5d-6e7f-8901-2345-67890abcdef1"],
+            "nonWorkingDays": ["2025-08-01T06:00:00+06:00"]
           }
         ],
         "services": [
@@ -50,6 +44,12 @@
             "serviceId": "2a3b4c5d-6e7f-8901-2345-67890abcdef1",
             "durationInMinutes": 45,
             "tag": "nail-polish"
+          },
+          {
+            "name": "Педикюр",
+            "serviceId": "xyzb4c5d-6e7f-8901-2345-67890abcdef1",
+            "durationInMinutes": 30,
+            "tag": "pedicure"
           }
         ],
         "photo": "https://example.com/sharm_center.jpg"
@@ -76,9 +76,7 @@
             "photo": "https://example.com/olga_smirnova.jpg",
             "title": "Мастер по гель-лаку",
             "location": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
-            "providesServices": [
-              "3b4c5d6e-7f8a-9012-3456-7890abcdef12"
-            ],
+            "providesServices": ["3b4c5d6e-7f8a-9012-3456-7890abcdef12"],
             "nonWorkingDays": []
           },
           {
@@ -87,12 +85,8 @@
             "photo": "https://example.com/mariya_kozlova.jpg",
             "title": "Педикюрщик",
             "location": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
-            "providesServices": [
-              "4c5d6e7f-8a9b-0123-4567-890abcdef123"
-            ],
-            "nonWorkingDays": [
-              "2025-08-05T06:00:00+06:00"
-            ]
+            "providesServices": ["4c5d6e7f-8a9b-0123-4567-890abcdef123"],
+            "nonWorkingDays": ["2025-08-05T06:00:00+06:00"]
           }
         ],
         "services": [
@@ -178,9 +172,7 @@
             "photo": "https://example.com/darya_volkova.jpg",
             "title": "Мастер по наращиванию ресниц",
             "location": "c6b5a4f3-e2d1-0987-6543-210fedcba987",
-            "providesServices": [
-              "7f8a9b0c-1d2e-3456-7890-abcdef123456"
-            ],
+            "providesServices": ["7f8a9b0c-1d2e-3456-7890-abcdef123456"],
             "nonWorkingDays": []
           },
           {
@@ -189,12 +181,8 @@
             "photo": "https://example.com/sofia_novikova.jpg",
             "title": "Бровист",
             "location": "c6b5a4f3-e2d1-0987-6543-210fedcba987",
-            "providesServices": [
-              "8a9b0c1d-2e3f-4567-8901-abcdef1234567"
-            ],
-            "nonWorkingDays": [
-              "2025-08-02T06:00:00+06:00"
-            ]
+            "providesServices": ["8a9b0c1d-2e3f-4567-8901-abcdef1234567"],
+            "nonWorkingDays": ["2025-08-02T06:00:00+06:00"]
           }
         ],
         "services": [
@@ -284,9 +272,7 @@
               "1d2e3f4a-5b6c-7890-1234-cdef1234567890",
               "2e3f4a5b-6c7d-8901-2345-def12345678901"
             ],
-            "nonWorkingDays": [
-              "2025-08-03T06:00:00+06:00"
-            ]
+            "nonWorkingDays": ["2025-08-03T06:00:00+06:00"]
           }
         ],
         "services": [
@@ -339,12 +325,8 @@
             "photo": "https://example.com/aleksey_ivanov.jpg",
             "title": "Мастер по окрашиванию",
             "location": "f3e2d1c0-b9a8-7654-3210-fedcba987654",
-            "providesServices": [
-              "3f4a5b6c-7d8e-9012-3456-ef123456789012"
-            ],
-            "nonWorkingDays": [
-              "2025-08-04T06:00:00+06:00"
-            ]
+            "providesServices": ["3f4a5b6c-7d8e-9012-3456-ef123456789012"],
+            "nonWorkingDays": ["2025-08-04T06:00:00+06:00"]
           }
         ],
         "services": [
@@ -487,12 +469,8 @@
             "photo": "https://example.com/pavel_zaharov.jpg",
             "title": "Визажист",
             "location": "c0b9a8f7-e6d5-4321-0987-654fedcba987",
-            "providesServices": [
-              "0a1b2c3d-4e5f-6789-0123-6789012345678"
-            ],
-            "nonWorkingDays": [
-              "2025-08-06T06:00:00+06:00"
-            ]
+            "providesServices": ["0a1b2c3d-4e5f-6789-0123-6789012345678"],
+            "nonWorkingDays": ["2025-08-06T06:00:00+06:00"]
           }
         ],
         "services": [

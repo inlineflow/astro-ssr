@@ -12,8 +12,9 @@ export const employeeSchema = z.object({
 export type Employee = z.infer<typeof employeeSchema>;
 
 export const serviceSchema = z.object({
-  name: z.string(),
   serviceId: z.string().uuid(),
+  name: z.string(),
+  price: z.number(),
   durationInMinutes: z.number(),
   tag: z.string(),
 });
