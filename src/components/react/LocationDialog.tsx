@@ -9,6 +9,7 @@ import {
   DialogTitle,
 } from "@/ui/dialog";
 import { ScrollArea } from "@/ui/scroll-area";
+import { Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { Location } from "src/lib/schema";
 import { ServiceIcons, serviceStyles } from "src/lib/service";
@@ -63,7 +64,10 @@ const LocationDetails = ({ location }: { location: Location }) => {
             <Badge className={`${s.iconData?.bgColor} text-primary w-fit`}>
               <p>{t(s.tag)}</p>
               <p>{s.price}KGS</p>
-              {123}
+              <p>
+                <Clock />
+                {s.durationInMinutes}
+              </p>
             </Badge>
           </li>
         ))}

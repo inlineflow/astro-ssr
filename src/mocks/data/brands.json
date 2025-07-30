@@ -37,18 +37,21 @@
             "name": "Стрижка и укладка",
             "serviceId": "1a2b3c4d-5e6f-7890-1234-567890abcdef",
             "durationInMinutes": 60,
+            "price": 650,
             "tag": "hairdressing"
           },
           {
             "name": "Маникюр",
             "serviceId": "2a3b4c5d-6e7f-8901-2345-67890abcdef1",
             "durationInMinutes": 45,
+            "price": 750,
             "tag": "nail-polish"
           },
           {
             "name": "Педикюр",
             "serviceId": "xyzb4c5d-6e7f-8901-2345-67890abcdef1",
             "durationInMinutes": 30,
+            "price": 1000,
             "tag": "pedicure"
           }
         ],
