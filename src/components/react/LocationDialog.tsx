@@ -1,17 +1,96 @@
+import { Button } from "@/ui/button";
 import { Card } from "@/ui/card";
-import { Dialog, DialogContent } from "@/ui/dialog";
-import { useState } from "react";
+import { Dialog, DialogClose, DialogContent, DialogTitle } from "@/ui/dialog";
+import { ScrollArea } from "@/ui/scroll-area";
 import type { Location } from "src/lib/schema";
 
-export const LocationDialog = ({ location }: { location: Location }) => {
-  const [isOpen, setOpen] = useState(false);
-
+export const LocationDialog = ({
+  location,
+  isOpen,
+  setOpen,
+}: {
+  location: Location;
+  isOpen: boolean;
+  setOpen: (open: boolean) => void;
+}) => {
   return (
     <Dialog defaultOpen={false} open={isOpen}>
+      <DialogTitle>abc</DialogTitle>
       <DialogContent>
-        <Card>
+        <ScrollArea className="w-full h-96 max-w-full max-h-full">
           <p>Hello world</p>
-        </Card>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+          <p>Hello world</p>
+        </ScrollArea>
+        <DialogClose
+          //  onClick={() => setOpen(false)}
+          asChild
+        >
+          <Button onClick={() => setOpen(false)}>Close</Button>
+        </DialogClose>
       </DialogContent>
     </Dialog>
   );

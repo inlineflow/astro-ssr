@@ -12,7 +12,13 @@ import { DateTime } from "luxon";
 import type { Location, LocationLight } from "src/lib/schema";
 import { commonContainerClasses, serviceStyles } from "src/lib/service";
 
-export const LocCard = ({ location }: { location: LocationLight }) => {
+export const LocCard = ({
+  location,
+  onClick,
+}: {
+  location: LocationLight;
+  onClick: (open: boolean) => void;
+}) => {
   const open = DateTime.fromISO(location.openingTime);
   const close = DateTime.fromISO(location.closingTime);
   const availableServicesIcons = serviceStyles.filter((i) =>
@@ -22,7 +28,7 @@ export const LocCard = ({ location }: { location: LocationLight }) => {
   return (
     <Card
       className="text-center px-4 py-4 h-full"
-      onClick={() => console.log("i've been clicked")}
+      onClick={() => onClick(true)}
     >
       <CardHeader>
         <CardTitle>{location.name}</CardTitle>
