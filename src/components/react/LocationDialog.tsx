@@ -58,31 +58,22 @@ const LocationDetails = ({ location }: { location: Location }) => {
       <div className="bg-pink-200 w-52 h-52 rounded-xl self-center mb-3" />
       <h3 className="text-center">{t("location.available_services")}</h3>
       {/* <ServiceIcons tags={location.services.map((s) => s.tag)} /> */}
-      <ul className="flex flex-wrap gap-x-1 gap-y-2 items-center justify-center">
-        {serviceRenderData.map((s) => (
-          <li key={s.tag}>
-            <Badge className={`${s.iconData?.bgColor} text-primary w-fit`}>
-              <p>{t(s.tag)}</p>
-              <p>{s.price}KGS</p>
-              <p>
-                <Clock />
-                {s.durationInMinutes}
-              </p>
-            </Badge>
-          </li>
-        ))}
-        {/* {serviceStyles.map((s) => (
-          <Badge className={`${s.bgColor} text-primary w-fit`}>
-            {t(s.tag)}
-            {s.}
-          </Badge>
-        ))}
-        {serviceStyles.toReversed().map((s) => (
-          <Badge className={`${s.bgColor} text-primary w-fit`}>
-            {t(s.tag)}
-          </Badge>
-        ))} */}
-      </ul>
+      <div className="flex flex-wrap max-w-fit self-center">
+        <ul className="flex flex-col gap-x-1 gap-y-2 items-center justify-center">
+          {serviceRenderData.map((s) => (
+            <li key={s.tag} className="w-full">
+              <Badge className={`${s.iconData?.bgColor} text-primary w-full`}>
+                <p>{t(s.tag)}</p>
+                <p>{s.price}KGS</p>
+                <p>
+                  <Clock />
+                  {s.durationInMinutes}
+                </p>
+              </Badge>
+            </li>
+          ))}
+        </ul>
+      </div>
       <p>{t("location.employees")}:</p>
       <ul>
         {location.employees.map((e) => (
