@@ -1,12 +1,14 @@
 ---
 import { Card } from "@/ui/card";
-import { Input } from "@/ui/input";
+// import { Dialog, DialogContent } from "@/ui/dialog";
+// import { Input } from "@/ui/input";
 import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
-import LocationCard from "components/astro/location-card.astro";
+// import LocationCard from "components/astro/location-card.astro";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import i18n from "src/lib/i18n";
-import { serviceStyles } from "src/lib/service";
+// import { serviceStyles } from "src/lib/service";
+import { LocationSearch } from "src/components/react/LocationSearch";
 
 export const prerender = false;
 const { data: locations, error } = await Astro.callAction(
@@ -25,31 +27,7 @@ const { data: locations, error } = await Astro.callAction(
       >
         <p>{i18n.t("brands.title")}</p>
       </Card>
-      <Input />
-      <Card className="px-3 py-3">
-        <ul class="flex gap-3">
-          {
-            serviceStyles.map((s) => (
-              <li class={`${s.bgColor} p-2 rounded-lg`}>
-                <s.Icon className="size-8" />
-              </li>
-            ))
-          }
-        </ul>
-      </Card>
-      <Card className="px-3 py-3 bg-pink-50">
-        {
-          locations && (
-            <ul class="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-3 lg:grid-cols-4">
-              {locations.map((loc) => (
-                <li>
-                  <LocationCard location={loc} />
-                </li>
-              ))}
-            </ul>
-          )
-        }
-      </Card>
+      {locations && <LocationSearch locations={locations} client:load />}
     </div>
     {error && <ErrorMessage errors={[error]} />}
   </div>

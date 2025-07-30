@@ -1,24 +1,31 @@
 ---
 interface Props {
   services: Service[];
+  size?: number;
 }
 import { commonContainerClasses, serviceStyles } from "src/lib/service";
 import type { Service } from "src/lib/schema";
+import { cn } from "@/lib/utils";
 
-const { services } = Astro.props;
+const { services, size } = Astro.props;
 
 const availableServicesIcons = serviceStyles.filter((i) =>
   services.map((s) => s.tag).includes(i.tag)
 );
+
+const __size = size ?? 32;
 ---
 
 <div class="flex space-x-2">
   {
     availableServicesIcons.map((i) => (
       <div
-        class={[...commonContainerClasses, ...i.classList, i.bgColor].join(" ")}
+        class={cn(
+          [...commonContainerClasses, ...i.classList, i.bgColor].join(" "),
+          "size-8"
+        )}
       >
-        <i.Icon width={32} height={32} />
+        <i.Icon width={__size} height={__size} />
       </div>
     ))
   }

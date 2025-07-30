@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 export const commonContainerClasses = [
   "rounded-full",
-  "p-2",
+  // "p-2",
   "flex",
   "items-center",
   "justify-center",
