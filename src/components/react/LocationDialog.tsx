@@ -92,12 +92,12 @@ const LocationDetails = ({ location }: { location: Location }) => {
                 {serviceRenderData.map((s) => (
                   <li key={s.tag} className="w-full">
                     <Badge
-                      className={`${s.iconData?.bgColor} text-primary w-full`}
+                      className={`${s.iconData?.bgColor} text-primary w-full text-lg justify-between px-4`}
                     >
                       <p>{t(s.tag)}</p>
                       <p>{s.price}KGS</p>
-                      <p>
-                        <Clock />
+                      <p className="flex items-center gap-[2px]">
+                        <Clock size={16} />
                         {s.durationInMinutes}
                       </p>
                     </Badge>
@@ -117,9 +117,14 @@ const LocationDetails = ({ location }: { location: Location }) => {
               {location.employees.map((emp) => (
                 <li
                   key={emp.employeeId}
-                  className="w-full text-center bg-accent/50 py-2"
+                  className="w-full text-center bg-accent/50 py-2 rounded-md"
                 >
-                  <p>{emp.name}</p>
+                  <div className="flex flex-col items-center pt-2">
+                    {/* <img src={emp.photo} alt={`${t("employee.photo")}`} /> */}
+                    <div className="size-24 bg-primary/10"></div>
+                    <p>{emp.title}</p>
+                    <p>{emp.name}</p>
+                  </div>
                 </li>
               ))}
             </ul>
