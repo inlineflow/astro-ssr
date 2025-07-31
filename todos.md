@@ -54,3 +54,5 @@ Don't make brand the first thing the user sees, it should be a bit more hidden.
 The user should be able to search by service in an area close to them, if they allow us to get geodata.
 
 Move search to location/index.astro
+
+# Consider changing employee title/role to a tag based system for i18n purposes

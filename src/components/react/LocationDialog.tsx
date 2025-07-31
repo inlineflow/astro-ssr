@@ -6,6 +6,7 @@ import {
 } from "@/ui/accordion";
 import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
+import { Card } from "@/ui/card";
 import {
   Dialog,
   // DialogClose,
@@ -36,7 +37,7 @@ export const LocationDialog = ({
 
   return (
     <Dialog defaultOpen={false} open={isOpen} onOpenChange={setOpen}>
-      <DialogContent>
+      <DialogContent className="[&>[data-slot=dialog-close]>svg]:size-6">
         <DialogHeader>
           <DialogTitle>{location.name}</DialogTitle>
         </DialogHeader>
@@ -115,16 +116,15 @@ const LocationDetails = ({ location }: { location: Location }) => {
           <AccordionContent>
             <ul className="flex flex-col gap-x-1 gap-y-2 items-center justify-center w-full">
               {location.employees.map((emp) => (
-                <li
-                  key={emp.employeeId}
-                  className="w-full text-center py-2 rounded-md shadow-md border-2 border-accent/50"
-                >
-                  <div className="flex flex-col items-center pt-2">
-                    {/* <img src={emp.photo} alt={`${t("employee.photo")}`} /> */}
-                    <div className="size-24 bg-primary/10 rounded-md mb-2"></div>
-                    <p>{emp.title}</p>
-                    <p>{emp.name}</p>
-                  </div>
+                <li key={emp.employeeId} className="w-full text-center py-2 ">
+                  <Card>
+                    <div className="flex flex-col items-center pt-2">
+                      {/* <img src={emp.photo} alt={`${t("employee.photo")}`} /> */}
+                      <div className="size-24 bg-primary/10 rounded-md mb-2"></div>
+                      <p>{emp.title}</p>
+                      <p>{emp.name}</p>
+                    </div>
+                  </Card>
                 </li>
               ))}
             </ul>
