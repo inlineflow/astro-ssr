@@ -28,5 +28,7 @@
   "pedicure": "Педикюр",
   "location.available_services": "Предоставляемые услуги",
   "location.employees": "Мастера",
+  "location.working_hours": "Рабочее время",
+  "location.nav_appointment": "Забронировать визит",
   "employees": "Мастера"
 }

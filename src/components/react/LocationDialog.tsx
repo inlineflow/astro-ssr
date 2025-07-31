@@ -16,6 +16,7 @@ import {
 } from "@/ui/dialog";
 import { ScrollArea } from "@/ui/scroll-area";
 import { Clock } from "lucide-react";
+import { DateTime } from "luxon";
 import { useTranslation } from "react-i18next";
 import type { Location } from "src/lib/schema";
 import { serviceStyles } from "src/lib/service";
@@ -31,6 +32,7 @@ export const LocationDialog = ({
 }) => {
   const { i18n } = useTranslation();
   console.log("i18n language", i18n.language);
+  const { t } = useTranslation();
 
   return (
     <Dialog defaultOpen={false} open={isOpen} onOpenChange={setOpen}>
@@ -54,7 +56,8 @@ export const LocationDialog = ({
               href={`/${i18n.language}/location/${location.locationId}`}
               className=""
             >
-              Make an appointment
+              {t("location.nav_appointment")}
+              {/* Make an appointment */}
             </a>
           </Button>
         </DialogFooter>
@@ -123,6 +126,14 @@ const LocationDetails = ({ location }: { location: Location }) => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      <div className="flex gap-x-2 justify-center">
+        <p>{t("location.working_hours")}:</p>
+        <p>
+          {`${DateTime.fromISO(location.openingTime).toFormat(
+            "T"
+          )} - ${DateTime.fromISO(location.closingTime).toFormat("T")}`}
+        </p>
+      </div>
     </div>
   );
 };

@@ -28,5 +28,7 @@
   "pedicure": "Pedicure",
   "location.available_services": "Available Services",
   "location.employees": "Employees",
+  "location.working_hours": "Working hours",
+  "location.nav_appointment": "Make an appointment",
   "employees": "Employees"
 }
