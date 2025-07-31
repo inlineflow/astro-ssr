@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/ui/card";
-import ServiceIcons from "components/astro/service-icons.astro";
+// import ServiceIcons from "components/astro/service-icons.astro";
 import { Clock, MapPin } from "lucide-react";
 import { DateTime } from "luxon";
 import type { Location, LocationLight } from "src/lib/schema";
@@ -17,7 +17,7 @@ export const LocCard = ({
   onClick,
 }: {
   location: LocationLight;
-  onClick: (open: boolean) => void;
+  onClick?: (open: boolean) => void;
 }) => {
   const open = DateTime.fromISO(location.openingTime);
   const close = DateTime.fromISO(location.closingTime);
@@ -28,7 +28,7 @@ export const LocCard = ({
   return (
     <Card
       className="text-center px-4 py-4 h-full"
-      onClick={() => onClick(true)}
+      onClick={() => onClick && onClick(true)}
     >
       <CardHeader>
         <CardTitle>{location.name}</CardTitle>

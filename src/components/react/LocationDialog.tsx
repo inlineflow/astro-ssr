@@ -7,25 +7,18 @@ import {
 import { Badge } from "@/ui/badge";
 import { Button } from "@/ui/button";
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/ui/collapsible";
-import {
   Dialog,
-  DialogClose,
+  // DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/ui/dialog";
 import { ScrollArea } from "@/ui/scroll-area";
-import { ArrowDown, ChevronDown, Clock } from "lucide-react";
-import { useEffect } from "react";
+import { Clock } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { defaultLang, getLang } from "src/lib/i18n";
 import type { Location } from "src/lib/schema";
-import { ServiceIcons, serviceStyles } from "src/lib/service";
+import { serviceStyles } from "src/lib/service";
 
 export const LocationDialog = ({
   location,
@@ -80,7 +73,7 @@ const LocationDetails = ({ location }: { location: Location }) => {
   return (
     <div className="flex flex-col gap-1">
       <div className="bg-pink-200 w-52 h-52 rounded-xl self-center mb-3" />
-      <h3 className="text-center">{t("location.available_services")}</h3>
+      {/* <h3 className="text-center">{t("location.available_services")}</h3> */}
       {/* <ServiceIcons tags={location.services.map((s) => s.tag)} /> */}
       <Accordion type="multiple">
         {/* className="flex flex-col max-w-fit self-center"> */}
