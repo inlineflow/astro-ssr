@@ -5,8 +5,19 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import ruTranslation from "./locales/ru/translation.json";
 import enTranslation from "./locales/en/translation.json";
 
-export const languages = ["en", "ru", "ky"];
+export type supportedLngs = (typeof languages)[number];
+export const languages = ["en", "ru", "ky"] as const;
 export const defaultLang = "en";
+export const getLang = () => {
+  if (import.meta.env.SSR) {
+    return "";
+  }
+  const x = window.location.href;
+  const url = new URL(x);
+  const pathParts = url.pathname.split("/");
+  const langCode = pathParts[1];
+  return langCode!;
+};
 
 i18n
   .use(LanguageDetector)

@@ -1,15 +1,20 @@
 ---
+import { getLang } from "src/lib/i18n";
 import Navigation from "../components/astro/nav/Navigation.astro";
 import "../styles/global.css";
+const lang = getLang();
 ---
 
 <!doctype html>
-<html lang="en" class="overflow-x-hidden">
+<html lang={lang} class="overflow-x-hidden">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendar</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico?" />
+    <script define:vars={{ lang: lang }}>
+      window.lang = lang;
+    </script>
   </head>
   <body class="max-w-full overflow-x-hidden">
     <Navigation />

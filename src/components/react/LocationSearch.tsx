@@ -9,6 +9,7 @@ import { Dialog, DialogContent } from "@/ui/dialog";
 import { LocationDialog } from "./LocationDialog";
 import { I18nextProvider } from "react-i18next";
 import i18n from "src/lib/i18n";
+import type { only } from "node:test";
 
 export const LocationSearch = ({ locations }: { locations: Location[] }) => {
   const [isOpen, setOpen] = useState(false);

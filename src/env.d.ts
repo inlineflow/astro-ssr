@@ -1,5 +1,14 @@
 /// <reference types="astro/client" />
 /// <reference types="vite-plugin-svgr/client" />
+// import type { supportedLngs } from "../src/lib/i18n";
+type supportedLngs = "en" | "ru" | "ky";
+
+// declare var lang: supportedLngs;
+declare global {
+  interface Window {
+    lang: supportedLngs;
+  }
+}
 
 interface ImportMetaEnv {
   readonly PUBLIC_MSW_ENABLED: string;
@@ -15,3 +24,5 @@ interface ImportMeta {
 //   const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
 //   export default ReactComponent;
 // }
+
+export {};

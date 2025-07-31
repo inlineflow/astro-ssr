@@ -16,7 +16,7 @@
   "form.employee_not_found": "Мастер не найден",
   "nav.home": "Главная",
   "nav.booking": "Запись",
-  "nav.locations": "Салоны",
+  "nav.browse": "Салоны",
   "brand.locations": ["филиал", "филиала", "филиалов"],
   "brands.title": "Салоны",
   "services": "Услуги",
@@ -27,5 +27,6 @@
   "nail-polish": "Маникюр",
   "pedicure": "Педикюр",
   "location.available_services": "Предоставляемые услуги",
-  "location.employees": "Мастера"
+  "location.employees": "Мастера",
+  "employees": "Мастера"
 }

@@ -16,7 +16,7 @@
   "form.employee_not_found": "Employee not found",
   "nav.home": "Home",
   "nav.booking": "Booking",
-  "nav.locations": "Brands",
+  "nav.browse": "Browse",
   "brand.locations": ["location", "locations"],
   "brands.title": "Brands",
   "services": "Services",
@@ -27,5 +27,6 @@
   "nail-polish": "Nail Polish",
   "pedicure": "Pedicure",
   "location.available_services": "Available Services",
-  "location.employees": "Employees"
+  "location.employees": "Employees",
+  "employees": "Employees"
 }
