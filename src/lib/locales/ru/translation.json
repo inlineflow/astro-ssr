@@ -32,5 +32,16 @@
   "location.nav_appointment": "Записаться на визит",
   "location.address": "Адрес",
   "employee.photo": "Фотография мастера",
+  "employee.role.hairdresser": "Парикмахер",
+  "employee.role.nail-technician": "Мастер маникюра/педикюра",
+  "employee.role.cosmetologist": "Косметолог",
+  "employee.role.eyelash-technician": "Мастер по наращиванию ресниц",
+  "employee.role.eyebrow-extension-specialist": "Мастер по наращиванию бровей",
+  "employee.role.barber": "Барбер",
+  "employee.role.massage-therapist": "Массажист",
+  "employee.role.colorist": "Мастер по окрашиванию волос",
+  "employee.role.hair-removal-specialist": "Мастер по депиляции",
+  "employee.role.makeup-artist": "Визажист",
+  "employee.role.beautician": "Мастер красоты",
   "employees": "Мастера"
 }

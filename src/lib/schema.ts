@@ -5,6 +5,7 @@ export const employeeSchema = z.object({
   name: z.string(),
   photo: z.string().url().optional(),
   title: z.string().optional(),
+  role: z.string(),
   location: z.string().uuid(),
   providesServices: z.array(z.string().uuid()),
   nonWorkingDays: z.array(z.string().datetime()),

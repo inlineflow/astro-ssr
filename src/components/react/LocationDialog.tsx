@@ -121,7 +121,7 @@ const LocationDetails = ({ location }: { location: Location }) => {
                     <div className="flex flex-col items-center pt-2">
                       {/* <img src={emp.photo} alt={`${t("employee.photo")}`} /> */}
                       <div className="size-24 bg-primary/10 rounded-md mb-2"></div>
-                      <p>{emp.title}</p>
+                      <p>{t(`employee.role.${emp.role}`)}</p>
                       <p>{emp.name}</p>
                     </div>
                   </Card>

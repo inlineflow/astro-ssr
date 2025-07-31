@@ -15,18 +15,18 @@
         "employees": [
           {
             "employeeId": "emp-glamour-001",
+            "role": "hairdresser",
             "name": "Елена Иванова",
             "photo": "https://example.com/elena_ivanova.jpg",
-            "title": "Стилист по волосам",
             "location": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
             "providesServices": ["1a2b3c4d-5e6f-7890-1234-567890abcdef"],
             "nonWorkingDays": []
           },
           {
             "employeeId": "emp-glamour-002",
+            "role": "nail-technician",
             "name": "Анна Петрова",
             "photo": "https://example.com/anna_petrova.jpg",
-            "title": "Мастер маникюра",
             "location": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
             "providesServices": ["2a3b4c5d-6e7f-8901-2345-67890abcdef1"],
             "nonWorkingDays": ["2025-08-01T06:00:00+06:00"]
@@ -75,18 +75,18 @@
         "employees": [
           {
             "employeeId": "emp-azhur-001",
+            "role": "nail-technician",
             "name": "Ольга Смирнова",
             "photo": "https://example.com/olga_smirnova.jpg",
-            "title": "Мастер по гель-лаку",
             "location": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
             "providesServices": ["3b4c5d6e-7f8a-9012-3456-7890abcdef12"],
             "nonWorkingDays": []
           },
           {
             "employeeId": "emp-azhur-002",
+            "role": "nail-technician",
             "name": "Мария Козлова",
             "photo": "https://example.com/mariya_kozlova.jpg",
-            "title": "Педикюрщик",
             "location": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
             "providesServices": ["4c5d6e7f-8a9b-0123-4567-890abcdef123"],
             "nonWorkingDays": ["2025-08-05T06:00:00+06:00"]
@@ -97,12 +97,14 @@
             "name": "Гель-маникюр",
             "serviceId": "3b4c5d6e-7f8a-9012-3456-7890abcdef12",
             "durationInMinutes": 60,
+            "price": 900,
             "tag": "nail-polish"
           },
           {
             "name": "Педикюр",
             "serviceId": "4c5d6e7f-8a9b-0123-4567-890abcdef123",
             "durationInMinutes": 75,
+            "price": 1200,
             "tag": "nail-polish"
           }
         ],
@@ -126,9 +128,9 @@
         "employees": [
           {
             "employeeId": "emp-radiant-001",
+            "role": "cosmetologist",
             "name": "Ирина Кузнецова",
             "photo": "https://example.com/irina_kuznetsova.jpg",
-            "title": "Косметолог",
             "location": "d7c6b5a4-f3e2-1098-7654-3210fedcba98",
             "providesServices": [
               "5d6e7f8a-9b0c-1234-5678-90abcdef1234",
@@ -142,12 +144,14 @@
             "name": "Глубокая чистка лица",
             "serviceId": "5d6e7f8a-9b0c-1234-5678-90abcdef1234",
             "durationInMinutes": 90,
+            "price": 2500,
             "tag": "skincare"
           },
           {
             "name": "Микродермабразия",
             "serviceId": "6e7f8a9b-0c1d-2345-6789-0abcdef12345",
             "durationInMinutes": 60,
+            "price": 3000,
             "tag": "skincare"
           }
         ],
@@ -171,15 +175,16 @@
         "employees": [
           {
             "employeeId": "emp-vzglyad-001",
+            "role": "eyelash-technician",
             "name": "Дарья Волкова",
             "photo": "https://example.com/darya_volkova.jpg",
-            "title": "Мастер по наращиванию ресниц",
             "location": "c6b5a4f3-e2d1-0987-6543-210fedcba987",
             "providesServices": ["7f8a9b0c-1d2e-3456-7890-abcdef123456"],
             "nonWorkingDays": []
           },
           {
             "employeeId": "emp-vzglyad-002",
+            "role": "eyebrow-extension-specialist",
             "name": "София Новикова",
             "photo": "https://example.com/sofia_novikova.jpg",
             "title": "Бровист",
@@ -193,13 +198,15 @@
             "name": "Наращивание ресниц",
             "serviceId": "7f8a9b0c-1d2e-3456-7890-abcdef123456",
             "durationInMinutes": 120,
+            "price": 2000,
             "tag": "eyelash-extensions"
           },
           {
             "name": "Ламинирование бровей",
             "serviceId": "8a9b0c1d-2e3f-4567-8901-abcdef1234567",
             "durationInMinutes": 60,
-            "tag": "eyelash-extensions"
+            "price": 1500,
+            "tag": "eyebrow-lamination"
           }
         ],
         "photo": "https://example.com/lash_brow_center.jpg"
@@ -222,6 +229,7 @@
         "employees": [
           {
             "employeeId": "emp-lezvie-001",
+            "role": "barber",
             "name": "Дмитрий Морозов",
             "photo": "https://example.com/dmitriy_morozov.jpg",
             "title": "Барбер",
@@ -238,12 +246,14 @@
             "name": "Мужская стрижка",
             "serviceId": "9b0c1d2e-3f4a-5678-9012-abcdef12345678",
             "durationInMinutes": 45,
+            "price": 800,
             "tag": "hairdressing"
           },
           {
             "name": "Бритье горячим полотенцем",
             "serviceId": "0c1d2e3f-4a5b-6789-0123-bcdef123456789",
             "durationInMinutes": 30,
+            "price": 600,
             "tag": "beard-shave"
           }
         ],
@@ -267,6 +277,7 @@
         "employees": [
           {
             "employeeId": "emp-serenity-001",
+            "role": "massage-therapist",
             "name": "Наталья Соколова",
             "photo": "https://example.com/natalya_sokolova.jpg",
             "title": "Массажист",
@@ -283,12 +294,14 @@
             "name": "Шведский массаж",
             "serviceId": "1d2e3f4a-5b6c-7890-1234-cdef1234567890",
             "durationInMinutes": 60,
+            "price": 1800,
             "tag": "massage"
           },
           {
             "name": "Скраб для тела",
             "serviceId": "2e3f4a5b-6c7d-8901-2345-def12345678901",
             "durationInMinutes": 45,
+            "price": 1500,
             "tag": "spa-treatment"
           }
         ],
@@ -312,6 +325,7 @@
         "employees": [
           {
             "employeeId": "emp-hairloom-001",
+            "role": "hairdresser",
             "name": "Екатерина Федорова",
             "photo": "https://example.com/ekaterina_fedorova.jpg",
             "title": "Парикмахер-стилист",
@@ -324,6 +338,7 @@
           },
           {
             "employeeId": "emp-hairloom-002",
+            "role": "colorist",
             "name": "Алексей Иванов",
             "photo": "https://example.com/aleksey_ivanov.jpg",
             "title": "Мастер по окрашиванию",
@@ -337,12 +352,14 @@
             "name": "Окрашивание и мелирование",
             "serviceId": "3f4a5b6c-7d8e-9012-3456-ef123456789012",
             "durationInMinutes": 180,
+            "price": 3500,
             "tag": "hairdressing"
           },
           {
             "name": "Укладка феном",
             "serviceId": "4a5b6c7d-8e9f-0123-4567-f1234567890123",
             "durationInMinutes": 45,
+            "price": 500,
             "tag": "hairdressing"
           }
         ],
@@ -366,6 +383,7 @@
         "employees": [
           {
             "employeeId": "emp-shelk-001",
+            "role": "hair-removal-specialist",
             "name": "Виктория Белова",
             "photo": "https://example.com/viktoriya_belova.jpg",
             "title": "Мастер по депиляции",
@@ -382,12 +400,14 @@
             "name": "Восковая депиляция ног",
             "serviceId": "5b6c7d8e-9f0a-1234-5678-1234567890123",
             "durationInMinutes": 60,
+            "price": 1000,
             "tag": "waxing"
           },
           {
             "name": "Восковая депиляция бровей",
             "serviceId": "6c7d8e9f-0a1b-2345-6789-2345678901234",
             "durationInMinutes": 15,
+            "price": 400,
             "tag": "waxing"
           }
         ],
@@ -411,6 +431,7 @@
         "employees": [
           {
             "employeeId": "emp-gentle-001",
+            "role": "massage-therapist",
             "name": "Артем Николаев",
             "photo": "https://example.com/artem_nikolaev.jpg",
             "title": "Массажист-терапевт",
@@ -427,12 +448,14 @@
             "name": "Глубокий массаж тканей",
             "serviceId": "7d8e9f0a-1b2c-3456-7890-3456789012345",
             "durationInMinutes": 75,
+            "price": 2200,
             "tag": "nassage"
           },
           {
             "name": "Массаж горячими камнями",
             "serviceId": "8e9f0a1b-2c3d-4567-8901-4567890123456",
             "durationInMinutes": 90,
+            "price": 2500,
             "tag": "nassage"
           }
         ],
@@ -456,6 +479,7 @@
         "employees": [
           {
             "employeeId": "emp-hub-001",
+            "role": "beautician",
             "name": "Светлана Васильева",
             "photo": "https://example.com/svetlana_vasilyeva.jpg",
             "title": "Универсальный мастер красоты",
@@ -468,6 +492,7 @@
           },
           {
             "employeeId": "emp-hub-002",
+            "role": "makeup-artist",
             "name": "Павел Захаров",
             "photo": "https://example.com/pavel_zaharov.jpg",
             "title": "Визажист",
@@ -481,12 +506,14 @@
             "name": "Пакет «Уход за лицом и массаж»",
             "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
             "durationInMinutes": 120,
+            "price": 3800,
             "tag": "bundle"
           },
           {
             "name": "Полное преображение",
             "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
             "durationInMinutes": 150,
+            "price": 5000,
             "tag": "makeup"
           }
         ],
