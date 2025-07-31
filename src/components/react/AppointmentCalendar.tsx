@@ -5,6 +5,8 @@ import { DateTime } from "luxon";
 import type { DayPickerProps, OnSelectHandler } from "react-day-picker";
 import { enGB, ru } from "react-day-picker/locale";
 import { useTranslation } from "react-i18next";
+import { format } from "date-fns";
+import { capitalize } from "src/lib/utils";
 
 const locales = {
   ru: ru,
@@ -60,6 +62,14 @@ AppointmentCalendarProps) => {
           required
           disabled={disabled}
           locale={locales[locale]}
+          formatters={{
+            formatWeekdayName: (day) => {
+              const name = capitalize(
+                format(day, "EEEEEE", { locale: locales[locale] })
+              );
+              return name;
+            },
+          }}
         />
       </Card>
     </div>

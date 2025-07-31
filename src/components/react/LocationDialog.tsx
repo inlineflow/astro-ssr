@@ -139,6 +139,10 @@ const LocationDetails = ({ location }: { location: Location }) => {
           )} - ${DateTime.fromISO(location.closingTime).toFormat("T")}`}
         </p>
       </div>
+      <div className="flex gap-x-2 justify-center">
+        <p>{t("location.address")}:</p>
+        <p>{location.address}</p>
+      </div>
     </div>
   );
 };

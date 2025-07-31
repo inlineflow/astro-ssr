@@ -29,7 +29,8 @@
   "location.available_services": "Предоставляемые услуги",
   "location.employees": "Мастера",
   "location.working_hours": "Рабочее время",
-  "location.nav_appointment": "Записаться визит",
+  "location.nav_appointment": "Записаться на визит",
+  "location.address": "Адрес",
   "employee.photo": "Фотография мастера",
   "employees": "Мастера"
 }

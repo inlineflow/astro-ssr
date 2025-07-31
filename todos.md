@@ -21,8 +21,6 @@ Make your own component for selecting services/employees
 
 # Rework timeblocks to accept the current service and re-render to show available blocks
 
-# Expand Service type to show how long the procedure takes and show the cost
-
 # Localize calendar to KG
 
 # Add localization to KG
@@ -56,3 +54,7 @@ The user should be able to search by service in an area close to them, if they a
 Move search to location/index.astro
 
 # Consider changing employee title/role to a tag based system for i18n purposes
+
+# Add sheet search for mobile
+
+# Expand Service type to show how long the procedure takes and show the cost
