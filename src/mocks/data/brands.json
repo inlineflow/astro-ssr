@@ -55,7 +55,8 @@
             "tag": "pedicure"
           }
         ],
-        "photo": "https://example.com/sharm_center.jpg"
+        "photo": "https://example.com/sharm_center.jpg",
+        "locationTypes": ["hair-salon", "nail-salon"]
       }
     ]
   },
@@ -108,7 +109,8 @@
             "tag": "nail-polish"
           }
         ],
-        "photo": "https://example.com/azhur_vysota.jpg"
+        "photo": "https://example.com/azhur_vysota.jpg",
+        "locationTypes": ["nail-salon"]
       }
     ]
   },
@@ -155,7 +157,8 @@
             "tag": "skincare"
           }
         ],
-        "photo": "https://example.com/spa_gorod.jpg"
+        "photo": "https://example.com/spa_gorod.jpg",
+        "locationTypes": ["spa"]
       }
     ]
   },
@@ -209,7 +212,8 @@
             "tag": "eyebrow-lamination"
           }
         ],
-        "photo": "https://example.com/lash_brow_center.jpg"
+        "photo": "https://example.com/lash_brow_center.jpg",
+        "locationTypes": ["eyelash-services"]
       }
     ]
   },
@@ -257,7 +261,8 @@
             "tag": "beard-shave"
           }
         ],
-        "photo": "https://example.com/muzhskoy_kabinet.jpg"
+        "photo": "https://example.com/muzhskoy_kabinet.jpg",
+        "locationTypes": ["hair-salon"]
       }
     ]
   },
@@ -305,7 +310,8 @@
             "tag": "spa-treatment"
           }
         ],
-        "photo": "https://example.com/ubeshishche_relaksa.jpg"
+        "photo": "https://example.com/ubeshishche_relaksa.jpg",
+        "locationTypes": ["spa", "massage-therapy"]
       }
     ]
   },
@@ -363,7 +369,8 @@
             "tag": "hairdressing"
           }
         ],
-        "photo": "https://example.com/nasledie_krasoty_center.jpg"
+        "photo": "https://example.com/nasledie_krasoty_center.jpg",
+        "locationTypes": ["hair-salon"]
       }
     ]
   },
@@ -411,7 +418,8 @@
             "tag": "waxing"
           }
         ],
-        "photo": "https://example.com/waxing_center.jpg"
+        "photo": "https://example.com/waxing_center.jpg",
+        "locationTypes": ["waxing-salon"]
       }
     ]
   },
@@ -459,7 +467,8 @@
             "tag": "nassage"
           }
         ],
-        "photo": "https://example.com/ozdorovitelny_otdyh.jpg"
+        "photo": "https://example.com/ozdorovitelny_otdyh.jpg",
+        "locationTypes": ["massage-therapy"]
       }
     ]
   },
@@ -517,7 +526,8 @@
             "tag": "makeup"
           }
         ],
-        "photo": "https://example.com/beauty_perekrestok.jpg"
+        "photo": "https://example.com/beauty_perekrestok.jpg",
+        "locationTypes": ["spa", "hair-salon", "nail-salon", "eyelash-services"]
       }
     ]
   }

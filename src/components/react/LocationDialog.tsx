@@ -76,7 +76,7 @@ const LocationDetails = ({ location }: { location: Location }) => {
   }));
   return (
     <div className="flex flex-col gap-1">
-      <div className="bg-pink-200 w-52 h-52 rounded-xl self-center mb-3" />
+      <div className="bg-primary/50 w-52 h-52 rounded-xl self-center mb-3" />
       {/* <h3 className="text-center">{t("location.available_services")}</h3> */}
       {/* <ServiceIcons tags={location.services.map((s) => s.tag)} /> */}
       <Accordion type="multiple">

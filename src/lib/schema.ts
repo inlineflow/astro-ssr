@@ -26,6 +26,15 @@ export type ServiceValidated = {
   validated: true;
 };
 
+const locationTypes = [
+  "spa",
+  "hair-salon",
+  "nail-salon",
+  "massage-therapy",
+  "eyelash-services",
+  "waxing-salon",
+] as const;
+
 export const locationSchema = z.object({
   locationId: z.string().uuid(),
   openingTime: z.string().datetime(),
@@ -37,6 +46,7 @@ export const locationSchema = z.object({
   employees: z.array(employeeSchema),
   services: z.array(serviceSchema),
   photo: z.string().url().optional(),
+  locationTypes: z.array(z.enum(locationTypes)),
 });
 export type Location = z.infer<typeof locationSchema>;
 

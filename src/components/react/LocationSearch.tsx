@@ -27,7 +27,7 @@ export const LocationSearch = ({ locations }: { locations: Location[] }) => {
             ))}
           </ul>
         </Card>
-        <Card className="px-3 py-3 bg-pink-50">
+        <Card className="px-3 py-3 bg-accent">
           {locations && (
             <ul className="flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-3 lg:grid-cols-4">
               {locations.map((loc) => (

@@ -9,6 +9,7 @@ import {
 // import ServiceIcons from "components/astro/service-icons.astro";
 import { Clock, MapPin } from "lucide-react";
 import { DateTime } from "luxon";
+import { useTranslation } from "react-i18next";
 import type { Location, LocationLight } from "src/lib/schema";
 import { commonContainerClasses, serviceStyles } from "src/lib/service";
 
@@ -25,6 +26,8 @@ export const LocCard = ({
     location.services.map((s) => s.tag).includes(i.tag)
   );
 
+  const { t } = useTranslation();
+
   return (
     <Card
       className="text-center px-4 py-4 h-full"
@@ -39,11 +42,20 @@ export const LocCard = ({
           // location.photo ? (
           //   <img src={location.photo} />
           // ) : (
-          <div className="bg-pink-200 w-52 h-52 rounded-xl self-center" />
+          <div className="bg-primary/20 w-52 h-52 rounded-xl self-center" />
           // )
         }
         <div className="divider bg-border h-0.5 my-1 w-full"></div>
-        <div className="flex space-x-2">
+        <div className="flex">
+          <div>
+            <p>
+              {location.services.length}
+              &ensp;
+              {t("services")}
+            </p>
+          </div>
+        </div>
+        {/* <div className="flex space-x-2">
           {
             availableServicesIcons.map((i) => (
               <div
@@ -67,21 +79,25 @@ export const LocCard = ({
             //   </div>
             // )
           }
-        </div>
+        </div> */}
       </CardContent>
-      <CardFooter className="items-center gap-1 px-0 min-h-fit h-4 flex-col md:flex md:gap-0 mt-auto">
+      <CardFooter className="gap-1 px-0 min-h-fit h-4 flex-col md:flex md:gap-1 mt-auto">
         <div className="divider bg-border h-0.5 my-1"></div>
-        <div className="flex">
-          <div className="flex gap-2 justify-center items-center">
+        <div className="flex w-full">
+          <div className="flex gap-2 w-full">
             <Clock />
-            <p className="text-nowrap">
-              {`${open.toFormat("T")} — ${close.toFormat("T")}`}
-            </p>
+            <div className="flex w-full gap-x-3 justify-center text-nowrap">
+              {/* {`${open.toFormat("T")} — ${close.toFormat("T")}`} */}
+              {/* <p>{`${open.toFormat("T")}${close.toFormat("T")}`}</p> */}
+              <p>{open.toFormat("T")}</p>
+              <p> — </p>
+              <p>{close.toFormat("T")}</p>
+            </div>
           </div>
         </div>
-        <div className="flex space-x-1 shrink justify-center items-center">
+        <div className="flex gap-2 shrink w-full">
           <MapPin className="size-6 shrink-0" />
-          <p className="">{location.address}</p>
+          <p className="m-auto text-sm">{location.address}</p>
         </div>
       </CardFooter>
     </Card>

@@ -23,21 +23,24 @@ export const serviceStyles = [
         className={cn("stroke-black/65", className)}
       />
     ),
-    bgColor: "bg-yellow-100",
+    // bgColor: "bg-yellow-100",
+    bgColor: "bg-accent",
     bgHighlight: "data-[selected=true]:bg-yellow-200",
     classList: [],
   },
   {
     tag: "nail-polish",
     Icon: NailPolishLogo,
-    bgColor: "bg-pink-100",
+    // bgColor: "bg-pink-100",
+    bgColor: "bg-accent",
     bgHighlight: "data-[selected=true]:bg-pink-200",
     classList: [],
   },
   {
     tag: "pedicure",
     Icon: NailPolishLogo,
-    bgColor: "bg-cyan-100",
+    // bgColor: "bg-cyan-100",
+    bgColor: "bg-accent",
     bgHighlight: "data-[selected=true]:bg-cyan-200",
     classList: [],
   },
