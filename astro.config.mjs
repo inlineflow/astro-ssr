@@ -21,6 +21,14 @@ export default defineConfig({
     }
   },
   site: "https://example.com",
+  server: {
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'astro-ssr-falling-resonance-9559.fly.dev',
+      // 'all'
+    ]
+  }
 });
 
 if (import.meta.env.DEV) {
