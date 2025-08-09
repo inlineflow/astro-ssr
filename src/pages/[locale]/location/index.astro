@@ -16,6 +16,10 @@ const { data: locations, error } = await Astro.callAction(
   {}
 );
 
+if (error) {
+  console.log("Error: ", error);
+}
+
 // console.log("brands: ", JSON.stringify(brands, null, 2));
 ---
 

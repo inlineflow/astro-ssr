@@ -10,14 +10,12 @@ type Link = {
 
 const currentLocale = Astro.currentLocale;
 const url = Astro.request.url;
-console.log("Url: ", url);
 
 const x = languages.map((l) => ({
   langTag: l,
   link: url.replace(Astro.currentLocale!, l),
   langName: capitalize(new Intl.DisplayNames([l], { type: "language" }).of(l)!),
 }));
-console.log("x: ", x);
 
 export type LangLink = (typeof x)[number];
 
