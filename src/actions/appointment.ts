@@ -1,12 +1,12 @@
 import { defineAction } from "astro:actions";
-import { baseUrl } from "../env";
+import { apiUrl } from "../env";
 import { DateTime } from "luxon";
 import { AppointmentSchema } from "../lib/schema";
 
 export const appointment = {
   getBookedAppointemnts: defineAction({
     handler: async () => {
-      const resp = await fetch(`${baseUrl}/appointments/booked`);
+      const resp = await fetch(`${apiUrl}/appointments/booked`);
       const result = (await resp.json()) as string[];
       const dates = result.map((i) => DateTime.fromISO(i));
       return dates;
@@ -20,7 +20,7 @@ export const appointment = {
         console.log("typeof input: ", typeof input);
         console.log("JSON.stringify(input): ", JSON.stringify(input));
 
-        const resp = await fetch(`${baseUrl}/appointment`, {
+        const resp = await fetch(`${apiUrl}/appointment`, {
           headers: {
             "Content-Type": "application/json",
           },

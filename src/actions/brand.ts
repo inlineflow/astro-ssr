@@ -2,7 +2,7 @@ import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import type { APIError } from "../lib/types";
 import type { Brand } from "src/lib/schema";
-import { baseUrl } from "../env";
+import { apiUrl } from "../env";
 
 export const brand = {
   getBrand: defineAction({
@@ -10,7 +10,7 @@ export const brand = {
       id: z.string().uuid(),
     }),
     handler: async (input) => {
-      const resp = await fetch(`${baseUrl}/brand/${input.id}`);
+      const resp = await fetch(`${apiUrl}/brand/${input.id}`);
       const result = (await resp.json()) as Brand | APIError;
       if ("error" in result) {
         throw new ActionError({
@@ -23,7 +23,7 @@ export const brand = {
   }),
   getAllBrands: defineAction({
     handler: async () => {
-      const resp = await fetch(`${baseUrl}/brand`);
+      const resp = await fetch(`${apiUrl}/brand`);
       const result = (await resp.json()) as Brand[] | APIError;
       if ("error" in result) {
         throw new ActionError({

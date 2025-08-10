@@ -3,6 +3,7 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_MSW_ENABLED: string;
+  readonly API_URL: string;
 }
 
 interface ImportMeta {
@@ -16,4 +17,4 @@ interface ImportMeta {
 //   export default ReactComponent;
 // }
 
-export {};
+export { };
