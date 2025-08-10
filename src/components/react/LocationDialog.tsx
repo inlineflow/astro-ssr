@@ -37,12 +37,12 @@ export const LocationDialog = ({
 
   return (
     <Dialog defaultOpen={false} open={isOpen} onOpenChange={setOpen}>
-      <DialogContent className="[&>[data-slot=dialog-close]>svg]:size-6">
+      <DialogContent className="[&>[data-slot=dialog-close]>svg]:size-6 h-[calc(100%-4rem)] flex flex-col">
         <DialogHeader>
           <DialogTitle>{location.name}</DialogTitle>
         </DialogHeader>
 
-        <ScrollArea className="w-full h-96 max-w-full max-h-full">
+        <ScrollArea className="w-full min-h-96 flex-grow max-w-full max-h-full">
           <LocationDetails location={location} />
         </ScrollArea>
         <DialogFooter>
