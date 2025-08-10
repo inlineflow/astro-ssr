@@ -1,10 +1,15 @@
 FROM node:lts-alpine AS runtime
 WORKDIR /app
 
+# COPY . .
+COPY pnpm-lock.yaml ./
+COPY package.json ./
+RUN npm install -g pnpm && pnpm ci --frozen-lockfile
+
+RUN pnpm fetch
 COPY . .
 
-RUN npm install
-# RUN npm run build
+# RUN pnpm ci
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
