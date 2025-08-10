@@ -43,5 +43,9 @@
   "employee.role.hair-removal-specialist": "Мастер по депиляции",
   "employee.role.makeup-artist": "Визажист",
   "employee.role.beautician": "Мастер красоты",
-  "employees": "Мастера"
+  "employees": "Мастера",
+  "search": "Поиск",
+  "search.title": "Гибкий поиск салонов",
+  "search.description": ""
+
 }

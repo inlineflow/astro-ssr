@@ -9,15 +9,16 @@ import { useState } from "react";
 import { LocationDialog } from "./LocationDialog";
 import { I18nextProvider } from "react-i18next";
 import i18n from "src/lib/i18n";
-
-export const LocationSearch = ({ locations }: { locations: Location[] }) => {
+import { LocationSearchPanel } from "./LocationSearchPanel";
+export const LocationGallery = ({ locations }: { locations: Location[] }) => {
   const [isOpen, setOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState({} as Location);
 
   return (
     <I18nextProvider i18n={i18n}>
       <div className="flex flex-col gap-5">
-        <Input />
+        {/* <Input /> */}
+        <LocationSearchPanel />
         <Card className="px-3 py-3">
           <ul className="flex gap-3">
             {serviceStyles.map((s) => (

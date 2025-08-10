@@ -82,7 +82,7 @@ const LocationDetails = ({ location }: { location: Location }) => {
       <Accordion type="multiple">
         {/* className="flex flex-col max-w-fit self-center"> */}
         <AccordionItem value="services">
-          <AccordionTrigger className="w-full px-4 border-none outline-0 focus-visible:ring-0">
+          <AccordionTrigger className="w-full border-none outline-0 focus-visible:ring-0">
             {/* // className="border-none flex outline-0 self-center"> */}
             {t("services")}
             {/* <ChevronDown /> */}
@@ -110,7 +110,7 @@ const LocationDetails = ({ location }: { location: Location }) => {
         </AccordionItem>
 
         <AccordionItem value="employees">
-          <AccordionTrigger className="w-full px-4 border-none outline-0 focus-visible:ring-0">
+          <AccordionTrigger className="w-full border-none outline-0 focus-visible:ring-0">
             {t("employees")}
           </AccordionTrigger>
           <AccordionContent>

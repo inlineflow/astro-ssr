@@ -62,3 +62,5 @@ Move search to location/index.astro
 <!-- # Add api to api url and calls -->
 
 <!-- # Fix separator spacing --- change card gap -->
+
+# Make good styles for the location dialog

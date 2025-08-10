@@ -8,7 +8,7 @@ import ErrorMessage from "components/astro/error-message.astro";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import i18n from "src/lib/i18n";
 // import { serviceStyles } from "src/lib/service";
-import { LocationSearch } from "src/components/react/LocationSearch";
+import { LocationGallery } from "src/components/react/LocationGallery";
 
 export const prerender = false;
 const { data: locations, error } = await Astro.callAction(
@@ -31,7 +31,7 @@ if (error) {
       >
         <p>{i18n.t("brands.title")}</p>
       </Card>
-      {locations && <LocationSearch locations={locations} client:load />}
+      {locations && <LocationGallery locations={locations} client:load />}
     </div>
     {error && <ErrorMessage errors={[error]} />}
   </div>
