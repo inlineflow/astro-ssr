@@ -59,4 +59,6 @@ Move search to location/index.astro
 
 # Expand Service type to show how long the procedure takes and show the cost
 
-# Add api to api url and calls
+<!-- # Add api to api url and calls -->
+
+<!-- # Fix separator spacing --- change card gap -->
