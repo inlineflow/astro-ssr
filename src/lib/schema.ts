@@ -26,7 +26,7 @@ export type ServiceValidated = {
   validated: true;
 };
 
-const locationTypes = [
+export const locationTypes = [
   "spa",
   "hair-salon",
   "nail-salon",

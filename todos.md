@@ -64,3 +64,7 @@ Move search to location/index.astro
 <!-- # Fix separator spacing --- change card gap -->
 
 # Make good styles for the location dialog
+
+# Consider allowing multiple location types per location and tie location services to location types, then out of all possible services for a given location type store the services a location actually provides.
+
+This way it will be easier to filter, because a single location could be found both by type (generic) and specific services that it offers (specific).
