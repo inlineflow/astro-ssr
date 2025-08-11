@@ -46,6 +46,8 @@
   "employees": "Мастера",
   "search": "Поиск",
   "search.title": "Гибкий поиск салонов",
-  "search.description": ""
-
+  "search.description": "",
+  "search.working_hours": "Рабочее время",
+  "search.opening_time": "От",
+  "search.closing_time": "До"
 }

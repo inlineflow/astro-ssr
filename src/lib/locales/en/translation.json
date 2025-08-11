@@ -32,5 +32,8 @@
   "location.nav_appointment": "Make an appointment",
   "location.address": "Address",
   "employee.photo": "Employee photo",
-  "employees": "Employees"
+  "employees": "Employees",
+  "search.working_hours": "Working Hours",
+  "search.opening_time": "Opens",
+  "search.closing_time": "Closes"
 }
