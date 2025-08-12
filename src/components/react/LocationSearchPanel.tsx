@@ -94,6 +94,7 @@ const LocationSearch = () => {
           </SelectContent>
         </Select>
       </div>
+      <Button>Submit</Button>
     </div>
   );
   // Working time from and to
