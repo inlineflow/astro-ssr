@@ -24,7 +24,6 @@ const locationHandlers = [
     `${apiUrl}/location/search`,
     async ({ request }) => {
       const body = await request.json();
-      // const data = locations;
       let result = locations;
       if (typeof body.name === "string") {
         result = result.filter((r) => r.name === body.name);

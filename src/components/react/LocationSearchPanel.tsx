@@ -1,3 +1,4 @@
+import { actions } from "astro:actions";
 import { Button } from "@/ui/button";
 import { Card } from "@/ui/card";
 import { Input } from "@/ui/input";
@@ -54,13 +55,18 @@ const fetchNewLocations = async (
   params: LocationSearchParams,
   setLocations: (l: Location[]) => void
 ) => {
-  const resp = await fetch(`${apiUrl}/location/search`, {
-    body: JSON.stringify(params),
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-  });
-  const result = await resp.json();
-  setLocations(result);
+  const { data, error } = await actions.location.searchLocations(params);
+  if (error) {
+    console.log("Error when searching for actions, params: ", params);
+    return;
+  }
+  // const resp = await fetch(`${apiUrl}/location/search`, {
+  //   body: JSON.stringify(params),
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  // });
+  // const result = await resp.json();
+  setLocations(data);
 };
 
 // const fetchNewLocations = async (

@@ -56,13 +56,20 @@ const lightLocationSchema = locationSchema.omit({
 });
 export type LocationLight = z.infer<typeof lightLocationSchema>;
 export type LocationType = (typeof locationTypes)[number];
-export type LocationSearchParams = {
-  name?: string;
-  opens_at?: string;
-  closes_at?: string;
-  location_type?: LocationType;
-  // location_type?: string;
-};
+export const LocationSearchParamsSchema = z.object({
+  name: z.string().optional(),
+  opens_at: z.string().optional(),
+  closes_at: z.string().optional(),
+  location_type: z.enum(locationTypes).optional(),
+});
+export type LocationSearchParams = z.infer<typeof LocationSearchParamsSchema>;
+// export type LocationSearchParams = {
+//   name?: string;
+//   opens_at?: string;
+//   closes_at?: string;
+//   location_type?: LocationType;
+//   // location_type?: string;
+// };
 
 export const brandSchema = z.object({
   id: z.string().uuid(),
