@@ -70,3 +70,5 @@ Move search to location/index.astro
 This way it will be easier to filter, because a single location could be found both by type (generic) and specific services that it offers (specific).
 
 # After submitting search run a query to the server and update locations in locations search
+
+# SETUP MSW IN THE BROWSER

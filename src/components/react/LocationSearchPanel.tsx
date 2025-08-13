@@ -17,8 +17,16 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/ui/sheet";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { locationTypes } from "src/lib/schema";
+import { apiUrl } from "src/env";
+import {
+  locationTypes,
+  type Location,
+  type LocationSearchParams,
+  type LocationType,
+} from "src/lib/schema";
+import { UseLocationGalleryData } from "./LocationGalleryContext";
 
 export const LocationSearchPanel = () => {
   const { t } = useTranslation();
@@ -42,21 +50,53 @@ export const LocationSearchPanel = () => {
   );
 };
 
+const fetchNewLocations = async (
+  params: LocationSearchParams,
+  setLocations: (l: Location[]) => void
+) => {
+  const resp = await fetch(`${apiUrl}/location/search`, {
+    body: JSON.stringify(params),
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+  const result = await resp.json();
+  setLocations(result);
+};
+
+// const fetchNewLocations = async (
+//   params: LocationSearchParams,
+//   locations: Location[],
+//   setLocations: (l: Location[]) => void
+// ) => {
+//   const res = locations.filter((l) => l.name === params.name);
+//   console.log(res);
+//   setLocations(res);
+// };
+
 const LocationSearch = () => {
+  const { setLocations } = UseLocationGalleryData();
   const { t } = useTranslation();
   const slots = Array.from({ length: 23 }, (_, i) => `${i}:00`);
+  const [params, setParams] = useState<LocationSearchParams>({});
 
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-1">
         <Label>{t("search.location_name")}</Label>
-        <Input />
+        <Input
+          onChange={(ev) => setParams({ ...params, name: ev.target.value })}
+          value={params.name}
+        />
       </div>
       <Card className="px-4">
         <Label>{t("search.working_hours")}</Label>
         <div className="flex w-full max-w-sm items-center gap-3">
           <div className="flex flex-col gap-3">
-            <Select>
+            <Select
+              onValueChange={(opens_at) =>
+                setParams({ ...params, opens_at: opens_at })
+              }
+            >
               <SelectTrigger>
                 <SelectValue placeholder={t("search.opening_time")} />
               </SelectTrigger>
@@ -68,7 +108,11 @@ const LocationSearch = () => {
             </Select>
           </div>
           <div className="flex flex-col gap-3">
-            <Select>
+            <Select
+              onValueChange={(closes_at) =>
+                setParams({ ...params, closes_at: closes_at })
+              }
+            >
               <SelectTrigger>
                 <SelectValue placeholder={t("search.closing_time")} />
               </SelectTrigger>
@@ -83,7 +127,14 @@ const LocationSearch = () => {
       </Card>
       <div className="flex flex-col gap-1 w-full">
         <Label>{t("search.location_type")}</Label>
-        <Select>
+        <Select
+          onValueChange={(location_type) =>
+            setParams({
+              ...params,
+              location_type: location_type as LocationType,
+            })
+          }
+        >
           <SelectTrigger className="w-full">
             <SelectValue placeholder={t("search.location_type")} />
           </SelectTrigger>
@@ -94,7 +145,9 @@ const LocationSearch = () => {
           </SelectContent>
         </Select>
       </div>
-      <Button>Submit</Button>
+      <Button onClick={() => fetchNewLocations(params, setLocations)}>
+        Submit
+      </Button>
     </div>
   );
   // Working time from and to
