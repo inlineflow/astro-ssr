@@ -53,10 +53,10 @@ export const BusinessSignUpForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{i18n.t("form.business_name")}</FormLabel>
+                <FormLabel>{i18n.t("form.brand_name")}</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder={i18n.t("form.business_name_placeholder")}
+                    placeholder={i18n.t("form.brand_name_placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -69,11 +69,11 @@ export const BusinessSignUpForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{i18n.t("form.business_email")}</FormLabel>
+                <FormLabel>{i18n.t("form.brand_email")}</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
-                    placeholder={i18n.t("form.business_email_placeholder")}
+                    placeholder={i18n.t("form.brand_email_placeholder")}
                     {...field}
                   />
                 </FormControl>
@@ -88,7 +88,10 @@ export const BusinessSignUpForm = () => {
               <FormItem>
                 <FormLabel>{i18n.t("form.phone_number")}</FormLabel>
                 <FormControl>
-                  <Input placeholder={i18n.t("form.phone_number")} {...field} />
+                  <Input
+                    placeholder={i18n.t("form.phone_number_placeholder")}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -112,6 +115,9 @@ export const BusinessSignUpForm = () => {
               </FormItem>
             )}
           ></FormField>
+          <a href={`/${i18n.language}/business-login`}>
+            {i18n.t("form.business_signup_signing")}
+          </a>
           <Button>{i18n.t("form.submit")}</Button>
         </form>
       </Form>

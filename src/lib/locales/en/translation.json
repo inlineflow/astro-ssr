@@ -35,9 +35,5 @@
   "employees": "Employees",
   "search.working_hours": "Working Hours",
   "search.opening_time": "Opens",
-  "search.closing_time": "Closes",
-  "form.business_description.optional": "Описание (опционально)",
-  "form.business_name": "Название салона",
-  "form.business_email": "Адрес электронной почты",
-  "form.phone_number": "Номер телефона"
+  "search.closing_time": "Closes"
 }

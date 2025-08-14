@@ -50,5 +50,16 @@
   "search.description": "",
   "search.working_hours": "Рабочее время",
   "search.opening_time": "От",
-  "search.closing_time": "До"
+  "search.closing_time": "До",
+  "form.business_description.optional": "Описание (опционально)",
+  "form.brand_name": "Название сети салонов",
+  "form.brand_name_empty": "Введите название сети салонов",
+  "form.brand_name_placeholder": "Звезда",
+  "form.brand_email": "Адрес электронной почты",
+  "form.email_invalid": "Введите действительный адрес электронной почты",
+  "form.brand_email_placeholder": "zvezda@gmail.com",
+  "form.phone_number": "Номер телефона",
+  "form.phone_empty": "Введите действительный номер телефона",
+  "form.phone_number_placeholder": "+996",
+  "form.business_signup_signing": "Или зайдите в уже существующий аккаунт"
 }
