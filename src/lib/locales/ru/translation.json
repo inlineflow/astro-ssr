@@ -61,5 +61,5 @@
   "form.phone_number": "Номер телефона",
   "form.phone_empty": "Введите действительный номер телефона",
   "form.phone_number_placeholder": "+996",
-  "form.business_signup_signing": "Или зайдите в уже существующий аккаунт"
+  "form.business_signup_signin": "Или зайдите в уже существующий аккаунт"
 }
