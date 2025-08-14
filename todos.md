@@ -70,3 +70,11 @@ Move search to location/index.astro
 This way it will be easier to filter, because a single location could be found both by type (generic) and specific services that it offers (specific).
 
 # Implement dashboard with a collapsible sidebar, on mobile toggle the sidebar via hamburger menu
+
+# Check this out for navbar
+
+https://www.shadcnblocks.com/block/navbar1
+
+# Add autocomplete to forms
+
+https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands/
