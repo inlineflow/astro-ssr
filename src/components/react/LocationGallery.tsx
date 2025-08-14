@@ -10,7 +10,10 @@ import { LocationDialog } from "./LocationDialog";
 import { I18nextProvider } from "react-i18next";
 import i18n from "src/lib/i18n";
 import { LocationSearchPanel } from "./LocationSearchPanel";
-import { LocationGalleryProvider, UseLocationGalleryData } from "./LocationGalleryContext";
+import {
+  LocationGalleryProvider,
+  UseLocationGalleryData,
+} from "./LocationGalleryContext";
 export const LocationGallery = ({ locations }: { locations: Location[] }) => {
   const [isOpen, setOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState({} as Location);
@@ -31,7 +34,12 @@ export const LocationGallery = ({ locations }: { locations: Location[] }) => {
             </ul>
           </Card>
           {/* <Card className="px-3 py-3"> */}
-          {locations && <LocationGrid setOpen={setOpen} setSelectedLocation={setSelectedLocation} />}
+          {locations && (
+            <LocationGrid
+              setOpen={setOpen}
+              setSelectedLocation={setSelectedLocation}
+            />
+          )}
           {/* </Card> */}
           <LocationDialog
             isOpen={isOpen}
@@ -44,7 +52,13 @@ export const LocationGallery = ({ locations }: { locations: Location[] }) => {
   );
 };
 
-const LocationGrid = ({ setSelectedLocation, setOpen }: { setSelectedLocation: (l: Location) => void, setOpen: (b: boolean) => void }) => {
+const LocationGrid = ({
+  setSelectedLocation,
+  setOpen,
+}: {
+  setSelectedLocation: (l: Location) => void;
+  setOpen: (b: boolean) => void;
+}) => {
   const { locations } = UseLocationGalleryData();
 
   return (
@@ -62,5 +76,5 @@ const LocationGrid = ({ setSelectedLocation, setOpen }: { setSelectedLocation: (
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};

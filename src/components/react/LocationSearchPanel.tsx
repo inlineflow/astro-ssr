@@ -31,9 +31,10 @@ import { UseLocationGalleryData } from "./LocationGalleryContext";
 
 export const LocationSearchPanel = () => {
   const { t } = useTranslation();
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   return (
-    <Sheet>
+    <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
       <SheetTrigger asChild>
         <Button variant="outline">{t("search")}</Button>
       </SheetTrigger>
@@ -43,7 +44,7 @@ export const LocationSearchPanel = () => {
           <SheetDescription>{t("search.description")}</SheetDescription>
         </SheetHeader>
         <div className="px-4">
-          <LocationSearch />
+          <LocationSearch setSheetOpen={setSheetOpen} />
         </div>
         <SheetFooter>footer</SheetFooter>
       </SheetContent>
@@ -79,7 +80,11 @@ const fetchNewLocations = async (
 //   setLocations(res);
 // };
 
-const LocationSearch = () => {
+const LocationSearch = ({
+  setSheetOpen,
+}: {
+  setSheetOpen: (b: boolean) => void;
+}) => {
   const { setLocations } = UseLocationGalleryData();
   const { t } = useTranslation();
   const slots = Array.from({ length: 23 }, (_, i) => `${i}:00`);
@@ -151,7 +156,12 @@ const LocationSearch = () => {
           </SelectContent>
         </Select>
       </div>
-      <Button onClick={() => fetchNewLocations(params, setLocations)}>
+      <Button
+        onClick={() => {
+          fetchNewLocations(params, setLocations);
+          setSheetOpen(false);
+        }}
+      >
         Submit
       </Button>
     </div>
