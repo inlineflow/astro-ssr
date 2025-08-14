@@ -20,7 +20,6 @@ import {
 } from "@/ui/sheet";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { apiUrl } from "src/env";
 import {
   locationTypes,
   type Location,

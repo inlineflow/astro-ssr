@@ -1,14 +1,14 @@
 {
-  "form_submit": "Submit",
-  "form_missing_appointment_time": "Please select a timeslot",
-  "form_missing_date": "Pick a date",
-  "form_missing_employee": "Employee is required",
-  "form_missing_service": "Service is required",
+  "form.submit": "Submit",
+  "form.missing_appointment_time": "Please select a timeslot",
+  "form.missing_date": "Pick a date",
+  "form.missing_employee": "Employee is required",
+  "form.missing_service": "Service is required",
   "loading.spinner": "Loading...",
   "appointment.successful.message": "Your appointment is at: ",
   "service": "Service",
   "form.calendar_date": "Calendar Date",
-  "form_timeOfDay_label": "Time of day of the appointment",
+  "form.timeOfDay_label": "Time of day of the appointment",
   "form.pick_a_service": "Choose a service",
   "form.pick_an_employee": "Choose an employee",
   "form.has_errors": "Fill in the required fields",
@@ -35,5 +35,9 @@
   "employees": "Employees",
   "search.working_hours": "Working Hours",
   "search.opening_time": "Opens",
-  "search.closing_time": "Closes"
+  "search.closing_time": "Closes",
+  "form.business_description.optional": "Описание (опционально)",
+  "form.business_name": "Название салона",
+  "form.business_email": "Адрес электронной почты",
+  "form.phone_number": "Номер телефона"
 }

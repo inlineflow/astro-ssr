@@ -29,18 +29,18 @@ import { capitalize } from "src/lib/utils";
 const FormSchema = z.object({
   calendarDate: z
     .string({
-      error: "form_missing_date",
+      error: "form.missing_date",
     })
     .nonempty(),
   timeOfDay: z
     .string({
-      error: i18n.t("form_missing_appointment_time"),
+      error: i18n.t("form.missing_appointment_time"),
     })
-    .nonempty({ error: i18n.t("form_missing_appointment_time") }),
+    .nonempty({ error: i18n.t("form.missing_appointment_time") }),
   serviceOpts: z.object(
     {
-      employeeId: z.uuid({ error: i18n.t("form_missing_employee") }),
-      serviceId: z.uuid({ error: i18n.t("form_missing_service") }),
+      employeeId: z.uuid({ error: i18n.t("form.missing_employee") }),
+      serviceId: z.uuid({ error: i18n.t("form.missing_service") }),
     },
     { error: "Service opts are required" }
   ),
@@ -212,7 +212,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
                       selected={field.value}
                     />
                   </FormControl>
-                  <FormLabel hidden>{i18n.t("form_timeOfDay_label")}</FormLabel>
+                  <FormLabel hidden>{i18n.t("form.timeOfDay_label")}</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
@@ -227,7 +227,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
           </div>
           <Button type="submit" className="w-full mt-5 mb-100">
             {/* Submit */}
-            {t("form_submit")}
+            {t("form.submit")}
           </Button>
         </SelectedServiceProvider>
       </form>
