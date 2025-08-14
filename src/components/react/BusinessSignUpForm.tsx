@@ -115,7 +115,10 @@ export const BusinessSignUpForm = () => {
               </FormItem>
             )}
           ></FormField>
-          <a href={`/${i18n.language}/business-login`}>
+          <a
+            href={`/${i18n.language}/business-login`}
+            className="underline underline-offset-4 text-sm"
+          >
             {i18n.t("form.business_signup_signin")}
           </a>
           <Button>{i18n.t("form.submit")}</Button>

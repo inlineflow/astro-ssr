@@ -14,18 +14,17 @@ import { useForm } from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
 
-const FormSchema = z
-  .object({
-    email: z
-      .email({ message: i18n.t("form.email_invalid") })
-      .nonempty({ message: i18n.t("form.email_empty") }),
-    password: z.string().min(4),
-    confirmPassword: z.string().min(4),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: i18n.t("form.passwords_dont_match"),
-    path: ["confirmPassword"],
-  });
+const FormSchema = z.object({
+  email: z
+    .email({ message: i18n.t("form.email_invalid") })
+    .nonempty({ message: i18n.t("form.email_empty") }),
+  password: z.string().min(4),
+  confirmPassword: z.string().min(4),
+});
+//   .refine((data) => data.password === data.confirmPassword, {
+//     message: i18n.t("form.passwords_dont_match"),
+//     path: ["confirmPassword"],
+//   });
 
 type BusinessLoginFormValues = z.infer<typeof FormSchema>;
 const onSubmit = async (data: BusinessLoginFormValues) => {
@@ -95,10 +94,10 @@ export const BusinessLoginForm = () => {
             )}
           ></FormField>
           <a
-            href={`/${i18n.language}/business-login`}
-            className="underline underline-offset-4"
+            href={`/${i18n.language}/business-sign-up`}
+            className="underline underline-offset-4 text-sm"
           >
-            {i18n.t("form.business_signup_signin")}
+            {i18n.t("form.business_signup")}
           </a>
           <Button>{i18n.t("form.submit")}</Button>
         </form>
