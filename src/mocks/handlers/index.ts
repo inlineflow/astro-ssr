@@ -20,6 +20,25 @@ const brands = await loadData<Brand[]>("brands.json");
 const locations = brands.map((e) => e.locations).flat();
 
 const locationHandlers = [
+  http.get<{ brandId: string }, never, Location[] | APIError>(
+    `${apiUrl}/brand/:brandId/locations`,
+    ({ params }) => {
+      const { brandId } = params;
+      // const brandId = url.searchParams.get("brand");
+      console.log("brandId: ", brandId);
+      // console.log("url.searchParams: ", url.searchParams);
+
+      if (!brandId) {
+        const error: APIError = {
+          error: { message: "Brand not found", status: 404 },
+        };
+        return HttpResponse.json(error);
+      }
+
+      const data = brands.find((b) => b.id === brandId)?.locations;
+      return HttpResponse.json(data);
+    }
+  ),
   http.post<never, LocationSearchParams, Location[]>(
     `${apiUrl}/location/search`,
     async ({ request }) => {

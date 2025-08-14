@@ -1,0 +1,22 @@
+---
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
+import { BusinessDashboard as Dashboard } from "src/components/react/BusinessDashboard";
+import { actions } from "astro:actions";
+import ErrorMessage from "components/astro/error-message.astro";
+export const prerender = false;
+// const x = actions.location.getLocationsByBrandId("123");
+const url = Astro.url;
+const brandId = url.searchParams.get("brand");
+if (!brandId) {
+  return Astro.rewrite("/404");
+}
+const { data: locations, error } = await Astro.callAction(
+  actions.location.getLocationsByBrandId,
+  brandId
+);
+---
+
+<CenteredLayout>
+  {locations && <Dashboard locations={locations} />}
+  {error && <ErrorMessage errors={[error]} />}
+</CenteredLayout>

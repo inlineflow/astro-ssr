@@ -39,6 +39,22 @@ export const location = {
       return result;
     },
   }),
+  getLocationsByBrandId: defineAction({
+    input: z.string().uuid(),
+    handler: async (brandId) => {
+      const resp = await fetch(`${apiUrl}/brand/${brandId}/locations`);
+      const result = (await resp.json()) as Location[] | APIError;
+      if ("error" in result) {
+        throw new ActionError({
+          code: ActionError.statusToCode(result.error.status),
+          message: result.error.message,
+        });
+      }
+
+      return result;
+    },
+  }),
+
   getLocation: defineAction({
     input: z.object({
       id: z.string().uuid(),
