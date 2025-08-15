@@ -17,6 +17,7 @@ import "leaflet/dist/leaflet.css";
         marker = L.marker(e.latlng).addTo(map);
       }
       marker.setLatLng(e.latlng);
+      window.marker = marker;
     });
     map.addEventListener("resize", () => map.invalidateSize());
 

@@ -1,6 +1,14 @@
 /// <reference types="astro/client" />
 /// <reference types="vite-plugin-svgr/client" />
 
+import { Marker } from "leaflet";
+
+declare global {
+  interface Window {
+    marker: Marker<any>;
+  }
+}
+
 interface ImportMetaEnv {
   readonly PUBLIC_MSW_ENABLED: string;
   readonly API_URL: string;
@@ -17,4 +25,4 @@ interface ImportMeta {
 //   export default ReactComponent;
 // }
 
-export { };
+export {};

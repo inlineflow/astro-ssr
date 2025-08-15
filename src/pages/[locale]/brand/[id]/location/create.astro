@@ -12,14 +12,27 @@ export const prerender = false;
     <p>hello world</p>
     <form id="location-create-form">
       <MapComponent client:load />
-      <Button>123</Button>
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+          console.log();
+        }}>123</Button
+      >
     </form>
   </div>
 </CenteredLayout>
 
-<script lang="ts">
-  const form = document.getElementById("location-create-form");
-  const map = document.getElementById("map");
+<script>
+  const form = document
+    .getElementById("location-create-form")
+    ?.addEventListener("submit", (e) => e.preventDefault());
+  // const map = document.getElementById("map");
+  document.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      console.log(window.marker.getLatLng());
+    });
+  });
+
   //   form?.addEventListener("submit", (e) => {
   //     if map.
   //   });
