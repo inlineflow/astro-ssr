@@ -18,6 +18,10 @@ const { data: locations, error } = await Astro.callAction(
 ---
 
 <CenteredLayout>
-  {locations && <Dashboard locations={locations} client:only="react" />}
+  {
+    locations && (
+      <Dashboard locations={locations} brandId={brandId} client:only="react" />
+    )
+  }
   {error && <ErrorMessage errors={[error]} />}
 </CenteredLayout>

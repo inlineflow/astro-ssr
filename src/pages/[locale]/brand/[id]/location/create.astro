@@ -1,0 +1,26 @@
+---
+import { Button } from "@/ui/button";
+import MapComponent from "components/astro/MapComponent.astro";
+import "leaflet/dist/leaflet.css";
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
+
+export const prerender = false;
+---
+
+<CenteredLayout>
+  <div>
+    <p>hello world</p>
+    <form id="location-create-form">
+      <MapComponent client:load />
+      <Button>123</Button>
+    </form>
+  </div>
+</CenteredLayout>
+
+<script lang="ts">
+  const form = document.getElementById("location-create-form");
+  const map = document.getElementById("map");
+  //   form?.addEventListener("submit", (e) => {
+  //     if map.
+  //   });
+</script>
