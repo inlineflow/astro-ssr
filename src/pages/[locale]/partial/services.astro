@@ -1,0 +1,10 @@
+---
+export const partial = true;
+export const prerender = false;
+const request = Astro.request;
+// const body = await request.json();
+console.log("request: ", request);
+const bodyText = await request.text();
+console.log("request body: ", bodyText);
+---
+<p>hello from partial</p>

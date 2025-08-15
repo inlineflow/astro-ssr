@@ -4,13 +4,13 @@ import MapComponent from "components/astro/MapComponent.astro";
 import "leaflet/dist/leaflet.css";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import i18n from "src/lib/i18n";
-import { locationTypes } from "src/lib/schema";
+import { locationTypes, locationTypeToServices } from "src/lib/schema";
 
 export const prerender = false;
 ---
 
 <CenteredLayout>
-  <div data-theme="light">
+  <div data-theme="light" class="w-full px-12">
     <p>hello world</p>
     <form id="location-create-form" class="flex flex-col gap-3">
       <fieldset class="fieldset bg-base-200 border-base-300 p-4">
@@ -20,6 +20,7 @@ export const prerender = false;
         <label class="label">{i18n.t("form.location-name")}</label>
         <input
           id="location-name"
+          name="location-name"
           type="text"
           class="input"
           placeholder={i18n.t("123")}
@@ -32,6 +33,10 @@ export const prerender = false;
           style="anchor-name: --location-type-anchor;">Location Type</button
         >
         <ul
+            hx-post={`/${i18n.language}/partial/services`}
+            hx-trigger="popover-closed"
+            hx-target="#services"
+            hx-include="[name=location-type]"
           class="dropdown md:dropdown-right menu w-52 rounded-box bg-base-100 shadow-sm flex gap-3"
           popover
           id="location-type"
@@ -41,14 +46,29 @@ export const prerender = false;
             locationTypes.map((lt) => (
               <div class="flex justify-between">
                 <li>{lt}</li>
-                <input type="checkbox" class="checkbox" />
+                <input type="checkbox" class="checkbox" data-id={lt} id={`location-type-${lt}`} name="location-type" value={lt} />
               </div>
             ))
           }
         </ul>
+        <button
+          type="button"
+          class="btn"
+          popovertarget="services"
+          style="anchor-name: --services-anchor;">Services</button
+        >
+        <ul
+          class="dropdown md:dropdown-right menu w-52 rounded-box bg-base-100 shadow-sm flex gap-3"
+          popover
+          id="services"
+          style="position-anchor: --services-anchor;"
+        >
+        <p>Pick location type</p>
+        </ul>
         <button type="button" class="btn" onclick="address_modal.showModal()"
           >Address
         </button>
+
         <dialog id="address_modal" class="modal">
           <div class="modal-box">
             <h3 class="text-lg font-bold">Hello world!</h3>
@@ -65,13 +85,54 @@ export const prerender = false;
       </fieldset>
     </form>
   </div>
+<script>
+    import "htmx.org";
+</script>
 
   <script>
-    document
-      .getElementById("location-create-form")
-      ?.addEventListener("submit", (e) => {
+    import { locationTypeToServices } from "src/lib/schema";
+
+    const form = document.getElementById("location-create-form");
+    form?.addEventListener("submit", (e) => {
         e.preventDefault();
         console.log(window.marker?.getLatLng());
+      // const availableServices = Array.from(inputs).filter(i => i.checked).map(i => {
+      //
+      //   const x = locationTypeToServices[(i.value) as keyof typeof locationTypeToServices];
+      // })
+
+      // for (const x of inputs) {
+      //   if (x.checked)
+      //   console.log(`${x.getAttribute("id")}: ${x.value}`);
+      // }
+
       });
+
+      const popover = document.getElementById("location-type")
+      popover?.addEventListener("toggle", (e) => {
+        if (e.newState !== "closed") {
+          return;
+        }
+
+        popover.dispatchEvent(new Event("popover-closed"));
+
+      // const services = document.getElementById("services");
+      // services?.replaceChildren()
+    })
+
+    document.body.addEventListener("htmx:configRequest", function(e) {
+      console.log("htmx:configRequest", e);
+      if (e.target.id === 'location-type') {
+        const inputs = document.querySelectorAll<HTMLInputElement>("[name=location-type]"); 
+        e.detail.headers['Content-Type'] = 'application/json';
+        e.detail.parameters = {}
+        const body = JSON.stringify(Array.from(inputs).filter(i => i.checked).map(i => i.value));
+        console.log(body);
+        e.detail.requestBody = body;
+        console.log(e.detail);
+        
+      }
+    })
+
   </script>
 </CenteredLayout>
