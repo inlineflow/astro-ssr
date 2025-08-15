@@ -2,9 +2,12 @@
 import { MapComponent } from "src/components/react/BusinessDashboard";
 import "leaflet/dist/leaflet.css";
 import "../styles/global.css";
+import CenteredLayout from "src/layouts/CenteredLayout.astro";
 export const prerender = false;
 ---
 
-<div id="#myMap" class="w-full h-full">
-  <MapComponent client:only="react" />
-</div>
+<CenteredLayout>
+  <div id="#myMap" class="w-full h-full">
+    <MapComponent client:only="react" />
+  </div>
+</CenteredLayout>
