@@ -64,5 +64,6 @@
   "form.password": "Пароль",
   "form.confirm_password": "Подтвердите Пароль",
   "form.business_signup_signin": "Или зайдите в уже существующий аккаунт",
-  "form.business_signup": "Или зарегестрируйтесь"
+  "form.business_signup": "Или зарегестрируйтесь",
+  "business_dashboard.add_location": "Добавить филиал"
 }

@@ -1,0 +1,10 @@
+---
+import { MapComponent } from "src/components/react/BusinessDashboard";
+import "leaflet/dist/leaflet.css";
+import "../styles/global.css";
+export const prerender = false;
+---
+
+<div id="#myMap" class="w-full h-full">
+  <MapComponent client:only="react" />
+</div>

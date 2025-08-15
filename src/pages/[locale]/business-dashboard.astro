@@ -3,6 +3,7 @@ import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import { BusinessDashboard as Dashboard } from "src/components/react/BusinessDashboard";
 import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
+import "leaflet/dist/leaflet.css";
 export const prerender = false;
 // const x = actions.location.getLocationsByBrandId("123");
 const url = Astro.url;
@@ -17,6 +18,6 @@ const { data: locations, error } = await Astro.callAction(
 ---
 
 <CenteredLayout>
-  {locations && <Dashboard locations={locations} />}
+  {locations && <Dashboard locations={locations} client:only="react" />}
   {error && <ErrorMessage errors={[error]} />}
 </CenteredLayout>
