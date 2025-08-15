@@ -10,6 +10,16 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
+// Global declarations for window object
+declare global {
+  interface Window {
+    // Add your custom properties here
+    // Example:
+    // myCustomProperty: string;
+    // myCustomFunction: () => void;
+  }
+}
+
 // declare module "*.svg?react" {
 //   import * as React from "react";
 
