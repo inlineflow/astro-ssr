@@ -3,37 +3,54 @@ import { Button } from "@/ui/button";
 import MapComponent from "components/astro/MapComponent.astro";
 import "leaflet/dist/leaflet.css";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
+import i18n from "src/lib/i18n";
 
 export const prerender = false;
 ---
 
 <CenteredLayout>
-  <div>
+  <div data-theme="light">
     <p>hello world</p>
-    <form id="location-create-form">
-      <MapComponent client:load />
-      <Button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log();
-        }}>123</Button
-      >
+    <form id="location-create-form" class="flex flex-col gap-3">
+      <fieldset class="fieldset bg-base-200 border-base-300 p-4">
+        <legend class="fieldset-legend">{i18n.t("form.create-location")}</legend
+        >
+
+        <label class="label">{i18n.t("form.location-name")}</label>
+        <input
+          id="location-name"
+          type="text"
+          class="input"
+          placeholder={i18n.t("123")}
+        />
+        <p>This is editable later</p>
+        <!-- <MapComponent client:load /> -->
+        <button type="button" class="btn" onclick="address_modal.showModal()"
+          >Address</button
+        >
+        <dialog id="address_modal" class="modal">
+          <div class="modal-box">
+            <h3 class="text-lg font-bold">Hello world!</h3>
+            <p class="py-4">Press esc to close</p>
+            <MapComponent />
+            <div class="modal-action">
+              <button type="button" class="btn" onclick="address_modal.close()"
+                >Close</button
+              >
+            </div>
+          </div>
+        </dialog>
+        <Button type="submit">123</Button>
+      </fieldset>
     </form>
   </div>
 </CenteredLayout>
 
 <script>
-  const form = document
+  document
     .getElementById("location-create-form")
-    ?.addEventListener("submit", (e) => e.preventDefault());
-  // const map = document.getElementById("map");
-  document.querySelectorAll("button").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      console.log(window.marker.getLatLng());
+    ?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      console.log(window.marker?.getLatLng());
     });
-  });
-
-  //   form?.addEventListener("submit", (e) => {
-  //     if map.
-  //   });
 </script>
