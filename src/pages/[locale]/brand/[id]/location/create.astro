@@ -4,6 +4,7 @@ import MapComponent from "components/astro/MapComponent.astro";
 import "leaflet/dist/leaflet.css";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import i18n from "src/lib/i18n";
+import { locationTypes } from "src/lib/schema";
 
 export const prerender = false;
 ---
@@ -24,10 +25,30 @@ export const prerender = false;
           placeholder={i18n.t("123")}
         />
         <p>This is editable later</p>
-        <!-- <MapComponent client:load /> -->
-        <button type="button" class="btn" onclick="address_modal.showModal()"
-          >Address</button
+        <button
+          type="button"
+          class="btn"
+          popovertarget="location-type"
+          style="anchor-name: --location-type-anchor;">Location Type</button
         >
+        <ul
+          class="dropdown dropdown-right menu w-52 rounded-box bg-base-100 shadow-sm flex gap-3"
+          popover
+          id="location-type"
+          style="position-anchor: --location-type-anchor;"
+        >
+          {
+            locationTypes.map((lt) => (
+              <div class="flex justify-between">
+                <li>{lt}</li>
+                <input type="checkbox" class="checkbox" />
+              </div>
+            ))
+          }
+        </ul>
+        <button type="button" class="btn" onclick="address_modal.showModal()"
+          >Address
+        </button>
         <dialog id="address_modal" class="modal">
           <div class="modal-box">
             <h3 class="text-lg font-bold">Hello world!</h3>
@@ -44,13 +65,13 @@ export const prerender = false;
       </fieldset>
     </form>
   </div>
-</CenteredLayout>
 
-<script>
-  document
-    .getElementById("location-create-form")
-    ?.addEventListener("submit", (e) => {
-      e.preventDefault();
-      console.log(window.marker?.getLatLng());
-    });
-</script>
+  <script>
+    document
+      .getElementById("location-create-form")
+      ?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(window.marker?.getLatLng());
+      });
+  </script>
+</CenteredLayout>
