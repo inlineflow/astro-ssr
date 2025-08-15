@@ -78,3 +78,5 @@ https://www.shadcnblocks.com/block/navbar1
 # Add autocomplete to forms
 
 https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands/
+
+# Add auth
