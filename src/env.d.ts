@@ -13,10 +13,13 @@ interface ImportMeta {
 // Global declarations for window object
 declare global {
   interface Window {
-    // Add your custom properties here
-    // Example:
-    // myCustomProperty: string;
-    // myCustomFunction: () => void;
+    // Test properties to verify type declarations work
+    testProperty: string;
+    testFunction: (message: string) => void;
+    testObject: {
+      name: string;
+      value: number;
+    };
   }
 }
 
@@ -27,4 +30,5 @@ declare global {
 //   export default ReactComponent;
 // }
 
-export { };
+// This export is required to make this a module
+export {};

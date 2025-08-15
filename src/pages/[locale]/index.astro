@@ -1,8 +1,10 @@
 ---
 export const prerender = false;
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
+import WindowTest from "src/components/react/WindowTest";
 ---
 
 <CenteredLayout>
   <p>Hello world</p>
+  <WindowTest client:load />
 </CenteredLayout>
