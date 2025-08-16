@@ -37,17 +37,19 @@ export const prerender = false;
             hx-trigger="popover-closed"
             hx-target="#services"
             hx-include="[name=location-type]"
-          class="dropdown md:dropdown-right menu w-52 rounded-box bg-base-100 shadow-sm flex gap-3"
+          class="dropdown md:dropdown-right menu w-64 rounded-box bg-base-100 shadow-sm gap-3 max-h-36"
           popover
           id="location-type"
           style="position-anchor: --location-type-anchor;"
         >
           {
             locationTypes.map((lt) => (
-              <div class="flex justify-between">
-                <li>{lt}</li>
-                <input type="checkbox" class="checkbox" data-id={lt} id={`location-type-${lt}`} name="location-type" value={lt} />
-              </div>
+              <li class="">
+                <div class="flex justify-between">
+                  <span>{lt}</span>
+                  <input type="checkbox" class="checkbox" data-id={lt} id={`location-type-${lt}`} name="location-type" value={lt} />
+                </div>
+              </li>
             ))
           }
         </ul>
@@ -58,7 +60,7 @@ export const prerender = false;
           style="anchor-name: --services-anchor;">Services</button
         >
         <ul
-          class="dropdown md:dropdown-right menu w-52 rounded-box bg-base-100 shadow-sm flex gap-3"
+          class="dropdown md:dropdown-right menu w-52 rounded-box bg-base-100 shadow-sm flex gap-3 max-h-36"
           popover
           id="services"
           style="position-anchor: --services-anchor;"
@@ -85,11 +87,12 @@ export const prerender = false;
       </fieldset>
     </form>
   </div>
-<script>
-    import "htmx.org";
-</script>
+<!-- <script> -->
+<!--     import "htmx.org"; -->
+<!-- </script> -->
 
   <script>
+    import htmx from "htmx.org";
     import { locationTypeToServices } from "src/lib/schema";
 
     const form = document.getElementById("location-create-form");
@@ -122,16 +125,26 @@ export const prerender = false;
 
     document.body.addEventListener("htmx:configRequest", function(e) {
       console.log("htmx:configRequest", e);
-      if (e.target.id === 'location-type') {
-        const inputs = document.querySelectorAll<HTMLInputElement>("[name=location-type]"); 
-        e.detail.headers['Content-Type'] = 'application/json';
-        e.detail.parameters = {}
-        const body = JSON.stringify(Array.from(inputs).filter(i => i.checked).map(i => i.value));
-        console.log(body);
-        e.detail.requestBody = body;
-        console.log(e.detail);
-        
-      }
+      // if (e.target.id === 'location-type') {
+      //   e.preventDefault();
+      //   const inputs = document.querySelectorAll<HTMLInputElement>("[name=location-type]"); 
+      //   // e.detail.headers['Content-Type'] = 'application/json';
+      //   // e.detail.parameters = {}
+      //   const body = JSON.stringify(Array.from(inputs).filter(i => i.checked).map(i => i.value));
+      //   const lang = "ru";
+      //   console.log("lang: ", lang);
+      //   htmx.ajax("POST", `/${lang}/partial/services`, {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: body,
+      //     target: "#services"
+      //   })
+      //   // console.log(body);
+      //   // e.detail.body = body;
+      //   // console.log(e);
+      //
+      // }
     })
 
   </script>

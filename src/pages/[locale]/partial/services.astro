@@ -1,10 +1,29 @@
 ---
+import { locationTypeToServices } from "src/lib/schema";
 export const partial = true;
 export const prerender = false;
 const request = Astro.request;
-// const body = await request.json();
-console.log("request: ", request);
-const bodyText = await request.text();
-console.log("request body: ", bodyText);
+const formData = await request.formData();
+console.log("formData: ", formData);
+const ltypes = formData.getAll("location-type");
+console.log("locationTypes", ltypes);
+// console.log("request: ", request);
+// const searchParams = Astro.url.searchParams;
+// const search = Astro.url.search;
+// console.log("searchParams: ", searchParams);
+// console.log("search: ", search);
+// for (const [key, value] of searchParams.entries()) {
+//   console.log(`${key}: ${value}`);
+// }
 ---
-<p>hello from partial</p>
+{ltypes && ltypes.map(lt => (
+<div>
+  <p>{lt}</p>
+  <ul>
+  {locationTypeToServices[lt as keyof typeof locationTypeToServices].map(s => (
+  <div class="ml-4 flex"><p>{s.serviceName}</p> <input type="checkbox" class="checkbox" /></div>
+  )
+  )}
+  </ul>
+</div>
+))}
