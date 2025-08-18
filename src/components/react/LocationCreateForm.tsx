@@ -17,10 +17,11 @@ import {
   LocationType,
   locationTypes,
   locationTypeToServices,
+  type LocationMetadata,
 } from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useState } from "react";
-import { ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, ServerCog } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -59,6 +60,25 @@ export const LocationCreateForm = () => {
       services: [],
     },
   });
+
+  // const services = keysOf(locationTypeToServices).map((key) => ({
+  //   [key]: locationTypeToServices[key].map((val) => ({
+  //     ...val,
+  //     selected: false,
+  //   })),
+  // }));
+  const services = keysOf(locationTypeToServices).reduce<
+    Record<LocationType, (LocationMetadata & { selected: boolean })[]>
+    // {
+    //   [key: LocationType]: any[];
+    // }
+  >((acc, key) => {
+    acc[key] = locationTypeToServices[key].map((val) => ({
+      ...val,
+      selected: false,
+    }));
+    return acc;
+  }, {} as Record<LocationType, (LocationMetadata & { selected: boolean })[]>);
 
   return (
     <Card className=" w-full m-12 p-4">
@@ -106,6 +126,7 @@ export const LocationCreateForm = () => {
                 <FormLabel>{i18n.t("form.location_services")}</FormLabel>
                 <FormControl>
                   <LocationServicesCombobox
+                    services={services}
                     selectServices={(services: string[]) =>
                       field.onChange(services)
                     }
@@ -180,11 +201,13 @@ const LocationTypeCombobox = ({
 
 const LocationServicesCombobox = ({
   selectServices,
+  services,
 }: {
   selectServices: (services: string[]) => void;
+  services: Record<LocationType, (LocationMetadata & { selected: boolean })[]>;
 }) => {
   const [open, setOpen] = useState(false);
-  const [currentServices, setCurrentServices] = useState<string[]>([]);
+  const [currentServices, setCurrentServices] = useState(services);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -208,9 +231,9 @@ const LocationServicesCombobox = ({
             <CommandEmpty>
               {i18n.t("form.pick_location_placeholder")}
             </CommandEmpty>
-            {keysOf(locationTypeToServices).map((lt) => (
+            {keysOf(services).map((lt) => (
               <CommandGroup heading={lt}>
-                {locationTypeToServices[lt].map((s) => (
+                {services[lt].map((s) => (
                   <CommandItem
                     key={s.serviceName}
                     value={s.serviceName}
@@ -223,6 +246,9 @@ const LocationServicesCombobox = ({
                     }}
                   >
                     {s.serviceName}
+                    <Check
+                      className={s.selected ? "hidden" : "bg-orange-100"}
+                    />
                     {/* consider fetching locataion type metadata to store location type value in location type picker */}
                   </CommandItem>
                 ))}
