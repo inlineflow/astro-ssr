@@ -239,7 +239,7 @@ const LocationServicesCombobox = ({
                     value={`${lt}|${s}` as `${LocationType}|${string}`}
                     className="ml-4"
                     onSelect={(val) => {
-                      setCurrentServices({
+                      const services = {
                         ...currentServices,
                         [lt]: [
                           ...locationTypeToServices[lt],
@@ -250,9 +250,10 @@ const LocationServicesCombobox = ({
                             selected: true,
                           },
                         ],
-                      });
+                      };
+                      setCurrentServices(services);
                       // setOpen(false);
-                      selectServices([...currentServices, val]);
+                      selectServices(services);
                     }}
                   >
                     {s.serviceName}
