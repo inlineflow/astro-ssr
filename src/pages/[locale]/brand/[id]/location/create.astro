@@ -5,93 +5,11 @@ import "leaflet/dist/leaflet.css";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import i18n from "src/lib/i18n";
 import { locationTypes, locationTypeToServices } from "src/lib/schema";
+import { LocationCreateForm } from "src/components/react/LocationCreateForm";
 
 export const prerender = false;
 ---
 
 <CenteredLayout>
-  <div data-theme="light" class="w-full px-12">
-    <p>hello world</p>
-    <form id="location-create-form" class="flex flex-col gap-3">
-      <fieldset class="fieldset bg-base-200 border-base-300 p-4">
-        <legend class="fieldset-legend">{i18n.t("form.create-location")}</legend
-        >
-
-        <label class="label">{i18n.t("form.location-name")}</label>
-        <input
-          id="location-name"
-          name="location-name"
-          type="text"
-          class="input"
-          placeholder={i18n.t("123")}
-        />
-        <p>This is editable later</p>
-        <button
-          type="button"
-          class="btn"
-          popovertarget="location-type"
-          style="anchor-name: --location-type-anchor;">Location Type</button
-        >
-        <ul
-          hx-post={`/${i18n.language}/partial/services`}
-          hx-trigger="popover-closed"
-          hx-target="#services"
-          hx-include="[name=location-type]"
-          class="dropdown md:dropdown-right menu w-64 rounded-box bg-base-100 shadow-sm gap-3 max-h-36"
-          popover
-          id="location-type"
-          style="position-anchor: --location-type-anchor;"
-        >
-          {
-            locationTypes.map((lt) => (
-              <li class="">
-                <div class="flex justify-between">
-                  <span>{lt}</span>
-                  <input
-                    type="checkbox"
-                    class="checkbox"
-                    data-id={lt}
-                    id={`location-type-${lt}`}
-                    name="location-type"
-                    value={lt}
-                  />
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-        <button
-          type="button"
-          class="btn"
-          popovertarget="services"
-          style="anchor-name: --services-anchor;">Services</button
-        >
-        <ul
-          class="dropdown md:dropdown-right menu w-52 rounded-box bg-base-100 shadow-sm flex gap-3 max-h-36"
-          popover
-          id="services"
-          style="position-anchor: --services-anchor;"
-        >
-          <p>Pick location type</p>
-        </ul>
-        <button type="button" class="btn" onclick="address_modal.showModal()"
-          >Address
-        </button>
-
-        <dialog id="address_modal" class="modal">
-          <div class="modal-box">
-            <h3 class="text-lg font-bold">Hello world!</h3>
-            <p class="py-4">Press esc to close</p>
-            <MapComponent />
-            <div class="modal-action">
-              <button type="button" class="btn" onclick="address_modal.close()"
-                >Close</button
-              >
-            </div>
-          </div>
-        </dialog>
-        <Button type="submit">123</Button>
-      </fieldset>
-    </form>
-  </div>
+  <LocationCreateForm client:load />
 </CenteredLayout>
