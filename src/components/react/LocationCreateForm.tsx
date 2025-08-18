@@ -13,7 +13,11 @@ import { Input } from "@/ui/input";
 import { useForm } from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
-import { locationTypes, locationTypeToServices } from "src/lib/schema";
+import {
+  LocationType,
+  locationTypes,
+  locationTypeToServices,
+} from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useState } from "react";
 import { ChevronsUpDown } from "lucide-react";
@@ -26,6 +30,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/ui/command";
+import { keysOf } from "src/lib/utils";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
@@ -100,9 +105,10 @@ export const LocationCreateForm = () => {
               <FormItem>
                 <FormLabel>{i18n.t("form.location_services")}</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder={i18n.t("form.location_services_placeholder")}
-                    {...field}
+                  <LocationServicesCombobox
+                    selectServices={(services: string[]) =>
+                      field.onChange(services)
+                    }
                   />
                 </FormControl>
                 <FormMessage />
@@ -121,7 +127,7 @@ export const LocationCreateForm = () => {
 const LocationTypeCombobox = ({
   selectType,
 }: {
-  selectType: (typeSlug: string) => void;
+  selectType: (slug: string) => void;
 }) => {
   const [open, setOpen] = useState(false);
   const [currentType, setCurrentType] = useState<string | undefined>();
@@ -165,6 +171,62 @@ const LocationTypeCombobox = ({
                 </CommandItem>
               ))}
             </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+const LocationServicesCombobox = ({
+  selectServices,
+}: {
+  selectServices: (services: string[]) => void;
+}) => {
+  const [open, setOpen] = useState(false);
+  const [currentServices, setCurrentServices] = useState<string[]>([]);
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className={cn("w-full justify-between", "")}
+        >
+          {i18n.t("form.pick_location_services")}
+          <ChevronsUpDown className="opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="max-w-72 p-0 w-[var(--radix-popover-trigger-width)]">
+        <Command>
+          <CommandInput
+            placeholder={i18n.t("form.location_services_placeholder")}
+            className="h-9 w-fit"
+          />
+          <CommandList>
+            <CommandEmpty>
+              {i18n.t("form.pick_location_placeholder")}
+            </CommandEmpty>
+            {keysOf(locationTypeToServices).map((lt) => (
+              <CommandGroup heading={lt}>
+                {locationTypeToServices[lt].map((s) => (
+                  <CommandItem
+                    key={s.serviceName}
+                    value={s.serviceName}
+                    onSelect={(val) => {
+                      console.log("val: ", val);
+                      setCurrentServices([...currentServices, val]);
+                      // setOpen(false);
+                      selectServices([...currentServices, val]);
+                    }}
+                  >
+                    {s.serviceName}
+                    {/* consider fetching locataion type metadata to store location type value in location type picker */}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ))}
           </CommandList>
         </Command>
       </PopoverContent>
