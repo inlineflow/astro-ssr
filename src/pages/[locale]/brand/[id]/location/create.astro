@@ -33,10 +33,10 @@ export const prerender = false;
           style="anchor-name: --location-type-anchor;">Location Type</button
         >
         <ul
-            hx-post={`/${i18n.language}/partial/services`}
-            hx-trigger="popover-closed"
-            hx-target="#services"
-            hx-include="[name=location-type]"
+          hx-post={`/${i18n.language}/partial/services`}
+          hx-trigger="popover-closed"
+          hx-target="#services"
+          hx-include="[name=location-type]"
           class="dropdown md:dropdown-right menu w-64 rounded-box bg-base-100 shadow-sm gap-3 max-h-36"
           popover
           id="location-type"
@@ -47,7 +47,14 @@ export const prerender = false;
               <li class="">
                 <div class="flex justify-between">
                   <span>{lt}</span>
-                  <input type="checkbox" class="checkbox" data-id={lt} id={`location-type-${lt}`} name="location-type" value={lt} />
+                  <input
+                    type="checkbox"
+                    class="checkbox"
+                    data-id={lt}
+                    id={`location-type-${lt}`}
+                    name="location-type"
+                    value={lt}
+                  />
                 </div>
               </li>
             ))
@@ -65,7 +72,7 @@ export const prerender = false;
           id="services"
           style="position-anchor: --services-anchor;"
         >
-        <p>Pick location type</p>
+          <p>Pick location type</p>
         </ul>
         <button type="button" class="btn" onclick="address_modal.showModal()"
           >Address
@@ -87,65 +94,4 @@ export const prerender = false;
       </fieldset>
     </form>
   </div>
-<!-- <script> -->
-<!--     import "htmx.org"; -->
-<!-- </script> -->
-
-  <script>
-    import htmx from "htmx.org";
-    import { locationTypeToServices } from "src/lib/schema";
-
-    const form = document.getElementById("location-create-form");
-    form?.addEventListener("submit", (e) => {
-        e.preventDefault();
-        console.log(window.marker?.getLatLng());
-      // const availableServices = Array.from(inputs).filter(i => i.checked).map(i => {
-      //
-      //   const x = locationTypeToServices[(i.value) as keyof typeof locationTypeToServices];
-      // })
-
-      // for (const x of inputs) {
-      //   if (x.checked)
-      //   console.log(`${x.getAttribute("id")}: ${x.value}`);
-      // }
-
-      });
-
-      const popover = document.getElementById("location-type")
-      popover?.addEventListener("toggle", (e) => {
-        if (e.newState !== "closed") {
-          return;
-        }
-
-        popover.dispatchEvent(new Event("popover-closed"));
-
-      // const services = document.getElementById("services");
-      // services?.replaceChildren()
-    })
-
-    document.body.addEventListener("htmx:configRequest", function(e) {
-      console.log("htmx:configRequest", e);
-      // if (e.target.id === 'location-type') {
-      //   e.preventDefault();
-      //   const inputs = document.querySelectorAll<HTMLInputElement>("[name=location-type]"); 
-      //   // e.detail.headers['Content-Type'] = 'application/json';
-      //   // e.detail.parameters = {}
-      //   const body = JSON.stringify(Array.from(inputs).filter(i => i.checked).map(i => i.value));
-      //   const lang = "ru";
-      //   console.log("lang: ", lang);
-      //   htmx.ajax("POST", `/${lang}/partial/services`, {
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: body,
-      //     target: "#services"
-      //   })
-      //   // console.log(body);
-      //   // e.detail.body = body;
-      //   // console.log(e);
-      //
-      // }
-    })
-
-  </script>
 </CenteredLayout>
