@@ -29,7 +29,9 @@ import {
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
-  type: z.enum(locationTypes, { message: i18n.t("form.location_type_empty") }),
+  type: z.enum(locationTypes, {
+    message: i18n.t("form.location_type_unknown"),
+  }),
   services: z
     .array(z.string())
     .min(1, { message: i18n.t("form.services_empty") }),
@@ -83,7 +85,9 @@ export const LocationCreateForm = () => {
               <FormItem>
                 <FormLabel>{i18n.t("form.location_type")}</FormLabel>
                 <FormControl>
-                  <LocationTypeCombobox></LocationTypeCombobox>
+                  <LocationTypeCombobox
+                    selectType={(slug: string) => field.onChange(slug)}
+                  ></LocationTypeCombobox>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -105,14 +109,20 @@ export const LocationCreateForm = () => {
               </FormItem>
             )}
           ></FormField>
-          <Button>{i18n.t("form.submit")}</Button>
+          <Button onClick={() => console.log(form.getValues())}>
+            {i18n.t("form.submit")}
+          </Button>
         </form>
       </Form>
     </Card>
   );
 };
 
-const LocationTypeCombobox = () => {
+const LocationTypeCombobox = ({
+  selectType,
+}: {
+  selectType: (typeSlug: string) => void;
+}) => {
   const [open, setOpen] = useState(false);
   const [currentType, setCurrentType] = useState<string | undefined>();
   return (
@@ -144,8 +154,10 @@ const LocationTypeCombobox = () => {
                   key={lt}
                   value={lt}
                   onSelect={(val) => {
+                    console.log("val: ", val);
                     setCurrentType(val);
                     setOpen(false);
+                    selectType(val);
                   }}
                 >
                   {lt}
