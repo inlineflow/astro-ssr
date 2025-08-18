@@ -80,3 +80,5 @@ https://www.shadcnblocks.com/block/navbar1
 https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands/
 
 # Add auth
+
+# consider fetching locataion type metadata to store location type value in location type picker

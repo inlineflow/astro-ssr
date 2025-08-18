@@ -14,6 +14,18 @@ import { useForm } from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
 import { locationTypes, locationTypeToServices } from "src/lib/schema";
+import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
+import { useState } from "react";
+import { ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/ui/command";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
@@ -21,6 +33,9 @@ const FormSchema = z.object({
   services: z
     .array(z.string())
     .min(1, { message: i18n.t("form.services_empty") }),
+  address: z.tuple([z.number(), z.number()], {
+    message: i18n.t("form.location_address_empty"),
+  }),
 });
 
 type LocationCreateFormValues = z.infer<typeof FormSchema>;
@@ -68,11 +83,7 @@ export const LocationCreateForm = () => {
               <FormItem>
                 <FormLabel>{i18n.t("form.location_type")}</FormLabel>
                 <FormControl>
-                  <Input
-                    type="email"
-                    placeholder={i18n.t("form.location_type_placeholder")}
-                    {...field}
-                  />
+                  <LocationTypeCombobox></LocationTypeCombobox>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -98,5 +109,53 @@ export const LocationCreateForm = () => {
         </form>
       </Form>
     </Card>
+  );
+};
+
+const LocationTypeCombobox = () => {
+  const [open, setOpen] = useState(false);
+  const [currentType, setCurrentType] = useState<string | undefined>();
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className={cn("w-full justify-between", "")}
+        >
+          {currentType ?? i18n.t("form.pick_location_type")}
+          <ChevronsUpDown className="opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="max-w-72 p-0 w-[var(--radix-popover-trigger-width)]">
+        <Command>
+          <CommandInput
+            placeholder={i18n.t("form.location_type_placeholder")}
+            className="h-9 w-fit"
+          />
+          <CommandList>
+            <CommandEmpty>
+              {i18n.t("form.pick_location_placeholder")}
+            </CommandEmpty>
+            <CommandGroup>
+              {locationTypes.map((lt) => (
+                <CommandItem
+                  key={lt}
+                  value={lt}
+                  onSelect={(val) => {
+                    setCurrentType(val);
+                    setOpen(false);
+                  }}
+                >
+                  {lt}
+                  {/* consider fetching locataion type metadata to store location type value in location type picker */}
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
