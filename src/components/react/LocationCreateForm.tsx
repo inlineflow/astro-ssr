@@ -214,6 +214,7 @@ const LocationServicesCombobox = ({
                   <CommandItem
                     key={s.serviceName}
                     value={s.serviceName}
+                    className="ml-4"
                     onSelect={(val) => {
                       console.log("val: ", val);
                       setCurrentServices([...currentServices, val]);
