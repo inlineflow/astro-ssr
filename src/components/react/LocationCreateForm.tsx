@@ -21,7 +21,7 @@ import {
 } from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useState } from "react";
-import { Check, ChevronsUpDown, ServerCog } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Command,
@@ -236,11 +236,21 @@ const LocationServicesCombobox = ({
                 {services[lt].map((s) => (
                   <CommandItem
                     key={s.serviceName}
-                    value={s.serviceName}
+                    value={`${lt}|${s}` as `${LocationType}|${string}`}
                     className="ml-4"
                     onSelect={(val) => {
-                      console.log("val: ", val);
-                      setCurrentServices([...currentServices, val]);
+                      setCurrentServices({
+                        ...currentServices,
+                        [lt]: [
+                          ...locationTypeToServices[lt],
+                          {
+                            ...locationTypeToServices[lt].find(
+                              (s) => s.serviceName === val
+                            ),
+                            selected: true,
+                          },
+                        ],
+                      });
                       // setOpen(false);
                       selectServices([...currentServices, val]);
                     }}
