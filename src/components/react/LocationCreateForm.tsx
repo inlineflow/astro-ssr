@@ -68,7 +68,10 @@ export const LocationCreateForm = () => {
   //   })),
   // }));
   const services = keysOf(locationTypeToServices).reduce<
-    Record<LocationType, (LocationMetadata & { selected: boolean })[]>
+    Record<
+      LocationType,
+      (LocationMetadata & { selected: boolean; serviceId: string })[]
+    >
     // {
     //   [key: LocationType]: any[];
     // }
@@ -76,9 +79,11 @@ export const LocationCreateForm = () => {
     acc[key] = locationTypeToServices[key].map((val) => ({
       ...val,
       selected: false,
+      serviceId: crypto.randomUUID(),
     }));
     return acc;
-  }, {} as Record<LocationType, (LocationMetadata & { selected: boolean })[]>);
+  }, {} as Record<LocationType, (LocationMetadata & { selected: boolean; serviceId: string })[]>);
+  console.log("services: ", services);
 
   return (
     <Card className=" w-full m-12 p-4">
@@ -127,9 +132,7 @@ export const LocationCreateForm = () => {
                 <FormControl>
                   <LocationServicesCombobox
                     services={services}
-                    selectServices={(services: string[]) =>
-                      field.onChange(services)
-                    }
+                    selectServices={(services) => field.onChange(services)}
                   />
                 </FormControl>
                 <FormMessage />
@@ -203,8 +206,16 @@ const LocationServicesCombobox = ({
   selectServices,
   services,
 }: {
-  selectServices: (services: string[]) => void;
-  services: Record<LocationType, (LocationMetadata & { selected: boolean })[]>;
+  selectServices: (
+    services: Record<
+      LocationType,
+      (LocationMetadata & { selected: boolean; serviceId: string })[]
+    >
+  ) => void;
+  services: Record<
+    LocationType,
+    (LocationMetadata & { selected: boolean; serviceId: string })[]
+  >;
 }) => {
   const [open, setOpen] = useState(false);
   const [currentServices, setCurrentServices] = useState(services);
@@ -231,35 +242,42 @@ const LocationServicesCombobox = ({
             <CommandEmpty>
               {i18n.t("form.pick_location_placeholder")}
             </CommandEmpty>
-            {keysOf(services).map((lt) => (
+            {keysOf(currentServices).map((lt) => (
               <CommandGroup heading={lt}>
-                {services[lt].map((s) => (
+                {currentServices[lt].map((s) => (
                   <CommandItem
                     key={s.serviceName}
-                    value={`${lt}|${s}` as `${LocationType}|${string}`}
+                    // value={`${lt}|${s}` as `${LocationType}|${string}`}
+                    value={s.serviceId}
+                    keywords={[s.serviceName, lt]}
                     className="ml-4"
-                    onSelect={(val) => {
-                      const services = {
+                    onSelect={(serviceId) => {
+                      const localServices = {
                         ...currentServices,
-                        [lt]: [
-                          ...locationTypeToServices[lt],
-                          {
-                            ...locationTypeToServices[lt].find(
-                              (s) => s.serviceName === val
-                            ),
-                            selected: true,
-                          },
-                        ],
+                        [lt]: services[lt].map((serv) =>
+                          serv.serviceId === serviceId
+                            ? { ...serv, selected: !serv.selected }
+                            : serv
+                        ),
+                        // [lt]: [
+                        //   ...services[lt],
+                        //   {
+                        //     ...services[lt].find(
+                        //       (s) => s.serviceId === serviceId
+                        //     ),
+                        //     selected: true,
+                        //   },
+                        // ],
                       };
-                      setCurrentServices(services);
+                      console.log("localServices in form: ", localServices);
+                      console.log("selected service: ", serviceId);
+                      setCurrentServices(localServices);
                       // setOpen(false);
-                      selectServices(services);
+                      selectServices(localServices);
                     }}
                   >
                     {s.serviceName}
-                    <Check
-                      className={s.selected ? "hidden" : "bg-orange-100"}
-                    />
+                    <Check className={s.selected ? "" : "hidden"} />
                     {/* consider fetching locataion type metadata to store location type value in location type picker */}
                   </CommandItem>
                 ))}
