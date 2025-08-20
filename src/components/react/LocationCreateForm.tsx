@@ -39,7 +39,12 @@ const FormSchema = z.object({
     message: i18n.t("form.location_type_unknown"),
   }),
   services: z
-    .array(z.string())
+    .array(
+      z.object({
+        serviceId: z.uuid(),
+        serviceName: z.string(),
+      })
+    )
     .min(1, { message: i18n.t("form.services_empty") }),
   address: z.tuple([z.number(), z.number()], {
     message: i18n.t("form.location_address_empty"),
@@ -48,7 +53,11 @@ const FormSchema = z.object({
 
 type LocationCreateFormValues = z.infer<typeof FormSchema>;
 const onSubmit = async (data: LocationCreateFormValues) => {
-  console.log(data);
+  console.log("onSubmit data: ", data);
+};
+
+const onError = async (data: any) => {
+  console.log("onError data: ", data);
 };
 
 export const LocationCreateForm = () => {
@@ -89,7 +98,7 @@ export const LocationCreateForm = () => {
     <Card className=" w-full m-12 p-4">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(onSubmit, onError)}
           className="flex flex-col gap-4"
         >
           <FormField
@@ -139,9 +148,7 @@ export const LocationCreateForm = () => {
               </FormItem>
             )}
           ></FormField>
-          <Button onClick={() => console.log(form.getValues())}>
-            {i18n.t("form.submit")}
-          </Button>
+          <Button>{i18n.t("form.submit")}</Button>
         </form>
       </Form>
     </Card>
@@ -207,10 +214,11 @@ const LocationServicesCombobox = ({
   services,
 }: {
   selectServices: (
-    services: Record<
-      LocationType,
-      (LocationMetadata & { selected: boolean; serviceId: string })[]
-    >
+    data: Array<{ serviceId: string; serviceName: string }>
+    // services: Record<
+    //   LocationType,
+    //   (LocationMetadata & { selected: boolean; serviceId: string })[]
+    // >
   ) => void;
   services: Record<
     LocationType,
@@ -254,7 +262,7 @@ const LocationServicesCombobox = ({
                     onSelect={(serviceId) => {
                       const localServices = {
                         ...currentServices,
-                        [lt]: services[lt].map((serv) =>
+                        [lt]: currentServices[lt].map((serv) =>
                           serv.serviceId === serviceId
                             ? { ...serv, selected: !serv.selected }
                             : serv
@@ -273,11 +281,21 @@ const LocationServicesCombobox = ({
                       console.log("selected service: ", serviceId);
                       setCurrentServices(localServices);
                       // setOpen(false);
-                      selectServices(localServices);
+                      const selectedServices = localServices[lt]
+                        .filter((serv) => serv.selected)
+                        .map((serv) => ({
+                          serviceId: serv.serviceId,
+                          serviceName: serv.serviceName,
+                        }));
+                      selectServices(selectedServices);
                     }}
                   >
                     {s.serviceName}
-                    <Check className={s.selected ? "" : "hidden"} />
+                    <Check
+                      className={`transition-opacity ease-in-out delay-150 duration-300 ${
+                        s.selected ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
                     {/* consider fetching locataion type metadata to store location type value in location type picker */}
                   </CommandItem>
                 ))}
