@@ -32,6 +32,18 @@ import {
   CommandList,
 } from "@/ui/command";
 import { keysOf } from "src/lib/utils";
+import { MapComponent } from "./MapComponent";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/ui/dialog";
+import { actions } from "astro:actions";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
@@ -54,6 +66,15 @@ const FormSchema = z.object({
 type LocationCreateFormValues = z.infer<typeof FormSchema>;
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
+  const { data: resp, error } = await actions.nominatim.lookupByLatLng(
+    data.address
+  );
+  if (error) {
+    console.log("error when fetching street name: ", error);
+    return;
+  }
+
+  console.log("response: ", resp);
 };
 
 const onError = async (data: any) => {
@@ -143,6 +164,39 @@ export const LocationCreateForm = () => {
                     services={services}
                     selectServices={(services) => field.onChange(services)}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          ></FormField>
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{i18n.t("form.location_address")}</FormLabel>
+                <FormControl>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline">
+                        {i18n.t("form.pick_address")}
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>New address</DialogTitle>
+                        <DialogDescription>Pick an address.</DialogDescription>
+                      </DialogHeader>
+                      <MapComponent
+                        selectLocation={(val) => field.onChange(val)}
+                      />
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button variant="outline">{i18n.t("close")}</Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </FormControl>
                 <FormMessage />
               </FormItem>

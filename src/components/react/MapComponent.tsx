@@ -8,7 +8,11 @@ import {
   useMapEvents,
 } from "react-leaflet";
 
-export const MapComponent = () => {
+export const MapComponent = ({
+  selectLocation,
+}: {
+  selectLocation: (location: [number, number]) => void;
+}) => {
   console.log("rendering map component");
   // const center: LatLngTuple = [42.8703, 74.6116];
   const center = new LatLng(42.8703, 74.6116);
@@ -22,7 +26,7 @@ export const MapComponent = () => {
         id="map"
       >
         <MapResizer />
-        <LocationMarker center={center} />
+        <LocationMarker center={center} selectLocation={selectLocation} />
       </MapContainer>
     </div>
   );
@@ -44,12 +48,19 @@ const MapResizer = () => {
   );
 };
 
-const LocationMarker = ({ center }: { center: LatLng }) => {
+const LocationMarker = ({
+  center,
+  selectLocation,
+}: {
+  center: LatLng;
+  selectLocation: (location: [number, number]) => void;
+}) => {
   const [position, setPosition] = useState<LatLng | null>(center);
   const map = useMapEvents({
     click: (e) => {
       console.log(e.latlng);
       setPosition(e.latlng);
+      selectLocation([e.latlng.lat, e.latlng.lng]);
     },
     // locationfound: (e) => {
     //   setPosition(e.latlng);

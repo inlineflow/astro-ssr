@@ -65,5 +65,14 @@
   "form.confirm_password": "Подтвердите Пароль",
   "form.business_signup_signin": "Или зайдите в уже существующий аккаунт",
   "form.business_signup": "Или зарегестрируйтесь",
+  "form.location_name": "Название филиала",
+  "form.location_name_placeholder": "Звезда...",
+  "form.location_type": "Тип салона",
+  "form.pick_location_type": "Парикмахерская",
+  "form.location_services": "Предоставляемые услуги",
+  "form.pick_location_services": "Выберите услуги",
+  "form.pick_address": "Укажите адрес",
+  "close": "Закрыть",
+  "form.location_address": "Адрес",
   "business_dashboard.add_location": "Добавить филиал"
 }
