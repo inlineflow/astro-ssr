@@ -374,7 +374,11 @@ const MapContent = ({
   const [location, setLocation] = useState<[number, number]>([
     42.8703, 74.6116,
   ]);
-  const { data, isFetching, error } = useQuery(
+  const {
+    data: resp,
+    isFetching,
+    error,
+  } = useQuery(
     {
       queryKey: ["address", location],
       queryFn: async ({ queryKey }) =>
@@ -386,6 +390,9 @@ const MapContent = ({
     },
     queryClient
   );
+
+  console.log(resp);
+
   return (
     <div>
       <MapComponent
@@ -395,15 +402,17 @@ const MapContent = ({
         }}
         markerLocation={location}
       />
-      <div className="flex items-center justify-center">
-        {withAddress && !isFetching && typeof data === "string" && (
-          <p className="text-center">{`Error: ${data}`}</p>
-        )}
-        {withAddress && !isFetching && typeof data !== "string" && data && (
-          <p className="text-center">{`${data.data?.address.road}`}</p>
-        )}
-        {isFetching && <Spinner variant="bars" />}
-      </div>
+      {withAddress && (
+        <div className="flex items-center justify-center">
+          {!isFetching && resp?.error && (
+            <p className="text-center">{`Error: ${resp?.error.message}`}</p>
+          )}
+          {!isFetching && resp?.data && (
+            <p className="text-center">{`${resp.data?.address.road} ${resp.data.address.house_number}`}</p>
+          )}
+          {isFetching && <Spinner variant="bars" />}
+        </div>
+      )}
     </div>
   );
 };
