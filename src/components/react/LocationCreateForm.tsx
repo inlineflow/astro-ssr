@@ -48,6 +48,7 @@ import {
 } from "@/ui/dialog";
 import { actions } from "astro:actions";
 import { Spinner } from "@/ui/spinner";
+import type { LeafletMouseEvent } from "leaflet";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
@@ -370,32 +371,34 @@ const MapContent = ({
   selectLocation: (location: [number, number]) => void;
   withAddress: boolean;
 }) => {
-  const [location, setLocation] = useState([42.8703, 74.6116]);
-  const [addressData, setAddressData] = useState<NominatimData | FetchError>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const x = useQuery({
-    queryKey: ["address", location],
-    queryFn: async ({ queryKey }) =>
-      await actions.nominatim.lookupByLatLng(queryKey[1] as [number, number]),
-  });
+  const [location, setLocation] = useState<[number, number]>([
+    42.8703, 74.6116,
+  ]);
+  const { data, isFetching, error } = useQuery(
+    {
+      queryKey: ["address", location],
+      queryFn: async ({ queryKey }) =>
+        await actions.nominatim.lookupByLatLng(queryKey[1] as [number, number]),
+    },
+    queryClient
+  );
   return (
     <div>
       <MapComponent
-        selectLocation={selectLocation}
         withAddress={withAddress}
-        setAddress={setAddressData}
+        onClick={(e: LeafletMouseEvent) => {
+          setLocation([e.latlng.lat, e.latlng.lng]);
+        }}
+        markerLocation={location}
       />
       <div className="flex items-center justify-center">
-        {withAddress && !loading && typeof addressData === "string" && (
-          <p className="text-center">{`Error: ${addressData}`}</p>
+        {withAddress && !isFetching && typeof data === "string" && (
+          <p className="text-center">{`Error: ${data}`}</p>
         )}
-        {withAddress &&
-          !loading &&
-          typeof addressData !== "string" &&
-          addressData && (
-            <p className="text-center">{`${addressData.address.road}`}</p>
-          )}
-        {loading && <Spinner variant="bars" />}
+        {withAddress && !isFetching && typeof data !== "string" && data && (
+          <p className="text-center">{`${data.data?.address.road}`}</p>
+        )}
+        {isFetching && <Spinner variant="bars" />}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { actions } from "astro:actions";
-import { LatLng } from "leaflet";
+import { LatLng, type LeafletMouseEvent } from "leaflet";
 import { useEffect, useState } from "react";
 import {
   MapContainer,
@@ -11,13 +11,13 @@ import {
 import type { NominatimData } from "src/lib/schema";
 
 export const MapComponent = ({
-  selectLocation,
   withAddress,
-  setAddress,
+  onClick,
+  markerLocation,
 }: {
-  selectLocation: (location: [number, number]) => void;
-  setAddress: (data: NominatimData | string) => void;
   withAddress: boolean;
+  onClick: (e: LeafletMouseEvent) => void;
+  markerLocation: [number, number];
 }) => {
   const center = new LatLng(42.8703, 74.6116);
   return (
@@ -32,8 +32,8 @@ export const MapComponent = ({
         <MapResizer />
         <LocationMarker
           center={center}
-          selectLocation={selectLocation}
-          setAddress={(data) => setAddress(data)}
+          onClick={onClick}
+          markerLocation={markerLocation}
         />
       </MapContainer>
     </div>
@@ -58,27 +58,28 @@ const MapResizer = () => {
 
 const LocationMarker = ({
   center,
-  selectLocation,
+  onClick,
+  markerLocation,
 }: {
   center: LatLng;
-  selectLocation: (location: [number, number]) => void;
+  onClick: (e: LeafletMouseEvent) => void;
+  markerLocation: [number, number];
 }) => {
-  const [position, setPosition] = useState<LatLng | null>(center);
   const map = useMapEvents({
-    click: async (e) => {
-      console.log(e.latlng);
-      setPosition(e.latlng);
-      selectLocation([e.latlng.lat, e.latlng.lng]);
-      // const { data: resp, error } = await actions.nominatim.lookupByLatLng([
-      //   e.latlng.lat,
-      //   e.latlng.lng,
-      // ]);
-    },
+    click: onClick,
+    // click: async (e) => {
+    //   console.log(e.latlng);
+    //   setPosition(e.latlng);
+    //   // const { data: resp, error } = await actions.nominatim.lookupByLatLng([
+    //   //   e.latlng.lat,
+    //   //   e.latlng.lng,
+    //   // ]);
+    // },
     // locationfound: (e) => {
     //   setPosition(e.latlng);
     //   console.log(e.latlng);
     // },
   });
 
-  return position !== null ? <Marker position={position}></Marker> : null;
+  return <Marker position={markerLocation}></Marker>;
 };
