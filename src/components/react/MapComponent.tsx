@@ -11,7 +11,6 @@ import {
 import type { NominatimData } from "src/lib/schema";
 
 export const MapComponent = ({
-  withAddress,
   onClick,
   markerLocation,
 }: {
@@ -57,7 +56,6 @@ const MapResizer = () => {
 };
 
 const LocationMarker = ({
-  center,
   onClick,
   markerLocation,
 }: {
@@ -67,18 +65,6 @@ const LocationMarker = ({
 }) => {
   const map = useMapEvents({
     click: onClick,
-    // click: async (e) => {
-    //   console.log(e.latlng);
-    //   setPosition(e.latlng);
-    //   // const { data: resp, error } = await actions.nominatim.lookupByLatLng([
-    //   //   e.latlng.lat,
-    //   //   e.latlng.lng,
-    //   // ]);
-    // },
-    // locationfound: (e) => {
-    //   setPosition(e.latlng);
-    //   console.log(e.latlng);
-    // },
   });
 
   return <Marker position={markerLocation}></Marker>;
