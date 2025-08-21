@@ -384,7 +384,6 @@ const MapContent = ({
         selectLocation={selectLocation}
         withAddress={withAddress}
         setAddress={setAddressData}
-        setLoading={setLoading}
       />
       <div className="flex items-center justify-center">
         {withAddress && !loading && typeof addressData === "string" && (
