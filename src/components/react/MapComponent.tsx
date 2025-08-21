@@ -1,3 +1,4 @@
+import { actions } from "astro:actions";
 import { LatLng } from "leaflet";
 import { useEffect, useState } from "react";
 import {
@@ -7,14 +8,17 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
+import type { NominatimData } from "src/lib/schema";
 
 export const MapComponent = ({
   selectLocation,
+  withAddress,
+  setAddress,
 }: {
   selectLocation: (location: [number, number]) => void;
+  setAddress: (data: NominatimData | string) => void;
+  withAddress: boolean;
 }) => {
-  console.log("rendering map component");
-  // const center: LatLngTuple = [42.8703, 74.6116];
   const center = new LatLng(42.8703, 74.6116);
   return (
     <div className="h-64 w-64">
@@ -26,7 +30,11 @@ export const MapComponent = ({
         id="map"
       >
         <MapResizer />
-        <LocationMarker center={center} selectLocation={selectLocation} />
+        <LocationMarker
+          center={center}
+          selectLocation={selectLocation}
+          setAddress={(data) => setAddress(data)}
+        />
       </MapContainer>
     </div>
   );
@@ -51,16 +59,29 @@ const MapResizer = () => {
 const LocationMarker = ({
   center,
   selectLocation,
+  setAddress,
 }: {
   center: LatLng;
   selectLocation: (location: [number, number]) => void;
+  setAddress: (data: NominatimData | string) => void;
 }) => {
   const [position, setPosition] = useState<LatLng | null>(center);
   const map = useMapEvents({
-    click: (e) => {
+    click: async (e) => {
       console.log(e.latlng);
       setPosition(e.latlng);
       selectLocation([e.latlng.lat, e.latlng.lng]);
+      const { data: resp, error } = await actions.nominatim.lookupByLatLng([
+        e.latlng.lat,
+        e.latlng.lng,
+      ]);
+
+      if (error) {
+        setAddress(error.message);
+        return;
+      }
+      setAddress(resp);
+      return;
     },
     // locationfound: (e) => {
     //   setPosition(e.latlng);

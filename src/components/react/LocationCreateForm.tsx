@@ -18,6 +18,7 @@ import {
   locationTypes,
   locationTypeToServices,
   type LocationMetadata,
+  type NominatimData,
 } from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useState } from "react";
@@ -91,20 +92,11 @@ export const LocationCreateForm = () => {
     },
   });
 
-  // const services = keysOf(locationTypeToServices).map((key) => ({
-  //   [key]: locationTypeToServices[key].map((val) => ({
-  //     ...val,
-  //     selected: false,
-  //   })),
-  // }));
   const services = keysOf(locationTypeToServices).reduce<
     Record<
       LocationType,
       (LocationMetadata & { selected: boolean; serviceId: string })[]
     >
-    // {
-    //   [key: LocationType]: any[];
-    // }
   >((acc, key) => {
     acc[key] = locationTypeToServices[key].map((val) => ({
       ...val,
@@ -187,9 +179,14 @@ export const LocationCreateForm = () => {
                         <DialogTitle>New address</DialogTitle>
                         <DialogDescription>Pick an address.</DialogDescription>
                       </DialogHeader>
-                      <MapComponent
+                      <MapContent
                         selectLocation={(val) => field.onChange(val)}
+                        withAddress
                       />
+                      {/* <MapComponent
+                        selectLocation={(val) => field.onChange(val)}
+                        withAddress
+                      /> */}
                       <DialogFooter>
                         <DialogClose asChild>
                           <Button variant="outline">{i18n.t("close")}</Button>
@@ -359,5 +356,31 @@ const LocationServicesCombobox = ({
         </Command>
       </PopoverContent>
     </Popover>
+  );
+};
+
+type FetchError = string;
+const MapContent = ({
+  selectLocation,
+  withAddress,
+}: {
+  selectLocation: (location: [number, number]) => void;
+  withAddress: boolean;
+}) => {
+  const [addressData, setAddressData] = useState<NominatimData | FetchError>();
+  return (
+    <div>
+      <MapComponent
+        selectLocation={selectLocation}
+        withAddress={withAddress}
+        setAddress={setAddressData}
+      />
+      {withAddress && typeof addressData === "string" && (
+        <p>{`Error: ${addressData}`}</p>
+      )}
+      {withAddress && typeof addressData !== "string" && addressData && (
+        <p>{`${addressData.address.road}`}</p>
+      )}
+    </div>
   );
 };

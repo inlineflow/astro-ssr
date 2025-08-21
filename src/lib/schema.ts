@@ -393,6 +393,18 @@ export const AppointmentSchema = z.object({
 export type Appointment = z.infer<typeof AppointmentSchema>;
 export type AppointmentPostRequest = Omit<Appointment, "">;
 
+export type NominatimData = {
+  address: {
+    house_number: string;
+    road: string;
+    city_district: string;
+    city: string;
+    "ISO3166-2-lvl4": string;
+    postcode: string;
+    country: string;
+    country_code: string;
+  };
+};
 // export const AppointmentPostRequestSchema = z.object({
 //   brandId: z.string().uuid(),
 //   serviceId: z.string().uuid(),
