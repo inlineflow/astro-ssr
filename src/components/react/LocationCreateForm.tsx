@@ -379,6 +379,10 @@ const MapContent = ({
       queryKey: ["address", location],
       queryFn: async ({ queryKey }) =>
         await actions.nominatim.lookupByLatLng(queryKey[1] as [number, number]),
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchInterval: false,
     },
     queryClient
   );
