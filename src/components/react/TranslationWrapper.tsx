@@ -7,7 +7,7 @@ export const TranslationContext = ({
 }: //   lng,
 {
   children: ReactNode;
-  lng: string;
+  // lng: string;
 }) => {
   return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
 };

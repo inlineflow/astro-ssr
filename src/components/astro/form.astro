@@ -14,7 +14,7 @@ const { validLocation } = Astro.props;
 
 {
   validLocation && (
-    <TranslationContext lng={Astro.currentLocale!} client:load>
+    <TranslationContext client:load>
       <AppointmentForm location={validLocation} client:load />
     </TranslationContext>
   )

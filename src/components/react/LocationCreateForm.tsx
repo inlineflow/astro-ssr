@@ -7,6 +7,8 @@ import {
   FormMessage,
 } from "@/ui/form";
 import { z } from "zod";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "src/data-fetching/store";
 import i18n from "src/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/ui/input";
@@ -368,8 +370,14 @@ const MapContent = ({
   selectLocation: (location: [number, number]) => void;
   withAddress: boolean;
 }) => {
+  const [location, setLocation] = useState([42.8703, 74.6116]);
   const [addressData, setAddressData] = useState<NominatimData | FetchError>();
   const [loading, setLoading] = useState<boolean>(false);
+  const x = useQuery({
+    queryKey: ["address", location],
+    queryFn: async ({ queryKey }) =>
+      await actions.nominatim.lookupByLatLng(queryKey[1] as [number, number]),
+  });
   return (
     <div>
       <MapComponent
