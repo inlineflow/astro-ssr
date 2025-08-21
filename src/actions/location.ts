@@ -1,10 +1,20 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { apiUrl } from "src/env";
-import { LocationSearchParamsSchema, type Location } from "src/lib/schema";
+import {
+  LocationCreateFormSchema,
+  LocationSearchParamsSchema,
+  type Location,
+} from "src/lib/schema";
 import type { APIError } from "src/lib/types";
 
 export const location = {
+  postLocation: defineAction({
+    input: LocationCreateFormSchema,
+    handler: async (input) => {
+      const resp = await fetch(`${apiUrl}/brand`);
+    },
+  }),
   searchLocations: defineAction({
     input: LocationSearchParamsSchema,
     handler: async (input) => {

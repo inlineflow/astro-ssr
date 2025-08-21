@@ -1,6 +1,12 @@
 import { http, HttpResponse } from "msw";
 import type { APIError } from "../../lib/types";
-import type { Location, Brand, LocationSearchParams } from "../../lib/schema";
+import {
+  type Location,
+  type Brand,
+  type LocationSearchParams,
+  type LocationCreateFormValues,
+  LocationCreateFormSchema,
+} from "../../lib/schema";
 // import { DateTime } from "luxon";
 import type { AppointmentPostRequest } from "../../lib/schema";
 import { loadData } from "../utils";
@@ -20,6 +26,28 @@ const brands = await loadData<Brand[]>("brands.json");
 const locations = brands.map((e) => e.locations).flat();
 
 const locationHandlers = [
+  http.post<{ brandId: string }, LocationCreateFormValues>(
+    `${apiUrl}/brand/:brandId/location`,
+    async ({ request }) => {
+      const data = await request.json();
+      const x = LocationCreateFormSchema.safeParse(data);
+      if (x.error) {
+        const error: APIError = {
+          error: {
+            status: 400,
+            message: `Failed validation: ${x.error.issues.map(
+              (i) => `${i.path.join(".")}:${i.message}`
+            )}`,
+          },
+        };
+        return HttpResponse.json(error);
+      }
+      return HttpResponse.json(
+        { message: "Location created successfully" },
+        { status: 200 }
+      );
+    }
+  ),
   http.get<{ brandId: string }, never, Location[] | APIError>(
     `${apiUrl}/brand/:brandId/locations`,
     ({ params }) => {

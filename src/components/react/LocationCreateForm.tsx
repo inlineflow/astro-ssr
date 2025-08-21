@@ -16,9 +16,11 @@ import { useForm } from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
 import {
+  LocationCreateFormSchema,
   LocationType,
   locationTypes,
   locationTypeToServices,
+  type LocationCreateFormValues,
   type LocationMetadata,
   type NominatimData,
 } from "src/lib/schema";
@@ -50,36 +52,11 @@ import { actions } from "astro:actions";
 import { Spinner } from "@/ui/spinner";
 import type { LeafletMouseEvent } from "leaflet";
 
-const FormSchema = z.object({
-  name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
-  type: z.enum(locationTypes, {
-    message: i18n.t("form.location_type_unknown"),
-  }),
-  services: z
-    .array(
-      z.object({
-        serviceId: z.uuid(),
-        serviceName: z.string(),
-      })
-    )
-    .min(1, { message: i18n.t("form.services_empty") }),
-  address: z.tuple([z.number(), z.number()], {
-    message: i18n.t("form.location_address_empty"),
-  }),
-});
-
-type LocationCreateFormValues = z.infer<typeof FormSchema>;
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
-  const { data: resp, error } = await actions.nominatim.lookupByLatLng(
-    data.address
-  );
-  if (error) {
-    console.log("error when fetching street name: ", error);
-    return;
-  }
-
-  console.log("response: ", resp);
+  const x = data;
+  x.name = "";
+  actions.location;
 };
 
 const onError = async (data: any) => {
@@ -88,7 +65,7 @@ const onError = async (data: any) => {
 
 export const LocationCreateForm = () => {
   const form = useForm<LocationCreateFormValues>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(LocationCreateFormSchema),
     defaultValues: {
       name: "",
       type: undefined as unknown as LocationCreateFormValues["type"],
@@ -399,6 +376,7 @@ const MapContent = ({
         withAddress={withAddress}
         onClick={(e: LeafletMouseEvent) => {
           setLocation([e.latlng.lat, e.latlng.lng]);
+          selectLocation([e.latlng.lat, e.latlng.lng]);
         }}
         markerLocation={location}
       />
