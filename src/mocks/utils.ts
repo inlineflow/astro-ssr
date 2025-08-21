@@ -16,3 +16,6 @@ export const loadData = async <T>(filePath: string): Promise<T> => {
     throw new Error(`Failed to read data from ${filePath}: ${err.message}`);
   }
 };
+
+export const delay = async (timeoutInMS: number) =>
+  new Promise((resolve) => setTimeout(resolve, timeoutInMS));

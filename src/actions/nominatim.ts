@@ -1,12 +1,14 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import type { NominatimData } from "src/lib/schema";
+import { delay } from "src/mocks/utils";
 
 export const nominatim = {
   lookupByLatLng: defineAction({
     input: z.tuple([z.number(), z.number()]),
     handler: async (input) => {
       try {
+        if (import.meta.env.DEV) delay(1200);
         console.log("input: ", input);
         const resp = await fetch(
           `https://nominatim.openstreetmap.org/reverse?lat=${input[0]}&lon=${input[1]}&format=json&accept-language=ru`,

@@ -45,6 +45,7 @@ import {
   DialogTrigger,
 } from "@/ui/dialog";
 import { actions } from "astro:actions";
+import { Spinner } from "@/ui/spinner";
 
 const FormSchema = z.object({
   name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
@@ -368,19 +369,27 @@ const MapContent = ({
   withAddress: boolean;
 }) => {
   const [addressData, setAddressData] = useState<NominatimData | FetchError>();
+  const [loading, setLoading] = useState<boolean>(false);
   return (
     <div>
       <MapComponent
         selectLocation={selectLocation}
         withAddress={withAddress}
         setAddress={setAddressData}
+        setLoading={setLoading}
       />
-      {withAddress && typeof addressData === "string" && (
-        <p>{`Error: ${addressData}`}</p>
-      )}
-      {withAddress && typeof addressData !== "string" && addressData && (
-        <p>{`${addressData.address.road}`}</p>
-      )}
+      <div className="flex items-center justify-center">
+        {withAddress && !loading && typeof addressData === "string" && (
+          <p className="text-center">{`Error: ${addressData}`}</p>
+        )}
+        {withAddress &&
+          !loading &&
+          typeof addressData !== "string" &&
+          addressData && (
+            <p className="text-center">{`${addressData.address.road}`}</p>
+          )}
+        {loading && <Spinner variant="bars" />}
+      </div>
     </div>
   );
 };

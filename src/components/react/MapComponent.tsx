@@ -14,9 +14,11 @@ export const MapComponent = ({
   selectLocation,
   withAddress,
   setAddress,
+  setLoading,
 }: {
   selectLocation: (location: [number, number]) => void;
   setAddress: (data: NominatimData | string) => void;
+  setLoading?: (b: boolean) => void;
   withAddress: boolean;
 }) => {
   const center = new LatLng(42.8703, 74.6116);
@@ -34,6 +36,9 @@ export const MapComponent = ({
           center={center}
           selectLocation={selectLocation}
           setAddress={(data) => setAddress(data)}
+          setLoading={(data) => {
+            if (setLoading) setLoading(data);
+          }}
         />
       </MapContainer>
     </div>
@@ -60,14 +65,17 @@ const LocationMarker = ({
   center,
   selectLocation,
   setAddress,
+  setLoading,
 }: {
   center: LatLng;
   selectLocation: (location: [number, number]) => void;
   setAddress: (data: NominatimData | string) => void;
+  setLoading?: (b: boolean) => void;
 }) => {
   const [position, setPosition] = useState<LatLng | null>(center);
   const map = useMapEvents({
     click: async (e) => {
+      if (setLoading) setLoading(true);
       console.log(e.latlng);
       setPosition(e.latlng);
       selectLocation([e.latlng.lat, e.latlng.lng]);
@@ -75,6 +83,7 @@ const LocationMarker = ({
         e.latlng.lat,
         e.latlng.lng,
       ]);
+      if (setLoading) setLoading(false);
 
       if (error) {
         setAddress(error.message);
