@@ -3,6 +3,7 @@ import { LocCard } from "components/react/LocationCard";
 import i18n from "src/lib/i18n";
 import type { Location } from "src/lib/schema";
 import "leaflet/dist/leaflet.css";
+import { PrefetchLink } from "./Utils";
 
 export const BusinessDashboard = ({
   locations,
@@ -23,7 +24,15 @@ export const BusinessDashboard = ({
       <ul>
         {locations.map((l) => (
           <li key={l.locationId}>
-            <LocCard location={l} onClick={() => console.log("hello world")} />
+            <PrefetchLink
+              href={`/${i18n.language}/brand/${brandId}/location/${l.locationId}/edit`}
+              // href="/"
+            >
+              <LocCard
+                location={l}
+                onClick={() => console.log("hello world")}
+              />
+            </PrefetchLink>
           </li>
         ))}
       </ul>

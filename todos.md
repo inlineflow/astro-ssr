@@ -88,3 +88,5 @@ https://www.chromium.org/developers/design-documents/form-styles-that-chromium-u
 perhaps derive them from picked services
 
 improve dashboard
+
+# implement the location edit page
