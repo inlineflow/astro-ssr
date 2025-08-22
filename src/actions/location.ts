@@ -85,12 +85,12 @@ export const location = {
     },
   }),
 
-  getLocation: defineAction({
+  getLocationById: defineAction({
     input: z.object({
-      id: z.string().uuid(),
+      locationId: z.string().uuid(),
     }),
     handler: async (input) => {
-      const resp = await fetch(`${apiUrl}/location/${input.id}`);
+      const resp = await fetch(`${apiUrl}/location/${input.locationId}`);
       const result = (await resp.json()) as Location | APIError;
       if ("error" in result) {
         throw new ActionError({

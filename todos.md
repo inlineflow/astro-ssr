@@ -90,3 +90,5 @@ perhaps derive them from picked services
 improve dashboard
 
 # implement the location edit page
+
+# store location address at [lat, lng] combination, look up address name at runtime (optionally cash results for some time in case user has poor network connection)

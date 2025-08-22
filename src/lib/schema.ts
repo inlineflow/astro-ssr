@@ -426,6 +426,9 @@ export const LocationCreateFormSchema = z.object({
 });
 
 export type LocationCreateFormValues = z.infer<typeof LocationCreateFormSchema>;
+
+export const LocationEditFormSchema = LocationCreateFormSchema;
+export type LocationEditFormValues = z.infer<typeof LocationEditFormSchema>;
 // export const AppointmentPostRequestSchema = z.object({
 //   brandId: z.string().uuid(),
 //   serviceId: z.string().uuid(),

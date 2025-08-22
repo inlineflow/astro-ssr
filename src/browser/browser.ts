@@ -6,7 +6,10 @@
  * @param key
  * @returns
  */
-export const extractUUID = (urlRaw: string | URL, key: string) => {
+export const extractUUID = (
+  urlRaw: string | URL,
+  key: "location" | "brand"
+) => {
   let url;
   if (typeof urlRaw === "string") {
     url = new URL(urlRaw);

@@ -12,7 +12,7 @@ import { queryClient } from "src/data-fetching/store";
 import i18n from "src/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/ui/input";
-import { useForm } from "react-hook-form";
+import { useForm, type FieldErrors } from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
 import {
@@ -22,7 +22,6 @@ import {
   locationTypeToServices,
   type LocationCreateFormValues,
   type LocationMetadata,
-  type NominatimData,
 } from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useState } from "react";
@@ -56,8 +55,6 @@ import { toast } from "sonner";
 
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
-  // const x = data;
-  // x.name = "";
   const brandId = extractUUID(window.location.href, "brand");
   if (!brandId) {
     console.log(
@@ -78,7 +75,7 @@ const onSubmit = async (data: LocationCreateFormValues) => {
   }
 };
 
-const onError = async (data: any) => {
+const onError = async (data: FieldErrors<LocationCreateFormValues>) => {
   console.log("onError data: ", data);
 };
 
