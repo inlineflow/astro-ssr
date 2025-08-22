@@ -1,10 +1,10 @@
 import { http, HttpResponse } from "msw";
 import type { APIError } from "../../lib/types";
-import {
-  type Location,
-  type Brand,
-  type LocationSearchParams,
-  type LocationCreateFormValues,
+import type {
+  Location,
+  Brand,
+  LocationSearchParams,
+  LocationCreateFormValues,
 } from "../../lib/schema";
 // import { DateTime } from "luxon";
 import type { AppointmentPostRequest } from "../../lib/schema";

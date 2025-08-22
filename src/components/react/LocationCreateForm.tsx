@@ -51,12 +51,24 @@ import {
 import { actions } from "astro:actions";
 import { Spinner } from "@/ui/spinner";
 import type { LeafletMouseEvent } from "leaflet";
+import { extractUUID } from "src/browser/browser";
 
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
-  const x = data;
-  x.name = "";
-  actions.location;
+  // const x = data;
+  // x.name = "";
+  const brandId = extractUUID(window.location.href, "brand");
+  if (!brandId) {
+    console.log(
+      `error, couldn't pass brandId in the url: ${window.location.href}`
+    );
+    return;
+  }
+  const { data: postData, error } = await actions.location.postLocation({
+    data,
+    brandId: brandId,
+  });
+  console.log("response: ", postData);
 };
 
 const onError = async (data: any) => {
