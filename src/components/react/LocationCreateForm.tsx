@@ -51,18 +51,24 @@ import {
 import { actions } from "astro:actions";
 import { Spinner } from "@/ui/spinner";
 import type { LeafletMouseEvent } from "leaflet";
+import { extractUUID } from "src/browser/browser";
 
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
-  const { data: resp, error } = await actions.nominatim.lookupByLatLng(
-    data.address
-  );
-  if (error) {
-    console.log("error when fetching street name: ", error);
+  // const x = data;
+  // x.name = "";
+  const brandId = extractUUID(window.location.href, "brand");
+  if (!brandId) {
+    console.log(
+      `error, couldn't pass brandId in the url: ${window.location.href}`
+    );
     return;
   }
-
-  console.log("response: ", resp);
+  const { data: postData, error } = await actions.location.postLocation({
+    data,
+    brandId: brandId,
+  });
+  console.log("response: ", postData);
 };
 
 const onError = async (data: any) => {
@@ -382,6 +388,7 @@ const MapContent = ({
         withAddress={withAddress}
         onClick={(e: LeafletMouseEvent) => {
           setLocation([e.latlng.lat, e.latlng.lng]);
+          selectLocation([e.latlng.lat, e.latlng.lng]);
         }}
         markerLocation={location}
       />
