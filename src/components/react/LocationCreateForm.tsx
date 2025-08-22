@@ -54,15 +54,9 @@ import type { LeafletMouseEvent } from "leaflet";
 
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
-  const { data: resp, error } = await actions.nominatim.lookupByLatLng(
-    data.address
-  );
-  if (error) {
-    console.log("error when fetching street name: ", error);
-    return;
-  }
-
-  console.log("response: ", resp);
+  const x = data;
+  x.name = "";
+  actions.location;
 };
 
 const onError = async (data: any) => {
@@ -382,6 +376,7 @@ const MapContent = ({
         withAddress={withAddress}
         onClick={(e: LeafletMouseEvent) => {
           setLocation([e.latlng.lat, e.latlng.lng]);
+          selectLocation([e.latlng.lat, e.latlng.lng]);
         }}
         markerLocation={location}
       />
