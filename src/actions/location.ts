@@ -1,6 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { apiUrl } from "src/env";
+import i18n from "src/lib/i18n";
 import {
   LocationCreateFormSchema,
   LocationSearchParamsSchema,
@@ -19,7 +20,9 @@ export const location = {
       if (parseResult.error) {
         throw new ActionError({
           code: "INTERNAL_SERVER_ERROR",
-          message: `Failed validation: ${parseResult.error.issues.map(
+          message: `${i18n.t("validation.failed_validation")}, ${i18n.t(
+            "validation.errors"
+          )}: ${parseResult.error.issues.map(
             (i) => `${i.path.join(".")}:${i.message}`
           )}`,
         });

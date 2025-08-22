@@ -69,9 +69,9 @@ const onSubmit = async (data: LocationCreateFormValues) => {
   if (!error) {
     console.log("response: ", postData);
     toast.success(postData.message);
-    setTimeout(() => {
-      window.location.href = `/${i18n.language}/brand/${brandId}/dashboard`;
-    }, 300);
+    // setTimeout(() => {
+    //   window.location.href = `/${i18n.language}/brand/${brandId}/dashboard`;
+    // }, 300);
   }
 };
 
@@ -135,8 +135,10 @@ export const LocationCreateForm = () => {
                 <FormLabel>{i18n.t("form.location_type")}</FormLabel>
                 <FormControl>
                   <LocationTypeCombobox
-                    selectType={(slug: string) => field.onChange(slug)}
-                  ></LocationTypeCombobox>
+                    selectTypes={(types: LocationType[]) =>
+                      field.onChange(types)
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -204,12 +206,15 @@ export const LocationCreateForm = () => {
 };
 
 const LocationTypeCombobox = ({
-  selectType,
+  selectTypes,
 }: {
-  selectType: (slug: string) => void;
+  selectTypes: (types: LocationType[]) => void;
 }) => {
   const [open, setOpen] = useState(false);
-  const [currentType, setCurrentType] = useState<string | undefined>();
+  // const [currentType, setCurrentType] = useState<string | undefined>();
+  const [currentTypes, setCurrentTypes] = useState(
+    locationTypes.map((lt) => ({ type: lt, selected: false }))
+  );
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -219,7 +224,9 @@ const LocationTypeCombobox = ({
           aria-expanded={open}
           className={cn("w-full justify-between", "")}
         >
-          {currentType ?? i18n.t("form.pick_location_type")}
+          {currentTypes.filter((ct) => ct.selected).length > 0
+            ? `${currentTypes.filter((ct) => ct.selected).length} selected`
+            : i18n.t("form.pick_location_type")}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -234,18 +241,28 @@ const LocationTypeCombobox = ({
               {i18n.t("form.pick_location_placeholder")}
             </CommandEmpty>
             <CommandGroup>
-              {locationTypes.map((lt) => (
+              {currentTypes.map((t) => (
                 <CommandItem
-                  key={lt}
-                  value={lt}
+                  key={t.type}
+                  value={t.type}
                   onSelect={(val) => {
                     console.log("val: ", val);
-                    setCurrentType(val);
-                    setOpen(false);
-                    selectType(val);
+                    // setCurrentType(val);
+                    const localTypes = currentTypes.map((ct) =>
+                      ct.type === val ? { ...ct, selected: !ct.selected } : ct
+                    );
+                    setCurrentTypes(localTypes);
+                    selectTypes(
+                      localTypes.filter((lt) => lt.selected).map((t) => t.type)
+                    );
                   }}
                 >
-                  {lt}
+                  {t.type}
+                  <Check
+                    className={`transition-opacity ease-in-out delay-150 duration-300 ${
+                      t.selected ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
                   {/* consider fetching locataion type metadata to store location type value in location type picker */}
                 </CommandItem>
               ))}

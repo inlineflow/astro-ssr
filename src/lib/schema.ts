@@ -409,9 +409,11 @@ export type NominatimData = {
 
 export const LocationCreateFormSchema = z.object({
   name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
-  type: z.enum(locationTypes, {
-    message: i18n.t("form.location_type_unknown"),
-  }),
+  type: z.array(
+    z.enum(locationTypes, {
+      message: i18n.t("form.location_type_unknown"),
+    })
+  ),
   services: z
     .array(
       z.object({

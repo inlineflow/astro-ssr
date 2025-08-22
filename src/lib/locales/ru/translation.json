@@ -74,5 +74,6 @@
   "form.pick_address": "Укажите адрес",
   "close": "Закрыть",
   "form.location_address": "Адрес",
-  "business_dashboard.add_location": "Добавить филиал"
+  "business_dashboard.add_location": "Добавить филиал",
+  "rest.location_created_successfully": "Филиал создан успешно"
 }

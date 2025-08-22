@@ -10,6 +10,7 @@ import type {
 import type { AppointmentPostRequest } from "../../lib/schema";
 import { loadData } from "../utils";
 import { DateTime } from "luxon";
+import i18n from "../../lib/i18n";
 
 // const env = loadEnv("development", process.cwd());
 // for some reason when I import it from 'src/env' it doesn't work
@@ -30,7 +31,7 @@ const locationHandlers = [
     async ({ request }) => {
       const data = await request.json();
       return HttpResponse.json(
-        { message: "Location created successfully" },
+        { message: i18n.t("rest.location_created_successfully") },
         { status: 201 }
       );
     }
