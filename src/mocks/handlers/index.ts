@@ -5,7 +5,6 @@ import {
   type Brand,
   type LocationSearchParams,
   type LocationCreateFormValues,
-  LocationCreateFormSchema,
 } from "../../lib/schema";
 // import { DateTime } from "luxon";
 import type { AppointmentPostRequest } from "../../lib/schema";
@@ -30,21 +29,9 @@ const locationHandlers = [
     `${apiUrl}/brand/:brandId/location`,
     async ({ request }) => {
       const data = await request.json();
-      const x = LocationCreateFormSchema.safeParse(data);
-      if (x.error) {
-        const error: APIError = {
-          error: {
-            status: 400,
-            message: `Failed validation: ${x.error.issues.map(
-              (i) => `${i.path.join(".")}:${i.message}`
-            )}`,
-          },
-        };
-        return HttpResponse.json(error);
-      }
       return HttpResponse.json(
         { message: "Location created successfully" },
-        { status: 200 }
+        { status: 201 }
       );
     }
   ),
