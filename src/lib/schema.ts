@@ -1,4 +1,5 @@
 import { z } from "astro:schema";
+import i18n from "./i18n";
 
 export const employeeSchema = z.object({
   employeeId: z.string().uuid(),
@@ -405,6 +406,26 @@ export type NominatimData = {
     country_code: string;
   };
 };
+
+export const LocationCreateFormSchema = z.object({
+  name: z.string().min(1, { message: i18n.t("form.location_name_empty") }),
+  type: z.enum(locationTypes, {
+    message: i18n.t("form.location_type_unknown"),
+  }),
+  services: z
+    .array(
+      z.object({
+        serviceId: z.string().uuid(),
+        serviceName: z.string(),
+      })
+    )
+    .min(1, { message: i18n.t("form.services_empty") }),
+  address: z.tuple([z.number(), z.number()], {
+    message: i18n.t("form.location_address_empty"),
+  }),
+});
+
+export type LocationCreateFormValues = z.infer<typeof LocationCreateFormSchema>;
 // export const AppointmentPostRequestSchema = z.object({
 //   brandId: z.string().uuid(),
 //   serviceId: z.string().uuid(),

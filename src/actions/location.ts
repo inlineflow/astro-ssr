@@ -1,10 +1,41 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { apiUrl } from "src/env";
-import { LocationSearchParamsSchema, type Location } from "src/lib/schema";
+import {
+  LocationCreateFormSchema,
+  LocationSearchParamsSchema,
+  type Location,
+} from "src/lib/schema";
 import type { APIError } from "src/lib/types";
 
 export const location = {
+  postLocation: defineAction({
+    input: z.object({
+      data: LocationCreateFormSchema,
+      brandId: z.string().uuid(),
+    }),
+    handler: async (input) => {
+      const parseResult = LocationCreateFormSchema.safeParse(input.data);
+      if (parseResult.error) {
+        throw new ActionError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: `Failed validation: ${parseResult.error.issues.map(
+            (i) => `${i.path.join(".")}:${i.message}`
+          )}`,
+        });
+      }
+
+      const resp = await fetch(`${apiUrl}/brand/${input.brandId}/location`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input.data),
+      });
+      const result = (await resp.json()) as { message: string; status: string };
+      return result;
+    },
+  }),
   searchLocations: defineAction({
     input: LocationSearchParamsSchema,
     handler: async (input) => {
