@@ -52,6 +52,7 @@ import { actions } from "astro:actions";
 import { Spinner } from "@/ui/spinner";
 import type { LeafletMouseEvent } from "leaflet";
 import { extractUUID } from "src/browser/browser";
+import { toast } from "sonner";
 
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
@@ -68,7 +69,13 @@ const onSubmit = async (data: LocationCreateFormValues) => {
     data,
     brandId: brandId,
   });
-  console.log("response: ", postData);
+  if (!error) {
+    console.log("response: ", postData);
+    toast.success(postData.message);
+    setTimeout(() => {
+      window.location.href = `/${i18n.language}/brand/${brandId}/dashboard`;
+    }, 300);
+  }
 };
 
 const onError = async (data: any) => {

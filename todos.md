@@ -82,3 +82,7 @@ https://www.chromium.org/developers/design-documents/form-styles-that-chromium-u
 # Add auth
 
 # consider fetching locataion type metadata to store location type value in location type picker
+
+# finish selection of multiple location types for a location
+
+perhaps derive them from picked services

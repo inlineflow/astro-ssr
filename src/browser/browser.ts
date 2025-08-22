@@ -6,8 +6,14 @@
  * @param key
  * @returns
  */
-export const extractUUID = (urlRaw: string, key: string) => {
-  const url = new URL(urlRaw);
+export const extractUUID = (urlRaw: string | URL, key: string) => {
+  let url;
+  if (typeof urlRaw === "string") {
+    url = new URL(urlRaw);
+  } else {
+    url = urlRaw;
+  }
+  //   const url = new URL(urlRaw);
   const parts = url.pathname.split("/");
   let result = undefined;
 

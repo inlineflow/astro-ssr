@@ -2,10 +2,12 @@
 import "leaflet/dist/leaflet.css";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import { LocationCreateForm } from "src/components/react/LocationCreateForm";
+import { Toaster } from "@/ui/sonner";
 
 export const prerender = false;
 ---
 
 <CenteredLayout>
   <LocationCreateForm client:only />
+  <Toaster client:load />
 </CenteredLayout>

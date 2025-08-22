@@ -1,15 +1,19 @@
 ---
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
-import { BusinessDashboard as Dashboard } from "src/components/react/BusinessDashboard";
+import { BusinessDashboard } from "src/components/react/BusinessDashboard";
 import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
 import "leaflet/dist/leaflet.css";
+import { extractUUID } from "src/browser/browser";
 export const prerender = false;
 // const x = actions.location.getLocationsByBrandId("123");
 const url = Astro.url;
-const brandId = url.searchParams.get("brand");
+const brandId = extractUUID(url, "brand");
+// const brandId = url.searchParams.get("brand");
 if (!brandId) {
-  return Astro.rewrite("/404");
+  console.log("brand id not found in ", Astro.url);
+  return new Response("123", { status: 400 });
+  // return Astro.rewrite("/404");
 }
 const { data: locations, error } = await Astro.callAction(
   actions.location.getLocationsByBrandId,
@@ -20,7 +24,11 @@ const { data: locations, error } = await Astro.callAction(
 <CenteredLayout>
   {
     locations && (
-      <Dashboard locations={locations} brandId={brandId} client:only="react" />
+      <BusinessDashboard
+        locations={locations}
+        brandId={brandId}
+        client:only="react"
+      />
     )
   }
   {error && <ErrorMessage errors={[error]} />}
