@@ -86,3 +86,5 @@ https://www.chromium.org/developers/design-documents/form-styles-that-chromium-u
 # finish selection of multiple location types for a location
 
 perhaps derive them from picked services
+
+improve dashboard

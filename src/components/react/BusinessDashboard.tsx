@@ -23,7 +23,7 @@ export const BusinessDashboard = ({
       <ul>
         {locations.map((l) => (
           <li key={l.locationId}>
-            <LocCard location={l} />
+            <LocCard location={l} onClick={() => console.log("hello world")} />
           </li>
         ))}
       </ul>
