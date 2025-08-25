@@ -25,7 +25,6 @@ import { Separator } from "@/ui/separator";
 import { AppointmentServiceControls } from "./AppointmentServiceControls";
 import { SelectedServiceProvider } from "./AppointmentServiceControlsContext";
 import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import i18n from "src/lib/i18n";
 import { capitalize } from "src/lib/utils";
 
