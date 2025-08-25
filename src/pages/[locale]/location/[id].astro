@@ -6,7 +6,7 @@ import FormSkeleton from "src/components/astro/form-skeleton.astro";
 import { Toaster } from "components/react/shadcn/ui/sonner";
 import LocationDescription from "components/astro/location-description.astro";
 import LocationDescriptionSkeleton from "components/astro/location-description-skeleton.astro";
-import type { LocationLight } from "src/lib/schema";
+// import type { LocationLight } from "src/lib/schema";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 
 export const prerender = false;
@@ -19,27 +19,27 @@ if (!id) {
 // let location: Location = {} as Location;
 const { data: location, error: fetchError } = await Astro.callAction(
   actions.location.getLocationById,
-  { id: id }
+  { locationId: id }
 );
 
 // const { data: validatedbrand, error: invalidbrandError } =
 //   validateService(brand);
 const errors = [fetchError].filter((e) => e !== undefined);
 
-let locLight = {} as LocationLight;
-if (!fetchError) {
-  locLight = {
-    name: location.name,
-    geodata: location.geodata,
-    // address: `${location.geodata.address.road}, ${location.geodata.address.house_number}`,
-    closingTime: location.closingTime,
-    brandId: location.brandId,
-    locationId: location.locationId,
-    openingTime: location.openingTime,
-    photo: location.photo,
-    services: location.services,
-  };
-} // let location: Location = {} as Location;
+// let locLight = {} as LocationLight;
+// if (!fetchError) {
+//   locLight = {
+//     name: location.name,
+//     geodata: location.geodata,
+//     // address: `${location.geodata.address.road}, ${location.geodata.address.house_number}`,
+//     closingTime: location.closingTime,
+//     brandId: location.brandId,
+//     locationId: location.locationId,
+//     openingTime: location.openingTime,
+//     photo: location.photo,
+//     services: location.services,
+//   };
+// } // let location: Location = {} as Location;
 // const { services, employees, ...locLight } = location!;
 // console.log(validatedbrand);
 ---
@@ -50,7 +50,7 @@ if (!fetchError) {
       location && (
         <div class="flex justify-center items-center min-w-screen">
           <div class="flex flex-col items-center gap-5 p-10">
-            <LocationDescription validLocationLight={locLight} server:defer>
+            <LocationDescription validLocationLight={location} server:defer>
               <LocationDescriptionSkeleton slot="fallback" />
             </LocationDescription>
             <Form validLocation={location} server:defer>

@@ -142,7 +142,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
         className="mt-5 w-full items-center justify-center space-y-5"
       >
         <SelectedServiceProvider>
