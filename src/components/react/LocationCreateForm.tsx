@@ -12,7 +12,12 @@ import { queryClient } from "src/data-fetching/store";
 import i18n from "src/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/ui/input";
-import { useForm, useFormState, type FieldErrors } from "react-hook-form";
+import {
+  useForm,
+  useFormState,
+  type DefaultValues,
+  type FieldErrors,
+} from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
 import {
@@ -20,6 +25,7 @@ import {
   LocationType,
   locationTypes,
   locationTypeToServices,
+  type Location,
   type LocationCreateFormValues,
   type LocationMetadata,
   type NominatimData,
@@ -81,14 +87,25 @@ const onError = async (data: FieldErrors<LocationCreateFormValues>) => {
   console.log(data);
 };
 
-export const LocationCreateForm = () => {
+const defaults: DefaultValues<LocationCreateFormValues> = {
+  geodata: {},
+  name: "",
+  services: [],
+  type: [],
+  // type: undefined as unknown as LocationCreateFormValues["type"],
+};
+
+export const LocationCreateForm = ({ location }: { location?: Location }) => {
   const form = useForm<LocationCreateFormValues>({
     resolver: zodResolver(LocationCreateFormSchema),
-    defaultValues: {
-      name: "",
-      type: undefined as unknown as LocationCreateFormValues["type"],
-      services: [],
-    },
+    defaultValues: location
+      ? {
+          name: location.name,
+          type: location.locationTypes,
+          services: location.services,
+          geodata: location.geodata,
+        }
+      : defaults,
   });
 
   const services = keysOf(locationTypeToServices).reduce<
@@ -186,6 +203,10 @@ export const LocationCreateForm = () => {
                       </DialogHeader>
                       <MapContent
                         setGeodataField={(val) => field.onChange(val)}
+                        center={[
+                          Number(location?.geodata.lat),
+                          Number(location?.geodata.lon),
+                        ]}
                         withAddress
                       />
                       {/* <MapComponent
@@ -338,20 +359,10 @@ const LocationServicesCombobox = ({
                             ? { ...serv, selected: !serv.selected }
                             : serv
                         ),
-                        // [lt]: [
-                        //   ...services[lt],
-                        //   {
-                        //     ...services[lt].find(
-                        //       (s) => s.serviceId === serviceId
-                        //     ),
-                        //     selected: true,
-                        //   },
-                        // ],
                       };
                       console.log("localServices in form: ", localServices);
                       console.log("selected service: ", serviceId);
                       setCurrentServices(localServices);
-                      // setOpen(false);
                       const selectedServices = localServices[lt]
                         .filter((serv) => serv.selected)
                         .map((serv) => ({
@@ -382,13 +393,15 @@ const LocationServicesCombobox = ({
 const MapContent = ({
   setGeodataField,
   withAddress,
+  center,
 }: {
   setGeodataField: (data: NominatimData) => void;
+  center?: [number, number];
   withAddress: boolean;
 }) => {
-  const [location, setLocation] = useState<[number, number]>([
-    42.8703, 74.6116,
-  ]);
+  const [location, setLocation] = useState<[number, number]>(
+    center ?? [42.8703, 74.6116]
+  );
   const {
     data: resp,
     isFetching,

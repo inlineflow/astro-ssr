@@ -1,9 +1,11 @@
 ---
+import "leaflet/dist/leaflet.css";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
-import { LocationEditForm } from "src/components/react/LocationEditForm";
+// import { LocationEditForm } from "src/components/react/LocationEditForm";
 import { extractUUID } from "src/browser/browser";
 import { actions } from "astro:actions";
 import ErrorMessage from "components/astro/error-message.astro";
+import { LocationCreateForm } from "components/react/LocationCreateForm";
 export const prerender = false;
 const locationId = extractUUID(Astro.url, "location");
 if (!locationId) {
@@ -19,6 +21,6 @@ const { data, error } = await Astro.callAction(
 ---
 
 <CenteredLayout>
-  {data && <LocationEditForm location={data} client:load />}
+  {data && <LocationCreateForm location={data} client:only />}
   {error && <ErrorMessage errors={[error]} />}
 </CenteredLayout>
