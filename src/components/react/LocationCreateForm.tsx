@@ -374,7 +374,6 @@ const LocationServicesCombobox = ({
   );
 };
 
-type FetchError = string;
 const MapContent = ({
   setGeodataField,
   withAddress,

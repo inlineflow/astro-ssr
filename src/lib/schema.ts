@@ -322,26 +322,34 @@ const h = Object.values(locationTypeToServices)
   .flat();
 
 const geodataSchema = z.object({
-  house_number: z
-    .string()
-    .min(1, { message: i18n.t("validation.address.empty_house_number") }),
-  road: z.string().min(1, { message: i18n.t("validation.address.empty_road") }),
-  city_district: z
-    .string()
-    .min(1, { message: i18n.t("validation.address.empty_city_district") }),
-  city: z.string().min(1, { message: i18n.t("validation.address.empty_city") }),
-  "ISO3166-2-lvl4": z
-    .string()
-    .min(1, { message: i18n.t("validation.address.empty_iso3166-2") }),
-  postcode: z
-    .string()
-    .min(1, { message: i18n.t("validation.address.empty_postcode") }),
-  country: z
-    .string()
-    .min(1, { message: i18n.t("validation.address.empty_country") }),
-  country_code: z
-    .string()
-    .min(1, { message: i18n.t("validation.address.empty_country_code") }),
+  lat: z.string().min(1),
+  lon: z.string().min(1),
+  address: z.object({
+    house_number: z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_house_number") }),
+    road: z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_road") }),
+    city_district: z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_city_district") }),
+    city: z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_city") }),
+    "ISO3166-2-lvl4": z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_iso3166-2") }),
+    postcode: z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_postcode") }),
+    country: z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_country") }),
+    country_code: z
+      .string()
+      .min(1, { message: i18n.t("validation.address.empty_country_code") }),
+  }),
 });
 
 export const locationSchema = z.object({
@@ -350,11 +358,7 @@ export const locationSchema = z.object({
   closingTime: z.string().datetime(),
   description: z.string().optional(),
   name: z.string(),
-  geodata: z.object({
-    lat: z.string(),
-    lon: z.string(),
-    address: geodataSchema,
-  }),
+  geodata: geodataSchema,
   brandId: z.string().uuid(),
   employees: z.array(employeeSchema),
   services: z.array(serviceSchema),
@@ -436,16 +440,16 @@ export type AppointmentPostRequest = Omit<Appointment, "">;
 //   };
 // };
 export type NominatimData = Location["geodata"];
-// type NominatimAddressInfo = {
-//   house_number: string;
-//   road: string;
-//   city_district: string;
-//   city: string;
-//   "ISO3166-2-lvl4": string;
-//   postcode: string;
-//   country: string;
-//   country_code: string;
-// };
+type NominatimAddressInfo = {
+  house_number: string;
+  road: string;
+  city_district: string;
+  city: string;
+  "ISO3166-2-lvl4": string;
+  postcode: string;
+  country: string;
+  country_code: string;
+};
 export type NominatimFullData = {
   place_id: number;
   licence: string;
@@ -460,7 +464,7 @@ export type NominatimFullData = {
   addresstype: string;
   name: string;
   display_name: string;
-  address: z.infer<typeof geodataSchema>;
+  address: NominatimAddressInfo;
   boundingbox: string[];
 };
 
