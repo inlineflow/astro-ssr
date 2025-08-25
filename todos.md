@@ -91,6 +91,8 @@ improve dashboard
 
 # implement the location edit page
 
+make the LocationCreateForm React component take in a filled-in location as the optional argument, in order to make the edit and create use the same code
+
 # store location address at [lat, lng] combination, look up address name at runtime (optionally cash results for some time in case user has poor network connection)
 
 # update validations for nominatim data, consider which fields are truly necessary and how to prompt the user to pick a different address
