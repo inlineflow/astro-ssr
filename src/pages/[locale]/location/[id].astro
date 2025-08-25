@@ -30,7 +30,8 @@ let locLight = {} as LocationLight;
 if (!fetchError) {
   locLight = {
     name: location.name,
-    address: location.address,
+    geodata: location.geodata,
+    // address: `${location.geodata.address.road}, ${location.geodata.address.house_number}`,
     closingTime: location.closingTime,
     brandId: location.brandId,
     locationId: location.locationId,

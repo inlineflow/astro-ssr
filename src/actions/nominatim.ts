@@ -1,6 +1,6 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import type { NominatimData } from "src/lib/schema";
+import type { NominatimData, NominatimFullData } from "src/lib/schema";
 import { delay } from "src/mocks/utils";
 
 export const nominatim = {
@@ -19,7 +19,7 @@ export const nominatim = {
             },
           }
         );
-        const result = (await resp.json()) as NominatimData;
+        const result = (await resp.json()) as NominatimFullData;
         console.log("result: ", result);
         return result;
       } catch (error) {

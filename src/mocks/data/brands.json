@@ -10,7 +10,20 @@
         "openingTime": "2025-07-29T15:00:00+06:00",
         "closingTime": "2025-07-29T23:00:00+06:00",
         "name": "Шарм Центр",
-        "address": "ул. Ленина, 123, Аньково",
+        "geodata": {
+          "lat": "42.8768535",
+          "lon": "74.6063395",
+          "address": {
+            "road": "Чуй проспект",
+            "house_number": "123",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720014",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
         "employees": [
           {
@@ -71,7 +84,21 @@
         "openingTime": "2025-07-29T16:00:00+06:00",
         "closingTime": "2025-07-29T02:00:00+06:00",
         "name": "Ажур на Высоте",
-        "address": "пр. Гагарина, 456, Аньково",
+        "geodata": {
+          "lat": "42.8737517",
+          "lon": "74.5975450",
+          "address": {
+            "military": "Генеральный штаб Вооруженных Сил КР",
+            "house_number": "456",
+            "road": "Выставочная ул.",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720040",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "b2c3d4e5-f6a7-8901-2345-67890abcdef1",
         "employees": [
           {
@@ -125,7 +152,21 @@
         "openingTime": "2025-07-29T14:30:00+06:00",
         "closingTime": "2025-07-29T00:30:00+06:00",
         "name": "Спа в Центре Города",
-        "address": "ул. Мира, 789, Аньково",
+        "geodata": {
+          "lat": "42.8740937",
+          "lon": "74.6035031",
+          "address": {
+            "office": "Агропром",
+            "house_number": "96б",
+            "road": "Киевская улица",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720040",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "c3d4e5f6-a7b8-9012-3456-7890abcdef23",
         "employees": [
           {
@@ -173,7 +214,21 @@
         "openingTime": "2025-07-29T15:30:00+06:00",
         "closingTime": "2025-07-29T01:30:00+06:00",
         "name": "Центр Ресниц и Бровей",
-        "address": "ул. Пушкина, 101, Аньково",
+        "geodata": {
+          "lat": "42.8710386",
+          "lon": "74.5914498",
+          "address": {
+            "tourism": "Ramada Hotel Bishkek",
+            "house_number": "37",
+            "road": "Исанова улица",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720017",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "d4e5f6a7-b8c9-0123-4567-890abcdef345",
         "employees": [
           {
@@ -228,7 +283,20 @@
         "openingTime": "2025-07-29T14:00:00+06:00",
         "closingTime": "2025-07-29T00:00:00+06:00",
         "name": "Мужской Кабинет",
-        "address": "ул. Горького, 222, Аньково",
+        "geodata": {
+          "lat": "42.8753525",
+          "lon": "74.6026192",
+          "address": {
+            "house_number": "120",
+            "road": "Чуй проспект",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720014",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "e5f6a7b8-c9d0-1234-5678-90abcdef4567",
         "employees": [
           {
@@ -277,7 +345,20 @@
         "openingTime": "2025-07-29T16:00:00+06:00",
         "closingTime": "2025-07-30T03:00:00+06:00",
         "name": "Убежище Релакса",
-        "address": "ул. Лермонтова, 333, Аньково",
+        "geodata": {
+          "lat": "42.8789120",
+          "lon": "74.6042897",
+          "address": {
+            "house_number": "91",
+            "road": "Раззакова улица",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720014",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "f6a7b8c9-d0e1-2345-6789-0abcdef56789",
         "employees": [
           {
@@ -326,7 +407,20 @@
         "openingTime": "2025-07-29T15:00:00+06:00",
         "closingTime": "2025-07-29T01:00:00+06:00",
         "name": "Наследие Красоты Центр",
-        "address": "ул. Чехова, 444, Аньково",
+        "geodata": {
+          "lat": "42.8796047",
+          "lon": "74.6111123",
+          "address": {
+            "house_number": "193",
+            "road": "Абдумомунова Токтоболота улица",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720014",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "a7b8c9d0-e1f2-3456-7890-1abcdef67890",
         "employees": [
           {
@@ -385,7 +479,21 @@
         "openingTime": "2025-07-29T16:00:00+06:00",
         "closingTime": "2025-07-30T00:00:00+06:00",
         "name": "Центр Депиляции",
-        "address": "ул. Толстого, 555, Аньково",
+        "geodata": {
+          "lat": "42.8712508",
+          "lon": "74.5972923",
+          "address": {
+            "amenity": "Национальный госпиталь",
+            "house_number": "1",
+            "road": "улица Тоголок Молдо",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720040",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "b8c9d0e1-f2a3-4567-8901-2abcdef78901",
         "employees": [
           {
@@ -434,7 +542,20 @@
         "openingTime": "2025-07-29T17:00:00+06:00",
         "closingTime": "2025-07-30T02:00:00+06:00",
         "name": "Оздоровительный Отдых",
-        "address": "ул. Достоевского, 666, Аньково",
+        "geodata": {
+          "lat": "42.8726614",
+          "lon": "74.6086041",
+          "address": {
+            "house_number": "104",
+            "road": "Тыныстанова улица",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720014",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "c9d0e1f2-a3b4-5678-9012-3abcdef89012",
         "employees": [
           {
@@ -483,7 +604,21 @@
         "openingTime": "2025-07-29T15:00:00+06:00",
         "closingTime": "2025-07-30T02:00:00+06:00",
         "name": "Бьюти Перекресток",
-        "address": "ул. Гоголя, 777, Аньково",
+        "geodata": {
+          "lat": "42.8759351",
+          "lon": "74.5949631",
+          "address": {
+            "amenity": "Пекинская Утка",
+            "house_number": "138",
+            "road": "Чуй проспект",
+            "city_district": "Первомайский район",
+            "city": "город Бишкек",
+            "ISO3166-2-lvl4": "KG-GB",
+            "postcode": "720040",
+            "country": "Киргизия",
+            "country_code": "kg"
+          }
+        },
         "brandId": "d0e1f2a3-b4c5-6789-0123-4abcdef90123",
         "employees": [
           {

@@ -141,7 +141,7 @@ const LocationDetails = ({ location }: { location: Location }) => {
       </div>
       <div className="flex gap-x-2 justify-center">
         <p>{t("location.address")}:</p>
-        <p>{location.address}</p>
+        <p>{`${location.geodata.address.road}, ${location.geodata.address.house_number}`}</p>
       </div>
     </div>
   );

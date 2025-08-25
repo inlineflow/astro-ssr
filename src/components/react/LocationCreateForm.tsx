@@ -12,7 +12,7 @@ import { queryClient } from "src/data-fetching/store";
 import i18n from "src/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/ui/input";
-import { useForm, type FieldErrors } from "react-hook-form";
+import { useForm, useFormState, type FieldErrors } from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
 import {
@@ -22,9 +22,10 @@ import {
   locationTypeToServices,
   type LocationCreateFormValues,
   type LocationMetadata,
+  type NominatimData,
 } from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -76,7 +77,7 @@ const onSubmit = async (data: LocationCreateFormValues) => {
 };
 
 const onError = async (data: FieldErrors<LocationCreateFormValues>) => {
-  console.log("onError data: ", data);
+  console.log(data);
 };
 
 export const LocationCreateForm = () => {
@@ -102,7 +103,7 @@ export const LocationCreateForm = () => {
     }));
     return acc;
   }, {} as Record<LocationType, (LocationMetadata & { selected: boolean; serviceId: string })[]>);
-  console.log("services: ", services);
+  // console.log("services: ", services);
 
   return (
     <Card className=" w-full m-12 p-4">
@@ -162,7 +163,7 @@ export const LocationCreateForm = () => {
           ></FormField>
           <FormField
             control={form.control}
-            name="address"
+            name="geodata"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{i18n.t("form.location_address")}</FormLabel>
@@ -179,7 +180,7 @@ export const LocationCreateForm = () => {
                         <DialogDescription>Pick an address.</DialogDescription>
                       </DialogHeader>
                       <MapContent
-                        selectLocation={(val) => field.onChange(val)}
+                        setGeodataField={(val) => field.onChange(val)}
                         withAddress
                       />
                       {/* <MapComponent
@@ -198,7 +199,7 @@ export const LocationCreateForm = () => {
               </FormItem>
             )}
           ></FormField>
-          <Button>{i18n.t("form.submit")}</Button>
+          <Button type="submit">{i18n.t("form.submit")}</Button>
         </form>
       </Form>
     </Card>
@@ -375,10 +376,10 @@ const LocationServicesCombobox = ({
 
 type FetchError = string;
 const MapContent = ({
-  selectLocation,
+  setGeodataField,
   withAddress,
 }: {
-  selectLocation: (location: [number, number]) => void;
+  setGeodataField: (data: NominatimData) => void;
   withAddress: boolean;
 }) => {
   const [location, setLocation] = useState<[number, number]>([
@@ -401,6 +402,18 @@ const MapContent = ({
     queryClient
   );
 
+  useEffect(() => {
+    if (resp && resp.data) {
+      console.log("refetched resp: ", resp.data);
+      const result: NominatimData = {
+        lat: resp.data.lat,
+        lon: resp.data.lon,
+        address: resp.data.address,
+      };
+      setGeodataField(result);
+    }
+  }, [resp]);
+
   console.log(resp);
 
   return (
@@ -409,7 +422,7 @@ const MapContent = ({
         withAddress={withAddress}
         onClick={(e: LeafletMouseEvent) => {
           setLocation([e.latlng.lat, e.latlng.lng]);
-          selectLocation([e.latlng.lat, e.latlng.lng]);
+          // selectLocation([e.latlng.lat, e.latlng.lng]);
         }}
         markerLocation={location}
       />

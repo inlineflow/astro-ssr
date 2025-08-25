@@ -68,7 +68,7 @@ export const LocCard = ({
         </div>
         <div className="flex gap-2 shrink w-full">
           <MapPin className="size-6 shrink-0" />
-          <p className="m-auto text-sm">{location.address}</p>
+          <p className="m-auto text-sm">{`${location.geodata.address.road}, ${location.geodata.address.house_number}`}</p>
         </div>
       </CardFooter>
     </Card>

@@ -11,7 +11,7 @@ export const LocationEditForm = ({ location }: { location: Location }) => {
   const form = useForm<LocationEditFormValues>({
     resolver: zodResolver(LocationEditFormSchema),
     defaultValues: {
-      address: location.address,
+      geodata: `${location.geodata.address.road}, ${location.geodata.address.house_number}`,
       name: location.name,
       services: location.services,
       type: location.locationTypes,

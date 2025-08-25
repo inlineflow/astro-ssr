@@ -321,13 +321,40 @@ const h = Object.values(locationTypeToServices)
   .map((l) => l.map((x) => x.serviceName))
   .flat();
 
+const geodataSchema = z.object({
+  house_number: z
+    .string()
+    .min(1, { message: i18n.t("validation.address.empty_house_number") }),
+  road: z.string().min(1, { message: i18n.t("validation.address.empty_road") }),
+  city_district: z
+    .string()
+    .min(1, { message: i18n.t("validation.address.empty_city_district") }),
+  city: z.string().min(1, { message: i18n.t("validation.address.empty_city") }),
+  "ISO3166-2-lvl4": z
+    .string()
+    .min(1, { message: i18n.t("validation.address.empty_iso3166-2") }),
+  postcode: z
+    .string()
+    .min(1, { message: i18n.t("validation.address.empty_postcode") }),
+  country: z
+    .string()
+    .min(1, { message: i18n.t("validation.address.empty_country") }),
+  country_code: z
+    .string()
+    .min(1, { message: i18n.t("validation.address.empty_country_code") }),
+});
+
 export const locationSchema = z.object({
   locationId: z.string().uuid(),
   openingTime: z.string().datetime(),
   closingTime: z.string().datetime(),
   description: z.string().optional(),
   name: z.string(),
-  address: z.string(),
+  geodata: z.object({
+    lat: z.string(),
+    lon: z.string(),
+    address: geodataSchema,
+  }),
   brandId: z.string().uuid(),
   employees: z.array(employeeSchema),
   services: z.array(serviceSchema),
@@ -394,17 +421,47 @@ export const AppointmentSchema = z.object({
 export type Appointment = z.infer<typeof AppointmentSchema>;
 export type AppointmentPostRequest = Omit<Appointment, "">;
 
-export type NominatimData = {
-  address: {
-    house_number: string;
-    road: string;
-    city_district: string;
-    city: string;
-    "ISO3166-2-lvl4": string;
-    postcode: string;
-    country: string;
-    country_code: string;
-  };
+// export type NominatimData = {
+//   lat: string;
+//   lon: string;
+//   address: {
+//     house_number: string;
+//     road: string;
+//     city_district: string;
+//     city: string;
+//     "ISO3166-2-lvl4": string;
+//     postcode: string;
+//     country: string;
+//     country_code: string;
+//   };
+// };
+export type NominatimData = Location["geodata"];
+// type NominatimAddressInfo = {
+//   house_number: string;
+//   road: string;
+//   city_district: string;
+//   city: string;
+//   "ISO3166-2-lvl4": string;
+//   postcode: string;
+//   country: string;
+//   country_code: string;
+// };
+export type NominatimFullData = {
+  place_id: number;
+  licence: string;
+  osm_type: string;
+  osm_id: number;
+  lat: string;
+  lon: string;
+  class: string;
+  type: string;
+  place_rank: number;
+  importance: number;
+  addresstype: string;
+  name: string;
+  display_name: string;
+  address: z.infer<typeof geodataSchema>;
+  boundingbox: string[];
 };
 
 export const LocationCreateFormSchema = z.object({
@@ -422,9 +479,7 @@ export const LocationCreateFormSchema = z.object({
       })
     )
     .min(1, { message: i18n.t("form.services_empty") }),
-  address: z.tuple([z.number(), z.number()], {
-    message: i18n.t("form.location_address_empty"),
-  }),
+  geodata: geodataSchema,
 });
 
 export type LocationCreateFormValues = z.infer<typeof LocationCreateFormSchema>;
