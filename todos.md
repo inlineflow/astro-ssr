@@ -98,3 +98,5 @@ make the LocationCreateForm React component take in a filled-in location as the 
 # update validations for nominatim data, consider which fields are truly necessary and how to prompt the user to pick a different address
 
 also allow an escape hatch for inputting the address string manually (lat and long should still be picked on the map)
+
+# fix all errors in location form and make services have UUIDs
