@@ -92,3 +92,7 @@ improve dashboard
 # implement the location edit page
 
 # store location address at [lat, lng] combination, look up address name at runtime (optionally cash results for some time in case user has poor network connection)
+
+# update validations for nominatim data, consider which fields are truly necessary and how to prompt the user to pick a different address
+
+also allow an escape hatch for inputting the address string manually (lat and long should still be picked on the map)

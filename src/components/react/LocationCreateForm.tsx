@@ -427,8 +427,10 @@ const MapContent = ({
       />
       {withAddress && (
         <div className="flex items-center justify-center">
-          {!isFetching && resp?.error && (
-            <p className="text-center">{`Error: ${resp?.error.message}`}</p>
+          {!isFetching && (resp?.error || error) && (
+            <p className="text-center">{`Error: ${
+              resp?.error ? resp.error.message : error?.message
+            }`}</p>
           )}
           {!isFetching && resp?.data && (
             <p className="text-center">{`${resp.data?.address.road} ${resp.data.address.house_number}`}</p>
