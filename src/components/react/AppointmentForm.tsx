@@ -38,8 +38,6 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
     },
   });
 
-  const { t } = useTranslation();
-
   // console.log("Language on client: ", i18n.language);
 
   // const watchedService = form.use("serviceOpts.serviceId");
@@ -211,7 +209,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
           </div>
           <Button type="submit" className="w-full mt-5 mb-100">
             {/* Submit */}
-            {t("form.submit")}
+            {i18n.t("form.submit")}
           </Button>
         </SelectedServiceProvider>
       </form>
