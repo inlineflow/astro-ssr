@@ -6,13 +6,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/ui/form";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm, useWatch, type FieldValues } from "react-hook-form";
 import { AppointmentCalendar } from "./AppointmentCalendar";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DateTime } from "luxon";
 import { TimeBlocks } from "./Timeblocks";
-import type { Location } from "src/lib/schema";
+import {
+  AppointmentFormSchema,
+  type AppointmentFormValues,
+  type Location,
+} from "src/lib/schema";
 import { Button } from "@/ui/button";
 import { toast } from "sonner";
 import { actions } from "astro:actions";
@@ -24,33 +28,10 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "src/lib/i18n";
 import { capitalize } from "src/lib/utils";
-// import { t as t } from "i18next";
-
-const FormSchema = z.object({
-  calendarDate: z
-    .string({
-      error: "form.missing_date",
-    })
-    .nonempty(),
-  timeOfDay: z
-    .string({
-      error: i18n.t("form.missing_appointment_time"),
-    })
-    .nonempty({ error: i18n.t("form.missing_appointment_time") }),
-  serviceOpts: z.object(
-    {
-      employeeId: z.uuid({ error: i18n.t("form.missing_employee") }),
-      serviceId: z.uuid({ error: i18n.t("form.missing_service") }),
-    },
-    { error: "Service opts are required" }
-  ),
-});
-
-export type AppointmentFormValues = z.infer<typeof FormSchema>;
 
 export const AppointmentForm = ({ location }: { location: Location }) => {
   const form = useForm<AppointmentFormValues>({
-    resolver: zodResolver(FormSchema),
+    resolver: zodResolver(AppointmentFormSchema),
     defaultValues: {
       calendarDate: DateTime.now().toISO(),
       serviceOpts: { employeeId: "", serviceId: "" },
@@ -74,7 +55,7 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
 
   // console.log("Fork state: ", Object.values(form.formState.errors));
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+  const onSubmit = async (data: AppointmentFormValues) => {
     const timeOfDay = DateTime.fromISO(data.timeOfDay);
     const appointment = DateTime.fromISO(data.calendarDate).set({
       hour: timeOfDay.hour,
@@ -142,7 +123,10 @@ export const AppointmentForm = ({ location }: { location: Location }) => {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
+        onSubmit={form.handleSubmit(onSubmit, (errors) => {
+          console.log(errors);
+          console.log(form.getValues());
+        })}
         className="mt-5 w-full items-center justify-center space-y-5"
       >
         <SelectedServiceProvider>

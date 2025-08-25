@@ -498,3 +498,33 @@ export type LocationEditFormValues = z.infer<typeof LocationEditFormSchema>;
 //   userId: z.string().uuid(),
 //   datetime: z.string(),
 // });
+
+export const AppointmentFormSchema = z.object({
+  calendarDate: z
+    .string({
+      message: "form.missing_date",
+    })
+    .nonempty(),
+  timeOfDay: z
+    .string({
+      message: i18n.t("form.missing_appointment_time"),
+    })
+    .nonempty({ message: i18n.t("form.missing_appointment_time") }),
+  serviceOpts: z.object(
+    {
+      // employeeId: z.string({ error: i18n.t("form.missing_employee") }),
+      // serviceId: z.string({ error: i18n.t("form.missing_service") }),
+      employeeId: z
+        .string()
+        .min(1, { message: i18n.t("form.missing_employee") })
+        .uuid(),
+      serviceId: z
+        .string()
+        .min(1, { message: i18n.t("form.missing_service") })
+        .uuid(),
+    },
+    { message: "Service opts are required" }
+  ),
+});
+
+export type AppointmentFormValues = z.infer<typeof AppointmentFormSchema>;

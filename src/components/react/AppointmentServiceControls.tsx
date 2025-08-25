@@ -4,10 +4,10 @@ import { EmployeePicker } from "./EmployeePicker";
 import { useFormField } from "@/ui/form";
 import { cn } from "@/lib/utils";
 import { type FieldErrors } from "react-hook-form";
-import type { AppointmentFormValues } from "./AppointmentForm";
+import type { AppointmentFormValues } from "src/lib/schema";
 import {
   SelectedEmployeeProvider,
-  SelectedServiceProvider,
+  // SelectedServiceProvider,
 } from "./AppointmentServiceControlsContext";
 
 type Props = {
