@@ -350,6 +350,7 @@ const geodataSchema = z.object({
       .string()
       .min(1, { message: i18n.t("validation.address.empty_country_code") }),
   }),
+  user_label: z.string().optional(),
 });
 
 export const locationSchema = z.object({

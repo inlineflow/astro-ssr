@@ -75,5 +75,9 @@
   "close": "Закрыть",
   "form.location_address": "Адрес",
   "business_dashboard.add_location": "Добавить филиал",
-  "rest.location_created_successfully": "Филиал создан успешно"
+  "rest.location_created_successfully": "Филиал создан успешно",
+  "form.address.user_label.optional": "Уточните адрес (опционально)",
+  "form.address.user_label_disclaimer": "Если не получается точно подобрать адрес на карте, то его можно уточнить вручную, используя поле ниже.",
+  "form.address.pick_an_address": "Московская 1",
+  "form.address.dialog_title": "Укажите адрес"
 }

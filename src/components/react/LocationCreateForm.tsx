@@ -53,6 +53,7 @@ import { Spinner } from "@/ui/spinner";
 import type { LeafletMouseEvent } from "leaflet";
 import { extractUUID } from "src/browser/browser";
 import { toast } from "sonner";
+import { Label } from "@/ui/label";
 
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);
@@ -176,8 +177,12 @@ export const LocationCreateForm = () => {
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>New address</DialogTitle>
-                        <DialogDescription>Pick an address.</DialogDescription>
+                        <DialogTitle>
+                          {i18n.t("form.address.dialog_title")}
+                        </DialogTitle>
+                        {/* <DialogDescription>
+                          {i18n.t("form.address.pick_an_address")}
+                        </DialogDescription> */}
                       </DialogHeader>
                       <MapContent
                         setGeodataField={(val) => field.onChange(val)}
@@ -401,6 +406,8 @@ const MapContent = ({
     queryClient
   );
 
+  const [userLabel, setUserLabel] = useState("");
+
   useEffect(() => {
     if (resp && resp.data) {
       console.log("refetched resp: ", resp.data);
@@ -408,15 +415,14 @@ const MapContent = ({
         lat: resp.data.lat,
         lon: resp.data.lon,
         address: resp.data.address,
+        user_label: userLabel,
       };
       setGeodataField(result);
     }
   }, [resp]);
 
-  console.log(resp);
-
   return (
-    <div>
+    <div className="flex flex-col gap-3 items-center text-center">
       <MapComponent
         withAddress={withAddress}
         onClick={(e: LeafletMouseEvent) => {
@@ -438,6 +444,18 @@ const MapContent = ({
           {isFetching && <Spinner variant="bars" />}
         </div>
       )}
+      <p className="text-sm">{i18n.t("form.address.user_label_disclaimer")}</p>
+      <div className="items-center w-64">
+        <Label htmlFor="address.user_label">
+          {i18n.t("form.address.user_label.optional")}
+        </Label>
+        <Input
+          id="address.user_label"
+          value={userLabel}
+          onChange={(e) => setUserLabel(e.target.value)}
+          className="mt-1"
+        />
+      </div>
     </div>
   );
 };
