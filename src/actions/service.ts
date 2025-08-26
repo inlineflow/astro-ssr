@@ -1,7 +1,8 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
 import { apiUrl } from "src/env";
-import { LocationType, locationTypes, type Service } from "src/lib/schema";
+import { LocationType, type Service } from "src/lib/schema";
+import { locationTypes } from "src/lib/types";
 
 export const service = {
   getServicesByLocationTypes: defineAction({
