@@ -8,7 +8,7 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
-import type { NominatimData } from "src/lib/schema";
+import type { Geodata } from "src/lib/schema";
 
 export const MapComponent = ({
   onClick,

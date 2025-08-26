@@ -432,7 +432,7 @@ export type AppointmentPostRequest = Omit<Appointment, "">;
 //     country_code: string;
 //   };
 // };
-export type NominatimData = Location["geodata"];
+export type Geodata = Location["geodata"];
 type NominatimAddressInfo = {
   house_number: string;
   road: string;

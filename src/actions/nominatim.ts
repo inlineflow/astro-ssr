@@ -1,6 +1,6 @@
 import { ActionError, defineAction } from "astro:actions";
 import { z } from "astro:schema";
-import type { NominatimData, NominatimFullData } from "src/lib/schema";
+import type { Geodata, NominatimFullData } from "src/lib/schema";
 import { delay } from "src/mocks/utils";
 
 export const nominatim = {

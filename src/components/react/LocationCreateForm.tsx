@@ -28,7 +28,7 @@ import {
   type LocationCreateFormValues,
   type LocationMetadata,
   type LtToServices,
-  type NominatimData,
+  type Geodata,
   type Service,
 } from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
@@ -399,7 +399,7 @@ const MapContent = ({
   withAddress,
   center,
 }: {
-  setGeodataField: (data: NominatimData) => void;
+  setGeodataField: (data: Geodata) => void;
   center?: [number, number] | undefined;
   withAddress: boolean;
 }) => {
@@ -428,7 +428,7 @@ const MapContent = ({
   useEffect(() => {
     if (resp && resp.data) {
       console.log("refetched resp: ", resp.data);
-      const result: NominatimData = {
+      const result: Geodata = {
         lat: resp.data.lat,
         lon: resp.data.lon,
         address: resp.data.address,
