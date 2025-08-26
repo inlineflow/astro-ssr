@@ -79,8 +79,6 @@ https://www.shadcnblocks.com/block/navbar1
 
 https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands/
 
-# Add auth
-
 # consider fetching locataion type metadata to store location type value in location type picker
 
 # finish selection of multiple location types for a location
@@ -110,3 +108,5 @@ also allow an escape hatch for inputting the address string manually (lat and lo
 # fetch location types and ltToServices from API (locationTypes should be cached on the API at startup)
 
 # fetch services on the client
+
+### Add auth
