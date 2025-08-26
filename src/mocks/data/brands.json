@@ -1,12 +1,12 @@
 [
   {
-    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "id": "a1b2c3d4-e5f6-4890-a234-567890abcdef",
     "name": "Салон Красоты «Шарм»",
     "description": "Ваш универсальный магазин для всех видов косметических услуг: от причесок до ногтей и всего остального.",
     "logo": "https://example.com/sharm_salon_logo.jpg",
     "locations": [
       {
-        "locationId": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+        "locationId": "f9e8d7c6-b5a4-4210-aedc-ba9876543210",
         "openingTime": "2025-07-29T15:00:00+06:00",
         "closingTime": "2025-07-29T23:00:00+06:00",
         "name": "Шарм Центр",
@@ -24,15 +24,15 @@
             "country_code": "kg"
           }
         },
-        "brandId": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+        "brandId": "a1b2c3d4-e5f6-4890-a234-567890abcdef",
         "employees": [
           {
             "employeeId": "e211832b-32ac-469b-980b-f351336c1e5d",
             "role": "hairdresser",
             "name": "Елена Иванова",
             "photo": "https://example.com/elena_ivanova.jpg",
-            "location": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
-            "providesServices": ["1a2b3c4d-5e6f-7890-1234-567890abcdef"],
+            "location": "f9e8d7c6-b5a4-4210-aedc-ba9876543210",
+            "providesServices": ["1a2b3c4d-5e6f-4890-a234-567890abcdef"],
             "nonWorkingDays": []
           },
           {
@@ -40,29 +40,29 @@
             "role": "nail-technician",
             "name": "Анна Петрова",
             "photo": "https://example.com/anna_petrova.jpg",
-            "location": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
-            "providesServices": ["2a3b4c5d-6e7f-8901-2345-67890abcdef1"],
+            "location": "f9e8d7c6-b5a4-4210-aedc-ba9876543210",
+            "providesServices": ["2a3b4c5d-6e7f-4901-a345-67890abcdef1"],
             "nonWorkingDays": ["2025-08-01T06:00:00+06:00"]
           }
         ],
         "services": [
           {
             "name": "Стрижка и укладка",
-            "serviceId": "1a2b3c4d-5e6f-7890-1234-567890abcdef",
+            "serviceId": "1a2b3c4d-5e6f-4890-a234-567890abcdef",
             "durationInMinutes": 60,
             "price": 650,
             "tag": "hairdressing"
           },
           {
             "name": "Маникюр",
-            "serviceId": "2a3b4c5d-6e7f-8901-2345-67890abcdef1",
+            "serviceId": "2a3b4c5d-6e7f-4901-a345-67890abcdef1",
             "durationInMinutes": 45,
             "price": 750,
             "tag": "nail-polish"
           },
           {
             "name": "Педикюр",
-            "serviceId": "xyzb4c5d-6e7f-8901-2345-67890abcdef1",
+            "serviceId": "79b4c5d-6e7f-4901-a345-67890abcdef1",
             "durationInMinutes": 30,
             "price": 1000,
             "tag": "pedicure"
@@ -74,13 +74,13 @@
     ]
   },
   {
-    "id": "b2c3d4e5-f6a7-8901-2345-67890abcdef1",
+    "id": "b2c3d4e5-f6a7-4901-a345-67890abcdef1",
     "name": "Ногтевая Студия «Ажур»",
     "description": "Специализируемся на изысканном уходе за ногтями и искусстве маникюра.",
     "logo": "https://example.com/azhur_nail_logo.jpg",
     "locations": [
       {
-        "locationId": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
+        "locationId": "e8d7c6b5-a4f3-4109-a765-43210fedcba9",
         "openingTime": "2025-07-29T16:00:00+06:00",
         "closingTime": "2025-07-29T02:00:00+06:00",
         "name": "Ажур на Высоте",
@@ -99,15 +99,15 @@
             "country_code": "kg"
           }
         },
-        "brandId": "b2c3d4e5-f6a7-8901-2345-67890abcdef1",
+        "brandId": "b2c3d4e5-f6a7-4901-a345-67890abcdef1",
         "employees": [
           {
             "employeeId": "1b312b33-e18e-4a6c-943e-f6f753c15d74",
             "role": "nail-technician",
             "name": "Ольга Смирнова",
             "photo": "https://example.com/olga_smirnova.jpg",
-            "location": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
-            "providesServices": ["3b4c5d6e-7f8a-9012-3456-7890abcdef12"],
+            "location": "e8d7c6b5-a4f3-4109-a765-43210fedcba9",
+            "providesServices": ["3b4c5d6e-7f8a-4012-a456-7890abcdef12"],
             "nonWorkingDays": []
           },
           {
@@ -115,22 +115,22 @@
             "role": "nail-technician",
             "name": "Мария Козлова",
             "photo": "https://example.com/mariya_kozlova.jpg",
-            "location": "e8d7c6b5-a4f3-2109-8765-43210fedcba9",
-            "providesServices": ["4c5d6e7f-8a9b-0123-4567-890abcdef123"],
+            "location": "e8d7c6b5-a4f3-4109-a765-43210fedcba9",
+            "providesServices": ["4c5d6e7f-8a9b-4123-a567-890abcdef123"],
             "nonWorkingDays": ["2025-08-05T06:00:00+06:00"]
           }
         ],
         "services": [
           {
             "name": "Гель-маникюр",
-            "serviceId": "3b4c5d6e-7f8a-9012-3456-7890abcdef12",
+            "serviceId": "3b4c5d6e-7f8a-4012-a456-7890abcdef12",
             "durationInMinutes": 60,
             "price": 900,
             "tag": "nail-polish"
           },
           {
             "name": "Педикюр",
-            "serviceId": "4c5d6e7f-8a9b-0123-4567-890abcdef123",
+            "serviceId": "4c5d6e7f-8a9b-4123-a567-890abcdef123",
             "durationInMinutes": 75,
             "price": 1200,
             "tag": "nail-polish"
@@ -142,13 +142,13 @@
     ]
   },
   {
-    "id": "c3d4e5f6-a7b8-9012-3456-7890abcdef23",
+    "id": "c3d4e5f6-a7b8-4012-a456-7890abcdef23",
     "name": "Спа-Центр «Сияющая Кожа»",
     "description": "Добейтесь здорового сияния с нашим спектром процедур по уходу за лицом и кожей.",
     "logo": "https://example.com/siyayushaya_kozha_logo.jpg",
     "locations": [
       {
-        "locationId": "d7c6b5a4-f3e2-1098-7654-3210fedcba98",
+        "locationId": "d7c6b5a4-f3e2-4098-a654-3210fedcba98",
         "openingTime": "2025-07-29T14:30:00+06:00",
         "closingTime": "2025-07-29T00:30:00+06:00",
         "name": "Спа в Центре Города",
@@ -167,17 +167,17 @@
             "country_code": "kg"
           }
         },
-        "brandId": "c3d4e5f6-a7b8-9012-3456-7890abcdef23",
+        "brandId": "c3d4e5f6-a7b8-4012-a456-7890abcdef23",
         "employees": [
           {
             "employeeId": "65147817-299f-44e2-a4f6-805c87e62a05",
             "role": "cosmetologist",
             "name": "Ирина Кузнецова",
             "photo": "https://example.com/irina_kuznetsova.jpg",
-            "location": "d7c6b5a4-f3e2-1098-7654-3210fedcba98",
+            "location": "d7c6b5a4-f3e2-4098-a654-3210fedcba98",
             "providesServices": [
-              "5d6e7f8a-9b0c-1234-5678-90abcdef1234",
-              "6e7f8a9b-0c1d-2345-6789-0abcdef12345"
+              "5d6e7f8a-9b0c-4234-a678-90abcdef1234",
+              "6e7f8a9b-0c1d-4345-a789-0abcdef12345"
             ],
             "nonWorkingDays": []
           }
@@ -185,14 +185,14 @@
         "services": [
           {
             "name": "Глубокая чистка лица",
-            "serviceId": "5d6e7f8a-9b0c-1234-5678-90abcdef1234",
+            "serviceId": "5d6e7f8a-9b0c-4234-a678-90abcdef1234",
             "durationInMinutes": 90,
             "price": 2500,
             "tag": "skincare"
           },
           {
             "name": "Микродермабразия",
-            "serviceId": "6e7f8a9b-0c1d-2345-6789-0abcdef12345",
+            "serviceId": "6e7f8a9b-0c1d-4345-a789-0abcdef12345",
             "durationInMinutes": 60,
             "price": 3000,
             "tag": "skincare"
@@ -204,13 +204,13 @@
     ]
   },
   {
-    "id": "d4e5f6a7-b8c9-0123-4567-890abcdef345",
+    "id": "d4e5f6a7-b8c9-4123-a567-890abcdef345",
     "name": "Студия Ресниц и Бровей «Взгляд»",
     "description": "Подчеркните свои глаза с помощью наших профессиональных услуг по уходу за ресницами и бровями.",
     "logo": "https://example.com/vzglyad_lash_brow_logo.jpg",
     "locations": [
       {
-        "locationId": "c6b5a4f3-e2d1-0987-6543-210fedcba987",
+        "locationId": "c6b5a4f3-e2d1-4987-a543-210fedcba987",
         "openingTime": "2025-07-29T15:30:00+06:00",
         "closingTime": "2025-07-29T01:30:00+06:00",
         "name": "Центр Ресниц и Бровей",
@@ -229,15 +229,15 @@
             "country_code": "kg"
           }
         },
-        "brandId": "d4e5f6a7-b8c9-0123-4567-890abcdef345",
+        "brandId": "d4e5f6a7-b8c9-4123-a567-890abcdef345",
         "employees": [
           {
             "employeeId": "73e72e1c-5d6c-4972-8869-19e34c676d91",
             "role": "eyelash-technician",
             "name": "Дарья Волкова",
             "photo": "https://example.com/darya_volkova.jpg",
-            "location": "c6b5a4f3-e2d1-0987-6543-210fedcba987",
-            "providesServices": ["7f8a9b0c-1d2e-3456-7890-abcdef123456"],
+            "location": "c6b5a4f3-e2d1-4987-a543-210fedcba987",
+            "providesServices": ["7f8a9b0c-1d2e-4456-a890-abcdef123456"],
             "nonWorkingDays": []
           },
           {
@@ -246,22 +246,22 @@
             "name": "София Новикова",
             "photo": "https://example.com/sofia_novikova.jpg",
             "title": "Бровист",
-            "location": "c6b5a4f3-e2d1-0987-6543-210fedcba987",
-            "providesServices": ["8a9b0c1d-2e3f-4567-8901-abcdef1234567"],
+            "location": "c6b5a4f3-e2d1-4987-a543-210fedcba987",
+            "providesServices": ["8a9b0c1d-2e3f-4567-a901-abcdef1234567"],
             "nonWorkingDays": ["2025-08-02T06:00:00+06:00"]
           }
         ],
         "services": [
           {
             "name": "Наращивание ресниц",
-            "serviceId": "7f8a9b0c-1d2e-3456-7890-abcdef123456",
+            "serviceId": "7f8a9b0c-1d2e-4456-a890-abcdef123456",
             "durationInMinutes": 120,
             "price": 2000,
             "tag": "eyelash-extensions"
           },
           {
             "name": "Ламинирование бровей",
-            "serviceId": "8a9b0c1d-2e3f-4567-8901-abcdef1234567",
+            "serviceId": "8a9b0c1d-2e3f-4567-a901-abcdef1234567",
             "durationInMinutes": 60,
             "price": 1500,
             "tag": "eyebrow-lamination"
@@ -273,13 +273,13 @@
     ]
   },
   {
-    "id": "e5f6a7b8-c9d0-1234-5678-90abcdef4567",
+    "id": "e5f6a7b8-c9d0-4234-a678-90abcdef4567",
     "name": "Барбершоп «Лезвие»",
     "description": "Современные стрижки и классическое бритье для взыскательных джентльменов.",
     "logo": "https://example.com/lezvie_barber_logo.jpg",
     "locations": [
       {
-        "locationId": "b5a4f3e2-d1c0-9876-5432-10fedcba9876",
+        "locationId": "b5a4f3e2-d1c0-4876-a432-10fedcba9876",
         "openingTime": "2025-07-29T14:00:00+06:00",
         "closingTime": "2025-07-29T00:00:00+06:00",
         "name": "Мужской Кабинет",
@@ -297,7 +297,7 @@
             "country_code": "kg"
           }
         },
-        "brandId": "e5f6a7b8-c9d0-1234-5678-90abcdef4567",
+        "brandId": "e5f6a7b8-c9d0-4234-a678-90abcdef4567",
         "employees": [
           {
             "employeeId": "1b312b33-e18e-4a6c-943e-f6f753c15d74",
@@ -305,10 +305,10 @@
             "name": "Дмитрий Морозов",
             "photo": "https://example.com/dmitriy_morozov.jpg",
             "title": "Барбер",
-            "location": "b5a4f3e2-d1c0-9876-5432-10fedcba9876",
+            "location": "b5a4f3e2-d1c0-4876-a432-10fedcba9876",
             "providesServices": [
-              "9b0c1d2e-3f4a-5678-9012-abcdef12345678",
-              "0c1d2e3f-4a5b-6789-0123-bcdef123456789"
+              "9b0c1d2e-3f4a-4678-b012-abcdef12345678",
+              "0c1d2e3f-4a5b-4789-a123-bcdef123456789"
             ],
             "nonWorkingDays": []
           }
@@ -316,14 +316,14 @@
         "services": [
           {
             "name": "Мужская стрижка",
-            "serviceId": "9b0c1d2e-3f4a-5678-9012-abcdef12345678",
+            "serviceId": "9b0c1d2e-3f4a-4678-b012-abcdef12345678",
             "durationInMinutes": 45,
             "price": 800,
             "tag": "hairdressing"
           },
           {
             "name": "Бритье горячим полотенцем",
-            "serviceId": "0c1d2e3f-4a5b-6789-0123-bcdef123456789",
+            "serviceId": "0c1d2e3f-4a5b-4789-a123-bcdef123456789",
             "durationInMinutes": 30,
             "price": 600,
             "tag": "beard-shave"
@@ -335,13 +335,13 @@
     ]
   },
   {
-    "id": "f6a7b8c9-d0e1-2345-6789-0abcdef56789",
+    "id": "f6a7b8c9-d0e1-4345-a789-0abcdef56789",
     "name": "Спа «Безмятежность»",
     "description": "Побалуйте себя спокойным отдыхом с нашими омолаживающими спа-процедурами.",
     "logo": "https://example.com/bezymyatezhnost_spa_logo.jpg",
     "locations": [
       {
-        "locationId": "a4f3e2d1-c0b9-8765-4321-0fedcba98765",
+        "locationId": "a4f3e2d1-c0b9-4765-a321-0fedcba98765",
         "openingTime": "2025-07-29T16:00:00+06:00",
         "closingTime": "2025-07-30T03:00:00+06:00",
         "name": "Убежище Релакса",
@@ -359,7 +359,7 @@
             "country_code": "kg"
           }
         },
-        "brandId": "f6a7b8c9-d0e1-2345-6789-0abcdef56789",
+        "brandId": "f6a7b8c9-d0e1-4345-a789-0abcdef56789",
         "employees": [
           {
             "employeeId": "23a85b96-b32c-4e89-98e3-53d34f0d3b6f",
@@ -367,10 +367,10 @@
             "name": "Наталья Соколова",
             "photo": "https://example.com/natalya_sokolova.jpg",
             "title": "Массажист",
-            "location": "a4f3e2d1-c0b9-8765-4321-0fedcba98765",
+            "location": "a4f3e2d1-c0b9-4765-a321-0fedcba98765",
             "providesServices": [
-              "1d2e3f4a-5b6c-7890-1234-cdef1234567890",
-              "2e3f4a5b-6c7d-8901-2345-def12345678901"
+              "1d2e3f4a-5b6c-4890-a234-cdef1234567890",
+              "2e3f4a5b-6c7d-4901-b345-def12345678901"
             ],
             "nonWorkingDays": ["2025-08-03T06:00:00+06:00"]
           }
@@ -378,14 +378,14 @@
         "services": [
           {
             "name": "Шведский массаж",
-            "serviceId": "1d2e3f4a-5b6c-7890-1234-cdef1234567890",
+            "serviceId": "1d2e3f4a-5b6c-4890-a234-cdef1234567890",
             "durationInMinutes": 60,
             "price": 1800,
             "tag": "massage"
           },
           {
             "name": "Скраб для тела",
-            "serviceId": "2e3f4a5b-6c7d-8901-2345-def12345678901",
+            "serviceId": "2e3f4a5b-6c7d-4901-b345-def12345678901",
             "durationInMinutes": 45,
             "price": 1500,
             "tag": "spa-treatment"
@@ -397,13 +397,13 @@
     ]
   },
   {
-    "id": "a7b8c9d0-e1f2-3456-7890-1abcdef67890",
+    "id": "a7b8c9d0-e1f2-4456-a789-1abcdef67890",
     "name": "Салон «Наследие Красоты»",
     "description": "Создаем красивые прически, подобранные под ваш уникальный образ.",
     "logo": "https://example.com/nasledie_krasoty_logo.jpg",
     "locations": [
       {
-        "locationId": "f3e2d1c0-b9a8-7654-3210-fedcba987654",
+        "locationId": "f3e2d1c0-b9a8-4654-a210-fedcba987654",
         "openingTime": "2025-07-29T15:00:00+06:00",
         "closingTime": "2025-07-29T01:00:00+06:00",
         "name": "Наследие Красоты Центр",
@@ -421,7 +421,7 @@
             "country_code": "kg"
           }
         },
-        "brandId": "a7b8c9d0-e1f2-3456-7890-1abcdef67890",
+        "brandId": "a7b8c9d0-e1f2-4456-a789-1abcdef67890",
         "employees": [
           {
             "employeeId": "e211832b-32ac-469b-980b-f351336c1e5d",
@@ -429,10 +429,10 @@
             "name": "Екатерина Федорова",
             "photo": "https://example.com/ekaterina_fedorova.jpg",
             "title": "Парикмахер-стилист",
-            "location": "f3e2d1c0-b9a8-7654-3210-fedcba987654",
+            "location": "f3e2d1c0-b9a8-4654-a210-fedcba987654",
             "providesServices": [
-              "3f4a5b6c-7d8e-9012-3456-ef123456789012",
-              "4a5b6c7d-8e9f-0123-4567-f1234567890123"
+              "3f4a5b6c-7d8e-4012-a456-ef123456789012",
+              "4a5b6c7d-8e9f-4123-a567-f1234567890123"
             ],
             "nonWorkingDays": []
           },
@@ -442,22 +442,22 @@
             "name": "Алексей Иванов",
             "photo": "https://example.com/aleksey_ivanov.jpg",
             "title": "Мастер по окрашиванию",
-            "location": "f3e2d1c0-b9a8-7654-3210-fedcba987654",
-            "providesServices": ["3f4a5b6c-7d8e-9012-3456-ef123456789012"],
+            "location": "f3e2d1c0-b9a8-4654-a210-fedcba987654",
+            "providesServices": ["3f4a5b6c-7d8e-4012-a456-ef123456789012"],
             "nonWorkingDays": ["2025-08-04T06:00:00+06:00"]
           }
         ],
         "services": [
           {
             "name": "Окрашивание и мелирование",
-            "serviceId": "3f4a5b6c-7d8e-9012-3456-ef123456789012",
+            "serviceId": "3f4a5b6c-7d8e-4012-a456-ef123456789012",
             "durationInMinutes": 180,
             "price": 3500,
             "tag": "hairdressing"
           },
           {
             "name": "Укладка феном",
-            "serviceId": "4a5b6c7d-8e9f-0123-4567-f1234567890123",
+            "serviceId": "4a5b6c7d-8e9f-4123-a567-f1234567890123",
             "durationInMinutes": 45,
             "price": 500,
             "tag": "hairdressing"
@@ -469,13 +469,13 @@
     ]
   },
   {
-    "id": "b8c9d0e1-f2a3-4567-8901-2abcdef78901",
+    "id": "b8c9d0e1-f2a3-4567-a901-2abcdef78901",
     "name": "Студия Депиляции «Шелк»",
     "description": "Гладкая кожа, искусно достигнутая с помощью наших профессиональных услуг депиляции.",
     "logo": "https://example.com/shelk_waxing_logo.jpg",
     "locations": [
       {
-        "locationId": "e2d1c0b9-a8f7-6543-2109-8765fedcba98",
+        "locationId": "e2d1c0b9-a8f7-4543-a109-8765fedcba98",
         "openingTime": "2025-07-29T16:00:00+06:00",
         "closingTime": "2025-07-30T00:00:00+06:00",
         "name": "Центр Депиляции",
@@ -494,7 +494,7 @@
             "country_code": "kg"
           }
         },
-        "brandId": "b8c9d0e1-f2a3-4567-8901-2abcdef78901",
+        "brandId": "b8c9d0e1-f2a3-4567-a901-2abcdef78901",
         "employees": [
           {
             "employeeId": "9e5a6109-1a0e-434f-a42e-1518f9219c62",
@@ -502,10 +502,10 @@
             "name": "Виктория Белова",
             "photo": "https://example.com/viktoriya_belova.jpg",
             "title": "Мастер по депиляции",
-            "location": "e2d1c0b9-a8f7-6543-2109-8765fedcba98",
+            "location": "e2d1c0b9-a8f7-4543-a109-8765fedcba98",
             "providesServices": [
-              "5b6c7d8e-9f0a-1234-5678-1234567890123",
-              "6c7d8e9f-0a1b-2345-6789-2345678901234"
+              "5b6c7d8e-9f0a-4234-a678-1234567890123",
+              "6c7d8e9f-0a1b-4345-a789-2345678901234"
             ],
             "nonWorkingDays": []
           }
@@ -513,14 +513,14 @@
         "services": [
           {
             "name": "Восковая депиляция ног",
-            "serviceId": "5b6c7d8e-9f0a-1234-5678-1234567890123",
+            "serviceId": "5b6c7d8e-9f0a-4234-a678-1234567890123",
             "durationInMinutes": 60,
             "price": 1000,
             "tag": "waxing"
           },
           {
             "name": "Восковая депиляция бровей",
-            "serviceId": "6c7d8e9f-0a1b-2345-6789-2345678901234",
+            "serviceId": "6c7d8e9f-0a1b-4345-a789-2345678901234",
             "durationInMinutes": 15,
             "price": 400,
             "tag": "waxing"
@@ -532,13 +532,13 @@
     ]
   },
   {
-    "id": "c9d0e1f2-a3b4-5678-9012-3abcdef89012",
+    "id": "c9d0e1f2-a3b4-4678-b012-3abcdef89012",
     "name": "Массаж и Велнес «Нежное Прикосновение»",
     "description": "Расслабьтесь, омолодитесь и восстановите баланс с нашими терапевтическими массажными услугами.",
     "logo": "https://example.com/neznoe_prikosnovenie_logo.jpg",
     "locations": [
       {
-        "locationId": "d1c0b9a8-f7e6-5432-1098-765fedcba987",
+        "locationId": "d1c0b9a8-f7e6-4432-b098-765fedcba987",
         "openingTime": "2025-07-29T17:00:00+06:00",
         "closingTime": "2025-07-30T02:00:00+06:00",
         "name": "Оздоровительный Отдых",
@@ -556,7 +556,7 @@
             "country_code": "kg"
           }
         },
-        "brandId": "c9d0e1f2-a3b4-5678-9012-3abcdef89012",
+        "brandId": "c9d0e1f2-a3b4-4678-b012-3abcdef89012",
         "employees": [
           {
             "employeeId": "e211832b-32ac-469b-980b-f351336c1e5d",
@@ -564,10 +564,10 @@
             "name": "Артем Николаев",
             "photo": "https://example.com/artem_nikolaev.jpg",
             "title": "Массажист-терапевт",
-            "location": "d1c0b9a8-f7e6-5432-1098-765fedcba987",
+            "location": "d1c0b9a8-f7e6-4432-b098-765fedcba987",
             "providesServices": [
-              "7d8e9f0a-1b2c-3456-7890-3456789012345",
-              "8e9f0a1b-2c3d-4567-8901-4567890123456"
+              "7d8e9f0a-1b2c-4456-a890-3456789012345",
+              "8e9f0a1b-2c3d-4567-a901-4567890123456"
             ],
             "nonWorkingDays": []
           }
@@ -575,14 +575,14 @@
         "services": [
           {
             "name": "Глубокий массаж тканей",
-            "serviceId": "7d8e9f0a-1b2c-3456-7890-3456789012345",
+            "serviceId": "7d8e9f0a-1b2c-4456-a890-3456789012345",
             "durationInMinutes": 75,
             "price": 2200,
             "tag": "nassage"
           },
           {
             "name": "Массаж горячими камнями",
-            "serviceId": "8e9f0a1b-2c3d-4567-8901-4567890123456",
+            "serviceId": "8e9f0a1b-2c3d-4567-a901-4567890123456",
             "durationInMinutes": 90,
             "price": 2500,
             "tag": "nassage"
@@ -594,13 +594,13 @@
     ]
   },
   {
-    "id": "d0e1f2a3-b4c5-6789-0123-4abcdef90123",
+    "id": "d0e1f2a3-b4c5-4789-a123-4abcdef90123",
     "name": "Салон и Спа «Бьюти Хаб»",
     "description": "Комплексное направление для всех ваших потребностей в красоте и здоровье.",
     "logo": "https://example.com/beauty_hub_logo.jpg",
     "locations": [
       {
-        "locationId": "c0b9a8f7-e6d5-4321-0987-654fedcba987",
+        "locationId": "c0b9a8f7-e6d5-4321-a987-654fedcba987",
         "openingTime": "2025-07-29T15:00:00+06:00",
         "closingTime": "2025-07-30T02:00:00+06:00",
         "name": "Бьюти Перекресток",
@@ -619,7 +619,7 @@
             "country_code": "kg"
           }
         },
-        "brandId": "d0e1f2a3-b4c5-6789-0123-4abcdef90123",
+        "brandId": "d0e1f2a3-b4c5-4789-a123-4abcdef90123",
         "employees": [
           {
             "employeeId": "23a85b96-b32c-4e89-98e3-53d34f0d3b6f",
@@ -627,10 +627,10 @@
             "name": "Светлана Васильева",
             "photo": "https://example.com/svetlana_vasilyeva.jpg",
             "title": "Универсальный мастер красоты",
-            "location": "c0b9a8f7-e6d5-4321-0987-654fedcba987",
+            "location": "c0b9a8f7-e6d5-4321-a987-654fedcba987",
             "providesServices": [
-              "9f0a1b2c-3d4e-5678-9012-5678901234567",
-              "0a1b2c3d-4e5f-6789-0123-6789012345678"
+              "9f0a1b2c-3d4e-4678-a012-5678901234567",
+              "0a1b2c3d-4e5f-4789-a123-6789012345678"
             ],
             "nonWorkingDays": []
           },
@@ -640,22 +640,22 @@
             "name": "Павел Захаров",
             "photo": "https://example.com/pavel_zaharov.jpg",
             "title": "Визажист",
-            "location": "c0b9a8f7-e6d5-4321-0987-654fedcba987",
-            "providesServices": ["0a1b2c3d-4e5f-6789-0123-6789012345678"],
+            "location": "c0b9a8f7-e6d5-4321-a987-654fedcba987",
+            "providesServices": ["0a1b2c3d-4e5f-4789-a123-6789012345678"],
             "nonWorkingDays": ["2025-08-06T06:00:00+06:00"]
           }
         ],
         "services": [
           {
             "name": "Пакет «Уход за лицом и массаж»",
-            "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
+            "serviceId": "9f0a1b2c-3d4e-4678-a012-5678901234567",
             "durationInMinutes": 120,
             "price": 3800,
             "tag": "bundle"
           },
           {
             "name": "Полное преображение",
-            "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
+            "serviceId": "0a1b2c3d-4e5f-4789-a123-6789012345678",
             "durationInMinutes": 150,
             "price": 5000,
             "tag": "makeup"

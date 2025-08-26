@@ -520,3 +520,4 @@ export const AppointmentFormSchema = z.object({
 });
 
 export type AppointmentFormValues = z.infer<typeof AppointmentFormSchema>;
+export type LtToServices = Record<LocationType, Service[]>;

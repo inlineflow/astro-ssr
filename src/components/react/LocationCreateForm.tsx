@@ -23,11 +23,13 @@ import { Button } from "@/ui/button";
 import {
   LocationCreateFormSchema,
   LocationType,
-  locationTypeToServices,
+  locationTypeToServices as ltToServices,
   type Location,
   type LocationCreateFormValues,
   type LocationMetadata,
+  type LtToServices,
   type NominatimData,
+  type Service,
 } from "src/lib/schema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/ui/popover";
 import { useEffect, useState } from "react";
@@ -66,7 +68,7 @@ const onSubmit = async (data: LocationCreateFormValues) => {
   const brandId = extractUUID(window.location.href, "brand");
   if (!brandId) {
     console.log(
-      `error, couldn't pass brandId in the url: ${window.location.href}`
+      `error, couldn't parse brandId in the url: ${window.location.href}`
     );
     return;
   }
@@ -95,7 +97,13 @@ const defaults: DefaultValues<LocationCreateFormValues> = {
   // type: undefined as unknown as LocationCreateFormValues["type"],
 };
 
-export const LocationCreateForm = ({ location }: { location?: Location }) => {
+export const LocationCreateForm = ({
+  location,
+  ltToServices,
+}: {
+  location?: Location;
+  ltToServices: LtToServices;
+}) => {
   const form = useForm<LocationCreateFormValues>({
     resolver: zodResolver(LocationCreateFormSchema),
     defaultValues: location
@@ -108,19 +116,13 @@ export const LocationCreateForm = ({ location }: { location?: Location }) => {
       : defaults,
   });
 
-  const services = keysOf(locationTypeToServices).reduce<
-    Record<
-      LocationType,
-      (LocationMetadata & { selected: boolean; serviceId: string })[]
-    >
-  >((acc, key) => {
-    acc[key] = locationTypeToServices[key].map((val) => ({
+  const services = keysOf(ltToServices).reduce((acc, key) => {
+    acc[key] = ltToServices[key].map((val) => ({
       ...val,
       selected: false,
-      serviceId: crypto.randomUUID(),
     }));
     return acc;
-  }, {} as Record<LocationType, (LocationMetadata & { selected: boolean; serviceId: string })[]>);
+  }, {} as Record<LocationType, (Service & { selected: boolean })[]>);
   // console.log("services: ", services);
 
   return (
@@ -203,10 +205,14 @@ export const LocationCreateForm = ({ location }: { location?: Location }) => {
                       </DialogHeader>
                       <MapContent
                         setGeodataField={(val) => field.onChange(val)}
-                        center={[
-                          Number(location?.geodata.lat),
-                          Number(location?.geodata.lon),
-                        ]}
+                        center={
+                          location
+                            ? [
+                                Number(location.geodata.lat),
+                                Number(location.geodata.lon),
+                              ]
+                            : undefined
+                        }
                         withAddress
                       />
                       {/* <MapComponent
@@ -272,6 +278,7 @@ const LocationTypeCombobox = ({
                 <CommandItem
                   key={t.type}
                   value={t.type}
+                  className="flex justify-between"
                   onSelect={(val) => {
                     console.log("val: ", val);
                     // setCurrentType(val);
@@ -284,7 +291,7 @@ const LocationTypeCombobox = ({
                     );
                   }}
                 >
-                  {t.type}
+                  <p>{t.type}</p>
                   <Check
                     className={`transition-opacity ease-in-out delay-150 duration-300 ${
                       t.selected ? "opacity-100" : "opacity-0"
@@ -312,10 +319,7 @@ const LocationServicesCombobox = ({
     //   (LocationMetadata & { selected: boolean; serviceId: string })[]
     // >
   ) => void;
-  services: Record<
-    LocationType,
-    (LocationMetadata & { selected: boolean; serviceId: string })[]
-  >;
+  services: Record<LocationType, (Service & { selected: boolean })[]>;
 }) => {
   const [open, setOpen] = useState(false);
   const [currentServices, setCurrentServices] = useState(services);
@@ -346,11 +350,11 @@ const LocationServicesCombobox = ({
               <CommandGroup heading={lt}>
                 {currentServices[lt].map((s) => (
                   <CommandItem
-                    key={s.serviceName}
+                    key={s.name}
                     // value={`${lt}|${s}` as `${LocationType}|${string}`}
                     value={s.serviceId}
-                    keywords={[s.serviceName, lt]}
-                    className="ml-4"
+                    keywords={[s.name, lt]}
+                    className="ml-4 flex justify-between"
                     onSelect={(serviceId) => {
                       const localServices = {
                         ...currentServices,
@@ -367,12 +371,12 @@ const LocationServicesCombobox = ({
                         .filter((serv) => serv.selected)
                         .map((serv) => ({
                           serviceId: serv.serviceId,
-                          serviceName: serv.serviceName,
+                          serviceName: serv.name,
                         }));
                       selectServices(selectedServices);
                     }}
                   >
-                    {s.serviceName}
+                    <p>{s.name}</p>
                     <Check
                       className={`transition-opacity ease-in-out delay-150 duration-300 ${
                         s.selected ? "opacity-100" : "opacity-0"
@@ -396,7 +400,7 @@ const MapContent = ({
   center,
 }: {
   setGeodataField: (data: NominatimData) => void;
-  center?: [number, number];
+  center?: [number, number] | undefined;
   withAddress: boolean;
 }) => {
   const [location, setLocation] = useState<[number, number]>(

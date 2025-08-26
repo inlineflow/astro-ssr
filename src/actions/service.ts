@@ -6,7 +6,7 @@ import { locationTypes } from "src/lib/types";
 
 export const service = {
   getServicesByLocationTypes: defineAction({
-    input: z.array(z.enum(locationTypes)),
+    input: z.array(z.enum(locationTypes)).readonly(),
     handler: async (input) => {
       try {
         const types = new Set(input);

@@ -3,11 +3,19 @@ import "leaflet/dist/leaflet.css";
 import CenteredLayout from "src/layouts/CenteredLayout.astro";
 import { LocationCreateForm } from "src/components/react/LocationCreateForm";
 import { Toaster } from "@/ui/sonner";
+import { actions } from "astro:actions";
+import { locationTypes } from "src/lib/types";
+import ErrorMessage from "components/astro/error-message.astro";
 
 export const prerender = false;
+const { data, error } = await Astro.callAction(
+  actions.service.getServicesByLocationTypes,
+  locationTypes
+);
 ---
 
 <CenteredLayout>
-  <LocationCreateForm client:only />
+  {data && <LocationCreateForm ltToServices={data} client:only />}
+  {error && <ErrorMessage errors={[error]} />}
   <Toaster client:load />
 </CenteredLayout>
