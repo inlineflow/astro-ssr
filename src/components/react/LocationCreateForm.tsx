@@ -55,7 +55,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/ui/dialog";
-import { actions } from "astro:actions";
+import { ActionError, actions } from "astro:actions";
 import { Spinner } from "@/ui/spinner";
 import type { LeafletMouseEvent } from "leaflet";
 import { extractUUID } from "src/browser/browser";
@@ -136,7 +136,7 @@ export const LocationCreateForm = ({ location }: { location?: Location }) => {
           return services;
         }
         console.log("error when fetching all services", error);
-        return {};
+        throw error;
       },
       staleTime: Infinity,
       refetchOnWindowFocus: false,
@@ -147,7 +147,8 @@ export const LocationCreateForm = ({ location }: { location?: Location }) => {
   );
 
   if (error) {
-    return <p>{error.message}</p>;
+    const err = error as ActionError<never>;
+    return <p>Sorry, we encountered an error: {err.message}</p>;
   }
 
   if (isFetching) {
