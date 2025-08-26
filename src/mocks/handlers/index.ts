@@ -1,16 +1,19 @@
 import { http, HttpResponse } from "msw";
 import type { APIError } from "../../lib/types";
-import type {
-  Location,
-  Brand,
-  LocationSearchParams,
-  LocationCreateFormValues,
+import {
+  type Location,
+  type Brand,
+  type LocationSearchParams,
+  type LocationCreateFormValues,
+  type LocationType,
+  locationTypes,
 } from "../../lib/schema";
 // import { DateTime } from "luxon";
-import type { AppointmentPostRequest } from "../../lib/schema";
+import type { AppointmentPostRequest, Service } from "../../lib/schema";
 import { loadData } from "../utils";
 import { DateTime } from "luxon";
 import i18n from "../../lib/i18n";
+import { ActionError } from "astro:actions";
 
 // const env = loadEnv("development", process.cwd());
 // for some reason when I import it from 'src/env' it doesn't work
@@ -24,6 +27,43 @@ const delay = async (timeout: number) =>
 
 const brands = await loadData<Brand[]>("brands.json");
 const locations = brands.map((e) => e.locations).flat();
+const ltToServices = await loadData<Record<LocationType, Service[]>>(
+  "locationTypesToServices.json"
+);
+
+const filterLocationTypes = (input: string[] | undefined) => {
+  if (!input) {
+    return [];
+  }
+
+  const result: LocationType[] = [];
+  for (const i of input) {
+    if ((locationTypes as readonly string[]).includes(i)) {
+      result.push(i as LocationType);
+    }
+  }
+  return [...new Set(result)];
+};
+
+const serviceHandlers = [
+  http.get(`${apiUrl}/service`, ({ request }) => {
+    const url = new URL(request.url);
+    const typeArgs = url.searchParams.get("locationType")?.split(",");
+    const locationTypes = filterLocationTypes(typeArgs);
+    if (locationTypes) {
+      const result: Partial<Record<LocationType, Service[]>> = {};
+      for (const lt of locationTypes) {
+        result[lt] = ltToServices[lt];
+      }
+      return HttpResponse.json(result);
+    }
+
+    throw new ActionError({
+      code: "NOT_FOUND",
+      message: "no matches",
+    });
+  }),
+];
 
 const locationHandlers = [
   http.post<{ brandId: string }, LocationCreateFormValues>(
@@ -149,4 +189,5 @@ export const handlers = [
   ...appointmentHandlers,
   ...brandHandlers,
   ...locationHandlers,
+  ...serviceHandlers,
 ];

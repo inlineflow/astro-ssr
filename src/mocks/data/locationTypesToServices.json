@@ -1,0 +1,224 @@
+{
+  "hair-salon": [
+    {
+      "name": "Стрижка и укладка",
+      "serviceId": "1a2b3c4d-5e6f-7890-1234-567890abcdef",
+      "durationInMinutes": 60,
+      "price": 650,
+      "tag": "hairdressing"
+    },
+    {
+      "name": "Мужская стрижка",
+      "serviceId": "9b0c1d2e-3f4a-5678-9012-abcdef12345678",
+      "durationInMinutes": 45,
+      "price": 800,
+      "tag": "hairdressing"
+    },
+    {
+      "name": "Окрашивание и мелирование",
+      "serviceId": "3f4a5b6c-7d8e-9012-3456-ef123456789012",
+      "durationInMinutes": 180,
+      "price": 3500,
+      "tag": "hairdressing"
+    },
+    {
+      "name": "Укладка феном",
+      "serviceId": "4a5b6c7d-8e9f-0123-4567-f1234567890123",
+      "durationInMinutes": 45,
+      "price": 500,
+      "tag": "hairdressing"
+    },
+    {
+      "name": "Пакет «Уход за лицом и массаж»",
+      "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
+      "durationInMinutes": 120,
+      "price": 3800,
+      "tag": "bundle"
+    },
+    {
+      "name": "Полное преображение",
+      "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
+      "durationInMinutes": 150,
+      "price": 5000,
+      "tag": "makeup"
+    }
+  ],
+  "nail-salon": [
+    {
+      "name": "Маникюр",
+      "serviceId": "2a3b4c5d-6e7f-8901-2345-67890abcdef1",
+      "durationInMinutes": 45,
+      "price": 750,
+      "tag": "nail-polish"
+    },
+    {
+      "name": "Педикюр",
+      "serviceId": "xyzb4c5d-6e7f-8901-2345-67890abcdef1",
+      "durationInMinutes": 30,
+      "price": 1000,
+      "tag": "pedicure"
+    },
+    {
+      "name": "Гель-маникюр",
+      "serviceId": "3b4c5d6e-7f8a-9012-3456-7890abcdef12",
+      "durationInMinutes": 60,
+      "price": 900,
+      "tag": "nail-polish"
+    },
+    {
+      "name": "Педикюр",
+      "serviceId": "4c5d6e7f-8a9b-0123-4567-890abcdef123",
+      "durationInMinutes": 75,
+      "price": 1200,
+      "tag": "nail-polish"
+    },
+    {
+      "name": "Пакет «Уход за лицом и массаж»",
+      "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
+      "durationInMinutes": 120,
+      "price": 3800,
+      "tag": "bundle"
+    },
+    {
+      "name": "Полное преображение",
+      "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
+      "durationInMinutes": 150,
+      "price": 5000,
+      "tag": "makeup"
+    }
+  ],
+  "spa": [
+    {
+      "name": "Глубокая чистка лица",
+      "serviceId": "5d6e7f8a-9b0c-1234-5678-90abcdef1234",
+      "durationInMinutes": 90,
+      "price": 2500,
+      "tag": "skincare"
+    },
+    {
+      "name": "Микродермабразия",
+      "serviceId": "6e7f8a9b-0c1d-2345-6789-0abcdef12345",
+      "durationInMinutes": 60,
+      "price": 3000,
+      "tag": "skincare"
+    },
+    {
+      "name": "Шведский массаж",
+      "serviceId": "1d2e3f4a-5b6c-7890-1234-cdef1234567890",
+      "durationInMinutes": 60,
+      "price": 1800,
+      "tag": "massage"
+    },
+    {
+      "name": "Скраб для тела",
+      "serviceId": "2e3f4a5b-6c7d-8901-2345-def12345678901",
+      "durationInMinutes": 45,
+      "price": 1500,
+      "tag": "spa-treatment"
+    },
+    {
+      "name": "Пакет «Уход за лицом и массаж»",
+      "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
+      "durationInMinutes": 120,
+      "price": 3800,
+      "tag": "bundle"
+    },
+    {
+      "name": "Полное преображение",
+      "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
+      "durationInMinutes": 150,
+      "price": 5000,
+      "tag": "makeup"
+    }
+  ],
+  "eyelash-services": [
+    {
+      "name": "Наращивание ресниц",
+      "serviceId": "7f8a9b0c-1d2e-3456-7890-abcdef123456",
+      "durationInMinutes": 120,
+      "price": 2000,
+      "tag": "eyelash-extensions"
+    },
+    {
+      "name": "Ламинирование бровей",
+      "serviceId": "8a9b0c1d-2e3f-4567-8901-abcdef1234567",
+      "durationInMinutes": 60,
+      "price": 1500,
+      "tag": "eyebrow-lamination"
+    },
+    {
+      "name": "Пакет «Уход за лицом и массаж»",
+      "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
+      "durationInMinutes": 120,
+      "price": 3800,
+      "tag": "bundle"
+    },
+    {
+      "name": "Полное преображение",
+      "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
+      "durationInMinutes": 150,
+      "price": 5000,
+      "tag": "makeup"
+    }
+  ],
+  "massage-therapy": [
+    {
+      "name": "Шведский массаж",
+      "serviceId": "1d2e3f4a-5b6c-7890-1234-cdef1234567890",
+      "durationInMinutes": 60,
+      "price": 1800,
+      "tag": "massage"
+    },
+    {
+      "name": "Скраб для тела",
+      "serviceId": "2e3f4a5b-6c7d-8901-2345-def12345678901",
+      "durationInMinutes": 45,
+      "price": 1500,
+      "tag": "spa-treatment"
+    },
+    {
+      "name": "Глубокий массаж тканей",
+      "serviceId": "7d8e9f0a-1b2c-3456-7890-3456789012345",
+      "durationInMinutes": 75,
+      "price": 2200,
+      "tag": "nassage"
+    },
+    {
+      "name": "Массаж горячими камнями",
+      "serviceId": "8e9f0a1b-2c3d-4567-8901-4567890123456",
+      "durationInMinutes": 90,
+      "price": 2500,
+      "tag": "nassage"
+    },
+    {
+      "name": "Пакет «Уход за лицом и массаж»",
+      "serviceId": "9f0a1b2c-3d4e-5678-9012-5678901234567",
+      "durationInMinutes": 120,
+      "price": 3800,
+      "tag": "bundle"
+    },
+    {
+      "name": "Полное преображение",
+      "serviceId": "0a1b2c3d-4e5f-6789-0123-6789012345678",
+      "durationInMinutes": 150,
+      "price": 5000,
+      "tag": "makeup"
+    }
+  ],
+  "waxing-salon": [
+    {
+      "name": "Восковая депиляция ног",
+      "serviceId": "5b6c7d8e-9f0a-1234-5678-1234567890123",
+      "durationInMinutes": 60,
+      "price": 1000,
+      "tag": "waxing"
+    },
+    {
+      "name": "Восковая депиляция бровей",
+      "serviceId": "6c7d8e9f-0a1b-2345-6789-2345678901234",
+      "durationInMinutes": 15,
+      "price": 400,
+      "tag": "waxing"
+    }
+  ]
+}
