@@ -1,19 +1,19 @@
 import { http, HttpResponse } from "msw";
-import type { APIError } from "../../lib/types";
-import {
-  type Location,
-  type Brand,
-  type LocationSearchParams,
-  type LocationCreateFormValues,
-  type LocationType,
-  locationTypes,
+// import { locationTypes, type APIError } from "../../lib/types";
+import { locationTypes, type APIError } from "../../lib/types";
+import type {
+  Location,
+  Brand,
+  LocationSearchParams,
+  LocationCreateFormValues,
+  LocationType,
 } from "../../lib/schema";
 // import { DateTime } from "luxon";
 import type { AppointmentPostRequest, Service } from "../../lib/schema";
 import { loadData } from "../utils";
 import { DateTime } from "luxon";
 import i18n from "../../lib/i18n";
-import { ActionError } from "astro:actions";
+// import { ActionError } from "astro:actions";
 
 // const env = loadEnv("development", process.cwd());
 // for some reason when I import it from 'src/env' it doesn't work
@@ -58,10 +58,18 @@ const serviceHandlers = [
       return HttpResponse.json(result);
     }
 
-    throw new ActionError({
-      code: "NOT_FOUND",
-      message: "no matches",
-    });
+    const error: APIError = {
+      error: {
+        message: "no matches",
+        status: 404,
+      },
+    };
+
+    return HttpResponse.json(error);
+    // throw new ActionError({
+    //   code: "NOT_FOUND",
+    //   message: "no matches",
+    // });
   }),
 ];
 

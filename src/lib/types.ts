@@ -7,7 +7,7 @@ export type Product = {
   name: string;
 };
 
-type APIError = {
+export type APIError = {
   error: { status: number; message: string };
 };
 
@@ -18,3 +18,12 @@ export type ErrorType = ActionError | ValidationError | Error;
 export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
+
+export const locationTypes = [
+  "spa",
+  "hair-salon",
+  "nail-salon",
+  "massage-therapy",
+  "eyelash-services",
+  "waxing-salon",
+] as const;

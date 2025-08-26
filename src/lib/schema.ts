@@ -1,5 +1,6 @@
 import { z } from "astro:schema";
 import i18n from "./i18n";
+import { locationTypes } from "./types";
 
 export const employeeSchema = z.object({
   employeeId: z.string().uuid(),
@@ -26,15 +27,6 @@ export type ServiceValidated = {
 } & {
   validated: true;
 };
-
-export const locationTypes = [
-  "spa",
-  "hair-salon",
-  "nail-salon",
-  "massage-therapy",
-  "eyelash-services",
-  "waxing-salon",
-] as const;
 
 export const LocationType = typeof locationTypes;
 export type LocationMetadata = {

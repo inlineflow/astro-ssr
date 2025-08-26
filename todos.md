@@ -102,3 +102,5 @@ also allow an escape hatch for inputting the address string manually (lat and lo
 # fix all errors in location form and make services have UUIDs
 
 # start storing provided services in location form
+
+# re organize all the type stuff
