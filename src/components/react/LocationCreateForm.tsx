@@ -23,7 +23,6 @@ import { Button } from "@/ui/button";
 import {
   LocationCreateFormSchema,
   LocationType,
-  locationTypes,
   locationTypeToServices,
   type Location,
   type LocationCreateFormValues,
@@ -60,6 +59,7 @@ import type { LeafletMouseEvent } from "leaflet";
 import { extractUUID } from "src/browser/browser";
 import { toast } from "sonner";
 import { Label } from "@/ui/label";
+import { locationTypes } from "src/lib/types";
 
 const onSubmit = async (data: LocationCreateFormValues) => {
   console.log("onSubmit data: ", data);

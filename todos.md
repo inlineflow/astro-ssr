@@ -106,3 +106,5 @@ also allow an escape hatch for inputting the address string manually (lat and lo
 # re organize all the type stuff
 
 # consider moving MSW to an astro integration
+
+# fetch location types and ltToServices from API (locationTypes should be cached on the API at startup)
