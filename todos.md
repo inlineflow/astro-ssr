@@ -110,3 +110,5 @@ also allow an escape hatch for inputting the address string manually (lat and lo
 # fetch services on the client
 
 ### Add auth
+
+### figure out how to solve i18n with multiple users and locales
