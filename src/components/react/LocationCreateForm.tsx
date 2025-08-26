@@ -114,20 +114,20 @@ export const LocationCreateForm = ({ location }: { location?: Location }) => {
       queryKey: ["services"],
       queryFn: async () => {
         const { data, error } = await actions.service.getAllServices();
-        if (data) {
-          const services = keysOf(data).reduce((acc, key) => {
-            acc[key] = data[key].map((val) => ({
-              ...val,
-              selected: false,
-            }));
-            return acc;
-          }, {} as Record<LocationType, (Service & { selected: boolean })[]>);
-
-          console.log("fetched services: ", services);
-          return services;
+        if (error) {
+          throw error;
         }
-        console.log("error when fetching all services", error);
-        throw error;
+
+        const services = keysOf(data).reduce((acc, key) => {
+          acc[key] = data[key].map((val) => ({
+            ...val,
+            selected: false,
+          }));
+          return acc;
+        }, {} as Record<LocationType, (Service & { selected: boolean })[]>);
+
+        console.log("fetched services: ", services);
+        return services;
       },
       staleTime: Infinity,
       refetchOnWindowFocus: false,
