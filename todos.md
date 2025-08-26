@@ -104,3 +104,5 @@ also allow an escape hatch for inputting the address string manually (lat and lo
 # start storing provided services in location form
 
 # re organize all the type stuff
+
+# consider moving MSW to an astro integration
