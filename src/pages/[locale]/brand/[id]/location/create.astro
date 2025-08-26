@@ -8,14 +8,16 @@ import { locationTypes } from "src/lib/types";
 import ErrorMessage from "components/astro/error-message.astro";
 
 export const prerender = false;
-const { data, error } = await Astro.callAction(
-  actions.service.getServicesByLocationTypes,
-  locationTypes
-);
+// const { data, error } = await Astro.callAction(
+//   actions.service.getServicesByLocationTypes,
+//   locationTypes
+// );
+const data = true;
+const error = false;
 ---
 
 <CenteredLayout>
-  {data && <LocationCreateForm ltToServices={data} client:only />}
+  {data && <LocationCreateForm client:only />}
   {error && <ErrorMessage errors={[error]} />}
   <Toaster client:load />
 </CenteredLayout>

@@ -50,7 +50,8 @@ const serviceHandlers = [
     const url = new URL(request.url);
     const typeArgs = url.searchParams.get("locationType")?.split(",");
     const locationTypes = filterLocationTypes(typeArgs);
-    if (locationTypes) {
+    console.log("locationTypes: ", locationTypes);
+    if (locationTypes.length > 0) {
       const result: Partial<Record<LocationType, Service[]>> = {};
       for (const lt of locationTypes) {
         result[lt] = ltToServices[lt];
@@ -58,14 +59,17 @@ const serviceHandlers = [
       return HttpResponse.json(result);
     }
 
-    const error: APIError = {
-      error: {
-        message: "no matches",
-        status: 404,
-      },
-    };
+    console.log("returning ltToServices: ", ltToServices);
+    return HttpResponse.json(ltToServices);
 
-    return HttpResponse.json(error);
+    // const error: APIError = {
+    //   error: {
+    //     message: "no matches",
+    //     status: 404,
+    //   },
+    // };
+
+    // return HttpResponse.json(error);
     // throw new ActionError({
     //   code: "NOT_FOUND",
     //   message: "no matches",

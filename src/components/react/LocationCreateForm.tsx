@@ -97,13 +97,11 @@ const defaults: DefaultValues<LocationCreateFormValues> = {
   // type: undefined as unknown as LocationCreateFormValues["type"],
 };
 
-export const LocationCreateForm = ({
-  location,
-  ltToServices,
-}: {
-  location?: Location;
-  ltToServices: LtToServices;
-}) => {
+export const LocationCreateForm = ({ location }: { location?: Location }) => {
+  // const [ltToServices, setLtToServices] = useState<
+  //   Record<LocationType, (Service & { selected: boolean })[]>
+  // >({} as Record<LocationType, (Service & { selected: boolean })[]>);
+
   const form = useForm<LocationCreateFormValues>({
     resolver: zodResolver(LocationCreateFormSchema),
     defaultValues: location
@@ -116,126 +114,161 @@ export const LocationCreateForm = ({
       : defaults,
   });
 
-  const services = keysOf(ltToServices).reduce((acc, key) => {
-    acc[key] = ltToServices[key].map((val) => ({
-      ...val,
-      selected: false,
-    }));
-    return acc;
-  }, {} as Record<LocationType, (Service & { selected: boolean })[]>);
-  // console.log("services: ", services);
+  const {
+    data: ltToServices,
+    isFetching,
+    error,
+  } = useQuery(
+    {
+      queryKey: ["services"],
+      queryFn: async () => {
+        const { data, error } = await actions.service.getAllServices();
+        if (data) {
+          const services = keysOf(data).reduce((acc, key) => {
+            acc[key] = data[key].map((val) => ({
+              ...val,
+              selected: false,
+            }));
+            return acc;
+          }, {} as Record<LocationType, (Service & { selected: boolean })[]>);
 
-  return (
-    <Card className=" w-full m-12 p-4">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit, onError)}
-          className="flex flex-col gap-4"
-        >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{i18n.t("form.location_name")}</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder={i18n.t("form.location_name_placeholder")}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{i18n.t("form.location_type")}</FormLabel>
-                <FormControl>
-                  <LocationTypeCombobox
-                    selectTypes={(types: LocationType[]) =>
-                      field.onChange(types)
-                    }
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-          <FormField
-            control={form.control}
-            name="services"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{i18n.t("form.location_services")}</FormLabel>
-                <FormControl>
-                  <LocationServicesCombobox
-                    services={services}
-                    selectServices={(services) => field.onChange(services)}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-          <FormField
-            control={form.control}
-            name="geodata"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{i18n.t("form.location_address")}</FormLabel>
-                <FormControl>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="outline">
-                        {i18n.t("form.pick_address")}
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>
-                          {i18n.t("form.address.dialog_title")}
-                        </DialogTitle>
-                        {/* <DialogDescription>
+          console.log("fetched services: ", services);
+          return services;
+        }
+        console.log("error when fetching all services", error);
+        return {};
+      },
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchInterval: false,
+    },
+    queryClient
+  );
+
+  if (error) {
+    return <p>{error.message}</p>;
+  }
+
+  if (isFetching) {
+    return <Spinner />;
+  }
+
+  if (ltToServices) {
+    return (
+      <Card className=" w-full m-12 p-4">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit, onError)}
+            className="flex flex-col gap-4"
+          >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{i18n.t("form.location_name")}</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={i18n.t("form.location_name_placeholder")}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            ></FormField>
+            <FormField
+              control={form.control}
+              name="type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{i18n.t("form.location_type")}</FormLabel>
+                  <FormControl>
+                    <LocationTypeCombobox
+                      selectTypes={(types: LocationType[]) =>
+                        field.onChange(types)
+                      }
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            ></FormField>
+            <FormField
+              control={form.control}
+              name="services"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{i18n.t("form.location_services")}</FormLabel>
+                  <FormControl>
+                    <LocationServicesCombobox
+                      services={ltToServices}
+                      selectServices={(services) => field.onChange(services)}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            ></FormField>
+            <FormField
+              control={form.control}
+              name="geodata"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{i18n.t("form.location_address")}</FormLabel>
+                  <FormControl>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline">
+                          {i18n.t("form.pick_address")}
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>
+                            {i18n.t("form.address.dialog_title")}
+                          </DialogTitle>
+                          {/* <DialogDescription>
                           {i18n.t("form.address.pick_an_address")}
                         </DialogDescription> */}
-                      </DialogHeader>
-                      <MapContent
-                        setGeodataField={(val) => field.onChange(val)}
-                        center={
-                          location
-                            ? [
-                                Number(location.geodata.lat),
-                                Number(location.geodata.lon),
-                              ]
-                            : undefined
-                        }
-                        withAddress
-                      />
-                      {/* <MapComponent
+                        </DialogHeader>
+                        <MapContent
+                          setGeodataField={(val) => field.onChange(val)}
+                          center={
+                            location
+                              ? [
+                                  Number(location.geodata.lat),
+                                  Number(location.geodata.lon),
+                                ]
+                              : undefined
+                          }
+                          withAddress
+                        />
+                        {/* <MapComponent
                         selectLocation={(val) => field.onChange(val)}
                         withAddress
                       /> */}
-                      <DialogFooter>
-                        <DialogClose asChild>
-                          <Button variant="outline">{i18n.t("close")}</Button>
-                        </DialogClose>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          ></FormField>
-          <Button type="submit">{i18n.t("form.submit")}</Button>
-        </form>
-      </Form>
-    </Card>
-  );
+                        <DialogFooter>
+                          <DialogClose asChild>
+                            <Button variant="outline">{i18n.t("close")}</Button>
+                          </DialogClose>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            ></FormField>
+            <Button type="submit">{i18n.t("form.submit")}</Button>
+          </form>
+        </Form>
+      </Card>
+    );
+  }
+
+  return <p>Something went wrong...</p>;
 };
 
 const LocationTypeCombobox = ({
@@ -347,10 +380,10 @@ const LocationServicesCombobox = ({
               {i18n.t("form.pick_location_placeholder")}
             </CommandEmpty>
             {keysOf(currentServices).map((lt) => (
-              <CommandGroup heading={lt}>
+              <CommandGroup heading={lt} key={lt}>
                 {currentServices[lt].map((s) => (
                   <CommandItem
-                    key={s.name}
+                    key={s.serviceId}
                     // value={`${lt}|${s}` as `${LocationType}|${string}`}
                     value={s.serviceId}
                     keywords={[s.name, lt]}
