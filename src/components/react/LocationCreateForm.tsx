@@ -12,22 +12,14 @@ import { queryClient } from "src/data-fetching/store";
 import i18n from "src/lib/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/ui/input";
-import {
-  useForm,
-  useFormState,
-  type DefaultValues,
-  type FieldErrors,
-} from "react-hook-form";
+import { useForm, type DefaultValues, type FieldErrors } from "react-hook-form";
 import { Card } from "@/ui/card";
 import { Button } from "@/ui/button";
 import {
   LocationCreateFormSchema,
   LocationType,
-  locationTypeToServices as ltToServices,
   type Location,
   type LocationCreateFormValues,
-  type LocationMetadata,
-  type LtToServices,
   type Geodata,
   type Service,
 } from "src/lib/schema";
@@ -49,7 +41,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
